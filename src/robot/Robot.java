@@ -3,14 +3,8 @@ package robot;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import robotDefinitions.ControlBase;
 import robotDefinitions.IRobotDefinition;
 import robotDefinitions.RobotName;
-import team2202.robot.definitions.Babbage;
-import team2202.robot.definitions.HoenheimDefinition;
-import team2202.robot.definitions.MechanumRobot;
-import team2202.robot.definitions.Piper;
-import team2202.robot.definitions.Tim;
 
 /**
  * The main robot class that calls the IControl methods of each IControl object
@@ -30,25 +24,8 @@ public class Robot extends IterativeRobot {
 										// is?
 		SmartWriter.putS("RobotName", name.toString(), DebugMode.COMPETITION);
 		// Switch to decide which robot definition to use
-		switch (name) {
-		case TIM:
-			robotDefinition=new Tim();//probably broken
-			break;
-		case PIPER:
-			robotDefinition=new Piper();
-			break;
-		case MECHANUMDRIVE:
-			robotDefinition=new MechanumRobot();
-			break;
-		case BABBAGE:
-			robotDefinition=new Babbage();
-			break;
-		case HOENHIEM:
-			robotDefinition=new HoenheimDefinition();
-			break;
-		default:
-			break;
-		}
+
+		//TODO: robotDefinition = new IRobotDefinition();
 
 		// Load all the properties in the currently selected definition
 		Global.controlObjects=robotDefinition.loadControlObjects();
