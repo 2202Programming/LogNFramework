@@ -82,11 +82,7 @@ public class DriveAtAngle implements ICommand {
 			nonGyro();
 		}
 
-		if (stopCondition.stopNow()) {
-			stop();
-			return true;
-		}
-		return false;
+		return stopCondition.stopNow();
 	}
 
 
