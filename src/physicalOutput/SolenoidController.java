@@ -3,6 +3,7 @@ package physicalOutput;
 import java.util.HashMap;
 import java.util.Map;
 
+import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SolenoidBase;
@@ -74,5 +75,55 @@ public class SolenoidController {
 		if ( !(temp instanceof Solenoid)) throw new Exception(name + " is not of type solioid");
 
 		return (Solenoid)temp;
+	}
+	
+	/**
+	 * Gets the value of a single valve solenoid
+	 * @param name the name of the solenoid
+	 * @return true if the solenoid is open. False if the solenoid is closed.
+	 * @throws Exception if the solenoid is not a single valve or does not exist.
+	 */
+	public boolean getSolenoidValue(String name) throws Exception {
+		Solenoid solenoid = getSolenoid(name);
+		return solenoid.get();
+	}
+	
+	/**
+	 * Gets the value of a double valve solenoid
+	 * @param name the name of the solenoid
+	 * @return true if the solenoid is open. False if the solenoid is closed.
+	 * @throws Exception if the solenoid is not a double valve or does not exist.
+	 */
+	public DoubleSolenoid.Value getDoubleSolenoidValue(String name) throws Exception {
+		DoubleSolenoid solenoid = getDoubleSolenoid(name);
+		return solenoid.get();
+	}
+	
+	/**
+	 * Sets the value of a single valve solenoid
+	 * @param name the name of the solenoid
+	 * @param value the value to set the solenoid
+	 */
+	public void setSolenoid(String name, boolean value) {
+		try{
+			Solenoid solenoid = getSolenoid(name);			
+			solenoid.set(value);
+		}catch(Exception e){
+			SmartWriter.outputError(e, System.currentTimeMillis()+"");
+		}
+	}
+	
+	/**
+	 * Sets the value of a single valve solenoid
+	 * @param name the name of the solenoid
+	 * @param value the value to set the solenoid
+	 */
+	public void setDoubleSolenoid(String name, DoubleSolenoid.Value value) {
+		try{
+			DoubleSolenoid solenoid = getDoubleSolenoid(name);			
+			solenoid.set(value);
+		}catch(Exception e){
+			SmartWriter.outputError(e, System.currentTimeMillis()+"");
+		}
 	}
 }

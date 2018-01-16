@@ -50,11 +50,7 @@ public class TurnCommand implements ICommand {
 		drive.setRightMotors(-motorValue);
 		boolean stopNow=stopCondition.stopNow();
 		SmartWriter.putB("hghjkhjghg", stopNow);
-		if (stopNow) {
-			stop();
-			return true;
-		}
-		return false;
+		return stopNow;
 	}
 	
 	public void stop(){

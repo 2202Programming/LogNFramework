@@ -42,6 +42,7 @@ public class CommandListRunner {
 			curCommand.init();
 		}
 		if (curCommand.run()) {
+			curCommand.stop();
 			commandNum++;
 		}
 		return false;
