@@ -60,7 +60,7 @@ public class TurnCommand implements ICommand {
 	}
 	
 	private void loadPIDValues() {
-		switch(Robot.name) {
+		switch (Robot.name) {
 		case BABBAGE:
 			pidValues=new PIDValues(0.006, 0.0002, .15);
 			break;
@@ -78,8 +78,6 @@ public class TurnCommand implements ICommand {
 			break;
 		default:
 			break;
-		
 		}
 	}
-
 }
