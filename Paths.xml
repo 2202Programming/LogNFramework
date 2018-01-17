@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Paths>
-	<L1-1>
+	<Path id = "L1-1">
 		<Command DriveCommand = "0.5">
 			<StopCondition DistanceStopCondition = "164">
 			</StopCondition>
@@ -35,5 +35,5 @@
 			<StopCondition DistanceStopCondition = "60">
 			</StopCondition>
 		</Command>
-	</L1-1>
+	</Path>
 </Paths>
