@@ -1,22 +1,26 @@
 package NotVlad;
 
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import com.ni.vision.NIVision.GetGeometricTemplateFeatureInfoResult;
-
 import auto.CommandList;
 import auto.ICommand;
-
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-
-import java.io.File;
+import auto.IStopCondition;
+import auto.commands.DriveCommand;
+import auto.commands.TurnCommand;
+import auto.stopConditions.DistanceStopCondition;
+import auto.stopConditions.TimerStopCondition;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class NotVladXMLInterpreter {
+
+	// somebody update pls
+	private static List<Encoder> tempEnc;
 	private Document xmlFile;
 
 	public NotVladXMLInterpreter(File f) {
@@ -25,7 +29,6 @@ public class NotVladXMLInterpreter {
 
 	public void readFile(File f) {
 		try {
-
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			xmlFile = dBuilder.parse(f);
@@ -36,24 +39,63 @@ public class NotVladXMLInterpreter {
 	}
 
 	public CommandList getPathList(String id) {
-		Node xmlPath = xmlFile.getElementById(id);
-		
+		// Searches the paths for the correct one
+		Node xmlPath = null;
+		NodeList paths = xmlFile.getElementsByTagName("Path");
+		for (int i = 0; i < paths.getLength(); i++) {
+			Node currentNode = paths.item(i);
+			// If there is an id attribute on the path
+			if (currentNode.getAttributes().item(0).getNodeName().equals("id")) {
+				// If the id matches the one we are looking for
+				if (currentNode.getAttributes().item(0).getNodeValue().equals(id)) {
+					xmlPath = currentNode;
+				}
+			}
+		}
+
+		// Will throw nullPointer if the path doesn't exist
 		NodeList xmlCommands = xmlPath.getChildNodes();
-		
+
 		CommandList path = new CommandList();
-		for(int i = 0; i < xmlCommands.getLength(); i++) {
+		for (int i = 0; i < xmlCommands.getLength(); i++) {
 			Node currentNode = xmlCommands.item(i);
-			if (currentNode.getNodeType() == Node.ELEMENT_NODE && currentNode.getNodeName().equals("Command")) {
+			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
 				// calls this method for all the children that are command lists
 				path.addCommand(getCommand(currentNode));
 			}
 		}
-		
+
 		return path;
 	}
-	
+
 	public ICommand getCommand(Node n) {
-		
+		NamedNodeMap attributes = n.getAttributes();
+		String commandName = n.getNodeName();
+
+		switch (commandName) {
+		case ("TurnCommand"): {
+			double turnDegrees = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
+			return new TurnCommand(turnDegrees);
+		}
+		case ("DriveCommand"): {
+			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			Node stopConditionNode = n.getChildNodes().item(0);
+			String stopConditionType = stopConditionNode.getNodeName();
+			IStopCondition stopCondition = new TimerStopCondition(0);
+
+			if (stopConditionType.equals("DistanceStopCondition")) {
+				int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
+				stopCondition = new DistanceStopCondition(tempEnc, stopDistance);
+			} else if (stopConditionType.equals("TimerStopCondition")) {
+				long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
+				stopCondition = new TimerStopCondition(stopTime);
+			}
+
+			return new DriveCommand(stopCondition, power);
+		}
+
+		}
+		return new DriveCommand(new TimerStopCondition(0), 0.6);
 	}
 
 	public void printFile() {
@@ -73,7 +115,7 @@ public class NotVladXMLInterpreter {
 		for (int i = 0; i < attributes.getLength(); i++) {
 			Node currentNode = attributes.item(i);
 
-			line += currentNode.getNodeName() + "= " + currentNode.getNodeValue();
+			line += currentNode.getNodeName() + "= " + currentNode.getNodeValue() + " ";
 		}
 
 		System.out.println(line);
