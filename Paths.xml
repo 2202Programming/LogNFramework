@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Paths>
 	<Path id = "L1-1">
-		<Command DriveCommand = "0.5">
+		<DriveCommand Power = "0.5">
 			<StopCondition DistanceStopCondition = "164">
 			</StopCondition>
-		</Command>
+		</DriveCommand>
 
-		<Command TurnCommand = "90">
+		<DriveCommand TurnDriveCommand = "90">
 			<StopCondition AngleStopCondition = "0">
 			</StopCondition>
-		</Command>
+		</DriveCommand>
 
-		<Command DriveCommand = "0.5">
+		<DriveCommand Power = "0.5">
 			<StopCondition DistanceStopCondition = "203">
 			</StopCondition>
-		</Command>
+		</DriveCommand>
 
-		<Command TurnCommand = "90">
+		<DriveCommand TurnDriveCommand = "90">
 			<StopCondition AngleStopCondition = "0">
 			</StopCondition>
-		</Command>
+		</DriveCommand>
 
-		<Command DriveCommand = "0.5">
+		<DriveCommand Power = "0.5">
 			<StopCondition DistanceStopCondition = "50">
 			</StopCondition>
-		</Command>
+		</DriveCommand>
 
-		<Command TurnCommand = "90">
+		<DriveCommand TurnDriveCommand = "90">
 			<StopCondition AngleStopCondition = "0">
 			</StopCondition>
-		</Command>
+		</DriveCommand>
 
-		<Command DriveCommand = "0.5">
+		<DriveCommand Power = "0.5">
 			<StopCondition DistanceStopCondition = "60">
 			</StopCondition>
-		</Command>
+		</DriveCommand>
 	</Path>
 </Paths>
