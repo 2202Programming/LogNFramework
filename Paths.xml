@@ -1,39 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Paths>
 	<Path id = "L1-1">
+	
 		<DriveCommand Power = "0.5">
-			<StopCondition DistanceStopCondition = "164">
-			</StopCondition>
+			<DistanceStopCondition Dist_Inches = "164">
+			</DistanceStopCondition>
 		</DriveCommand>
 
-		<DriveCommand TurnDriveCommand = "90">
-			<StopCondition AngleStopCondition = "0">
-			</StopCondition>
-		</DriveCommand>
-
-		<DriveCommand Power = "0.5">
-			<StopCondition DistanceStopCondition = "203">
-			</StopCondition>
-		</DriveCommand>
-
-		<DriveCommand TurnDriveCommand = "90">
-			<StopCondition AngleStopCondition = "0">
-			</StopCondition>
-		</DriveCommand>
+		<TurnCommand Angle= "90" MaxError = "10" TimeInRange = "0.3">
+		</TurnCommand>
 
 		<DriveCommand Power = "0.5">
-			<StopCondition DistanceStopCondition = "50">
-			</StopCondition>
+			<DistanceStopCondition Dist_Inches = "203">
+			</DistanceStopCondition>
 		</DriveCommand>
 
-		<DriveCommand TurnDriveCommand = "90">
-			<StopCondition AngleStopCondition = "0">
-			</StopCondition>
-		</DriveCommand>
+		<TurnCommand Angle= "90" MaxError = "10" TimeInRange = "0.3">
+		</TurnCommand>
 
 		<DriveCommand Power = "0.5">
-			<StopCondition DistanceStopCondition = "60">
-			</StopCondition>
+			<DistanceStopCondition Dist_Inches = "50">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle= "90" MaxError = "10" TimeInRange = "0.3">
+		</TurnCommand>
+
+		<DriveCommand Power = "0.5">
+			<DistanceStopCondition Dist_Inches = "60">
+			</DistanceStopCondition>
 		</DriveCommand>
 	</Path>
 </Paths>
