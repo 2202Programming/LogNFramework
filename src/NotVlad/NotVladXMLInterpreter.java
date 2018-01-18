@@ -23,10 +23,22 @@ public class NotVladXMLInterpreter {
 	private static List<Encoder> tempEnc;
 	private Document xmlFile;
 
+	/**
+	 * Loads xml file into memory
+	 * 
+	 * @param f
+	 *            xml file path
+	 */
 	public NotVladXMLInterpreter(File f) {
 		readFile(f);
 	}
 
+	/**
+	 * Reads the xml file
+	 * 
+	 * @param f
+	 *            xml file path
+	 */
 	public void readFile(File f) {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -38,6 +50,16 @@ public class NotVladXMLInterpreter {
 		}
 	}
 
+	/**
+	 * Searches for a specific path in the xml file and returns a command list of
+	 * the commands in the xml file
+	 * 
+	 * @param id
+	 *            path id 1st character: starting position 2nd character: target
+	 *            location 3rd character: path option
+	 * @return command list of specified path
+	 * 
+	 */
 	public CommandList getPathList(String id) {
 		// Searches the paths for the correct one
 		Node xmlPath = null;
@@ -68,6 +90,13 @@ public class NotVladXMLInterpreter {
 		return path;
 	}
 
+	/**
+	 * Converts the xml command into an ICommand to be put in a CommandList
+	 * 
+	 * @param n
+	 *            the Node created of the command within a path
+	 * @return ICommand version of the command
+	 */
 	public ICommand getCommand(Node n) {
 		NamedNodeMap attributes = n.getAttributes();
 		String commandName = n.getNodeName();
@@ -98,10 +127,21 @@ public class NotVladXMLInterpreter {
 		return new DriveCommand(new TimerStopCondition(0), 0.6);
 	}
 
+	/**
+	 * 
+	 */
 	public void printFile() {
 		printFile(xmlFile.getDocumentElement(), 0);
 	}
 
+	/**
+	 * Prints the xml file that was read
+	 * 
+	 * @param cur
+	 *            current Node
+	 * @param depth
+	 *            How deep you are in the tree
+	 */
 	public void printFile(Node cur, int depth) {
 		String line = "";
 		for (int i = 0; i < depth; i++) {
