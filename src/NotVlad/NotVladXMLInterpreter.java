@@ -1,13 +1,17 @@
 package NotVlad;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import auto.CommandList;
 import auto.ICommand;
 import auto.IStopCondition;
@@ -16,6 +20,7 @@ import auto.commands.TurnCommand;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
+import input.SensorController;
 
 public class NotVladXMLInterpreter {
 
@@ -25,6 +30,10 @@ public class NotVladXMLInterpreter {
 
 	public NotVladXMLInterpreter(File f) {
 		readFile(f);
+		tempEnc = new ArrayList<Encoder>();
+		SensorController sensorController = SensorController.getInstance();
+		tempEnc.add((Encoder)sensorController.getSensor("ENCODER0"));
+		tempEnc.add((Encoder)sensorController.getSensor("ENCODER1"));
 	}
 
 	public void readFile(File f) {

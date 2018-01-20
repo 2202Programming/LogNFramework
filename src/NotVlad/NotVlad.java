@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 import input.SensorController;
 import physicalOutput.motors.IMotor;
 import physicalOutput.motors.SparkMotor;
+import robot.Global;
 import robot.IControl;
 import robotDefinitions.RobotDefinitionBase;
 
@@ -56,7 +57,7 @@ public class NotVlad extends RobotDefinitionBase {
 		// Create map to store public objects
 		Map<String, IControl> iControlMap=super.loadControlObjects();
 		
-		//Global.controllers = new PiperControl();
+		Global.controllers = new PiperControl();
 
 		// TODO add the sensors here
 		/*
