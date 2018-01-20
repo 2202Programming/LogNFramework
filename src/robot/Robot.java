@@ -1,5 +1,6 @@
 package robot;
 
+import NotVlad.NotVlad;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -18,14 +19,15 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		SmartWriter.putS("Robot State", "Initsing", DebugMode.DEBUG);
 		// String to say which robot we are using could later be made into a XML
-		// property getter
-		name=RobotName.HOENHIEM; // TODO Can we get this from the robot so
+		// property getter // TODO Can we get this from the robot so
 										// it automatically knows what robot it
 										// is?
+		name = RobotName.NOTVLAD;
 		SmartWriter.putS("RobotName", name.toString(), DebugMode.COMPETITION);
 		// Switch to decide which robot definition to use
 
-		//TODO: robotDefinition = new IRobotDefinition();
+		robotDefinition = new NotVlad();
+		
 
 		// Load all the properties in the currently selected definition
 		Global.controlObjects=robotDefinition.loadControlObjects();
