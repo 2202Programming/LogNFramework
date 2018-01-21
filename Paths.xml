@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Paths>
+	<Path Id="Test">
+	
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="34">
+			</DistanceStopCondition>
+		</DriveCommand>
+		<TurnCommand Angle="90"></TurnCommand>
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="20">
+			</DistanceStopCondition>
+		</DriveCommand>
+		
+	</Path>
+	
 	<Path Id="L1-2">
 
 		<DriveCommand Power="0.5">

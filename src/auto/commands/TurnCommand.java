@@ -10,6 +10,7 @@ import drive.IDrive;
 import robot.Global;
 import robot.Robot;
 import robotDefinitions.RobotDefinitionBase;
+import robotDefinitions.RobotName;
 
 
 public class TurnCommand implements ICommand {
@@ -64,7 +65,7 @@ public class TurnCommand implements ICommand {
 		case BABBAGE:
 			pidValues=new PIDValues(0.006, 0.0002, .15);
 			break;
-		case PIPER:
+		case NOTVLAD:
 			pidValues=new PIDValues(0.02, 0.0006, 0.15);//new PIDValues(0.005, 0.0002, 0.15);
 			break;
 		case TIM:
