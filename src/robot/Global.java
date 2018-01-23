@@ -15,4 +15,10 @@ public class Global {
 	
 	public static ControlBase controllers;
 	
+	public enum TargetSide {L, R};
+	
+	public static TargetSide ourSwitchPosition;
+	public static TargetSide scalePosition;
+	public static TargetSide opponentSwitchPosition;
+	
 }
