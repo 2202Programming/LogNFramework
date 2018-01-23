@@ -1,6 +1,6 @@
 package auto.stopConditions;
 
-import java.util.List;
+import java.util.List;import javax.security.auth.x500.X500Principal;
 
 import auto.IStopCondition;
 import comms.SmartWriter;
@@ -24,10 +24,12 @@ public class DistanceStopCondition implements IStopCondition {
 	public boolean stopNow() {
 		int sum = 0;
 		for(Encoder x: enc){
+			//x.setDistancePerPulse(0.333333333333333333);
 			//x.get() returns encoder counts
 			//encoder count -> inches will need to be put here
 			sum += x.getDistance();
 		}
+		SmartWriter.putD("Current Distance Per Pulse", enc.get(0).getDistancePerPulse());
 		SmartWriter.putD("AUTO - AVG Encoder Count", sum/enc.size());
 		return (sum/enc.size()) > duration;
 	}
