@@ -93,7 +93,7 @@ public class NotVladXMLInterpreter {
 		CommandList path = new CommandList();
 		for (int i = 0; i < xmlCommands.getLength(); i++) {
 			Node currentNode = xmlCommands.item(i);
-			System.out.println("nodeName:" + currentNode.getNodeName());
+			//System.out.println("nodeName:" + currentNode.getNodeName());
 			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
 				// calls this method for all the children that are command lists
 				path.addCommand(getCommand(currentNode));
@@ -128,7 +128,7 @@ public class NotVladXMLInterpreter {
 					stopConditionNode = n.getChildNodes().item(i);
 				}
 			}
-			System.out.println(stopConditionNode);
+			//System.out.println(stopConditionNode);
 			String stopConditionType = stopConditionNode.getNodeName();
 			IStopCondition stopCondition = new TimerStopCondition(0);
 			
