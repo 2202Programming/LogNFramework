@@ -24,7 +24,7 @@ public class DistanceStopCondition implements IStopCondition {
 	public boolean stopNow() {
 		int sum = 0;
 		for(Encoder x: enc){
-			//x.setDistancePerPulse(0.333333333333333333);
+			x.setDistancePerPulse((Math.PI * 6)/1440);//x.setDistancePerPulse(0.333333333333333333);
 			//x.get() returns encoder counts
 			//encoder count -> inches will need to be put here
 			sum += x.getDistance();
