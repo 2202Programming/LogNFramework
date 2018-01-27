@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import input.EncoderMonitor;
 import input.SensorController;
+import input.NavXTester;
 import physicalOutput.motors.IMotor;
 import physicalOutput.motors.SparkMotor;
 import robot.Global;
@@ -109,7 +110,7 @@ public class NotVlad extends RobotDefinitionBase {
 //		IMotor intakeMotor = new SparkMotor(getInt("INTAKEMOTOR"),false);
 //		Intake intake = new Intake(intakeMotor);
 
-//		new NavXTester();
+		new NavXTester();
 		//new NavXPIDTunable();
 		//new CommandListRunnerDoNotKeepItSucks();
 		
