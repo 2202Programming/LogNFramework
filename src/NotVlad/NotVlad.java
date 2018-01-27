@@ -10,6 +10,7 @@ import drive.ArcadeDrive;
 import drive.IDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
+import input.EncoderMonitor;
 import input.SensorController;
 import physicalOutput.motors.IMotor;
 import physicalOutput.motors.SparkMotor;
@@ -78,13 +79,13 @@ public class NotVlad extends RobotDefinitionBase {
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, arcadeDrive);
 
 		//Encoder stuff
-		Encoder encoder0 =new Encoder(0, 1);
+		Encoder encoder0 = new Encoder(0, 1);
 		Encoder encoder1 =  new Encoder(2, 3);
-		encoder0.setDistancePerPulse(0.058);
-		encoder1.setDistancePerPulse(0.06529);
-		//EncoderMonitor encoderMonitor = new EncoderMonitor();
-		//encoderMonitor.add("ENCODER0", encoder0);
-		//encoderMonitor.add("ENCODER1", encoder1);
+		encoder0.setDistancePerPulse(0.06265);
+		encoder1.setDistancePerPulse(0.06265);
+		EncoderMonitor encoderMonitor = new EncoderMonitor();
+		encoderMonitor.add("ENCODER0", encoder0);
+		encoderMonitor.add("ENCODER1", encoder1);
 		
 		SensorController sensorController=SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
