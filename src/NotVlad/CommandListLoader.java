@@ -11,6 +11,7 @@ import robot.Global;
 //include notVlad robotDefinition
 import robot.Global.TargetSide;
 import robot.IControl;
+import comms.SmartWriter;
 
 public class CommandListLoader extends IControl {
 
@@ -45,9 +46,10 @@ public class CommandListLoader extends IControl {
 		}
 
 		choosePath();
+		System.out.println(Global.opponentSwitchPosition);
 	}
 
-	public void choosePath() {
+	public static String choosePath() {
 		String path = "";
 
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
@@ -55,7 +57,7 @@ public class CommandListLoader extends IControl {
 
 		int pathNum = 1; // Defaults to front approach of the scale
 
-		if (!switchboard.getApproach()) {
+		if (switchboard.getApproach()) {
 			// If we are approaching from the side
 			pathNum++;
 		}
@@ -85,24 +87,7 @@ public class CommandListLoader extends IControl {
 			path += "1";
 		}
 
-		NotVladXMLInterpreter interp = new NotVladXMLInterpreter(new File("Paths.xml"));
-		commandList = interp.getPathList(path);
+		return path;
 	}
 
-	public void autonomousPeriodic() {
-		if (autoName.equals("none")) {
-			autonomousInit();
-		} else {
-			if (runner == null) {
-				runner = new CommandListRunner(commandList);
-				runner.init();
-			} else {
-				runner.runList();
-			}
-		}
-	}
-
-	public void teleopInit() {
-
-	}
 }

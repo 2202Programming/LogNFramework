@@ -90,8 +90,10 @@ public class MiyamotoControl extends ControlBase {
 
 	@Override
 	public XboxController[] getControllers() {
-		XboxController[] controllers = new XboxController[1];
+		XboxController[] controllers = new XboxController[3];
 		controllers[0] = XboxController.getXboxController(0);
+		controllers[1] = XboxController.getXboxController(1);
+		controllers[2] = XboxController.getXboxController(2);
 		return controllers;
 	}
 

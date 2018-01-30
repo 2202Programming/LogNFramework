@@ -6,6 +6,7 @@ import auto.CommandList;
 import auto.CommandListRunner;
 import comms.DebugMode;
 import comms.SmartWriter;
+import edu.wpi.first.wpilibj.DriverStation;
 import robot.IControl;
 
 public class AutoRunner extends IControl{
@@ -25,7 +26,7 @@ public class AutoRunner extends IControl{
 		File file = new File("/home/lvuser/Paths.xml");
 		System.out.println(file.getName());
 		XMLInterpreter = new NotVladXMLInterpreter(file);
-		CommandList list = XMLInterpreter.getPathList(SmartWriter.getS("Path"));
+		CommandList list = XMLInterpreter.getPathList(CommandListLoader.choosePath());
 		System.out.println("Parse End" + System.currentTimeMillis());
 		runner = new CommandListRunner(list);
 		timeCost = System.currentTimeMillis();
@@ -34,6 +35,7 @@ public class AutoRunner extends IControl{
 	public void autonomousPeriodic(){
 		if(!finished) {
 			SmartWriter.putD("TimeCost", System.currentTimeMillis()-timeCost);
+			SmartWriter.putS("Game Data & Path Name", DriverStation.getInstance().getGameSpecificMessage() + " " + CommandListLoader.choosePath());
 		}
 		finished = runner.runList();
 	}
