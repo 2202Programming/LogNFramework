@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import input.EncoderMonitor;
 import input.SensorController;
+import input.NavXTester;
 import physicalOutput.motors.IMotor;
 import physicalOutput.motors.SparkMotor;
 import robot.Global;
@@ -58,7 +59,7 @@ public class NotVlad extends RobotDefinitionBase {
 		// Create map to store public objects
 		Map<String, IControl> iControlMap=super.loadControlObjects();
 		
-		Global.controllers = new PiperControl();
+		Global.controllers = new MiyamotoControl();
 
 		// TODO add the sensors here
 		/*
@@ -79,7 +80,7 @@ public class NotVlad extends RobotDefinitionBase {
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, arcadeDrive);
 
 		//Encoder stuff
-		Encoder encoder0 = new Encoder(0, 1);
+		Encoder encoder0 = new Encoder(0, 1, true);
 		Encoder encoder1 =  new Encoder(2, 3);
 		encoder0.setDistancePerPulse(0.06265);
 		encoder1.setDistancePerPulse(0.06265);
@@ -109,7 +110,7 @@ public class NotVlad extends RobotDefinitionBase {
 //		IMotor intakeMotor = new SparkMotor(getInt("INTAKEMOTOR"),false);
 //		Intake intake = new Intake(intakeMotor);
 
-//		new NavXTester();
+		new NavXTester();
 		//new NavXPIDTunable();
 		//new CommandListRunnerDoNotKeepItSucks();
 		

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Paths>
-	<Path Id="Test">
-	
+	<Path Id="EnterPath"> 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="5">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
-		<TurnCommand Angle="90"></TurnCommand>
+		<TurnCommand Angle="-90"></TurnCommand>
 		<DriveCommand Power="0.5">
 			<DistanceStopCondition Dist_Inches="5">
 			</DistanceStopCondition>

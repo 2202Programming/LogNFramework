@@ -17,7 +17,15 @@ public class Global {
 	public static ControlBase controllers;
 
 	public enum TargetSide {
-		L, R
+		L {
+			public String toString() {
+				return "Left";
+			}
+		}, R {
+			public String toString() {
+				return "Right";
+			}
+		}
 	};
 
 	public enum StartPosition {
