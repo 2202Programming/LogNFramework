@@ -3,8 +3,10 @@ package NotVlad;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.ArcadeDrive;
 import drive.IDrive;
@@ -95,6 +97,8 @@ public class NotVlad extends RobotDefinitionBase {
 		
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
+		
+		Lift lift = new Lift(new TalonSRX(0));
 		
 //		SolenoidController solenoidController = SolenoidController.getInstance();
 //		solenoidController.registerSolenoid("intakeSolenoid", new DoubleSolenoid(4,5));
