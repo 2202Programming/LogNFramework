@@ -1,7 +1,9 @@
 package robot;
 
+import NotVlad.NotVlad;
 import comms.DebugMode;
 import comms.SmartWriter;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import robotDefinitions.IRobotDefinition;
 import robotDefinitions.RobotName;
@@ -18,22 +20,23 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		SmartWriter.putS("Robot State", "Initsing", DebugMode.DEBUG);
 		// String to say which robot we are using could later be made into a XML
-		// property getter
-		name=RobotName.HOENHIEM; // TODO Can we get this from the robot so
-										// it automatically knows what robot it
-										// is?
+		// property getter // TODO Can we get this from the robot so
+		// it automatically knows what robot it
+		// is?
+		name = RobotName.NOTVLAD;
 		SmartWriter.putS("RobotName", name.toString(), DebugMode.COMPETITION);
 		// Switch to decide which robot definition to use
 
-		//TODO: robotDefinition = new IRobotDefinition();
+		robotDefinition = new NotVlad();
 
 		// Load all the properties in the currently selected definition
-		Global.controlObjects=robotDefinition.loadControlObjects();
-		 
+		Global.controlObjects = robotDefinition.loadControlObjects();
+
 	}
 
 	public void autonomousInit() {
 		SmartWriter.putS("Robot State", "Autonomous Init", DebugMode.COMPETITION);
+
 		try {
 			IControl.callAutonomousInit();
 		} catch (Exception e) {
@@ -48,7 +51,7 @@ public class Robot extends IterativeRobot {
 		} catch (Exception e) {
 			SmartWriter.outputError(e, "Auto Periodic");
 		}
-	}
+	};
 
 	public void teleopInit() {
 		SmartWriter.putS("Robot State", "Teleop Init", DebugMode.COMPETITION);
@@ -70,7 +73,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledInit() {
-		
+
 		SmartWriter.putS("Robot State", "Disabled Init", DebugMode.COMPETITION);
 		try {
 			IControl.callDisabledInit();
@@ -80,7 +83,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledPeriodic() {
-		
+
 		SmartWriter.putS("Robot State", "Disabled Periodic", DebugMode.COMPETITION);
 		try {
 			IControl.callDisabledPeriodic();
