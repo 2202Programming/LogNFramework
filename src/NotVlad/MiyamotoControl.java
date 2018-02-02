@@ -71,7 +71,20 @@ public class MiyamotoControl extends ControlBase {
 	public boolean climbSlow(){
 		return controllers[2].getBackHeld();
 	}
-
+	/**
+	 * returns if the robot should intake
+	 * @return if the robot should intake
+	 */
+	public boolean intake(){
+		return controllers[1].getAHeld();
+	}
+	/**
+	 * returns if the robot should outtake
+	 * @return if the robot should outtake
+	 */
+	public boolean outtake(){
+		return controllers[1].getBHeld();
+	}
 	@Override
 	public XboxController[] getControllers() {
 		XboxController[] controllers = new XboxController[1];
