@@ -57,37 +57,34 @@ public class MiyamotoControl extends ControlBase {
 	public boolean getPathType() {
 		return controllers[2].getRightBumperHeld();
 	}
-
-	// speeds up intake
-	public boolean intakeSpeed() {
-		return controllers[0].getAHeld();
+	/**
+	 * returns if the climber should climb fast
+	 * @return if the climber should climb fast
+	 */
+	public boolean climbFast(){
+		return controllers[2].getStartHeld();
 	}
-
-	// starts shooting
-	public boolean startShooting() {
-		return controllers[0].getRightTriggerPressed();
+	/**
+	 * returns if the climber should climb slow
+	 * @return if the climber should climb slow
+	 */
+	public boolean climbSlow(){
+		return controllers[2].getBackHeld();
 	}
-
-	// stops shooting
-	public boolean stopShooting() {
-		return controllers[0].getBPressed();
+	/**
+	 * returns if the robot should intake
+	 * @return if the robot should intake
+	 */
+	public boolean intake(){
+		return controllers[1].getAHeld();
 	}
-
-	// toggles the height of the shooter
-	public boolean toggleShooterHeight() {
-		return controllers[0].getRightBumperPressed();
+	/**
+	 * returns if the robot should outtake
+	 * @return if the robot should outtake
+	 */
+	public boolean outtake(){
+		return controllers[1].getBHeld();
 	}
-
-	// engage high-goal vision
-	public boolean hgVision() {
-		return controllers[0].getYPressed();
-	}
-
-	// cancel high-goal vision
-	public boolean cancelHg() {
-		return controllers[0].getStartPressed();
-	}
-
 	@Override
 	public XboxController[] getControllers() {
 		XboxController[] controllers = new XboxController[3];
