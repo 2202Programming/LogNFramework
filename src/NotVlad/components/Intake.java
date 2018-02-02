@@ -24,7 +24,7 @@ public class Intake extends IControl {
 	public void teleopInit(){
 		init();
 	}
-	public void teleopPeriodicIntake(){
+	public void intake(){
 		if(controller.intake()){
 			intakeMotorLeft.set(0.2);
 			intakeMotorRight.set(-0.2);
@@ -34,7 +34,7 @@ public class Intake extends IControl {
 			intakeMotorRight.set(0);
 		}
 	}
-	public void teleopPeriodicOuttake(){
+	public void outtake(){
 		if(controller.outtake()){
 			intakeMotorLeft.set(-0.2);
 			intakeMotorRight.set(0.2);
@@ -44,4 +44,9 @@ public class Intake extends IControl {
 			intakeMotorRight.set(0);
 		}
 	}
+	public void teleopPeriodic() {
+		intake();
+		outtake();
+	}
+	
 }
