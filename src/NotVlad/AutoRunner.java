@@ -27,7 +27,7 @@ public class AutoRunner extends IControl {
 	public void autonomousInit() {
 		Waypoint[] path = new Waypoint[] { new Waypoint(-4, -1, Pathfinder.d2r(0)) };
 		CommandList list = new CommandList();
-		list.addCommand(new TankPathFinderCommand(path, 1.0, 1.0, 1.0, .5842, 0.2032, .0005, .002, .15, 0));
+		list.addCommand(new TankPathFinderCommand(path, 1.7, 1.0, 1.0, .5842, 0.2032, .0005, .002, .15, 0));
 		runner = new CommandListRunner(list);
 		timeCost = System.currentTimeMillis();
 	}
@@ -35,10 +35,6 @@ public class AutoRunner extends IControl {
 	public void autonomousPeriodic() {
 		if (!finished) {
 			SmartWriter.putD("TimeCost", System.currentTimeMillis() - timeCost);
-			SmartWriter.putS("Game Data & Path Name",
-					DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
-			SmartWriter.putS("Switch/Scale",
-					Global.ourSwitchPosition.toString() + " " + Global.scalePosition.toString());
 		}
 		finished = runner.runList();
 	}
