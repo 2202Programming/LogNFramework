@@ -34,7 +34,7 @@ public class TalonSRXMotor extends IMotor {
 	 * @param kd
 	 * @param kf
 	 */
-	public TalonSRXMotor(int port, boolean reverse, int kp, int ki, int kd, int kf){
+	public TalonSRXMotor(int port, boolean reverse, double kp, double ki, double kd, double kf){
 		this(port,reverse);
 		mode = ControlMode.Position;
 		part.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);

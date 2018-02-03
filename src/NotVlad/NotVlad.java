@@ -3,22 +3,19 @@ package NotVlad;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import NotVlad.components.Climber;
 import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
-import drive.ArcadeDrive;
-import drive.IDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import input.EncoderMonitor;
-import input.NavXTester;
 import input.SensorController;
 import physicalOutput.motors.IMotor;
 import physicalOutput.motors.SparkMotor;
+import physicalOutput.motors.TalonSRXMotor;
 import robot.Global;
 import robot.IControl;
 import robotDefinitions.RobotDefinitionBase;
@@ -104,7 +101,8 @@ public class NotVlad extends RobotDefinitionBase {
 		IMotor intakeRight = new SparkMotor(getInt("INTAKERIGHTPIN"),true);
 		Intake intake = new Intake(intakeLeft,intakeRight);
 		
-		Lift lift = new Lift(new TalonSRX(11));
+		TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
+		Lift lift = new Lift(liftMotor);
 		
 //		SolenoidController solenoidController = SolenoidController.getInstance();
 //		solenoidController.registerSolenoid("intakeSolenoid", new DoubleSolenoid(4,5));
