@@ -6,6 +6,8 @@ import java.util.Map;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import NotVlad.components.Climber;
+import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.ArcadeDrive;
@@ -13,8 +15,8 @@ import drive.IDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import input.EncoderMonitor;
-import input.SensorController;
 import input.NavXTester;
+import input.SensorController;
 import physicalOutput.motors.IMotor;
 import physicalOutput.motors.SparkMotor;
 import robot.Global;
@@ -41,16 +43,13 @@ public class NotVlad extends RobotDefinitionBase {
 
 		// Default Motor Pins
 		_properties.put("FLMOTORPIN", "3");// PWM3
-		_properties.put("BLMOTORPIN", "4");// PWM4
+		_properties.put("BLMOTORPIN", "2");// PWM4
 		_properties.put("FRMOTORPIN", "1");// PWM1
-		_properties.put("BRMOTORPIN", "2");// PWM2
-		_properties.put("SFLMOTORPIN", "6");// Shooter front left
-		_properties.put("SBLMOTORPIN", "6");// Shooter back left
-		_properties.put("SFRMOTORPIN", "7");// Shooter front right
-		_properties.put("SBRMOTERPIN", "7");// Shooter back left
-		_properties.put("INTAKEMOTOR", "5");
+		_properties.put("BRMOTORPIN", "0");// PWM2
+		_properties.put("CLIMBMOTORPIN", "4");
+		_properties.put("INTAKELEFTPIN", "5");// Shooter front left
+		_properties.put("INTAKERIGHTPIN", "6");// Shooter back left
 	}
-
 	/***
 	 * 
 	 * @return Control object map for Tim
@@ -71,9 +70,9 @@ public class NotVlad extends RobotDefinitionBase {
 		 */
 
 		// Create IMotors for Arcade Drive
-		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), false);
+		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), true);
 		IMotor FR=new SparkMotor(getInt("FRMOTORPIN"), true);
-		IMotor BL=new SparkMotor(getInt("BLMOTORPIN"), false);
+		IMotor BL=new SparkMotor(getInt("BLMOTORPIN"), true);
 		IMotor BR=new SparkMotor(getInt("BRMOTORPIN"), true);
 
 		// Create IDrive arcade drive I dont know why we cast it as a IDrive
@@ -97,6 +96,13 @@ public class NotVlad extends RobotDefinitionBase {
 		
 		//AutoRunner AR = new AutoRunner();
 		//iControlMap.put("AutoRunner", AR);
+		
+		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
+		Climber climber = new Climber(climbMotor);
+		
+		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"),true);
+		IMotor intakeRight = new SparkMotor(getInt("INTAKERIGHTPIN"),true);
+		Intake intake = new Intake(intakeLeft,intakeRight);
 		
 		Lift lift = new Lift(new TalonSRX(11));
 		
