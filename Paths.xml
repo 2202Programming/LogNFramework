@@ -52,27 +52,10 @@
 	
 	<Path Id="L1-1">
 
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="30">
+		<DriveCommand Power="1.0">
+			<DistanceStopCondition Dist_Inches="118">
 			</DistanceStopCondition>
 		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="130">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="30">
-			</DistanceStopCondition>
-		</DriveCommand>
-
 	</Path>
 	
 	
