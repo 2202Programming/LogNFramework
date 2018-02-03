@@ -1,76 +1,57 @@
 package NotVlad;
 
-import java.io.File;
-
 import auto.CommandList;
 import auto.CommandListRunner;
+import auto.pathFinder.TankPathFinderCommand;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DriverStation;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Waypoint;
 import robot.Global;
-import robot.IControl;
 import robot.Global.TargetSide;
+import robot.IControl;
 
-public class AutoRunner extends IControl{
+public class AutoRunner extends IControl {
 	NotVladXMLInterpreter XMLInterpreter;
 	CommandListRunner runner;
 	private double timeCost;
 	private boolean finished;
-	public AutoRunner(){
-	}
-	
-	public void robotInit(){
-	}
-	
-	public void autonomousInit(){
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if (gameData.charAt(0) == 'L') {
-			Global.ourSwitchPosition = TargetSide.L;
-		} else {
-			Global.ourSwitchPosition = TargetSide.R;
-		}
 
-		if (gameData.charAt(1) == 'L') {
-			Global.scalePosition = TargetSide.L;
-		} else {
-			Global.scalePosition = TargetSide.R;
-		}
+	public AutoRunner() {
+	}
 
-		if (gameData.charAt(2) == 'L') {
-			Global.opponentSwitchPosition = TargetSide.L;
-		} else {
-			Global.opponentSwitchPosition = TargetSide.R;
-		}
-		
-		finished = false;
-		System.out.println("Start" + System.currentTimeMillis());
-		File file = new File("/home/lvuser/Paths.xml");
-		System.out.println(file.getName());
-		XMLInterpreter = new NotVladXMLInterpreter(file);
-		CommandList list = XMLInterpreter.getPathList(choosePath());
-		System.out.println("Parse End" + System.currentTimeMillis());
+	public void robotInit() {
+	}
+
+	public void autonomousInit() {
+		Waypoint[] path = new Waypoint[] { new Waypoint(-4, -1, Pathfinder.d2r(0)) };
+		CommandList list = new CommandList();
+		list.addCommand(new TankPathFinderCommand(path, 1.0, 1.0, 1.0, .5842, 0.2032, .0005, .002, .15, 0));
 		runner = new CommandListRunner(list);
 		timeCost = System.currentTimeMillis();
 	}
-	
-	public void autonomousPeriodic(){
-		if(!finished) {
-			SmartWriter.putD("TimeCost", System.currentTimeMillis()-timeCost);
-			SmartWriter.putS("Game Data & Path Name", DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
-			SmartWriter.putS("Switch/Scale", Global.ourSwitchPosition.toString() + " " + Global.scalePosition.toString());
+
+	public void autonomousPeriodic() {
+		if (!finished) {
+			SmartWriter.putD("TimeCost", System.currentTimeMillis() - timeCost);
+			SmartWriter.putS("Game Data & Path Name",
+					DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
+			SmartWriter.putS("Switch/Scale",
+					Global.ourSwitchPosition.toString() + " " + Global.scalePosition.toString());
 		}
 		finished = runner.runList();
 	}
-	
-	public void teleopInit(){
+
+	public void teleopInit() {
 		runner.stop();
 	}
-	
-	public void disabledInit(){
+
+	public void disabledInit() {
 		SmartWriter.putS("Path", "EnterPath", DebugMode.COMPETITION);
 		runner.stop();
 	}
-	
+
 	public static String choosePath() {
 		String path = "";
 
