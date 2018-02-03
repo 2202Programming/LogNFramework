@@ -9,6 +9,7 @@ public class Intake extends IControl {
 	private IMotor intakeMotorLeft;
 	private IMotor intakeMotorRight;
 	private MiyamotoControl controller;
+	
 	public Intake(IMotor intakeMotorLeft, IMotor intakeMotorRight){
 		this.intakeMotorLeft=intakeMotorLeft;
 		this.intakeMotorRight=intakeMotorRight;
