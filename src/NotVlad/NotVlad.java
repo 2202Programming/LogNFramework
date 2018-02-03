@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import NotVlad.components.Intake;
 import comms.SmartWriter;
 import drive.ArcadeDrive;
 import drive.IDrive;
@@ -35,18 +36,15 @@ public class NotVlad extends RobotDefinitionBase {
 	}
 
 	protected void loadManualDefinitions() {
-		_properties=new HashMap<String, String>();
+		_properties = new HashMap<String, String>();
 
 		// Default Motor Pins
 		_properties.put("FLMOTORPIN", "3");// PWM3
 		_properties.put("BLMOTORPIN", "4");// PWM4
 		_properties.put("FRMOTORPIN", "1");// PWM1
 		_properties.put("BRMOTORPIN", "2");// PWM2
-		_properties.put("SFLMOTORPIN", "6");// Shooter front left
-		_properties.put("SBLMOTORPIN", "6");// Shooter back left
-		_properties.put("SFRMOTORPIN", "7");// Shooter front right
-		_properties.put("SBRMOTERPIN", "7");// Shooter back left
-		_properties.put("INTAKEMOTOR", "5");
+		_properties.put("LINTAKEMOTOR", "5"); // Left intake motor
+		_properties.put("RINTAKEMOTOR", "6"); // Right intake motor
 	}
 
 	/***
@@ -57,8 +55,8 @@ public class NotVlad extends RobotDefinitionBase {
 
 		SmartWriter.putS("Robot is notvlad...", "asdf");
 		// Create map to store public objects
-		Map<String, IControl> iControlMap=super.loadControlObjects();
-		
+		Map<String, IControl> iControlMap = super.loadControlObjects();
+
 		Global.controllers = new MiyamotoControl();
 
 		// TODO add the sensors here
@@ -69,52 +67,59 @@ public class NotVlad extends RobotDefinitionBase {
 		 */
 
 		// Create IMotors for Arcade Drive
-		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), false);
-		IMotor FR=new SparkMotor(getInt("FRMOTORPIN"), true);
-		IMotor BL=new SparkMotor(getInt("BLMOTORPIN"), false);
-		IMotor BR=new SparkMotor(getInt("BRMOTORPIN"), true);
+		IMotor FL = new SparkMotor(getInt("FLMOTORPIN"), false);
+		IMotor FR = new SparkMotor(getInt("FRMOTORPIN"), true);
+		IMotor BL = new SparkMotor(getInt("BLMOTORPIN"), false);
+		IMotor BR = new SparkMotor(getInt("BRMOTORPIN"), true);
 
 		// Create IDrive arcade drive I dont know why we cast it as a IDrive
 		// though
-		IDrive arcadeDrive=new ArcadeDrive(FL, FR, BL, BR);
+		IDrive arcadeDrive = new ArcadeDrive(FL, FR, BL, BR);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, arcadeDrive);
 
-		//Encoder stuff
+		// Create IMotors for intake
+		IMotor leftIntakeMotor = new SparkMotor(getInt("LINTAKEMOTOR"), false);
+		IMotor rightIntakeMotor = new SparkMotor(getInt("RINTAKEMOTOR"), false);
+		Intake intake = new Intake(leftIntakeMotor, rightIntakeMotor);
+		iControlMap.put("INTAKE", intake);
+
+		// Encoder stuff
 		Encoder encoder0 = new Encoder(0, 1, true);
-		Encoder encoder1 =  new Encoder(2, 3);
+		Encoder encoder1 = new Encoder(2, 3);
 		encoder0.setDistancePerPulse(0.06265);
 		encoder1.setDistancePerPulse(0.06265);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.add("ENCODER1", encoder1);
-		
-		SensorController sensorController=SensorController.getInstance();
+
+		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
 		sensorController.registerSensor("ENCODER1", encoder1);
 		sensorController.registerSensor("NAVX", new AHRS(SerialPort.Port.kMXP));
-		
+
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
-		
-//		SolenoidController solenoidController = SolenoidController.getInstance();
-//		solenoidController.registerSolenoid("intakeSolenoid", new DoubleSolenoid(4,5));
-		
-//		IMotor[] shooterMotors = {new SparkMotor(getInt("SFLMOTORPIN"),true),new SparkMotor(getInt("SFRMOTORPIN"),true)};
-//		ChainMotor shootMotors = new ChainMotor(shooterMotors);
-//		
-//		DoubleSolenoid heightSolenoid = new DoubleSolenoid(0, 1);
-//		DoubleSolenoid trigger = new DoubleSolenoid(2, 3);
-//		Shooter shooter = new Shooter(shootMotors, heightSolenoid,trigger);
-//		
-//		
-//		IMotor intakeMotor = new SparkMotor(getInt("INTAKEMOTOR"),false);
-//		Intake intake = new Intake(intakeMotor);
+
+		// SolenoidController solenoidController = SolenoidController.getInstance();
+		// solenoidController.registerSolenoid("intakeSolenoid", new
+		// DoubleSolenoid(4,5));
+
+		// IMotor[] shooterMotors = {new SparkMotor(getInt("SFLMOTORPIN"),true),new
+		// SparkMotor(getInt("SFRMOTORPIN"),true)};
+		// ChainMotor shootMotors = new ChainMotor(shooterMotors);
+		//
+		// DoubleSolenoid heightSolenoid = new DoubleSolenoid(0, 1);
+		// DoubleSolenoid trigger = new DoubleSolenoid(2, 3);
+		// Shooter shooter = new Shooter(shootMotors, heightSolenoid,trigger);
+		//
+		//
+		// IMotor intakeMotor = new SparkMotor(getInt("INTAKEMOTOR"),false);
+		// Intake intake = new Intake(intakeMotor);
 
 		new NavXTester();
-		//new NavXPIDTunable();
-		//new CommandListRunnerDoNotKeepItSucks();
-		
-		
+		// new NavXPIDTunable();
+		// new CommandListRunnerDoNotKeepItSucks();
+
 		// Create the autonomous command list maker, and command runner
 		// CommandListMaker CLM = new CommandListMaker(AD);
 		// CommandListRunner CR = new CommandListRunner(CLM.makeList1(),"PIPER"); //
