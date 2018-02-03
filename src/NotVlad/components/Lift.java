@@ -1,7 +1,5 @@
 package NotVlad.components;
 
-import javax.sound.midi.ControllerEventListener;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -37,6 +35,36 @@ public class Lift extends IControl {
 		setPosition = position.getNumber();
 	}
 	
+	private LiftPosition getCurrentPosition(){
+		int current = motor.getTalon().getSelectedSensorPosition(0);
+		int[] distances = new int[4];
+		distances[0] = current-LiftPosition.BOTTOM.getNumber();
+		distances[1] = current-LiftPosition.SWITCH.getNumber();
+		distances[2] = current-LiftPosition.SCALE.getNumber();
+		distances[3] = current-LiftPosition.CLIMB.getNumber();
+		
+		int minDistance = distances[0];
+		int minIndex = 0;
+		for(int i = 1; i <  distances.length; i++){
+			if(distances[i] < minDistance){
+				minDistance = distances[i];
+				minIndex = i;
+			}
+		}
+		
+		switch(minIndex){
+			case 0:
+				return LiftPosition.BOTTOM;
+			case 1:
+				return LiftPosition.SWITCH;
+			case 2:
+				return LiftPosition.SCALE;
+			case 3:
+				return LiftPosition.CLIMB;
+		}
+		return LiftPosition.BOTTOM;
+	}
+	
 	public void teleopInit(){
 		talon.set(ControlMode.Position, 0);
 		talon.setIntegralAccumulator(0.0, 0, 0);
@@ -48,6 +76,7 @@ public class Lift extends IControl {
 		
 		motor.reset();
 		setLiftPosition(LiftPosition.BOTTOM);
+		motor.set(setPosition);
 	}
 	
 	public void teleopPeriodic(){
@@ -61,7 +90,35 @@ public class Lift extends IControl {
 		SmartWriter.putD("TalonEncoder",talon.getSelectedSensorPosition(0));
 		
 		if(controller.raiseLift()){
-			
+			switch(getCurrentPosition()){
+				case BOTTOM:
+					setLiftPosition(LiftPosition.SWITCH);
+					break;
+				case SWITCH:
+					setLiftPosition(LiftPosition.SCALE);
+					break;
+				case SCALE:
+					setLiftPosition(LiftPosition.CLIMB);
+					break;
+				default:
+					setLiftPosition(LiftPosition.BOTTOM);
+					break;
+			}
+		}
+		if(controller.lowerLift()){
+			switch(getCurrentPosition()){
+				case SWITCH:
+					setLiftPosition(LiftPosition.BOTTOM);
+					break;
+				case SCALE:
+					setLiftPosition(LiftPosition.SWITCH);
+					break;
+				case CLIMB:
+					setLiftPosition(LiftPosition.SCALE);
+				default:
+					setLiftPosition(LiftPosition.BOTTOM);
+					break;
+			}
 		}
 		motor.set(setPosition);
 	}
