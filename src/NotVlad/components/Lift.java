@@ -1,5 +1,7 @@
 package NotVlad.components;
 
+import javax.sound.midi.ControllerEventListener;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -11,11 +13,11 @@ import robot.Global;
 import robot.IControl;
 
 public class Lift extends IControl {
-	private MiyamotoControl controller;
 	private TalonSRX talon;
 	
+	private MiyamotoControl controller;
 	private TalonSRXMotor motor;
-	private int currentPosition;
+	private int setPosition;
 	
 	public Lift(TalonSRX talon) {
 		this.talon = talon;
@@ -28,30 +30,11 @@ public class Lift extends IControl {
 	
 	public Lift(TalonSRXMotor motor){
 		this.motor = motor;
-		this.currentPosition = 0;
-	}
-	
-	private int convertPosition(LiftPosition position){
-		int toReturn = 0;
-		switch(position){
-			case BOTTOM:
-				toReturn = 0;
-				break;
-			case SWITCH:
-				toReturn = 1;
-				break;
-			case SCALE:
-				toReturn = 2;
-				break;
-			case CLIMB:
-				toReturn = 3;
-				break;
-		}
-		return toReturn;
+		this.setPosition = 0;
 	}
 	
 	private void setLiftPosition(LiftPosition position){
-		motor.set(convertPosition(position));
+		setPosition = position.getNumber();
 	}
 	
 	public void teleopInit(){
@@ -64,7 +47,7 @@ public class Lift extends IControl {
 //		talon.configReverseSoftLimitThreshold(-30000, 0);
 		
 		motor.reset();
-		
+		setLiftPosition(LiftPosition.BOTTOM);
 	}
 	
 	public void teleopPeriodic(){
@@ -76,5 +59,10 @@ public class Lift extends IControl {
 		talon.set(ControlMode.Position, position);
 		SmartWriter.putD("TalonSpeed", talon.getMotorOutputPercent());
 		SmartWriter.putD("TalonEncoder",talon.getSelectedSensorPosition(0));
+		
+		if(controller.raiseLift()){
+			
+		}
+		motor.set(setPosition);
 	}
 }
