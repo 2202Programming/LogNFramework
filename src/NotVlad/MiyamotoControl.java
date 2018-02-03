@@ -85,6 +85,15 @@ public class MiyamotoControl extends ControlBase {
 	public boolean outtake(){
 		return controllers[1].getBHeld();
 	}
+	
+	public boolean raiseLift(){
+		return controllers[1].getRightBumperPressed();
+	}
+	
+	public boolean lowerLift(){
+		return controllers[1].getLeftBumperPressed();
+	}
+
 	@Override
 	public XboxController[] getControllers() {
 		XboxController[] controllers = new XboxController[1];

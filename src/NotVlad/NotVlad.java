@@ -3,10 +3,12 @@ package NotVlad;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import NotVlad.components.Climber;
 import NotVlad.components.Intake;
+import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.ArcadeDrive;
 import drive.IDrive;
@@ -58,7 +60,7 @@ public class NotVlad extends RobotDefinitionBase {
 		// Create map to store public objects
 		Map<String, IControl> iControlMap=super.loadControlObjects();
 		
-		Global.controllers = new PiperControl();
+		Global.controllers = new MiyamotoControl();
 
 		// TODO add the sensors here
 		/*
@@ -75,8 +77,8 @@ public class NotVlad extends RobotDefinitionBase {
 
 		// Create IDrive arcade drive I dont know why we cast it as a IDrive
 		// though
-		IDrive arcadeDrive=new ArcadeDrive(FL, FR, BL, BR);
-		iControlMap.put(RobotDefinitionBase.DRIVENAME, arcadeDrive);
+		//IDrive arcadeDrive=new ArcadeDrive(FL, FR, BL, BR);
+		//iControlMap.put(RobotDefinitionBase.DRIVENAME, arcadeDrive);
 
 		//Encoder stuff
 		Encoder encoder0 = new Encoder(0, 1);
@@ -92,8 +94,8 @@ public class NotVlad extends RobotDefinitionBase {
 		sensorController.registerSensor("ENCODER1", encoder1);
 		sensorController.registerSensor("NAVX", new AHRS(SerialPort.Port.kMXP));
 		
-		AutoRunner AR = new AutoRunner();
-		iControlMap.put("AutoRunner", AR);
+		//AutoRunner AR = new AutoRunner();
+		//iControlMap.put("AutoRunner", AR);
 		
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
 		Climber climber = new Climber(climbMotor);
@@ -101,6 +103,8 @@ public class NotVlad extends RobotDefinitionBase {
 		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"),true);
 		IMotor intakeRight = new SparkMotor(getInt("INTAKERIGHTPIN"),true);
 		Intake intake = new Intake(intakeLeft,intakeRight);
+		
+		Lift lift = new Lift(new TalonSRX(11));
 		
 //		SolenoidController solenoidController = SolenoidController.getInstance();
 //		solenoidController.registerSolenoid("intakeSolenoid", new DoubleSolenoid(4,5));
@@ -116,7 +120,7 @@ public class NotVlad extends RobotDefinitionBase {
 //		IMotor intakeMotor = new SparkMotor(getInt("INTAKEMOTOR"),false);
 //		Intake intake = new Intake(intakeMotor);
 
-		new NavXTester();
+		//new NavXTester();
 		//new NavXPIDTunable();
 		//new CommandListRunnerDoNotKeepItSucks();
 		
