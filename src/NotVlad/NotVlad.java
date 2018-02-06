@@ -62,14 +62,6 @@ public class NotVlad extends RobotDefinitionBase {
 		
 		Global.controllers = new MiyamotoControl();
 
-		// TODO add the sensors here
-		/*
-		 * // Creates the global solenoid controller SolenoidController SO =
-		 * SolenoidController.getInstance(); SO.registerSolenoid("TRIGGER", new
-		 * DoubleSolenoid(1,1)); //TODO register the solenoids here
-		 */
-
-
 		//Encoder stuff
 		Encoder encoder0 = new Encoder(0, 1);
 		Encoder encoder1 =  new Encoder(2, 3);
@@ -91,6 +83,7 @@ public class NotVlad extends RobotDefinitionBase {
 		
 		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL));
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
+		SneakMode sneak = new SneakMode();
 		
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
 		Climber climber = new Climber(climbMotor);

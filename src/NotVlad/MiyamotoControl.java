@@ -93,6 +93,10 @@ public class MiyamotoControl extends ControlBase {
 	public boolean lowerLift(){
 		return controllers[1].getLeftBumperPressed();
 	}
+	
+	public boolean sneakMode(){
+		return controllers[0].getRightBumperPressed();
+	}
 
 	@Override
 	public XboxController[] getControllers() {
