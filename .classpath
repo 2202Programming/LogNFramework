@@ -15,6 +15,6 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
 	<classpathentry kind="var" path="wpiutil" sourcepath="wpiutil.sources"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
-	<classpathentry kind="lib" path="/Users/edhuang/wpilib/user/java/lib/Pathfinder-Java.jar"/>
+	<classpathentry kind="lib" path="C:/Users/BeastRomulus/wpilib/user/java/lib/Pathfinder-Java-1.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
