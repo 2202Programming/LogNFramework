@@ -20,6 +20,7 @@ public class TwoStickDrive extends IDrive {
 	private double maxAcceleration;
 	//Smooths the turning of the robot by applying an exponential curve to the joystick input. Very useful to make turning easier while driving fast.
 	private int turnSmoothingExponent;
+	private boolean invertSticks;
 	
 	/**
 	 * A class that uses one joystick as forward/backwards movement and another for turning.
@@ -32,6 +33,7 @@ public class TwoStickDrive extends IDrive {
 		this.rightMotors = rightMotors;
 		maxAcceleration = 2;
 		turnSmoothingExponent = 1;
+		invertSticks = false;
 	}
 	
 	/**
@@ -40,9 +42,10 @@ public class TwoStickDrive extends IDrive {
 	 * @param leftMotors all of the left motors
 	 * @param maxAcceleration the max acceleration of the robot between 0 and 2
 	 */
-	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, double maxAcceleration){
+	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, double maxAcceleration, boolean invertSticks){
 		this(rightMotors,leftMotors);
 		this.maxAcceleration = maxAcceleration;
+		this.invertSticks = invertSticks;
 	}
 	
 	/**
@@ -55,6 +58,10 @@ public class TwoStickDrive extends IDrive {
 	
 	public void setTurnExponent(int exp){
 		turnSmoothingExponent = exp;
+	}
+	
+	public void invertJoysticks(boolean invert){
+		invertSticks = invert;
 	}
 
 	@Override
@@ -77,14 +84,24 @@ public class TwoStickDrive extends IDrive {
 	}
 	
 	private MotorPowers setForwardSpeed(){
-		double forwardStick = controller.getLeftJoystickY();
+		double forwardStick;
+		if(invertSticks){
+			forwardStick = controller.getRightJoystickY();
+		}else{
+			forwardStick = controller.getLeftJoystickY();
+		}
 		MotorPowers toReturn = new MotorPowers();
 		toReturn.leftPower = toReturn.rightPower = forwardStick;
 		return toReturn;
 	}
 	
 	private MotorPowers setTurnAmount(){
-		double turnStick = controller.getRightJoystickX();
+		double turnStick;
+		if(invertSticks){
+			turnStick = controller.getLeftJoystickX();
+		}else{
+			turnStick = controller.getRightJoystickX();
+		}
 		turnStick = turnStick*Math.abs(Math.pow(turnStick, turnSmoothingExponent-1));
 		MotorPowers toReturn = new MotorPowers();
 		toReturn.leftPower = turnStick;
