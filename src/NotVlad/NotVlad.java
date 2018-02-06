@@ -10,6 +10,7 @@ import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.IDrive;
+import drive.SneakMode;
 import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;

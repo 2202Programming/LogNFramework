@@ -16,8 +16,6 @@ public class TwoStickDrive extends IDrive {
 	
 	private double leftPower;
 	private double rightPower;
-	//This holds the maxAcceleration of the robot measured from 0 to 2. This is the max percent change that the motors will have while driving.
-	private double maxAcceleration;
 	//Smooths the turning of the robot by applying an exponential curve to the joystick input. Very useful to make turning easier while driving fast.
 	private int turnSmoothingExponent;
 	private boolean invertSticks;
@@ -46,14 +44,6 @@ public class TwoStickDrive extends IDrive {
 		this(rightMotors,leftMotors);
 		this.maxAcceleration = maxAcceleration;
 		this.invertSticks = invertSticks;
-	}
-	
-	/**
-	 * Sets the max acceleration of the robot
-	 * @param maxAcceleration the max acceleration of the robot between 0 and 2
-	 */
-	public void setMaxAcceleration(double maxAcceleration){
-		this.maxAcceleration = maxAcceleration;
 	}
 	
 	public void setTurnExponent(int exp){
