@@ -86,7 +86,7 @@ public class TankPathFinderCommand implements ICommand {
 		double r = right.calculate(rightEncoder.get());
 
 		// Assuming the gyro is giving a value in degrees (-180 to 180)
-		double gyro_heading = navX.getAngle() > 360 ? navX.getAngle() - 180 : navX.getAngle();
+		double gyro_heading = navX.getYaw();
 		double desired_heading = Pathfinder.r2d(left.getHeading()); // Should also be in degrees
 
 		// boundHalfDegrees makes the angle be from -180 to 180
