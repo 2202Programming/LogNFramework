@@ -9,12 +9,13 @@ import NotVlad.components.Climber;
 import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
-import drive.ArcadeDrive;
 import drive.IDrive;
+import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import input.EncoderMonitor;
 import input.SensorController;
+import physicalOutput.motors.ChainMotor;
 import physicalOutput.motors.IMotor;
 import physicalOutput.motors.SparkMotor;
 import physicalOutput.motors.TalonSRXMotor;
@@ -41,17 +42,17 @@ public class NotVlad extends RobotDefinitionBase {
 		_properties=new HashMap<String, String>();
 
 		// Default Motor Pins
-		_properties.put("FLMOTORPIN", "3");// PWM3
-		_properties.put("BLMOTORPIN", "2");// PWM4
-		_properties.put("FRMOTORPIN", "1");// PWM1
-		_properties.put("BRMOTORPIN", "0");// PWM2
+		_properties.put("FLMOTORPIN", "3");
+		_properties.put("BLMOTORPIN", "2");
+		_properties.put("FRMOTORPIN", "1");
+		_properties.put("BRMOTORPIN", "0");
 		_properties.put("CLIMBMOTORPIN", "4");
-		_properties.put("INTAKELEFTPIN", "5");// Shooter front left
-		_properties.put("INTAKERIGHTPIN", "6");// Shooter back left
+		_properties.put("INTAKELEFTPIN", "5");
+		_properties.put("INTAKERIGHTPIN", "6");
 	}
 	/***
 	 * 
-	 * @return Control object map for Tim
+	 * @return Control object map for Miyamoto
 	 */
 	public Map<String, IControl> loadControlObjects() {
 
@@ -68,16 +69,6 @@ public class NotVlad extends RobotDefinitionBase {
 		 * DoubleSolenoid(1,1)); //TODO register the solenoids here
 		 */
 
-		// Create IMotors for Arcade Drive
-		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), false);
-		IMotor FR=new SparkMotor(getInt("FRMOTORPIN"), true);
-		IMotor BL=new SparkMotor(getInt("BLMOTORPIN"), false);
-		IMotor BR=new SparkMotor(getInt("BRMOTORPIN"), true);
-
-		// Create IDrive arcade drive I dont know why we cast it as a IDrive
-		// though
-		IDrive arcadeDrive=new ArcadeDrive(FL, FR, BL, BR);
-		iControlMap.put(RobotDefinitionBase.DRIVENAME, arcadeDrive);
 
 		//Encoder stuff
 		Encoder encoder0 = new Encoder(0, 1);
@@ -93,8 +84,13 @@ public class NotVlad extends RobotDefinitionBase {
 		sensorController.registerSensor("ENCODER1", encoder1);
 		sensorController.registerSensor("NAVX", new AHRS(SerialPort.Port.kMXP));
 		
-		//AutoRunner AR = new AutoRunner();
-		//iControlMap.put("AutoRunner", AR);
+		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), false);
+		IMotor FR=new SparkMotor(getInt("FRMOTORPIN"), true);
+		IMotor BL=new SparkMotor(getInt("BLMOTORPIN"), false);
+		IMotor BR=new SparkMotor(getInt("BRMOTORPIN"), true);
+		
+		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL));
+		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 		
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
 		Climber climber = new Climber(climbMotor);
@@ -106,36 +102,8 @@ public class NotVlad extends RobotDefinitionBase {
 		TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
 		Lift lift = new Lift(liftMotor);
 		
-//		SolenoidController solenoidController = SolenoidController.getInstance();
-//		solenoidController.registerSolenoid("intakeSolenoid", new DoubleSolenoid(4,5));
-		
-//		IMotor[] shooterMotors = {new SparkMotor(getInt("SFLMOTORPIN"),true),new SparkMotor(getInt("SFRMOTORPIN"),true)};
-//		ChainMotor shootMotors = new ChainMotor(shooterMotors);
-//		
-//		DoubleSolenoid heightSolenoid = new DoubleSolenoid(0, 1);
-//		DoubleSolenoid trigger = new DoubleSolenoid(2, 3);
-//		Shooter shooter = new Shooter(shootMotors, heightSolenoid,trigger);
-//		
-//		
-//		IMotor intakeMotor = new SparkMotor(getInt("INTAKEMOTOR"),false);
-//		Intake intake = new Intake(intakeMotor);
-
-		//new NavXTester();
-		//new NavXPIDTunable();
-		//new CommandListRunnerDoNotKeepItSucks();
-		
-		
-		// Create the autonomous command list maker, and command runner
-		// CommandListMaker CLM = new CommandListMaker(AD);
-		// CommandListRunner CR = new CommandListRunner(CLM.makeList1(),"PIPER"); //
-		// makes list one for the TIM robot
-
-		// Create the IMotors for the Shooter class
-		// IMotor SL = new SparkMotor(getInt("SLMOTORPIN"),false);
-		// IMotor SR = new SparkMotor(getInt("SRMOTORPIN"),false);
-
-		// temp.put("AD", AD);
-		// temp.put("CR", CR);
+		//AutoRunner AR = new AutoRunner();
+		//iControlMap.put("AutoRunner", AR);
 
 		return iControlMap;
 	}
