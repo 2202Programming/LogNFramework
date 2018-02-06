@@ -1,23 +1,23 @@
-package NotVlad;
+package drive;
 
-import drive.TwoStickDrive;
 import robot.Global;
 import robot.IControl;
+import robotDefinitions.ControlBase;
 import robotDefinitions.RobotDefinitionBase;
 
 public class SneakMode extends IControl {
-	private MiyamotoControl controller;
+	private ControlBase controller;
 	private double[] accelerationValues;
 	private int index;
-	private TwoStickDrive drive;
+	private IDrive drive;
 	
 	public SneakMode(){
-		controller = (MiyamotoControl)Global.controllers;
+		controller = Global.controllers;
 		accelerationValues = new double[2];
 		accelerationValues[0] = 2;
 		accelerationValues[1] = 0.2;
 		index = 0;
-		drive = (TwoStickDrive)Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
+		drive = (IDrive)Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 	}
 	
 	public void teleopPeriodic(){
