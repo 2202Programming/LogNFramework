@@ -66,6 +66,7 @@ public class TankPathFinderCommand implements ICommand {
 		// Configure the PID tuning
 		left.configurePIDVA(proportionalGain, integralGain, dervativeGain, 1 / maxVelocity, 0);
 		right.configurePIDVA(proportionalGain, integralGain, dervativeGain, 1 / maxVelocity, 0);
+		System.out.println("PathFinder command created");
 	}
 
 	@Override
@@ -76,6 +77,7 @@ public class TankPathFinderCommand implements ICommand {
 
 		// Get the gyroscope
 		navX = (AHRS) (SensorController.getInstance().getSensor("NAVX"));
+		navX.reset();
 	}
 
 	@Override
@@ -90,10 +92,12 @@ public class TankPathFinderCommand implements ICommand {
 		// boundHalfDegrees makes the angle be from -180 to 180
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
 		double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
-
+		
 		//Sets the motor speeds
 		drive.setLeftMotors(l + turn);
+		System.out.println("Left Motor set to: " + (l + turn));
 		drive.setRightMotors(r - turn);
+		System.out.println("Right Motor set to: " + (r - turn));
 
 		return false;
 	}
