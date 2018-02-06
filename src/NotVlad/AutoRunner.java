@@ -2,7 +2,9 @@ package NotVlad;
 
 import auto.CommandList;
 import auto.CommandListRunner;
+import auto.commands.EmptyCommand;
 import auto.pathFinder.TankPathFinderCommand;
+import auto.stopConditions.TimerStopCondition;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -25,16 +27,24 @@ public class AutoRunner extends IControl {
 	}
 
 	public void autonomousInit() {
-		Waypoint[] path = new Waypoint[] { new Waypoint(-4, -1, Pathfinder.d2r(0)) };
+		Waypoint[] path = new Waypoint[] { new Waypoint(0, 0, Pathfinder.d2r(0)), new Waypoint(.5, -.5, Pathfinder.d2r(-90)) };
 		CommandList list = new CommandList();
+		System.out.println("Starting creation of TankPath");
 		list.addCommand(new TankPathFinderCommand(path, 1.7, 1.0, 1.0, .5842, 0.2032, .0005, .002, .15, 0));
+		System.out.println("TankPath command created");
+		list.addCommand(new EmptyCommand(new TimerStopCondition(0)));
 		runner = new CommandListRunner(list);
 		timeCost = System.currentTimeMillis();
+		finished = false;
 	}
 
 	public void autonomousPeriodic() {
 		if (!finished) {
 			SmartWriter.putD("TimeCost", System.currentTimeMillis() - timeCost);
+		}
+		if (runner == null) {
+			System.out.println("Init called in periodic");
+			autonomousInit();
 		}
 		finished = runner.runList();
 	}
