@@ -9,6 +9,8 @@ import NotVlad.components.Climber;
 import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
+import drive.ArcadeDrive;
+import drive.IDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import input.EncoderMonitor;
@@ -67,15 +69,15 @@ public class NotVlad extends RobotDefinitionBase {
 		 */
 
 		// Create IMotors for Arcade Drive
-		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), true);
+		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), false);
 		IMotor FR=new SparkMotor(getInt("FRMOTORPIN"), true);
-		IMotor BL=new SparkMotor(getInt("BLMOTORPIN"), true);
+		IMotor BL=new SparkMotor(getInt("BLMOTORPIN"), false);
 		IMotor BR=new SparkMotor(getInt("BRMOTORPIN"), true);
 
 		// Create IDrive arcade drive I dont know why we cast it as a IDrive
 		// though
-		//IDrive arcadeDrive=new ArcadeDrive(FL, FR, BL, BR);
-		//iControlMap.put(RobotDefinitionBase.DRIVENAME, arcadeDrive);
+		IDrive arcadeDrive=new ArcadeDrive(FL, FR, BL, BR);
+		iControlMap.put(RobotDefinitionBase.DRIVENAME, arcadeDrive);
 
 		//Encoder stuff
 		Encoder encoder0 = new Encoder(0, 1);

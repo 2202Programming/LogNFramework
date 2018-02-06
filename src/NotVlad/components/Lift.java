@@ -3,6 +3,7 @@ package NotVlad.components;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import NotVlad.MiyamotoControl;
+import comms.SmartWriter;
 import physicalOutput.motors.TalonSRXMotor;
 import robot.Global;
 import robot.IControl;
@@ -19,6 +20,7 @@ public class Lift extends IControl {
 	}
 	
 	public Lift(TalonSRXMotor motor){
+		controller = (MiyamotoControl)Global.controllers;
 		this.motor = motor;
 		this.setPosition = 0;
 	}
@@ -30,10 +32,10 @@ public class Lift extends IControl {
 	private LiftPosition getCurrentPosition(){
 		int current = motor.getTalon().getSelectedSensorPosition(0);
 		int[] distances = new int[4];
-		distances[0] = current-LiftPosition.BOTTOM.getNumber();
-		distances[1] = current-LiftPosition.SWITCH.getNumber();
-		distances[2] = current-LiftPosition.SCALE.getNumber();
-		distances[3] = current-LiftPosition.CLIMB.getNumber();
+		distances[0] = Math.abs(current-LiftPosition.BOTTOM.getNumber());
+		distances[1] = Math.abs(current-LiftPosition.SWITCH.getNumber());
+		distances[2] = Math.abs(current-LiftPosition.SCALE.getNumber());
+		distances[3] = Math.abs(current-LiftPosition.CLIMB.getNumber());
 		
 		int minDistance = distances[0];
 		int minIndex = 0;
@@ -95,6 +97,12 @@ public class Lift extends IControl {
 					break;
 			}
 		}
+		SmartWriter.putD("SetPosition", setPosition);
+//		if(controller.lowerLift()){
+//			setPosition-=1000;
+//		}else if(controller.raiseLift()){
+//			setPosition+=1000;
+//		}
 		motor.set(setPosition);
 	}
 }
