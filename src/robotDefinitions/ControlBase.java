@@ -15,6 +15,12 @@ public abstract class ControlBase extends IControl {
 	}
 
 	public abstract XboxController[] getControllers();
+	
+	/**
+	 * Toggles the sneaking of the robot between the values inputed in the sneakMode class
+	 * @return
+	 */
+	public abstract boolean sneakMode();
 
 	/**
 	 * getLeftJoystickX - returns the x value of the controller at

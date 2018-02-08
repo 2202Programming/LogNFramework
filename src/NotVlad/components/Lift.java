@@ -92,6 +92,7 @@ public class Lift extends IControl {
 					break;
 				case CLIMB:
 					setLiftPosition(LiftPosition.SCALE);
+					break;
 				default:
 					setLiftPosition(LiftPosition.BOTTOM);
 					break;
