@@ -49,11 +49,6 @@ public class ArcadeDrive extends IDrive {
 	 * TeleopPeriodic to when they are suppose to be passed to the motors
 	 */
 	private double leftMotors=0, rightMotors=0;
-
-	/**
-	 * This makes it easier to drive robots that tip
-	 */
-	private double maxAcceleration=100000;
 	
 	public ArcadeDrive(IMotor fl, IMotor fr) {
 		this.frontLeft=fl;
