@@ -97,8 +97,14 @@ public class TwoStickDrive extends IDrive {
 
 	@Override
 	protected void setMotors() {
-		leftMotors.set(leftPower);
+		if(Math.abs(leftPower)> maxVelocity){
+			leftPower = Math.signum(leftPower)*maxVelocity;
+		}
+		if(Math.abs(rightPower)> maxVelocity){
+			rightPower = Math.signum(rightPower)*maxVelocity;
+		}
 		rightMotors.set(rightPower);
+		leftMotors.set(leftPower);
 	}
 
 	@Override

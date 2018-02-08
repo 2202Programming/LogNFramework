@@ -23,6 +23,7 @@ public abstract class IDrive extends IControl {
 	 * This represents the max change in output voltage
 	 */
 	protected double maxAcceleration;
+	protected double maxVelocity;
 
 	/**
 	 * Sets the drive control so that it is controlled by this IDrive in case
@@ -144,6 +145,10 @@ public abstract class IDrive extends IControl {
 	 */
 	public void setMaxAcceleration(double maxAcceleration){
 		this.maxAcceleration = maxAcceleration;
+	}
+	
+	public void setMaxVelocity(double maxVelocity){
+		this.maxVelocity = maxVelocity;
 	}
 
 	/**

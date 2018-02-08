@@ -12,29 +12,30 @@ import robotDefinitions.RobotDefinitionBase;
  */
 public class SneakMode extends IControl {
 	private ControlBase controller;
-	private double[] accelerationValues;
+	private MotionProfile[] profiles;
 	private int index;
 	private IDrive drive;
 	
 	public SneakMode(IDrive drive){
 		controller = Global.controllers;
-		accelerationValues = new double[2];
-		accelerationValues[0] = 0.05;
-		accelerationValues[1] = 2;
+		profiles = new MotionProfile[2];
+		profiles[0] = new MotionProfile (0.05,1);
+		profiles[1] = new MotionProfile (0.05,0.5);
 		index = 0;
 		this.drive = drive;
 	}
 	
-	public SneakMode(IDrive drive, double[] accelerationValues){
+	public SneakMode(IDrive drive, MotionProfile[] profiles){
 		this(drive);
-		this.accelerationValues = accelerationValues;
+		this.profiles = profiles;
 	}
 	
 	public void teleopPeriodic(){
 		if(controller.sneakMode()){
 			index++;
 		}
-		index%=accelerationValues.length;
-		drive.setMaxAcceleration(accelerationValues[index]);
+		index%=profiles.length;
+		drive.setMaxAcceleration(profiles[index].getAcceleration());
+		drive.setMaxVelocity(profiles[index].getVelocity());
 	}
 }
