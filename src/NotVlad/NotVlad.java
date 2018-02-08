@@ -40,7 +40,7 @@ public class NotVlad extends RobotDefinitionBase {
 	}
 
 	protected void loadManualDefinitions() {
-		_properties=new HashMap<String, String>();
+		_properties = new HashMap<String, String>();
 
 		// Default Motor Pins
 		_properties.put("FLMOTORPIN", "3");
@@ -71,8 +71,8 @@ public class NotVlad extends RobotDefinitionBase {
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.add("ENCODER1", encoder1);
-		
-		SensorController sensorController=SensorController.getInstance();
+
+		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
 		sensorController.registerSensor("ENCODER1", encoder1);
 		sensorController.registerSensor("NAVX", new AHRS(SerialPort.Port.kMXP));
@@ -96,8 +96,8 @@ public class NotVlad extends RobotDefinitionBase {
 		TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
 		Lift lift = new Lift(liftMotor);
 		
-		//AutoRunner AR = new AutoRunner();
-		//iControlMap.put("AutoRunner", AR);
+		AutoRunner AR = new AutoRunner();
+		iControlMap.put("AutoRunner", AR);
 
 		return iControlMap;
 	}
