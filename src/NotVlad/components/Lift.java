@@ -66,43 +66,43 @@ public class Lift extends IControl {
 	}
 	
 	public void teleopPeriodic(){
-		if(controller.raiseLift()){
-			switch(getCurrentPosition()){
-				case BOTTOM:
-					setLiftPosition(LiftPosition.SWITCH);
-					break;
-				case SWITCH:
-					setLiftPosition(LiftPosition.SCALE);
-					break;
-				case SCALE:
-					setLiftPosition(LiftPosition.CLIMB);
-					break;
-				default:
-					setLiftPosition(LiftPosition.BOTTOM);
-					break;
-			}
-		}
-		if(controller.lowerLift()){
-			switch(getCurrentPosition()){
-				case SWITCH:
-					setLiftPosition(LiftPosition.BOTTOM);
-					break;
-				case SCALE:
-					setLiftPosition(LiftPosition.SWITCH);
-					break;
-				case CLIMB:
-					setLiftPosition(LiftPosition.SCALE);
-				default:
-					setLiftPosition(LiftPosition.BOTTOM);
-					break;
-			}
-		}
-		SmartWriter.putD("SetPosition", setPosition);
-//		if(controller.lowerLift()){
-//			setPosition-=1000;
-//		}else if(controller.raiseLift()){
-//			setPosition+=1000;
+//		if(controller.raiseLift()){
+//			switch(getCurrentPosition()){
+//				case BOTTOM:
+//					setLiftPosition(LiftPosition.SWITCH);
+//					break;
+//				case SWITCH:
+//					setLiftPosition(LiftPosition.SCALE);
+//					break;
+//				case SCALE:
+//					setLiftPosition(LiftPosition.CLIMB);
+//					break;
+//				default:
+//					setLiftPosition(LiftPosition.BOTTOM);
+//					break;
+//			}
 //		}
+//		if(controller.lowerLift()){
+//			switch(getCurrentPosition()){
+//				case SWITCH:
+//					setLiftPosition(LiftPosition.BOTTOM);
+//					break;
+//				case SCALE:
+//					setLiftPosition(LiftPosition.SWITCH);
+//					break;
+//				case CLIMB:
+//					setLiftPosition(LiftPosition.SCALE);
+//				default:
+//					setLiftPosition(LiftPosition.BOTTOM);
+//					break;
+//			}
+//		}
+		SmartWriter.putD("SetPosition", setPosition);
+		if(controller.lowerLift()){
+			setPosition-=1000;
+		}else if(controller.raiseLift()){
+			setPosition+=1000;
+		}
 		motor.set(setPosition);
 	}
 }

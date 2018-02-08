@@ -19,6 +19,7 @@ public class TwoStickDrive extends IDrive {
 	//Smooths the turning of the robot by applying an exponential curve to the joystick input. Very useful to make turning easier while driving fast.
 	private int turnSmoothingExponent;
 	private boolean invertSticks;
+	private double lastForward;
 	
 	/**
 	 * A class that uses one joystick as forward/backwards movement and another for turning.
@@ -32,6 +33,7 @@ public class TwoStickDrive extends IDrive {
 		maxAcceleration = 2;
 		turnSmoothingExponent = 1;
 		invertSticks = false;
+		lastForward = 0;
 	}
 	
 	/**
@@ -58,19 +60,8 @@ public class TwoStickDrive extends IDrive {
 	protected void teleopUpdate() {
 		MotorPowers forward = setForwardSpeed();
 		MotorPowers turn = setTurnAmount();
-		MotorPowers setSpeed = new MotorPowers();
-		setSpeed.leftPower = forward.leftPower+turn.leftPower;
-		setSpeed.rightPower = forward.rightPower+turn.rightPower;
-		if(Math.abs(setSpeed.leftPower-leftPower) > maxAcceleration){
-			leftPower+=Math.signum(setSpeed.leftPower-leftPower)*maxAcceleration;
-		}else{
-			leftPower = setSpeed.leftPower;
-		}
-		if(Math.abs(setSpeed.rightPower-rightPower) > maxAcceleration){
-			rightPower+=Math.signum(setSpeed.rightPower-rightPower)*maxAcceleration;
-		}else{
-			rightPower = setSpeed.rightPower;
-		}
+		leftPower = forward.leftPower+turn.leftPower;
+		rightPower = forward.rightPower+turn.rightPower;
 	}
 	
 	private MotorPowers setForwardSpeed(){
@@ -81,7 +72,12 @@ public class TwoStickDrive extends IDrive {
 			forwardStick = controller.getLeftJoystickY();
 		}
 		MotorPowers toReturn = new MotorPowers();
-		toReturn.leftPower = toReturn.rightPower = forwardStick;
+		if(Math.abs(forwardStick-lastForward) > maxAcceleration){
+			forwardStick = lastForward+Math.signum(forwardStick-lastForward)*maxAcceleration;
+		}
+		lastForward = forwardStick;
+		toReturn.leftPower = forwardStick;
+		toReturn.rightPower = forwardStick;
 		return toReturn;
 	}
 	
