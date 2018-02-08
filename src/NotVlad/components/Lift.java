@@ -30,7 +30,7 @@ public class Lift extends IControl {
 	}
 	
 	private LiftPosition getCurrentPosition(){
-		int current = motor.getTalon().getSelectedSensorPosition(0);
+		int current = Math.abs(motor.getTalon().getSelectedSensorPosition(0));
 		int[] distances = new int[4];
 		distances[0] = Math.abs(current-LiftPosition.BOTTOM.getNumber());
 		distances[1] = Math.abs(current-LiftPosition.SWITCH.getNumber());
@@ -46,6 +46,7 @@ public class Lift extends IControl {
 			}
 		}
 		
+		SmartWriter.putD("minIndex", minIndex);
 		switch(minIndex){
 			case 0:
 				return LiftPosition.BOTTOM;
@@ -99,6 +100,8 @@ public class Lift extends IControl {
 			}
 		}
 		SmartWriter.putD("SetPosition", setPosition);
+		SmartWriter.putD("LiftPos", motor.getTalon().getSelectedSensorPosition(0));
+		SmartWriter.putD("LiftCurrent", motor.getTalon().getOutputCurrent());
 //		if(controller.lowerLift()){
 //			setPosition-=1000;
 //		}else if(controller.raiseLift()){
