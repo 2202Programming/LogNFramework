@@ -73,4 +73,8 @@ public class EncoderMonitor extends IControl {
 			entry.getValue().reset();
 		}
 	}
+	
+	public HashMap<String, Encoder> getEncoders() {
+		return encoders;
+	}
 }
