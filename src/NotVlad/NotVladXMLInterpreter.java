@@ -141,9 +141,11 @@ public class NotVladXMLInterpreter {
 				stopCondition = new TimerStopCondition(stopTime);
 			}
 
-			return new SneakDriveCommand(stopCondition, .1);
+			return new SneakDriveCommand(stopCondition, .01);
+		} case("DecelCommand") : {
+			double startPower = Double.parseDouble(attributes.getNamedItem("StartPower").getNodeValue());
 		}
-
+		
 		}
 		return new DriveCommand(new TimerStopCondition(0), 0.6);
 	}
