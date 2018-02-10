@@ -17,7 +17,6 @@ import auto.ICommand;
 import auto.IStopCondition;
 import auto.commands.DecelCommand;
 import auto.commands.DriveCommand;
-import auto.commands.SneakDriveCommand;
 import auto.commands.TurnCommand;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
@@ -40,8 +39,8 @@ public class NotVladXMLInterpreter {
 		readFile(f);
 		tempEnc = new ArrayList<Encoder>();
 		SensorController sensorController = SensorController.getInstance();
-		tempEnc.add((Encoder) sensorController.getSensor("ENCODER0"));
-		tempEnc.add((Encoder) sensorController.getSensor("ENCODER1"));
+		tempEnc.add((Encoder)sensorController.getSensor("ENCODER0"));
+		tempEnc.add((Encoder)sensorController.getSensor("ENCODER1"));
 	}
 
 	/**
@@ -87,14 +86,15 @@ public class NotVladXMLInterpreter {
 				}
 			}
 		}
+		
 
 		// Will throw nullPointer if the path doesn't exist
 		NodeList xmlCommands = xmlPath.getChildNodes();
-
+		
 		CommandList path = new CommandList();
 		for (int i = 0; i < xmlCommands.getLength(); i++) {
 			Node currentNode = xmlCommands.item(i);
-			// System.out.println("nodeName:" + currentNode.getNodeName());
+			//System.out.println("nodeName:" + currentNode.getNodeName());
 			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
 				// calls this method for all the children that are command lists
 				path.addCommand(getCommand(currentNode));
@@ -121,19 +121,18 @@ public class NotVladXMLInterpreter {
 			return new TurnCommand(turnDegrees);
 		}
 		case ("DriveCommand"): {
-			// double power =
-			// Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 			Node stopConditionNode = null;
-			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
-				// System.out.println(n.getChildNodes().item(i));
-				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
+			for(int i = 0; i < n.getChildNodes().getLength(); i++){
+				//System.out.println(n.getChildNodes().item(i));
+				if(n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE){
 					stopConditionNode = n.getChildNodes().item(i);
 				}
 			}
-			// System.out.println(stopConditionNode);
+			//System.out.println(stopConditionNode);
 			String stopConditionType = stopConditionNode.getNodeName();
 			IStopCondition stopCondition = new TimerStopCondition(0);
-
+			
 			if (stopConditionType.equals("DistanceStopCondition")) {
 				int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
 				stopCondition = new DistanceStopCondition(tempEnc, stopDistance);
