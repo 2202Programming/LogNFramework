@@ -16,7 +16,7 @@
 	<Path Id="L1-2">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="245">
+			<DistanceStopCondition Dist_Inches="164">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -24,7 +24,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="205">
+			<DistanceStopCondition Dist_Inches="203">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -32,7 +32,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="168">
+			<DistanceStopCondition Dist_Inches="50">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -40,15 +40,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="28">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="66">
+			<DistanceStopCondition Dist_Inches="60">
 			</DistanceStopCondition>
 		</DriveCommand>
 	</Path>
@@ -61,7 +53,7 @@
 	<Path Id="L1-1">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -69,7 +61,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="165">
+			<DistanceStopCondition Dist_Inches="130">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -77,7 +69,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="70">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -92,7 +84,7 @@
 	<Path Id="L2-1">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="245">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -100,23 +92,23 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="205">
+			<DistanceStopCondition Dist_Inches="170">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="90">
+		<TurnCommand Angle="-90">
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="72">
+			<DistanceStopCondition Dist_Inches="89">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="90">
+		<TurnCommand Angle="-90">
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="20.5">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -131,7 +123,7 @@
 	<Path Id="L2-2">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
+			<DistanceStopCondition Dist_Inches="164">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -139,25 +131,34 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="221">
+			<DistanceStopCondition Dist_Inches="203">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="-90">
+		<TurnCommand Angle="90">
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="96">
+			<DistanceStopCondition Dist_Inches="50">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="-90">
+		<TurnCommand Angle="90">
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="27">
+			<DistanceStopCondition Dist_Inches="50">
 			</DistanceStopCondition>
 		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
+			</DistanceStopCondition>
+		</DriveCommand>
+
 	</Path>
 
 
@@ -192,7 +193,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="27">
+			<DistanceStopCondition Dist_Inches="5">
 			</DistanceStopCondition>
 		</DriveCommand>
 	</Path>
@@ -205,7 +206,7 @@
 	<Path Id="L5-1">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -213,7 +214,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="168">
+			<DistanceStopCondition Dist_Inches="203">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -221,50 +222,37 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="43">
-			</DistanceStopCondition>
-		</DriveCommand>	
-	</Path>
-	
-	<Path Id="L5-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
+			<DistanceStopCondition Dist_Inches="135">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="55">
+			</DistanceStopCondition>
+		</DriveCommand>
+
 		<TurnCommand Angle="90">
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="218">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
 
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="44">
-			</DistanceStopCondition>
-		</DriveCommand>		
 	</Path>
-	
-	
-	
-	
+
+
+
+
+
+
 	<Path Id="L6-1">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -272,7 +260,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="218">
+			<DistanceStopCondition Dist_Inches="300">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -280,56 +268,28 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="257">
+			<DistanceStopCondition Dist_Inches="320">
 			</DistanceStopCondition>
 		</DriveCommand>
 
 		<TurnCommand Angle="-90">
 		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
+			</DistanceStopCondition>
+		</DriveCommand>
 	</Path>
-	
-	<Path Id="L6-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="221">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-			<TurnCommand Angle="-90">
-		</TurnCommand>
 
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="89">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	</Path>
-	
-	
-	
-	
+
+
+
+
+
 	<Path Id="L7-1">
-	
+
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="36">
+			<DistanceStopCondition Dist_Inches="55">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -337,9 +297,34 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="53">
+			<DistanceStopCondition Dist_Inches="60">
 			</DistanceStopCondition>
-		</DriveCommand>	
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="150">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="60">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
+			</DistanceStopCondition>
+		</DriveCommand>
+
 	</Path>
 
 
@@ -365,7 +350,7 @@
 	<Path Id="M1-1">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="74">
+			<DistanceStopCondition Dist_Inches="55">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -373,7 +358,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="43">
+			<DistanceStopCondition Dist_Inches="50">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -381,7 +366,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="68">
+			<DistanceStopCondition Dist_Inches="55">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -392,7 +377,7 @@
 
 	<Path Id="M2-1">
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
+			<DistanceStopCondition Dist_Inches="45">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -400,7 +385,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="99">
+			<DistanceStopCondition Dist_Inches="150">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -408,13 +393,18 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="96">
+			<DistanceStopCondition Dist_Inches="60">
 			</DistanceStopCondition>
 		</DriveCommand>
 
 		<TurnCommand Angle="-90">
 		</TurnCommand>
-	
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="45">
+			</DistanceStopCondition>
+		</DriveCommand>
+
 	</Path>
 
 
@@ -423,7 +413,7 @@
 	<Path Id="M3-1">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
+			<DistanceStopCondition Dist_Inches="45">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -431,7 +421,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="59">
+			<DistanceStopCondition Dist_Inches="90">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -439,7 +429,7 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="67">
+			<DistanceStopCondition Dist_Inches="45">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -451,7 +441,7 @@
 	<Path Id="M4-1">
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
+			<DistanceStopCondition Dist_Inches="45">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -459,719 +449,53 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="101">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="23">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-		
-	</Path>
-	
-	<Path Id="M4-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="109">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="153">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="67">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="25">
-			</DistanceStopCondition>
-		</DriveCommand>
-	
-	</Path>
-	
-	<Path Id="M5-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="109">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="161">
-			</DistanceStopCondition>
-		</DriveCommand>
-				
-	<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="30">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="48">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-	</Path>
-	
-	
-	<Path Id="M6-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="111">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="257">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-	</Path>
-	
-	<Path Id="M6-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="101">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="167">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="250">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="87">
-			</DistanceStopCondition>
-		</DriveCommand>
-				
-	<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-	</Path>
-	
-	<Path Id="M7-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="109">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="161">
-			</DistanceStopCondition>
-		</DriveCommand>
-				
-	<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="178">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="47">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-	</Path>
-	
-	<Path Id="M7-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="101">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="164">
-			</DistanceStopCondition>
-		</DriveCommand>
-				
-	<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="27">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="47">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-	</Path>
-	
-	<Path Id="M8-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="119">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="261">
-			</DistanceStopCondition>
-		</DriveCommand>
-				
-	<TurnCommand Angle="90">
-		</TurnCommand>
-		
-	</Path>
-	
-	<Path Id="M8-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="101">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="167">
-			</DistanceStopCondition>
-		</DriveCommand>
-				
-	<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="226">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="88">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-		
-	</Path>
-	
-	
-	<Path Id="R1-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="109">
-			</DistanceStopCondition>
-		</DriveCommand>
-	</Path>
-	
-	
-	
-	
-	<Path Id="R2-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="135">
-			</DistanceStopCondition>
-		</DriveCommand>
-	
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="28">
-			</DistanceStopCondition>
-		</DriveCommand>
-	</Path>
-	
-	<Path Id="R3-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="160">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="65">
-			</DistanceStopCondition>
-		</DriveCommand>
-	</Path>
-	
-	<Path Id="R3-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="214">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="137">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="55">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="31">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-	</Path>
-	
-	
-	<Path Id="R4-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="73">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="32">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-	</Path>
-	
-	<Path Id="R4-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="100">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="27">
-			</DistanceStopCondition>
-		</DriveCommand>
-	
-	</Path>
-	
-	<Path Id="R5-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="170">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="175">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-	</Path>
-	
-	<Path Id="R5-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="35">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-	</Path>
-	
-	
-	<Path Id="R6-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="295">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-			
-	</Path>
-	
-	<Path Id="R6-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="170">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="87">
-			</DistanceStopCondition>
-		</DriveCommand>
-					
-	</Path>
-	
-	
-	<Path Id="R7-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="170">
+			<DistanceStopCondition Dist_Inches="90">
 			</DistanceStopCondition>
 		</DriveCommand>
 
 		<TurnCommand Angle="90">
 		</TurnCommand>
 
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-	</Path>
-	
-	<Path Id="R7-2">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="170">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="40">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-		
-	</Path>
-	
-	<Path Id ="R8-1">
-	
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="206">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<TurnCommand Angle="90">
-		</TurnCommand>
-	
 		<DriveCommand Power="0.5">
 			<DistanceStopCondition Dist_Inches="60">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<TurnCommand Angle="90">
 		</TurnCommand>
-		
-	</Path>
-	
-	<Path Id ="R8-2">
-	
+
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
+			<DistanceStopCondition Dist_Inches="45">
+			</DistanceStopCondition>
+		</DriveCommand>
+	</Path>
+
+
+
+
+	<Path Id="R1-1">
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
 		<TurnCommand Angle="-90">
 		</TurnCommand>
-		
+
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="206">
+			<DistanceStopCondition Dist_Inches="30">
+			</DistanceStopCondition>
+		</DriveCommand>
+	</Path>
+
+
+
+
+	<Path Id="R2-1">
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -1179,13 +503,282 @@
 		</TurnCommand>
 
 		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="268">
+			<DistanceStopCondition Dist_Inches="60">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
+			</DistanceStopCondition>
+		</DriveCommand>
+	</Path>
+
+	<Path Id="R3-1">
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
+			</DistanceStopCondition>
+		</DriveCommand>
+
 		<TurnCommand Angle="90">
 		</TurnCommand>
-	
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="50">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="200">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="350">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="200">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="70">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+	</Path>
+
+	<Path Id="R4-1">
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="50">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="60">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="200">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="300">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="60">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+	</Path>
+
+	<Path Id="R5-1">
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="50">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="60">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="200">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="70">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="30">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+	</Path>
+
+
+
+
+	<Path Id="R6-1">
+		\
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="50">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="60">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="260">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="20">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+	</Path>
+
+
+
+	<Path Id="R7-1">
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="50">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="60">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="200">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="260">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="20">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+	</Path>
+
+
+
+	<Path Id="R8-1">
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="50">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="60">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="200">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="290">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="90">
+		</TurnCommand>
+
+		<DriveCommand Power="0.5">
+			<DistanceStopCondition Dist_Inches="80">
+			</DistanceStopCondition>
+		</DriveCommand>
+
 	</Path>
 
 </Paths>
