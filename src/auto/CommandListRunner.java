@@ -4,7 +4,7 @@ import auto.commands.EmptyCommand;
 import robot.IControl;
 
 public class CommandListRunner {
-	private int commandNum;
+	public int commandNum;
 	private int prevCommandNum;
 	private CommandList commands;
 	private ICommand curCommand;

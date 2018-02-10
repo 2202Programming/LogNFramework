@@ -421,6 +421,43 @@
 	</Path>
 
 
+	<Path Id="M2-2">
+	<DriveCommand Power="0.5">
+		<DistanceStopCondition Dist_Inches="38">
+		</DistanceStopCondition>
+	</DriveCommand>
+	<TurnCommand Angle="-90">
+	</TurnCommand>
+	<DriveCommand Power="0.5">
+		<DistanceStopCondition Dist_Inches="101">
+		</DistanceStopCondition>
+	</DriveCommand>
+	<TurnCommand Angle="90">
+	</TurnCommand>
+	<DriveCommand Power="0.5">
+		<DistanceStopCondition Dist_Inches="167">
+		</DistanceStopCondition>
+	</DriveCommand>
+	<TurnCommand Angle="90">
+	</TurnCommand>
+	<DriveCommand Power="0.5">
+		<DistanceStopCondition Dist_Inches="250">
+		</DistanceStopCondition>
+	</DriveCommand>
+	<TurnCommand Angle="90">
+	</TurnCommand>
+	<DriveCommand Power="0.5">
+		<DistanceStopCondition Dist_Inches="72">
+		</DistanceStopCondition>
+	</DriveCommand>
+	<TurnCommand Angle="90">
+	</TurnCommand>
+	<DriveCommand Power="0.5">
+		<DistanceStopCondition Dist_Inches="21">
+		</DistanceStopCondition>
+	</DriveCommand>
+	
+	</Path>
 
 
 	<Path Id="M3-1">
@@ -448,6 +485,10 @@
 
 	</Path>
 
+	<Path Id="M3-2">
+	<DriveCommand Power="0.5">
+	</DriveCommand>
+	</Path>
 
 
 
