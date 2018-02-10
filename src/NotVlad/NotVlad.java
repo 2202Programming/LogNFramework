@@ -44,10 +44,10 @@ public class NotVlad extends RobotDefinitionBase {
 
 		// Default Motor Pins
 		_properties.put("FLMOTORPIN", "3");
-		_properties.put("BLMOTORPIN", "2");
+		_properties.put("BLMOTORPIN", "4");
 		_properties.put("FRMOTORPIN", "1");
-		_properties.put("BRMOTORPIN", "0");
-		_properties.put("CLIMBMOTORPIN", "4");
+		_properties.put("BRMOTORPIN", "2");
+		_properties.put("CLIMBMOTORPIN", "7");
 		_properties.put("INTAKELEFTPIN", "5");
 		_properties.put("INTAKERIGHTPIN", "6");
 	}
