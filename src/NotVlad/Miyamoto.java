@@ -36,7 +36,7 @@ public class Miyamoto extends RobotDefinitionBase {
 	}
 
 	protected String loadDefinitionName() {
-		return "NOTVLAD";
+		return "MIYAMOTO";
 	}
 
 	protected void loadManualDefinitions() {
@@ -57,20 +57,22 @@ public class Miyamoto extends RobotDefinitionBase {
 	 */
 	public Map<String, IControl> loadControlObjects() {
 
-		SmartWriter.putS("Robot is notvlad...", "asdf");
+		SmartWriter.putS("Robot is miyamoto...", "asdf");
 		// Create map to store public objects
 		Map<String, IControl> iControlMap=super.loadControlObjects();
 		
 		Global.controllers = new MiyamotoControl();
 
 		//Encoder stuff
-		Encoder encoder0 = new Encoder(0, 1);
-		Encoder encoder1 =  new Encoder(2, 3);
+		Encoder encoder0 = new Encoder(10, 11);	//Right
+		Encoder encoder1 =  new Encoder(12, 13); //Left
 		encoder0.setDistancePerPulse(0.06265);
 		encoder1.setDistancePerPulse(0.06265);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
-		encoderMonitor.add("ENCODER1", encoder1);
+		encoderMonitor.
+		
+		add("ENCODER1", encoder1);
 
 		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
