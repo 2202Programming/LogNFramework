@@ -352,11 +352,11 @@
 	<Path Id="L8-1">
 
 		<DriveCommand Power="1.0">
-			<DistanceStopCondition Dist_Inches="150">
+			<DistanceStopCondition Dist_Inches="220">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<DecelCommand MaxAcceleration=".05">
+		<DecelCommand MaxAcceleration=".1">
 		</DecelCommand>
 
 	</Path>
