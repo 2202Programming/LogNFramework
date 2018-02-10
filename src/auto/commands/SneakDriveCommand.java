@@ -15,13 +15,15 @@ public class SneakDriveCommand implements ICommand {
 	private double prevSpeed;
 
 	/**
-	 * Drives at the constant speed for a given number of seconds at a given motor
-	 * power
+	 * Gradually speeds up at a constant acceleration of motor power; <br>
+	 * WARNING: DOES NOT STOP! ALWAYS PAIR THIS WITH A DECELCOMMAND <br>
+	 * Precondition: The left and right motor speeds are equal
+	 * Postcondition: The left and right motors speeds are nonzero.
 	 * 
-	 * @param secondsToDrive
-	 *            The number of seconds to drive
-	 * @param speed
-	 *            The speed to drive at, between 0 and 1
+	 * @param stop
+	 *            The stop condition
+	 * @param maxAcceleration
+	 *            The acceleration of motor power
 	 */
 	public SneakDriveCommand(IStopCondition stop, double maxAcceleration) {
 		stopCondition = stop;
@@ -33,6 +35,7 @@ public class SneakDriveCommand implements ICommand {
 		stopCondition.init();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
+		prevSpeed = drive.getLeftMotorsSpeed();
 	}
 
 	public boolean run() {
@@ -55,8 +58,6 @@ public class SneakDriveCommand implements ICommand {
 	}
 
 	public void stop() {
-		drive.setLeftMotors(0);
-		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
 	}
 }

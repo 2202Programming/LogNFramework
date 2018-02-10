@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 import auto.CommandList;
 import auto.ICommand;
 import auto.IStopCondition;
+import auto.commands.DecelCommand;
 import auto.commands.DriveCommand;
 import auto.commands.SneakDriveCommand;
 import auto.commands.TurnCommand;
@@ -142,10 +143,12 @@ public class NotVladXMLInterpreter {
 			}
 
 			return new SneakDriveCommand(stopCondition, .01);
-		} case("DecelCommand") : {
-			double startPower = Double.parseDouble(attributes.getNamedItem("StartPower").getNodeValue());
 		}
-		
+		case ("DecelCommand"): {
+			double maxAcceleration = Double.parseDouble(attributes.getNamedItem("maxAcceleration").getNodeValue());
+			return new DecelCommand(maxAcceleration);
+		}
+
 		}
 		return new DriveCommand(new TimerStopCondition(0), 0.6);
 	}
