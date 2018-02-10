@@ -64,10 +64,10 @@ public class NotVlad extends RobotDefinitionBase {
 		Global.controllers = new MiyamotoControl();
 
 		//Encoder stuff
-		Encoder encoder0 = new Encoder(0, 1);
-		Encoder encoder1 =  new Encoder(2, 3);
-		encoder0.setDistancePerPulse(0.06265);
-		encoder1.setDistancePerPulse(0.06265);
+		Encoder encoder0 = new Encoder(0, 1, true);
+		Encoder encoder1 =  new Encoder(2, 3, false);
+		encoder0.setDistancePerPulse(0.062875);
+		encoder1.setDistancePerPulse(0.063685);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.add("ENCODER1", encoder1);
