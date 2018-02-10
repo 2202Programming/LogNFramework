@@ -145,7 +145,7 @@ public class NotVladXMLInterpreter {
 			return new SneakDriveCommand(stopCondition, .01);
 		}
 		case ("DecelCommand"): {
-			double maxAcceleration = Double.parseDouble(attributes.getNamedItem("maxAcceleration").getNodeValue());
+			double maxAcceleration = Double.parseDouble(attributes.getNamedItem("MaxAcceleration").getNodeValue());
 			return new DecelCommand(maxAcceleration);
 		}
 
