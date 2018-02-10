@@ -1,7 +1,6 @@
 package auto.commands;
 
 import auto.ICommand;
-import auto.IStopCondition;
 import drive.DriveControl;
 import drive.IDrive;
 import robot.Global;
@@ -14,22 +13,24 @@ public class DecelCommand implements ICommand {
 	private double prevSpeed;
 
 	/**
-	 * Drives at the constant speed for a given number of seconds at a given motor
-	 * power
+	 * Gradually slows down at a constant acceleration of motor power;
+	 * Precondition: The left and right motors speed are equal and nonzero
+	 * Postcondition: The left and right motor speeds are zero
 	 * 
-	 * @param secondsToDrive
-	 *            The number of seconds to drive
-	 * @param speed
-	 *            The speed to drive at, between 0 and 1
+	 * @param stop
+	 *            The stop condition
+	 * @param maxAcceleration
+	 *            The acceleration of motor power
 	 */
-	public DecelCommand(double startPower, double maxAcceleration) {
+	public DecelCommand(double maxAcceleration) {
 		this.maxAcceleration = maxAcceleration;
-		prevSpeed = startPower;
+		prevSpeed = 1.0;
 	}
 
 	public void init() {
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
+		prevSpeed = drive.getLeftMotorsSpeed();
 	}
 
 	public boolean run() {
