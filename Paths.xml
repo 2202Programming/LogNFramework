@@ -174,9 +174,12 @@
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<DecelCommand MaxAccerleration=".1">
+		<DecelCommand MaxAcceleration=".1">
 		</DecelCommand>
 
+		<OuttakeCommand>
+			<TimerStopCondition Timer="3"></TimerStopCondition>
+		</OuttakeCommand>
 	</Path>
 
 	<Path Id="L3-2">
