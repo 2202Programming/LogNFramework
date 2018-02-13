@@ -94,9 +94,11 @@ public class Miyamoto extends RobotDefinitionBase {
 		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"),true);
 		IMotor intakeRight = new SparkMotor(getInt("INTAKERIGHTPIN"),true);
 		Intake intake = new Intake(intakeLeft,intakeRight);
+		iControlMap.put("INTAKE", intake);
 		
 		TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
 		Lift lift = new Lift(liftMotor);
+		iControlMap.put("LIFT", lift);
 		
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
