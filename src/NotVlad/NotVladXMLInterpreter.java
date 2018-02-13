@@ -33,8 +33,6 @@ import robot.Global;
 
 public class NotVladXMLInterpreter {
 
-	// somebody update pls
-	private static List<Encoder> tempEnc;
 	private Document xmlFile;
 
 	/**
@@ -45,10 +43,6 @@ public class NotVladXMLInterpreter {
 	 */
 	public NotVladXMLInterpreter(File f) {
 		readFile(f);
-		tempEnc = new ArrayList<Encoder>();
-		SensorController sensorController = SensorController.getInstance();
-		tempEnc.add((Encoder) sensorController.getSensor("ENCODER0"));
-		tempEnc.add((Encoder) sensorController.getSensor("ENCODER1"));
 	}
 
 	/**
@@ -131,26 +125,8 @@ public class NotVladXMLInterpreter {
 		case ("DriveCommand"): {
 			// double power =
 			// Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
-			Node stopConditionNode = null;
-			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
-				// System.out.println(n.getChildNodes().item(i));
-				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
-					stopConditionNode = n.getChildNodes().item(i);
-				}
-			}
-			// System.out.println(stopConditionNode);
-			String stopConditionType = stopConditionNode.getNodeName();
-			IStopCondition stopCondition = new TimerStopCondition(0);
 
-			if (stopConditionType.equals("DistanceStopCondition")) {
-				int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
-				stopCondition = new DistanceStopCondition(tempEnc, stopDistance);
-			} else if (stopConditionType.equals("TimerStopCondition")) {
-				long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
-				stopCondition = new TimerStopCondition(stopTime);
-			}
-
-			return new SneakDriveCommand(stopCondition, .01);
+			return new SneakDriveCommand(getStopCondition(n), .01);
 		}
 
 		case ("DecelCommand"): {
@@ -167,59 +143,85 @@ public class NotVladXMLInterpreter {
 			case ("SCALE"): {
 				targetPosition = LiftPosition.SCALE;
 			}
+			case ("BOTTOM"): {
+				targetPosition = LiftPosition.BOTTOM;
 			}
-			Node stopConditionNode = null;
-			List<TalonSRXMotor> talons = new ArrayList<TalonSRXMotor>(1);
-			talons.add((TalonSRXMotor) Global.controlObjects.get("LIFT_TALON"));
-
-			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
-				// System.out.println(n.getChildNodes().item(i));
-				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
-					stopConditionNode = n.getChildNodes().item(i);
-				}
 			}
-			// System.out.println(stopConditionNode);
-			IStopCondition stop = new TalonDistanceStopCondition(talons, targetPosition);
-
-			return new LiftCommand(targetPosition, stop);
+			return new LiftCommand(targetPosition, getStopCondition(n));
 		}
 
 		case ("OuttakeCommand"): {
-			Node stopConditionNode = null;
-			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
-				// System.out.println(n.getChildNodes().item(i));
-				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
-					stopConditionNode = n.getChildNodes().item(i);
-				}
-			}
-			// System.out.println(stopConditionNode);
-			String stopConditionType = stopConditionNode.getNodeName();
-			long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
-			IStopCondition stopCondition = new TimerStopCondition(stopTime);
-			return new OuttakeCommand(stopCondition);
+			return new OuttakeCommand(getStopCondition(n));
 		}
 
 		case ("IntakeCommand"): {
-			Node stopConditionNode = null;
-			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
-				// System.out.println(n.getChildNodes().item(i));
-				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
-					stopConditionNode = n.getChildNodes().item(i);
-				}
-			}
-			// System.out.println(stopConditionNode);
-			String stopConditionType = stopConditionNode.getNodeName();
-			long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
-			IStopCondition stopCondition = new TimerStopCondition(stopTime);
-			return new IntakeCommand(stopCondition);
+			return new IntakeCommand(getStopCondition(n));
+		}
 		}
 
-		}
-		return new DriveCommand(new TimerStopCondition(0), 0.6);
+		return new DriveCommand(new TimerStopCondition(0), 0.0);
 	}
 
 	/**
+	 * Gets the stop condition of a command
 	 * 
+	 * Precondition: The stop condition is a child node of the command
+	 * 
+	 * @param parentNode
+	 *            The parent node of the stop condition/ command
+	 * @return The stop condition for the command
+	 */
+	public IStopCondition getStopCondition(Node parentNode) {
+		Node stopConditionNode = null;
+		for (int i = 0; i < parentNode.getChildNodes().getLength(); i++) {
+			// System.out.println(n.getChildNodes().item(i));
+			if (parentNode.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
+				stopConditionNode = parentNode.getChildNodes().item(i);
+			}
+		}
+		// System.out.println(stopConditionNode);
+		String stopConditionType = stopConditionNode.getNodeName();
+
+		switch (stopConditionType) {
+		case ("DistanceStopCondition"): {
+			int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
+			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
+			SensorController sensorController = SensorController.getInstance();
+			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
+			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
+			return new DistanceStopCondition(encoders, stopDistance);
+		}
+		case ("TimerStopCondition"): {
+			long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
+			return new TimerStopCondition(stopTime);
+		}
+		case ("TalonDistanceStopCondition"): {
+			// Get Talon motors
+			List<TalonSRXMotor> talons = new ArrayList<TalonSRXMotor>(1);
+			talons.add((TalonSRXMotor) Global.controlObjects.get("LIFT_TALON"));
+
+			// Get target position
+			LiftPosition targetPosition = null;
+			switch (parentNode.getAttributes().getNamedItem("Height").getNodeValue()) {
+			case ("SWITCH"): {
+				targetPosition = LiftPosition.SWITCH;
+			}
+			case ("SCALE"): {
+				targetPosition = LiftPosition.SCALE;
+			}
+			case ("BOTTOM"): {
+				targetPosition = LiftPosition.BOTTOM;
+			}
+			}
+
+			return new TalonDistanceStopCondition(talons, targetPosition);
+		}
+		}
+		return new TimerStopCondition(0);
+	}
+
+	/**
+	 * Prints the xml file on console
 	 */
 	public void printFile() {
 		printFile(xmlFile.getDocumentElement(), 0);
