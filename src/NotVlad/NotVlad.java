@@ -44,10 +44,10 @@ public class NotVlad extends RobotDefinitionBase {
 
 		// Default Motor Pins
 		_properties.put("FLMOTORPIN", "3");
-		_properties.put("BLMOTORPIN", "2");
+		_properties.put("BLMOTORPIN", "4");
 		_properties.put("FRMOTORPIN", "1");
-		_properties.put("BRMOTORPIN", "0");
-		_properties.put("CLIMBMOTORPIN", "4");
+		_properties.put("BRMOTORPIN", "2");
+		_properties.put("CLIMBMOTORPIN", "7");
 		_properties.put("INTAKELEFTPIN", "5");
 		_properties.put("INTAKERIGHTPIN", "6");
 	}
@@ -64,13 +64,14 @@ public class NotVlad extends RobotDefinitionBase {
 		Global.controllers = new MiyamotoControl();
 
 		//Encoder stuff
-		Encoder encoder0 = new Encoder(0, 1);
-		Encoder encoder1 =  new Encoder(2, 3);
-		encoder0.setDistancePerPulse(0.06265);
-		encoder1.setDistancePerPulse(0.06265);
+		Encoder encoder0 = new Encoder(0, 1, true);
+		Encoder encoder1 =  new Encoder(2, 3, false);
+		encoder0.setDistancePerPulse(0.062875);
+		encoder1.setDistancePerPulse(0.063685);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.add("ENCODER1", encoder1);
+		iControlMap.put("ENCODERMONITOR", encoderMonitor);
 
 		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);

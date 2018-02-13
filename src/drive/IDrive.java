@@ -13,14 +13,14 @@ import robot.IControl;
 public abstract class IDrive extends IControl {
 
 	/**
-	 * State that stores whether the motors are controlled by the drive,
-	 * externally, or are disabled.
+	 * State that stores whether the motors are controlled by the drive, externally,
+	 * or are disabled.
 	 */
-	protected DriveControl driveControl=DriveControl.DRIVE_CONTROLLED;
-	
+	protected DriveControl driveControl = DriveControl.DRIVE_CONTROLLED;
+
 	/**
-	 * This is the maxAcceleration of the robot between 0 and 2
-	 * This represents the max change in output voltage
+	 * This is the maxAcceleration of the robot between 0 and 2 This represents the
+	 * max change in output voltage
 	 */
 	protected double maxAcceleration;
 	protected double maxVelocity;
@@ -34,7 +34,7 @@ public abstract class IDrive extends IControl {
 	}
 
 	public final void autonomousPeriodic() {
-		SmartWriter.putS("Drive State", ""+driveControl, DebugMode.DEBUG);
+		SmartWriter.putS("Drive State", "" + driveControl, DebugMode.DEBUG);
 		switch (driveControl) {
 		case DISABLED:
 			disableMotors();
@@ -77,8 +77,8 @@ public abstract class IDrive extends IControl {
 	}
 
 	/**
-	 * This is the subclass version of teleopPeriodic(). teleopPeriodic() is
-	 * needed to call the necessary methods to update motors.
+	 * This is the subclass version of teleopPeriodic(). teleopPeriodic() is needed
+	 * to call the necessary methods to update motors.
 	 */
 	protected abstract void teleopUpdate();
 
@@ -87,29 +87,28 @@ public abstract class IDrive extends IControl {
 	 * controlled externally, or disable the motors <br>
 	 * <br>
 	 * Preconditions: none <br>
-	 * Postconditions: If this IDrive has been set to enabled, the values passed
-	 * to setLeft/RightMotorsRaw will be the ones set in setLeftMotorDrive and
-	 * setRightMotorDrive. If it is set to disabled, the values passed will be
-	 * the ones from setLeft
+	 * Postconditions: If this IDrive has been set to enabled, the values passed to
+	 * setLeft/RightMotorsRaw will be the ones set in setLeftMotorDrive and
+	 * setRightMotorDrive. If it is set to disabled, the values passed will be the
+	 * ones from setLeft
 	 * 
 	 * @param enabled
-	 *            Whether or not this <i>ArcadeDrive</i> object should be
-	 *            enabled.
+	 *            Whether or not this <i>ArcadeDrive</i> object should be enabled.
 	 */
 	public void setDriveControl(DriveControl driveControl) {
-		this.driveControl=driveControl;
+		this.driveControl = driveControl;
 	}
 
 	/**
-	 * Called when the subclass is suppose to set the motors to whatever the
-	 * drive needs them to be at when it is in control
+	 * Called when the subclass is suppose to set the motors to whatever the drive
+	 * needs them to be at when it is in control
 	 */
 	protected abstract void setMotors();
 
 	/**
 	 * Sets all the motors to zero, or disables them. (Note that there is no
-	 * enableMotors callback method. It may just be easier to set the motors to
-	 * zero manually or to always enable them when setMotors is called)
+	 * enableMotors callback method. It may just be easier to set the motors to zero
+	 * manually or to always enable them when setMotors is called)
 	 */
 	protected abstract void disableMotors();
 
@@ -135,19 +134,21 @@ public abstract class IDrive extends IControl {
 	public DriveControl getDriveControl() {
 		return driveControl;
 	}
-	
+
 	/**
 	 * Sets the max acceleration of the robot<br>
 	 * <br>
 	 * Preconditions: maxAcceleration is between 0 and 2<br>
 	 * Postconditions: the max acceleration will be set
-	 * @param maxAcceleration the max acceleration of the robot
+	 * 
+	 * @param maxAcceleration
+	 *            the max acceleration of the robot
 	 */
-	public void setMaxAcceleration(double maxAcceleration){
+	public void setMaxAcceleration(double maxAcceleration) {
 		this.maxAcceleration = maxAcceleration;
 	}
-	
-	public void setMaxVelocity(double maxVelocity){
+
+	public void setMaxVelocity(double maxVelocity) {
 		this.maxVelocity = maxVelocity;
 	}
 
@@ -184,5 +185,21 @@ public abstract class IDrive extends IControl {
 	 *            The power of the right motors
 	 */
 	public abstract void setRightMotors(double power);
+
+	/**
+	 * This is used by Auto commands to get the current motor speed. That's about
+	 * it. Nowhere else as far as I know. <br>
+	 * <br>
+	 * Precondition: This IDrive state is in EXTERNAL_CONTROL<br>
+	 */
+	public abstract double getLeftMotorsSpeed();
+
+	/**
+	 * This is used by Auto commands to get the current motor speed. That's about
+	 * it. Nowhere else as far as I know. <br>
+	 * <br>
+	 * Precondition: This IDrive state is in EXTERNAL_CONTROL<br>
+	 */
+	public abstract double getRightMotorsSpeed();
 
 }

@@ -1,22 +1,40 @@
 package NotVlad;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Map;
 
 import auto.CommandList;
 import auto.CommandListRunner;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
+import input.EncoderMonitor;
 import robot.Global;
-import robot.IControl;
 import robot.Global.TargetSide;
+import robot.IControl;
 
 public class AutoRunner extends IControl{
 	NotVladXMLInterpreter XMLInterpreter;
 	CommandListRunner runner;
 	private double timeCost;
 	private boolean finished;
+	private PrintWriter writer;
+	private File distanceLogs;
+	
 	public AutoRunner(){
+		distanceLogs = new File("/home/lvuser/distanceLogs.txt");
+		try {
+			writer = new PrintWriter(new FileOutputStream(distanceLogs, false));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void robotInit(){
@@ -42,6 +60,8 @@ public class AutoRunner extends IControl{
 			Global.opponentSwitchPosition = TargetSide.R;
 		}
 		
+		
+		
 		finished = false;
 		System.out.println("Start" + System.currentTimeMillis());
 		File file = new File("/home/lvuser/Paths.xml");
@@ -54,6 +74,16 @@ public class AutoRunner extends IControl{
 	}
 	
 	public void autonomousPeriodic(){
+		
+		
+		EncoderMonitor encoderMonitor = (EncoderMonitor) Global.controlObjects.get("ENCODERMONITOR");
+		Map<String, Encoder> encoders = encoderMonitor.getEncoders();
+		
+		writer.print("Encoder0 Counts: " + encoders.get("ENCODER0").get() + "\t" + "Encoder0 Distance: " + encoders.get("ENCODER0").getDistance() + "\t");
+		writer.print("Encoder1 Counts: " + encoders.get("ENCODER1").get() + "\t" + "Encoder1 Distance: " + encoders.get("ENCODER1").getDistance() + "\t");
+		writer.print("Time: " + (System.currentTimeMillis() - timeCost) + "\t");
+		writer.println("Command Number: " + runner.commandNum);
+		
 		if(!finished) {
 			SmartWriter.putD("TimeCost", System.currentTimeMillis()-timeCost);
 			SmartWriter.putS("Game Data & Path Name", DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
