@@ -51,6 +51,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		_properties.put("INTAKELEFTPIN", "5");
 		_properties.put("INTAKERIGHTPIN", "6");
 	}
+
 	/***
 	 * 
 	 * @return Control object map for Miyamoto
@@ -59,47 +60,48 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		SmartWriter.putS("Robot is miyamoto...", "asdf");
 		// Create map to store public objects
-		Map<String, IControl> iControlMap=super.loadControlObjects();
-		
+		Map<String, IControl> iControlMap = super.loadControlObjects();
+
 		Global.controllers = new MiyamotoControl();
 
-		//Encoder stuff
-		Encoder encoder0 = new Encoder(10, 11);	//Right
-		Encoder encoder1 =  new Encoder(12, 13); //Left
+		// Encoder stuff
+		Encoder encoder0 = new Encoder(10, 11); // Right
+		Encoder encoder1 = new Encoder(12, 13); // Left
 		encoder0.setDistancePerPulse(0.06265);
 		encoder1.setDistancePerPulse(0.06265);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.
-		
-		add("ENCODER1", encoder1);
+
+				add("ENCODER1", encoder1);
 
 		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
 		sensorController.registerSensor("ENCODER1", encoder1);
 		sensorController.registerSensor("NAVX", new AHRS(SerialPort.Port.kMXP));
-		
-		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), false);
-		IMotor FR=new SparkMotor(getInt("FRMOTORPIN"), true);
-		IMotor BL=new SparkMotor(getInt("BLMOTORPIN"), false);
-		IMotor BR=new SparkMotor(getInt("BRMOTORPIN"), true);
-		
-		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL),4,false);
+
+		IMotor FL = new SparkMotor(getInt("FLMOTORPIN"), false);
+		IMotor FR = new SparkMotor(getInt("FRMOTORPIN"), true);
+		IMotor BL = new SparkMotor(getInt("BLMOTORPIN"), false);
+		IMotor BR = new SparkMotor(getInt("BRMOTORPIN"), true);
+
+		IDrive drive = new TwoStickDrive(new ChainMotor(FR, BR), new ChainMotor(FL, BL), 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 		SneakMode sneak = new SneakMode(drive);
-		
+
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
 		Climber climber = new Climber(climbMotor);
-		
-		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"),true);
-		IMotor intakeRight = new SparkMotor(getInt("INTAKERIGHTPIN"),true);
-		Intake intake = new Intake(intakeLeft,intakeRight);
+
+		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"), true);
+		IMotor intakeRight = new SparkMotor(getInt("INTAKERIGHTPIN"), true);
+		Intake intake = new Intake(intakeLeft, intakeRight);
 		iControlMap.put("INTAKE", intake);
-		
-		TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
+
+		TalonSRXMotor liftMotor = new TalonSRXMotor(11, true, 0.1, 0.0, 0.0, 0.0);
+		iControlMap.put("LIFT_TALON", liftMotor);
 		Lift lift = new Lift(liftMotor);
 		iControlMap.put("LIFT", lift);
-		
+
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
 
