@@ -7,7 +7,7 @@ public class NotVladXMLInterpreterTester {
 		long startParse = System.nanoTime();
 		try {
 			NotVladXMLInterpreter interp = new NotVladXMLInterpreter(new File("Paths.xml"));
-			interp.getPathList("11");
+			interp.getPathList("L3-1");
 		} catch (NullPointerException e) {
 			System.out.println("OOF");
 		}
