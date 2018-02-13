@@ -12,17 +12,24 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import NotVlad.components.LiftPosition;
 import auto.CommandList;
 import auto.ICommand;
 import auto.IStopCondition;
 import auto.commands.DecelCommand;
 import auto.commands.DriveCommand;
+import auto.commands.IntakeCommand;
+import auto.commands.LiftCommand;
+import auto.commands.OuttakeCommand;
 import auto.commands.SneakDriveCommand;
 import auto.commands.TurnCommand;
 import auto.stopConditions.DistanceStopCondition;
+import auto.stopConditions.TalonDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
+import physicalOutput.motors.TalonSRXMotor;
+import robot.Global;
 
 public class NotVladXMLInterpreter {
 
@@ -120,6 +127,7 @@ public class NotVladXMLInterpreter {
 			double turnDegrees = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
 			return new TurnCommand(turnDegrees);
 		}
+
 		case ("DriveCommand"): {
 			// double power =
 			// Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
@@ -144,9 +152,48 @@ public class NotVladXMLInterpreter {
 
 			return new SneakDriveCommand(stopCondition, .01);
 		}
+
 		case ("DecelCommand"): {
 			double maxAcceleration = Double.parseDouble(attributes.getNamedItem("MaxAcceleration").getNodeValue());
 			return new DecelCommand(maxAcceleration);
+		}
+
+		case ("LiftCommand"): {
+			LiftPosition targetPosition = null;
+			switch (attributes.getNamedItem("Height").getNodeValue()) {
+			case ("SWITCH"): {
+				targetPosition = LiftPosition.SWITCH;
+			}
+			case ("SCALE"): {
+				targetPosition = LiftPosition.SCALE;
+			}
+			}
+			Node stopConditionNode = null;
+			List<TalonSRXMotor> talons = new ArrayList<TalonSRXMotor>(1);
+			talons.add((TalonSRXMotor) Global.controlObjects.get("LIFT_TALON"));
+
+			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
+				// System.out.println(n.getChildNodes().item(i));
+				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
+					stopConditionNode = n.getChildNodes().item(i);
+				}
+			}
+			// System.out.println(stopConditionNode);
+			IStopCondition stop = new TalonDistanceStopCondition(talons, targetPosition);
+
+			return new LiftCommand(targetPosition, stop);
+		}
+
+		case ("OuttakeCommand"): {
+			int stopTime = Integer.parseInt(attributes.getNamedItem("Timer").getNodeValue());
+			IStopCondition timeStop = new TimerStopCondition(stopTime);
+			return new OuttakeCommand(timeStop);
+		}
+
+		case ("IntakeCommand"): {
+			int stopTime = Integer.parseInt(attributes.getNamedItem("Timer").getNodeValue());
+			IStopCondition timeStop = new TimerStopCondition(stopTime);
+			return new IntakeCommand(timeStop);
 		}
 
 		}
