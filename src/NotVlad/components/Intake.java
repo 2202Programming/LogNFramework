@@ -30,13 +30,13 @@ public class Intake extends IControl {
 	}
 
 	public void intake() {
-		intakeMotorLeft.set(0.2);
-		intakeMotorRight.set(-0.2);
+		intakeMotorLeft.set(0.6);
+		intakeMotorRight.set(-0.6);
 	}
 
 	public void outtake() {
-		intakeMotorLeft.set(-0.2);
-		intakeMotorRight.set(0.2);
+		intakeMotorLeft.set(-1);
+		intakeMotorRight.set(1);
 	}
 
 	public void stop() {

@@ -29,8 +29,16 @@ public class Lift extends IControl {
 		setPosition = position.getNumber();
 	}
 	
+	public void setLiftPosition(int position){
+		setPosition = position;
+	}
+	
+	public int getLiftPosition(){
+		return setPosition;
+	}
+	
 	private LiftPosition getCurrentPosition(){
-		int current = motor.getTalon().getSelectedSensorPosition(0);
+		int current = Math.abs(motor.getTalon().getSelectedSensorPosition(0));
 		int[] distances = new int[4];
 		distances[0] = Math.abs(current-LiftPosition.BOTTOM.getNumber());
 		distances[1] = Math.abs(current-LiftPosition.SWITCH.getNumber());
@@ -46,6 +54,7 @@ public class Lift extends IControl {
 			}
 		}
 		
+		SmartWriter.putD("minIndex", minIndex);
 		switch(minIndex){
 			case 0:
 				return LiftPosition.BOTTOM;
@@ -99,11 +108,18 @@ public class Lift extends IControl {
 			}
 		}
 		SmartWriter.putD("SetPosition", setPosition);
-//		if(controller.lowerLift()){
-//			setPosition-=1000;
-//		}else if(controller.raiseLift()){
-//			setPosition+=1000;
-//		}
+		SmartWriter.putD("LiftPos", motor.getTalon().getSelectedSensorPosition(0));
+		SmartWriter.putD("LiftCurrent", motor.getTalon().getOutputCurrent());
+		motor.set(setPosition);
+	}
+	
+	public void autonomousInit(){
+		motor.reset();
+		setLiftPosition(LiftPosition.BOTTOM);
+		motor.set(setPosition);
+	}
+	
+	public void autonomousPeriodic(){
 		motor.set(setPosition);
 	}
 }
