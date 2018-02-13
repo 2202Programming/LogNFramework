@@ -89,7 +89,7 @@ public class NotVladXMLInterpreter {
 			if (currentNode.getAttributes().item(0).getNodeName().equals("Id")) {
 				// If the id matches the one we are looking for
 				if (currentNode.getAttributes().item(0).getNodeValue().equals(id)) {
-					System.out.println("Found Path");
+					System.out.println("Found Path: " + id);
 					xmlPath = currentNode;
 				}
 			}
@@ -185,15 +185,33 @@ public class NotVladXMLInterpreter {
 		}
 
 		case ("OuttakeCommand"): {
-			int stopTime = Integer.parseInt(attributes.getNamedItem("Timer").getNodeValue());
-			IStopCondition timeStop = new TimerStopCondition(stopTime);
-			return new OuttakeCommand(timeStop);
+			Node stopConditionNode = null;
+			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
+				// System.out.println(n.getChildNodes().item(i));
+				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
+					stopConditionNode = n.getChildNodes().item(i);
+				}
+			}
+			// System.out.println(stopConditionNode);
+			String stopConditionType = stopConditionNode.getNodeName();
+			long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
+			IStopCondition stopCondition = new TimerStopCondition(stopTime);
+			return new OuttakeCommand(stopCondition);
 		}
 
 		case ("IntakeCommand"): {
-			int stopTime = Integer.parseInt(attributes.getNamedItem("Timer").getNodeValue());
-			IStopCondition timeStop = new TimerStopCondition(stopTime);
-			return new IntakeCommand(timeStop);
+			Node stopConditionNode = null;
+			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
+				// System.out.println(n.getChildNodes().item(i));
+				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
+					stopConditionNode = n.getChildNodes().item(i);
+				}
+			}
+			// System.out.println(stopConditionNode);
+			String stopConditionType = stopConditionNode.getNodeName();
+			long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
+			IStopCondition stopCondition = new TimerStopCondition(stopTime);
+			return new IntakeCommand(stopCondition);
 		}
 
 		}
