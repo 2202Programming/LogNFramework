@@ -29,6 +29,14 @@ public class Lift extends IControl {
 		setPosition = position.getNumber();
 	}
 	
+	public void setLiftPosition(int position){
+		setPosition = position;
+	}
+	
+	public int getLiftPosition(){
+		return setPosition;
+	}
+	
 	private LiftPosition getCurrentPosition(){
 		int current = Math.abs(motor.getTalon().getSelectedSensorPosition(0));
 		int[] distances = new int[4];
@@ -102,11 +110,16 @@ public class Lift extends IControl {
 		SmartWriter.putD("SetPosition", setPosition);
 		SmartWriter.putD("LiftPos", motor.getTalon().getSelectedSensorPosition(0));
 		SmartWriter.putD("LiftCurrent", motor.getTalon().getOutputCurrent());
-//		if(controller.lowerLift()){
-//			setPosition-=1000;
-//		}else if(controller.raiseLift()){
-//			setPosition+=1000;
-//		}
+		motor.set(setPosition);
+	}
+	
+	public void autonomousInit(){
+		motor.reset();
+		setLiftPosition(LiftPosition.BOTTOM);
+		motor.set(setPosition);
+	}
+	
+	public void autonomousPeriodic(){
 		motor.set(setPosition);
 	}
 }
