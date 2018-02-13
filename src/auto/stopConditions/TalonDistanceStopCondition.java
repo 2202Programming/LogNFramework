@@ -1,6 +1,8 @@
 package auto.stopConditions;
 
 import java.util.List;
+
+import NotVlad.components.LiftPosition;
 import auto.IStopCondition;
 import comms.SmartWriter;
 import physicalOutput.motors.TalonSRXMotor;
@@ -13,11 +15,16 @@ import physicalOutput.motors.TalonSRXMotor;
  */
 public class TalonDistanceStopCondition implements IStopCondition {
 	private List<TalonSRXMotor> talons;
-	private int duration;
+	private int stopPosition;
 
-	public TalonDistanceStopCondition(List<TalonSRXMotor> talons, int inches) {
+	public TalonDistanceStopCondition(List<TalonSRXMotor> talons, int finalPosition) {
 		this.talons = talons;
-		duration = inches;
+		stopPosition = finalPosition;
+	}
+
+	public TalonDistanceStopCondition(List<TalonSRXMotor> talons, LiftPosition finalPosition) {
+		this.talons = talons;
+		stopPosition = finalPosition.getNumber();
 	}
 
 	public void init() {
@@ -33,6 +40,6 @@ public class TalonDistanceStopCondition implements IStopCondition {
 			sum += t.getTalon().getSelectedSensorPosition(0);
 		}
 		SmartWriter.putD("AUTO - Talon AVG Encoder Count", sum / talons.size());
-		return (sum / talons.size()) > duration;
+		return ((sum / talons.size()) - stopPosition) <= 1e-7;
 	}
 }
