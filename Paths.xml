@@ -178,7 +178,7 @@
 		</DecelCommand>
 
 		<OuttakeCommand>
-			<TimerStopCondition Timer="3"></TimerStopCondition>
+			<TimerStopCondition Timer="3000"></TimerStopCondition>
 		</OuttakeCommand>
 	</Path>
 
