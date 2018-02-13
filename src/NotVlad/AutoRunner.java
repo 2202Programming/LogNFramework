@@ -2,6 +2,7 @@ package NotVlad;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -29,7 +30,7 @@ public class AutoRunner extends IControl{
 	public AutoRunner(){
 		distanceLogs = new File("/home/lvuser/distanceLogs.txt");
 		try {
-			writer = new PrintWriter(distanceLogs);
+			writer = new PrintWriter(new FileOutputStream(distanceLogs, false));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,9 +79,10 @@ public class AutoRunner extends IControl{
 		EncoderMonitor encoderMonitor = (EncoderMonitor) Global.controlObjects.get("ENCODERMONITOR");
 		Map<String, Encoder> encoders = encoderMonitor.getEncoders();
 		
-		writer.write("Encoder0 Counts: " + encoders.get("ENCODER0").get() + "\t" + "Encoder0 Distance: " + encoders.get("ENCODER0").getDistance() + "\t");
-		writer.write("Encoder1 Counts: " + encoders.get("ENCODER1").get() + "\t" + "Encoder1 Distance: " + encoders.get("ENCODER1").getDistance() + "\t");
-		writer.write("Time: " + (System.currentTimeMillis() - timeCost) + "\n");
+		writer.print("Encoder0 Counts: " + encoders.get("ENCODER0").get() + "\t" + "Encoder0 Distance: " + encoders.get("ENCODER0").getDistance() + "\t");
+		writer.print("Encoder1 Counts: " + encoders.get("ENCODER1").get() + "\t" + "Encoder1 Distance: " + encoders.get("ENCODER1").getDistance() + "\t");
+		writer.print("Time: " + (System.currentTimeMillis() - timeCost) + "\t");
+		writer.println("Command Number: " + runner.commandNum);
 		
 		if(!finished) {
 			SmartWriter.putD("TimeCost", System.currentTimeMillis()-timeCost);

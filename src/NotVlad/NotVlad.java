@@ -71,6 +71,7 @@ public class NotVlad extends RobotDefinitionBase {
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.add("ENCODER1", encoder1);
+		iControlMap.put("ENCODERMONITOR", encoderMonitor);
 
 		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);

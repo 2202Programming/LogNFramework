@@ -1,6 +1,7 @@
 package auto.commands;
 
 import auto.ICommand;
+import comms.SmartWriter;
 import drive.DriveControl;
 import drive.IDrive;
 import robot.Global;
@@ -31,6 +32,7 @@ public class DecelCommand implements ICommand {
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 		prevSpeed = drive.getLeftMotorsSpeed();
+		SmartWriter.putD("Starting Decel Speed", prevSpeed);
 	}
 
 	public boolean run() {
