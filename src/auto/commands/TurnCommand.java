@@ -66,7 +66,8 @@ public class TurnCommand implements ICommand {
 			pidValues=new PIDValues(0.006, 0.0002, .15);
 			break;
 		case NOTVLAD:
-			pidValues=new PIDValues(0.005, 0.0002, 0.15);//new PIDValues(0.02, 0.0006, 0.15);
+			pidValues=new PIDValues(0.1185* .60, 0.0, 0.15);//new PIDValues(0.02, 0.0006, 0.15); //(0.03, 0.0, 0.0) works for Piper
+			//Ku = .1887 and Tu = .6465 for PID tuning
 			break;
 		case TIM:
 			//TODO setPIDVALUES
