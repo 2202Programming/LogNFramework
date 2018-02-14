@@ -17,6 +17,7 @@ import auto.CommandList;
 import auto.ICommand;
 import auto.IStopCondition;
 import auto.commands.DecelCommand;
+import auto.commands.DriveAtAngle;
 import auto.commands.DriveCommand;
 import auto.commands.IntakeCommand;
 import auto.commands.LiftCommand;
@@ -126,7 +127,8 @@ public class NotVladXMLInterpreter {
 			// double power =
 			// Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 
-			return new SneakDriveCommand(getStopCondition(n), .01);
+//			return new SneakDriveCommand(getStopCondition(n), .01);
+			return new DriveAtAngle(getStopCondition(n), .3, 0.0);
 		}
 
 		case ("DecelCommand"): {
