@@ -2,9 +2,11 @@ package NotVlad;
 
 import comms.XboxController;
 import robot.Global.StartPosition;
-import robotDefinitions.ControlBase;
+import robotDefinitions.controls.ControlBase;
+import robotDefinitions.controls.MotionProfileableController;
+import robotDefinitions.controls.ReversableController;
 
-public class MiyamotoControl extends ControlBase {
+public class MiyamotoControl extends ControlBase implements ReversableController, MotionProfileableController{
 
 	// Controllers 0 and 1 are xbox controllers used to control the robot
 	// Controller 2 is the switchboard that controls auto
@@ -94,8 +96,12 @@ public class MiyamotoControl extends ControlBase {
 		return controllers[1].getLeftBumperPressed();
 	}
 	
-	public boolean sneakMode(){
+	public boolean cycleMotionProfile(){
 		return controllers[0].getRightBumperPressed();
+	}
+	
+	public boolean reverseDrive(){
+		return controllers[0].getLeftBumperPressed();
 	}
 	
 	public boolean manualLiftUp(){

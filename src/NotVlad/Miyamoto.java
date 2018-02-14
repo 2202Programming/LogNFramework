@@ -10,7 +10,7 @@ import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.IDrive;
-import drive.SneakMode;
+import drive.MotionProfiler;
 import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -86,7 +86,8 @@ public class Miyamoto extends RobotDefinitionBase {
 		
 		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL),4,false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
-		SneakMode sneak = new SneakMode(drive);
+		MotionProfiler sneak = new MotionProfiler(drive);
+		ReverseDrive reverse = new ReverseDrive(drive);
 		
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
 		Climber climber = new Climber(climbMotor);
@@ -96,7 +97,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		Intake intake = new Intake(intakeLeft,intakeRight);
 		
 		TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
-		Lift lift = new Lift(liftMotor);
+		Lift lift = new Lift(liftMotor);		
 		
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
