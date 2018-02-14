@@ -65,15 +65,14 @@ public class Miyamoto extends RobotDefinitionBase {
 		Global.controllers = new MiyamotoControl();
 
 		// Encoder stuff
-		Encoder encoder0 = new Encoder(10, 11); // Right
+		Encoder encoder0 = new Encoder(10, 11, true); // Right
 		Encoder encoder1 = new Encoder(12, 13); // Left
-		encoder0.setDistancePerPulse(0.06265);
-		encoder1.setDistancePerPulse(0.06265);
+		encoder0.setDistancePerPulse(0.05318);
+		encoder1.setDistancePerPulse(0.05321);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
-		encoderMonitor.
-
-				add("ENCODER1", encoder1);
+		encoderMonitor.add("ENCODER1", encoder1);
+		iControlMap.put("ENCODERMONITOR", encoderMonitor);
 
 		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
