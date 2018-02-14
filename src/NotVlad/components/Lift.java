@@ -12,12 +12,7 @@ public class Lift extends IControl {
 	private MiyamotoControl controller;
 	private TalonSRXMotor motor;
 	private int setPosition;
-	
-	public Lift(TalonSRX talon) {
-		controller = (MiyamotoControl)Global.controllers;
-		talon.setIntegralAccumulator(0.0,0,0);
-		talon.setSelectedSensorPosition(0, 0, 0);
-	}
+	private LiftPosition[] positions;
 	
 	public Lift(TalonSRXMotor motor){
 		controller = (MiyamotoControl)Global.controllers;
@@ -107,6 +102,14 @@ public class Lift extends IControl {
 					break;
 			}
 		}
+		
+		if(controller.manualLiftUp()){
+			setPosition += 100;
+		}
+		if(controller.manualLiftDown()){
+			setPosition -= 100;
+		}
+		
 		SmartWriter.putD("SetPosition", setPosition);
 		SmartWriter.putD("LiftPos", motor.getTalon().getSelectedSensorPosition(0));
 		SmartWriter.putD("LiftCurrent", motor.getTalon().getOutputCurrent());

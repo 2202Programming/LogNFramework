@@ -97,6 +97,14 @@ public class MiyamotoControl extends ControlBase {
 	public boolean sneakMode(){
 		return controllers[0].getRightBumperPressed();
 	}
+	
+	public boolean manualLiftUp(){
+		return controllers[1].getRightTriggerHeld();
+	}
+	
+	public boolean manualLiftDown(){
+		return controllers[1].getLeftTriggerHeld();
+	}
 
 	@Override
 	public XboxController[] getControllers() {

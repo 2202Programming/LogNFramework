@@ -12,6 +12,7 @@ import comms.SmartWriter;
 import drive.IDrive;
 import drive.SneakMode;
 import drive.TwoStickDrive;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import input.EncoderMonitor;
@@ -70,14 +71,13 @@ public class Miyamoto extends RobotDefinitionBase {
 		encoder1.setDistancePerPulse(0.06265);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
-		encoderMonitor.
-		
-		add("ENCODER1", encoder1);
+		encoderMonitor.add("ENCODER1", encoder1);
 
 		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
 		sensorController.registerSensor("ENCODER1", encoder1);
 		sensorController.registerSensor("NAVX", new AHRS(SerialPort.Port.kMXP));
+		sensorController.registerSensor("INTAKE", new DigitalInput(2));
 		
 		IMotor FL=new SparkMotor(getInt("FLMOTORPIN"), false);
 		IMotor FR=new SparkMotor(getInt("FRMOTORPIN"), true);
