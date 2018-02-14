@@ -57,6 +57,10 @@ public class Intake extends IControl {
 			sensorCount = 0;
 		}
 		
+		if(controller.overrideIntake()){
+			intake();
+		}
+		
 		if (controller.intake()) {
 			if(sensorCount > 100){
 				stop();

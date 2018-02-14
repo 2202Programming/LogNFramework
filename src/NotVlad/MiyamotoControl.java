@@ -88,6 +88,10 @@ public class MiyamotoControl extends ControlBase implements ReversableController
 		return controllers[1].getBHeld();
 	}
 	
+	public boolean overrideIntake(){
+		return controllers[1].getXHeld();
+	}
+	
 	public boolean raiseLift(){
 		return controllers[1].getRightBumperPressed();
 	}

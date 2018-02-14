@@ -19,8 +19,7 @@ public class MotionProfiler extends IControl {
 	
 	public MotionProfiler(IDrive drive){
 		profiles = new MotionProfile[2];
-		profiles[0] = new MotionProfile (0.05,1);
-		profiles[1] = new MotionProfile (0.05,0.5);
+		profiles[0] = new MotionProfile (2,1);
 		index = 0;
 		if(drive instanceof MotionProfileable){
 			this.drive = (MotionProfileable)drive;			

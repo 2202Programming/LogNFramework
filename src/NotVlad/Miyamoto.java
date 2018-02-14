@@ -10,6 +10,7 @@ import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.IDrive;
+import drive.MotionProfile;
 import drive.MotionProfiler;
 import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -86,7 +87,11 @@ public class Miyamoto extends RobotDefinitionBase {
 		
 		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL),4,false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
-		MotionProfiler sneak = new MotionProfiler(drive);
+		MotionProfile[] profiles = {
+				new MotionProfile(0.1,1),
+				new MotionProfile(0.1,0.6)
+				};
+		MotionProfiler sneak = new MotionProfiler(drive,profiles);
 		ReverseDrive reverse = new ReverseDrive(drive);
 		
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
