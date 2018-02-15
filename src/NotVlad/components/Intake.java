@@ -24,7 +24,7 @@ public class Intake extends IControl {
 		intakeMotorRight.set(0);
 		controller=(MiyamotoControl)(Global.controllers);
 		sensor=(DigitalInput)SensorController.getInstance().getSensor("INTAKE");
-		sensorCount = 0;
+		sensorCount=0;
 	}
 
 	public void autonomousInit() {
@@ -51,27 +51,32 @@ public class Intake extends IControl {
 	}
 
 	public void teleopPeriodic() {
-		if(sensor.get()){
+		if (sensor.get()) {
 			sensorCount++;
-		}else{
-			sensorCount = 0;
-		}
-		
-		if(controller.overrideIntake()){
-			intake();
-		}
-		
-		if (controller.intake()) {
-			if(sensorCount > 100){
-				stop();
-			}else{
-				intake();				
-			}
-		}else if (controller.outtake()) {
-			outtake();
 		}
 		else {
-			stop();
+			sensorCount=0;
+		}
+
+		if (controller.overrideIntake()) {
+			intake();
+		}
+		else {
+			if (controller.intake()) {
+				if (sensorCount>100) {
+					stop();
+				}
+				else {
+					intake();
+				}
+			}
+			else
+				if (controller.outtake()) {
+					outtake();
+				}
+				else {
+					stop();
+				}
 		}
 	}
 }
