@@ -14,6 +14,7 @@ import drive.SneakMode;
 import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SPI.Port;
 import input.EncoderMonitor;
 import input.SensorController;
 import physicalOutput.motors.ChainMotor;
@@ -69,15 +70,21 @@ public class Miyamoto extends RobotDefinitionBase {
 		Encoder encoder1 = new Encoder(12, 13); // Left
 		encoder0.setDistancePerPulse(0.05318);
 		encoder1.setDistancePerPulse(0.05321);
+		
+		
+		
+		SensorController sensorController = SensorController.getInstance();
+		AHRS navX =  new AHRS(Port.kMXP);
+		System.out.println(navX == null);
+		sensorController.registerSensor("NAVX", navX);
+
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.add("ENCODER1", encoder1);
 		iControlMap.put("ENCODERMONITOR", encoderMonitor);
 
-		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
 		sensorController.registerSensor("ENCODER1", encoder1);
-		sensorController.registerSensor("NAVX", new AHRS(SerialPort.Port.kMXP));
 
 		IMotor FL = new SparkMotor(getInt("FLMOTORPIN"), false);
 		IMotor FR = new SparkMotor(getInt("FRMOTORPIN"), true);
