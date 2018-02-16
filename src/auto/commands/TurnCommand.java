@@ -44,7 +44,6 @@ public class TurnCommand implements ICommand {
 	public void init() {
 		controller=new PIDController(0.0, 0.0, 0.0, source, output);
 		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
-		output = ;
 		drive = (IDrive)Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		stopCondition.init();
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
