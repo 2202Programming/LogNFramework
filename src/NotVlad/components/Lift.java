@@ -12,6 +12,7 @@ public class Lift extends IControl {
 	private int setPosition;
 	private LiftPosition[] positions;
 	private int index;
+	private boolean settling;
 	
 	public Lift(TalonSRXMotor motor){
 		controller = (MiyamotoControl)Global.controllers;
@@ -23,6 +24,7 @@ public class Lift extends IControl {
 		positions[2] = LiftPosition.SCALE;
 		positions[3] = LiftPosition.CLIMB;
 		index = 0;
+		settling = false;
 	}
 	
 	public void setLiftPosition(LiftPosition position){
@@ -39,18 +41,24 @@ public class Lift extends IControl {
 	
 	public void teleopInit(){
 		motor.reset();
+		index = 0;
 		setLiftPosition(LiftPosition.BOTTOM);
 		motor.set(setPosition);
+		settling = false;
 	}
 	
 	public void teleopPeriodic(){
 		if(controller.raiseLift()){
+			settling = true;
 			index = Math.min(positions.length, index+1);
-			setLiftPosition(positions[index]);
 		}
 		if(controller.lowerLift()){
+			settling = true;
 			index = Math.max(0, index-1);
-			setLiftPosition(positions[index]);
+		}
+		
+		if(settling){
+			settleLift(index);
 		}
 		
 		if(controller.manualLiftUp()){
@@ -74,5 +82,15 @@ public class Lift extends IControl {
 	
 	public void autonomousPeriodic(){
 		motor.set(setPosition);
+	}
+	
+	public void settleLift(int index){
+		int counts = motor.getTalon().getSelectedSensorPosition(0);
+		if(counts < positions[index].getNumber()){
+			setLiftPosition(LiftPosition.MAX);
+		}else{
+			setLiftPosition(positions[index]);
+			settling = false;
+		}
 	}
 }
