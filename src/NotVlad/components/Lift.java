@@ -85,7 +85,7 @@ public class Lift extends IControl {
 	}
 	
 	public void settleLift(int index){
-		int counts = motor.getTalon().getSelectedSensorPosition(0);
+		int counts = Math.abs(motor.getTalon().getSelectedSensorPosition(0));
 		if(counts < positions[index].getNumber()){
 			setLiftPosition(LiftPosition.MAX);
 		}else{
