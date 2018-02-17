@@ -41,7 +41,7 @@ public class TurnCommand implements ICommand {
 		stopCondition = stop;
 		output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
 		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
-		controller = new PIDController(0.0, 0.0, 0.0, source, output, .02);
+		controller = new PIDController(0.0, 0.0, 0.0, source, output, 0.02);
 		controller.setInputRange(-180, 180);
 		controller.setOutputRange(-1.0, 1.0);
 		controller.setPercentTolerance(1.0);
@@ -53,9 +53,9 @@ public class TurnCommand implements ICommand {
 		}
 	}
 
-	public void init() {
+	public void init() { 
 		controller.reset();
-		controller.setSetpoint(((AHRS) source).getYaw() + degreesToTurn);
+		controller.setSetpoint(degreesToTurn);
 		controller.enable();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		stopCondition.init();
@@ -75,6 +75,7 @@ public class TurnCommand implements ICommand {
 
 	public void stop() {
 		controller.reset();
+		System.out.println("Turn Command Finished");
 		drive.setLeftMotors(0);
 		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
