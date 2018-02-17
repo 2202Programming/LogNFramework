@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SPI.Port;
 import input.EncoderMonitor;
 import input.SensorController;
+import physicalOutput.TurnController;
 import physicalOutput.motors.ChainMotor;
 import physicalOutput.motors.IMotor;
 import physicalOutput.motors.SparkMotor;
@@ -70,11 +71,9 @@ public class Miyamoto extends RobotDefinitionBase {
 		Encoder encoder1 = new Encoder(12, 13); // Left
 		encoder0.setDistancePerPulse(0.05318);
 		encoder1.setDistancePerPulse(0.05321);
-		
-		
-		
+
 		SensorController sensorController = SensorController.getInstance();
-		AHRS navX =  new AHRS(Port.kMXP);
+		AHRS navX = new AHRS(Port.kMXP);
 		System.out.println(navX == null);
 		sensorController.registerSensor("NAVX", navX);
 
@@ -93,6 +92,10 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		IDrive drive = new TwoStickDrive(new ChainMotor(FR, BR), new ChainMotor(FL, BL), 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
+		
+		TurnController turnController = new TurnController(new ChainMotor(FR, BR), new ChainMotor(FL, BL));
+		iControlMap.put("TURNCONTROLLER", turnController);
+		
 		SneakMode sneak = new SneakMode(drive);
 
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
