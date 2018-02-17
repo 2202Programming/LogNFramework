@@ -3,10 +3,9 @@ package NotVlad;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.Map;
+import com.kauailabs.navx.frc.AHRS;
 
 import auto.CommandList;
 import auto.CommandListRunner;
@@ -15,19 +14,20 @@ import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import input.EncoderMonitor;
+import input.SensorController;
 import robot.Global;
 import robot.Global.TargetSide;
 import robot.IControl;
 
-public class AutoRunner extends IControl{
+public class AutoRunner extends IControl {
 	NotVladXMLInterpreter XMLInterpreter;
 	CommandListRunner runner;
 	private double timeCost;
 	private boolean finished;
 	private PrintWriter writer;
 	private File distanceLogs;
-	
-	public AutoRunner(){
+
+	public AutoRunner() {
 		distanceLogs = new File("/home/lvuser/distanceLogs.txt");
 		try {
 			writer = new PrintWriter(new FileOutputStream(distanceLogs, false));
@@ -36,11 +36,11 @@ public class AutoRunner extends IControl{
 			e.printStackTrace();
 		}
 	}
-	
-	public void robotInit(){
+
+	public void robotInit() {
 	}
-	
-	public void autonomousInit(){
+
+	public void autonomousInit() {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if (gameData.charAt(0) == 'L') {
 			Global.ourSwitchPosition = TargetSide.L;
@@ -59,48 +59,60 @@ public class AutoRunner extends IControl{
 		} else {
 			Global.opponentSwitchPosition = TargetSide.R;
 		}
-		
-		
+
+		AHRS navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
+		navX.reset();
 		
 		finished = false;
-		System.out.println("Start" + System.currentTimeMillis());
+		long start = System.currentTimeMillis();
+		System.out.println("Start: " + start);
 		File file = new File("/home/lvuser/Paths.xml");
 		System.out.println(file.getName());
 		XMLInterpreter = new NotVladXMLInterpreter(file);
 		CommandList list = XMLInterpreter.getPathList(choosePath());
-		System.out.println("Parse End" + System.currentTimeMillis());
+		long end = System.currentTimeMillis();
+		System.out.println("Parse End: " + end);
+		System.out.println("Parse Time: " + (end - start));
 		runner = new CommandListRunner(list);
 		timeCost = System.currentTimeMillis();
+		SmartWriter.putS("Game Data & Path Name",
+				DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
 	}
-	
-	public void autonomousPeriodic(){
-		
-		
+
+	public void autonomousPeriodic() {
+		if (runner == null) {
+			System.out.println("Runner is null");
+			return;
+		}
+
 		EncoderMonitor encoderMonitor = (EncoderMonitor) Global.controlObjects.get("ENCODERMONITOR");
 		Map<String, Encoder> encoders = encoderMonitor.getEncoders();
-		
-		writer.print("Encoder0 Counts: " + encoders.get("ENCODER0").get() + "\t" + "Encoder0 Distance: " + encoders.get("ENCODER0").getDistance() + "\t");
-		writer.print("Encoder1 Counts: " + encoders.get("ENCODER1").get() + "\t" + "Encoder1 Distance: " + encoders.get("ENCODER1").getDistance() + "\t");
+
+		writer.print("Encoder0 Counts: " + encoders.get("ENCODER0").get() + "\t" + "Encoder0 Distance: "
+				+ encoders.get("ENCODER0").getDistance() + "\t");
+		writer.print("Encoder1 Counts: " + encoders.get("ENCODER1").get() + "\t" + "Encoder1 Distance: "
+				+ encoders.get("ENCODER1").getDistance() + "\t");
 		writer.print("Time: " + (System.currentTimeMillis() - timeCost) + "\t");
 		writer.println("Command Number: " + runner.commandNum);
-		
-		if(!finished) {
-			SmartWriter.putD("TimeCost", System.currentTimeMillis()-timeCost);
-			SmartWriter.putS("Game Data & Path Name", DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
-			SmartWriter.putS("Switch/Scale", Global.ourSwitchPosition.toString() + " " + Global.scalePosition.toString());
+
+		if (!finished) {
+			SmartWriter.putD("TimeCost", System.currentTimeMillis() - timeCost);
+			SmartWriter.putS("Switch/Scale",
+					Global.ourSwitchPosition.toString() + " " + Global.scalePosition.toString());
 		}
 		finished = runner.runList();
 	}
-	
-	public void teleopInit(){
-		runner.stop();
+
+	public void teleopInit() {
+		if (runner != null)
+			runner.stop();
 	}
-	
-	public void disabledInit(){
+
+	public void disabledInit() {
 		SmartWriter.putS("Path", "EnterPath", DebugMode.COMPETITION);
 		runner.stop();
 	}
-	
+
 	public static String choosePath() {
 		String path = "";
 

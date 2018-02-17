@@ -2,14 +2,15 @@ package auto.commands;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import PID.PIDController;
-import PID.PIDValues;
+import PID.BadPIDController;
 import auto.ICommand;
 import auto.IStopCondition;
 import comms.SmartWriter;
 import drive.DriveControl;
 import drive.IDrive;
+import edu.wpi.first.wpilibj.PIDController;
 import input.SensorController;
+import physicalOutput.TurnController;
 import robot.Global;
 import robotDefinitions.RobotDefinitionBase;
 
@@ -34,7 +35,13 @@ public class DriveAtAngle implements ICommand {
 		usePID = true;
 		// these will most likely be small as the value needs to be under 1.0/
 		// -1.0
-		controller = new PIDController(0.01, 0.00005, .00001, true, false);
+		TurnController output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
+		AHRS source = (AHRS) SensorController.getInstance().getSensor("NAVX");
+		navx = source;
+		controller = new PIDController(0.3, 0.0, 0.0, source, output);
+		controller.setInputRange(-180, 180);
+		controller.setOutputRange(-0.6, 0.6);
+		controller.setPercentTolerance(1.0);
 		stopCondition = stop;
 		this.angle = angle;
 		slowSpeed = speed;
@@ -67,15 +74,14 @@ public class DriveAtAngle implements ICommand {
 
 	public void init() {
 		stopCondition.init();
-		navx = (AHRS) (SensorController.getInstance().getSensor("NAVX"));
-		navx.reset();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 		
+		controller.setSetpoint(angle);
 	}
 
 	public boolean run() {
-		SmartWriter.putS("TargetAngle driveAtAngle ", getError() + ", NavXAngle: "+navx.getAngle());
+		SmartWriter.putS("TargetAngle driveAtAngle ", getError() + ", NavXAngle: "+navx.getYaw());
 		if (usePID) {
 			withGyro();
 		} else {
@@ -87,7 +93,7 @@ public class DriveAtAngle implements ICommand {
 
 
 	private void withGyro() {
-		double change = controller.calculate(0, getError());
+		double change = controller.get();
 		drive.setLeftMotors(slowSpeed - change);
 		drive.setRightMotors(slowSpeed + change);
 	}
