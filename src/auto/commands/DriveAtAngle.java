@@ -2,7 +2,6 @@ package auto.commands;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import PID.BadPIDController;
 import auto.ICommand;
 import auto.IStopCondition;
 import comms.SmartWriter;
@@ -11,6 +10,7 @@ import drive.IDrive;
 import edu.wpi.first.wpilibj.PIDController;
 import input.SensorController;
 import physicalOutput.TurnController;
+import physicalOutput.motors.FakePIDMotor;
 import robot.Global;
 import robotDefinitions.RobotDefinitionBase;
 
@@ -35,10 +35,10 @@ public class DriveAtAngle implements ICommand {
 		usePID = true;
 		// these will most likely be small as the value needs to be under 1.0/
 		// -1.0
-		TurnController output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
 		AHRS source = (AHRS) SensorController.getInstance().getSensor("NAVX");
 		navx = source;
-		controller = new PIDController(0.3, 0.0, 0.0, source, output);
+		FakePIDMotor output = new FakePIDMotor();
+		controller = new PIDController(0.01, 0.0, 0.0, source, output, .02);
 		controller.setInputRange(-180, 180);
 		controller.setOutputRange(-0.6, 0.6);
 		controller.setPercentTolerance(1.0);
@@ -76,7 +76,7 @@ public class DriveAtAngle implements ICommand {
 		stopCondition.init();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
-		
+		controller.enable();
 		controller.setSetpoint(angle);
 	}
 
@@ -94,8 +94,11 @@ public class DriveAtAngle implements ICommand {
 
 	private void withGyro() {
 		double change = controller.get();
-		drive.setLeftMotors(slowSpeed - change);
-		drive.setRightMotors(slowSpeed + change);
+		System.out.println("Base motor speed: " + slowSpeed);
+		drive.setLeftMotors(slowSpeed + change);
+		drive.setRightMotors(slowSpeed - change);
+		System.out.println("PID error: " + controller.getError());
+		System.out.println("PID offset: " + change);
 	}
 
 	private void nonGyro() {
@@ -130,6 +133,7 @@ public class DriveAtAngle implements ICommand {
 	}
 
 	public void stop() {
+		controller.disable();
 		drive.setLeftMotors(0);
 		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
