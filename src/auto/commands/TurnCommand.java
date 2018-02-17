@@ -41,7 +41,7 @@ public class TurnCommand implements ICommand {
 		stopCondition = stop;
 		output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
 		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
-		controller = new PIDController(0.0, 0.0, 0.0, source, output);
+		controller = new PIDController(0.0, 0.0, 0.0, source, output, .02);
 		controller.setInputRange(-180, 180);
 		controller.setOutputRange(-1.0, 1.0);
 		controller.setPercentTolerance(1.0);
