@@ -43,7 +43,6 @@ public class EncoderMonitor extends IControl {
 		}
 
 		SmartWriter.putD("NavXAngleTeleop", navX.getYaw(), DebugMode.DEBUG);
-		System.out.println("navX Angle: " + navX.getYaw());
 	}
 
 	/**
@@ -55,7 +54,6 @@ public class EncoderMonitor extends IControl {
 			SmartWriter.putD(entry.getKey() + " DISTANCE", entry.getValue().getDistance(), DebugMode.COMPETITION);
 		}
 		SmartWriter.putD("NavXAngleAuto", navX.getYaw(), DebugMode.DEBUG);
-		System.out.println("navX Angle: " + navX.getYaw());
 	}
 
 	/**
