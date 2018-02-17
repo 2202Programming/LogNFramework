@@ -129,8 +129,9 @@ public class NotVladXMLInterpreter {
 
 			// return new SneakDriveCommand(getStopCondition(n), .01);
 
+			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 			double angle = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
-			return new DriveAtAngle(getStopCondition(n), .5, angle);
+			return new DriveAtAngle(getStopCondition(n), power, angle);
 		}
 
 		case ("DecelCommand"): {
