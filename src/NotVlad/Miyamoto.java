@@ -95,14 +95,13 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		ChainMotor left = new ChainMotor(FR, BR);
 		ChainMotor right = new ChainMotor(FL, BL);
-		IDrive drive = new TwoStickDrive(left, right, 4, false);
-		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 		
 		TurnController turnController = new TurnController(left, right);
 		iControlMap.put("TURNCONTROLLER", turnController);
 		
-		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL),4,false);
+		IDrive drive = new TwoStickDrive(left, right, 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
+		
 		MotionProfile[] profiles = {
 				new MotionProfile(0.1,1),
 				new MotionProfile(0.1,0.6)
