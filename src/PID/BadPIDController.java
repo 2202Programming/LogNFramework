@@ -7,7 +7,7 @@ package PID;
  * @author David and Daniel
  *
  */
-public class PIDController {
+public class BadPIDController {
 	private double kp;
 	private double ki;
 	private double kd;
@@ -19,11 +19,11 @@ public class PIDController {
 	 * A default constructor for a PIDController<br>
 	 * Must set pid values before using calculate
 	 */
-	public PIDController() {
+	public BadPIDController() {
 		this(0, 0, 0, true, true);
 	}
 	
-	public PIDController(PIDValues values) {
+	public BadPIDController(PIDValues values) {
 		this(values.kp, values.ki, values.kd, true, true);
 	}
 	
@@ -42,7 +42,7 @@ public class PIDController {
 	 *            Sets whether the I value should be reset when it is overshot
 	 *            (Use if you aren't using d)
 	 */
-	public PIDController(double kp, double ki, double kd, boolean resetOnOvershoot, boolean daveyDTrick) {
+	public BadPIDController(double kp, double ki, double kd, boolean resetOnOvershoot, boolean daveyDTrick) {
 		this.kp=kp;
 		this.ki=ki;
 		this.kd=kd;
