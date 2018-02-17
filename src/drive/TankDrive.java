@@ -4,7 +4,7 @@ import comms.DebugMode;
 import comms.SmartWriter;
 import physicalOutput.motors.IMotor;
 import robot.Global;
-import robotDefinitions.ControlBase;
+import robotDefinitions.controls.ControlBase;
 
 public class TankDrive extends IDrive {
 

@@ -1,6 +1,7 @@
 package NotVlad.components;
 
 import NotVlad.MiyamotoControl;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import physicalOutput.motors.IMotor;
 import robot.Global;
 import robot.IControl;
@@ -8,8 +9,11 @@ import robot.IControl;
 public class Climber extends IControl {
 	private IMotor climbMotor;
 	private MiyamotoControl controller;
+	private PowerDistributionPanel pdp;
+	
 	public Climber(IMotor climbMotor) {
 		this.climbMotor=climbMotor;
+		pdp = new PowerDistributionPanel();
 	}
 	private void init(){
 		climbMotor.set(0);
@@ -27,6 +31,11 @@ public class Climber extends IControl {
 		}
 		else if(controller.climbSlow()){
 			climbMotor.set(0.5);
+		}
+		else if(controller.climbReverse()){
+			if(pdp.getCurrent(2) < 2){
+				climbMotor.set(-0.5);				
+			}
 		}
 		else{
 			climbMotor.set(0);
