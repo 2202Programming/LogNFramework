@@ -2,14 +2,15 @@ package auto.commands;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import PID.PIDController;
-import PID.PIDValues;
 import auto.ICommand;
 import auto.IStopCondition;
 import comms.SmartWriter;
 import drive.DriveControl;
 import drive.IDrive;
+import edu.wpi.first.wpilibj.PIDController;
 import input.SensorController;
+import physicalOutput.TurnController;
+import physicalOutput.motors.FakePIDMotor;
 import robot.Global;
 import robotDefinitions.RobotDefinitionBase;
 
@@ -34,7 +35,13 @@ public class DriveAtAngle implements ICommand {
 		usePID = true;
 		// these will most likely be small as the value needs to be under 1.0/
 		// -1.0
-		controller = new PIDController(0.01, 0.00005, .01, true, false);
+		AHRS source = (AHRS) SensorController.getInstance().getSensor("NAVX");
+		navx = source;
+		FakePIDMotor output = new FakePIDMotor();
+		controller = new PIDController(0.01, 0.0, 0.0, source, output, .02);
+		controller.setInputRange(-180, 180);
+		controller.setOutputRange(-0.6, 0.6);
+		controller.setPercentTolerance(1.0);
 		stopCondition = stop;
 		this.angle = angle;
 		slowSpeed = speed;
@@ -67,15 +74,14 @@ public class DriveAtAngle implements ICommand {
 
 	public void init() {
 		stopCondition.init();
-		navx = (AHRS) (SensorController.getInstance().getSensor("NAVX"));
-		navx.reset();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
-		
+		controller.enable();
+		controller.setSetpoint(angle);
 	}
 
 	public boolean run() {
-		SmartWriter.putS("TargetAngle driveAtAngle ", getError() + ", NavXAngle: "+navx.getAngle());
+		SmartWriter.putS("TargetAngle driveAtAngle ", getError() + ", NavXAngle: "+navx.getYaw());
 		if (usePID) {
 			withGyro();
 		} else {
@@ -87,9 +93,12 @@ public class DriveAtAngle implements ICommand {
 
 
 	private void withGyro() {
-		double change = controller.calculate(0, getError());
-		drive.setLeftMotors(slowSpeed - change);
-		drive.setRightMotors(slowSpeed + change);
+		double change = controller.get();
+		System.out.println("Base motor speed: " + slowSpeed);
+		drive.setLeftMotors(slowSpeed + change);
+		drive.setRightMotors(slowSpeed - change);
+		System.out.println("PID error: " + controller.getError());
+		System.out.println("PID offset: " + change);
 	}
 
 	private void nonGyro() {
@@ -112,11 +121,7 @@ public class DriveAtAngle implements ICommand {
 	}
 	
 	public double getAngle() {
-		double angle = navx.getAngle();
-		if (angle > 180) {
-			angle = angle - 360;
-		}
-		return angle;
+		return navx.getYaw();
 	}
 
 	/**
@@ -128,6 +133,7 @@ public class DriveAtAngle implements ICommand {
 	}
 
 	public void stop() {
+		controller.disable();
 		drive.setLeftMotors(0);
 		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);

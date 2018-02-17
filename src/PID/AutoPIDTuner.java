@@ -33,7 +33,7 @@ public class AutoPIDTuner extends IControl {
 	 * that new PID values can be set when they are tested, and so that error
 	 * can be reset after tests.
 	 */
-	private PIDController pidController;
+	private BadPIDController pidController;
 
 	/**
 	 * The error tolerance. The loop will count as being complete when the error
@@ -405,7 +405,7 @@ public class AutoPIDTuner extends IControl {
 		toTune.startReset(testOf3);
 		startTime=new Date(System.currentTimeMillis());
 		bestPIDValues=testingPIDValues=new PIDValues(.01, .0005, 0);
-		pidController=new PIDController(testingPIDValues);
+		pidController=new BadPIDController(testingPIDValues);
 		errorSafeCounter=0;
 		currentTuneCounter=0;
 		bestTuneTime=Integer.MAX_VALUE;

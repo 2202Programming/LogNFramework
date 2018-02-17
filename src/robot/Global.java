@@ -2,7 +2,7 @@ package robot;
 
 import java.util.Map;
 
-import robotDefinitions.ControlBase;
+import robotDefinitions.controls.ControlBase;
 
 /**
  * A class for global variables that are not part of any specific class

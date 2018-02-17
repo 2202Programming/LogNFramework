@@ -2,9 +2,11 @@ package NotVlad;
 
 import comms.XboxController;
 import robot.Global.StartPosition;
-import robotDefinitions.ControlBase;
+import robotDefinitions.controls.ControlBase;
+import robotDefinitions.controls.MotionProfileableController;
+import robotDefinitions.controls.ReversableController;
 
-public class MiyamotoControl extends ControlBase {
+public class MiyamotoControl extends ControlBase implements ReversableController, MotionProfileableController{
 
 	// Controllers 0 and 1 are xbox controllers used to control the robot
 	// Controller 2 is the switchboard that controls auto
@@ -71,6 +73,11 @@ public class MiyamotoControl extends ControlBase {
 	public boolean climbSlow(){
 		return controllers[2].getBackHeld();
 	}
+	
+	public boolean climbReverse(){
+		return controllers[2].getL3Held() && controllers[2].getR3Held() && controllers[1].getL3Held() && controllers[1].getR3Held();
+	}
+	
 	/**
 	 * returns if the robot should intake
 	 * @return if the robot should intake
@@ -86,6 +93,10 @@ public class MiyamotoControl extends ControlBase {
 		return controllers[1].getBHeld();
 	}
 	
+	public boolean overrideIntake(){
+		return controllers[1].getXHeld();
+	}
+	
 	public boolean raiseLift(){
 		return controllers[1].getRightBumperPressed();
 	}
@@ -94,8 +105,20 @@ public class MiyamotoControl extends ControlBase {
 		return controllers[1].getLeftBumperPressed();
 	}
 	
-	public boolean sneakMode(){
+	public boolean cycleMotionProfile(){
 		return controllers[0].getRightBumperPressed();
+	}
+	
+	public boolean reverseDrive(){
+		return controllers[0].getLeftBumperPressed();
+	}
+	
+	public boolean manualLiftUp(){
+		return controllers[1].getRightTriggerHeld();
+	}
+	
+	public boolean manualLiftDown(){
+		return controllers[1].getLeftTriggerHeld();
 	}
 
 	@Override

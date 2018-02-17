@@ -1,5 +1,6 @@
 package physicalOutput.motors;
 
+import edu.wpi.first.wpilibj.PIDOutput;
 import robot.IControl;
 
 //leinad's stuff
@@ -7,7 +8,7 @@ import robot.IControl;
 /**
  * The super class for motors
  */
-public abstract class IMotor extends IControl {
+public abstract class IMotor extends IControl implements PIDOutput{
 
 	/**
 	 * Not necessarily used by anything; make sure we use this, because I don't think anyone does
@@ -112,5 +113,9 @@ public abstract class IMotor extends IControl {
 	
 	public double getSpeed(){
 		return setValue;
+	}
+	
+	public void pidWrite(double output){
+		set(output);
 	}
 }

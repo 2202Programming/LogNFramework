@@ -2,29 +2,39 @@ package drive;
 
 import physicalOutput.motors.IMotor;
 import robot.Global;
-import robotDefinitions.ControlBase;
+import robotDefinitions.controls.ControlBase;
 
 /**
- * A class that uses one joystick as forward/backwards movement and another for turning.
+ * A class that uses one joystick as forward/backwards movement and another for
+ * turning.
+ * 
  * @author Daniel
  *
  */
-public class TwoStickDrive extends IDrive {
+public class TwoStickDrive extends IDrive implements Reversable, MotionProfileable{
 	private IMotor leftMotors;
 	private IMotor rightMotors;
 	private ControlBase controller;
-	
+
 	private double leftPower;
 	private double rightPower;
-	//Smooths the turning of the robot by applying an exponential curve to the joystick input. Very useful to make turning easier while driving fast.
+	// Smooths the turning of the robot by applying an exponential curve to the
+	// joystick input. Very useful to make turning easier while driving fast.
 	private int turnSmoothingExponent;
 	private boolean invertSticks;
 	private double lastForward;
-	
+	private boolean backwardsDrive;
+	private double maxAcceleration;
+	private double maxVelocity;
+
 	/**
-	 * A class that uses one joystick as forward/backwards movement and another for turning.
-	 * @param rightMotors all of the right motors
-	 * @param leftMotors all of the left motors
+	 * A class that uses one joystick as forward/backwards movement and another for
+	 * turning.
+	 * 
+	 * @param rightMotors
+	 *            all of the right motors
+	 * @param leftMotors
+	 *            all of the left motors
 	 */
 	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors) {
 		controller = Global.controllers;
@@ -34,61 +44,85 @@ public class TwoStickDrive extends IDrive {
 		turnSmoothingExponent = 1;
 		invertSticks = false;
 		lastForward = 0;
+		backwardsDrive = false;
 	}
-	
+
 	/**
-	 * A class that uses one joystick as forward/backwards movement and another for turning.
-	 * @param rightMotors all of the right motors
-	 * @param leftMotors all of the left motors
-	 * @param maxAcceleration the max acceleration of the robot between 0 and 2
+	 * A class that uses one joystick as forward/backwards movement and another for
+	 * turning.
+	 * 
+	 * @param rightMotors
+	 *            all of the right motors
+	 * @param leftMotors
+	 *            all of the left motors
+	 * @param maxAcceleration
+	 *            the max acceleration of the robot between 0 and 2
 	 */
-	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, double maxAcceleration, boolean invertSticks){
-		this(rightMotors,leftMotors);
+	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, double maxAcceleration, boolean invertSticks) {
+		this(rightMotors, leftMotors);
 		this.maxAcceleration = maxAcceleration;
 		this.invertSticks = invertSticks;
 	}
-	
-	public void setTurnExponent(int exp){
+
+	public void setTurnExponent(int exp) {
 		turnSmoothingExponent = exp;
 	}
-	
-	public void invertJoysticks(boolean invert){
+
+	public void invertJoysticks(boolean invert) {
 		invertSticks = invert;
+	}
+	
+	public void reverseDrive(boolean reverse){
+		backwardsDrive = reverse;
+	}
+	
+	@Override
+	public void setMaxAcceleration(double maxAcceleration) {
+		this.maxAcceleration = maxAcceleration;
+	}
+	
+	@Override
+	public void setMaxVelocity(double maxVelocity) {
+		this.maxVelocity = maxVelocity;
 	}
 
 	@Override
 	protected void teleopUpdate() {
 		MotorPowers forward = setForwardSpeed();
 		MotorPowers turn = setTurnAmount();
-		leftPower = forward.leftPower+turn.leftPower;
-		rightPower = forward.rightPower+turn.rightPower;
+		leftPower = forward.leftPower + turn.leftPower;
+		rightPower = forward.rightPower + turn.rightPower;
 	}
-	
-	private MotorPowers setForwardSpeed(){
+
+	private MotorPowers setForwardSpeed() {
 		double forwardStick;
-		if(invertSticks){
+		if (invertSticks) {
 			forwardStick = controller.getRightJoystickY();
-		}else{
+		} else {
 			forwardStick = controller.getLeftJoystickY();
 		}
 		MotorPowers toReturn = new MotorPowers();
-		if(Math.abs(forwardStick-lastForward) > maxAcceleration){
-			forwardStick = lastForward+Math.signum(forwardStick-lastForward)*maxAcceleration;
+		if (Math.abs(forwardStick - lastForward) > maxAcceleration) {
+			forwardStick = lastForward + Math.signum(forwardStick - lastForward) * maxAcceleration;
 		}
 		lastForward = forwardStick;
 		toReturn.leftPower = forwardStick;
 		toReturn.rightPower = forwardStick;
+		if(backwardsDrive){
+			toReturn.leftPower = -toReturn.leftPower;
+			toReturn.rightPower = -toReturn.rightPower;
+		}
 		return toReturn;
 	}
-	
-	private MotorPowers setTurnAmount(){
+
+	private MotorPowers setTurnAmount() {
 		double turnStick;
-		if(invertSticks){
+		if (invertSticks) {
 			turnStick = controller.getLeftJoystickX();
-		}else{
+		} else {
 			turnStick = controller.getRightJoystickX();
 		}
-		turnStick = turnStick*Math.abs(Math.pow(turnStick, turnSmoothingExponent-1));
+		turnStick = turnStick * Math.abs(Math.pow(turnStick, turnSmoothingExponent - 1));
 		MotorPowers toReturn = new MotorPowers();
 		toReturn.leftPower = turnStick;
 		toReturn.rightPower = -turnStick;
@@ -97,11 +131,11 @@ public class TwoStickDrive extends IDrive {
 
 	@Override
 	protected void setMotors() {
-		if(Math.abs(leftPower)> maxVelocity){
-			leftPower = Math.signum(leftPower)*maxVelocity;
+		if (Math.abs(leftPower) > maxVelocity) {
+			leftPower = Math.signum(leftPower) * maxVelocity;
 		}
-		if(Math.abs(rightPower)> maxVelocity){
-			rightPower = Math.signum(rightPower)*maxVelocity;
+		if (Math.abs(rightPower) > maxVelocity) {
+			rightPower = Math.signum(rightPower) * maxVelocity;
 		}
 		rightMotors.set(rightPower);
 		leftMotors.set(leftPower);
@@ -132,13 +166,28 @@ public class TwoStickDrive extends IDrive {
 		}
 	}
 
+	@Override
+	/**
+	 * Returns the motor speed/power of the left motors
+	 */
+	public double getLeftMotorsSpeed() {
+		return leftMotors.getSpeed();
+	}
+
+	@Override
+	/**
+	 * Returns the motor speed/power of the right motors
+	 */
+	public double getRightMotorsSpeed() {
+		return rightMotors.getSpeed();
+	}
 }
 
-class MotorPowers{
+class MotorPowers {
 	public double leftPower;
 	public double rightPower;
-	
-	public MotorPowers(){
+
+	public MotorPowers() {
 		leftPower = 0;
 		rightPower = 0;
 	}

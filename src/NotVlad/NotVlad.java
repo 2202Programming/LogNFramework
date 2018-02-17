@@ -10,7 +10,7 @@ import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.IDrive;
-import drive.SneakMode;
+import drive.MotionProfiler;
 import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -44,12 +44,12 @@ public class NotVlad extends RobotDefinitionBase {
 
 		// Default Motor Pins
 		_properties.put("FLMOTORPIN", "3");
-		_properties.put("BLMOTORPIN", "2");
+		_properties.put("BLMOTORPIN", "4");
 		_properties.put("FRMOTORPIN", "1");
-		_properties.put("BRMOTORPIN", "0");
-		_properties.put("CLIMBMOTORPIN", "4");
-		_properties.put("INTAKELEFTPIN", "5");
-		_properties.put("INTAKERIGHTPIN", "6");
+		_properties.put("BRMOTORPIN", "2");
+		//_properties.put("CLIMBMOTORPIN", "4");
+		_properties.put("INTAKELEFTPIN", "6");
+		_properties.put("INTAKERIGHTPIN", "7");
 	}
 	/***
 	 * 
@@ -64,13 +64,14 @@ public class NotVlad extends RobotDefinitionBase {
 		Global.controllers = new MiyamotoControl();
 
 		//Encoder stuff
-		Encoder encoder0 = new Encoder(0, 1);
-		Encoder encoder1 =  new Encoder(2, 3);
-		encoder0.setDistancePerPulse(0.06265);
-		encoder1.setDistancePerPulse(0.06265);
+		Encoder encoder0 = new Encoder(0, 1, true);
+		Encoder encoder1 =  new Encoder(2, 3, false);
+		encoder0.setDistancePerPulse(0.062875);
+		encoder1.setDistancePerPulse(0.063685);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.add("ENCODER1", encoder1);
+		iControlMap.put("ENCODERMONITOR", encoderMonitor);
 
 		SensorController sensorController = SensorController.getInstance();
 		sensorController.registerSensor("ENCODER0", encoder0);
@@ -84,17 +85,19 @@ public class NotVlad extends RobotDefinitionBase {
 		
 		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL),4,false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
-		SneakMode sneak = new SneakMode(drive);
+		MotionProfiler sneak = new MotionProfiler(drive);
 		
-		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
-		Climber climber = new Climber(climbMotor);
+		//IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
+		//Climber climber = new Climber(climbMotor);
 		
 		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"),true);
 		IMotor intakeRight = new SparkMotor(getInt("INTAKERIGHTPIN"),true);
 		Intake intake = new Intake(intakeLeft,intakeRight);
 		
-		TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
-		Lift lift = new Lift(liftMotor);
+		iControlMap.put("INTAKE", intake);
+		
+		//TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
+		//Lift lift = new Lift(liftMotor);
 		
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);

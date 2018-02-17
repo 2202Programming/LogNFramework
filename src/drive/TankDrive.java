@@ -4,9 +4,9 @@ import comms.DebugMode;
 import comms.SmartWriter;
 import physicalOutput.motors.IMotor;
 import robot.Global;
-import robotDefinitions.ControlBase;
+import robotDefinitions.controls.ControlBase;
 
-public class TankDrive extends IDrive  {
+public class TankDrive extends IDrive {
 
 	/**
 	 * The motor corresponding to the front right wheel
@@ -37,7 +37,7 @@ public class TankDrive extends IDrive  {
 	 * holds the values to pass to the motors from when they are calculated in
 	 * TeleopPeriodic to when they are suppose to be passed to the motors
 	 */
-	private double leftMotors=0, rightMotors=0;
+	private double leftMotors = 0, rightMotors = 0;
 
 	/**
 	 * @param fl
@@ -49,28 +49,28 @@ public class TankDrive extends IDrive  {
 	 * @param br
 	 *            The back right motor
 	 */
-	
+
 	public TankDrive(IMotor fl, IMotor fr, IMotor bl, IMotor br) {
-		this.frontLeft=fl;
-		this.frontRight=fr;
-		this.backLeft=bl;
-		this.backRight=br;
-		controller=Global.controllers;
+		this.frontLeft = fl;
+		this.frontRight = fr;
+		this.backLeft = bl;
+		this.backRight = br;
+		controller = Global.controllers;
 	}
-	
-	
+
 	/**
-	 * Sets <i>leftMotors</i> and <i>rightMotors</i> to what they are suppose to
-	 * be using the leftJoystick of the XboxController for the leftMotor and the rightJoystick for the rightMotor as input <br>
+	 * Sets <i>leftMotors</i> and <i>rightMotors</i> to what they are suppose to be
+	 * using the leftJoystick of the XboxController for the leftMotor and the
+	 * rightJoystick for the rightMotor as input <br>
 	 * <br>
 	 * Preconditions: none<br>
 	 * Postconditions: none<br>
 	 */
 	protected void teleopUpdate() {
-		double leftStick=controller.getLeftJoystickY();
-		double rightStick=controller.getRightJoystickY();
-		leftMotors=leftStick;
-		rightMotors=rightStick;
+		double leftStick = controller.getLeftJoystickY();
+		double rightStick = controller.getRightJoystickY();
+		leftMotors = leftStick;
+		rightMotors = rightStick;
 
 		SmartWriter.putD("LeftMotors", leftMotors, DebugMode.FULL);
 		SmartWriter.putD("RightMotors", rightMotors, DebugMode.FULL);
@@ -97,8 +97,8 @@ public class TankDrive extends IDrive  {
 	}
 
 	/**
-	 * Checks to see if any of the motors have encoders, returns true if any of
-	 * them do
+	 * Checks to see if any of the motors have encoders, returns true if any of them
+	 * do
 	 */
 	public boolean hasEncoders() {
 		// TODO implement in SensorController branch
@@ -122,10 +122,25 @@ public class TankDrive extends IDrive  {
 		setLeftMotorsRaw(power);
 
 	}
-	
+
 	// comments in IDrive
 	public void setRightMotors(double power) {
 		setRightMotorsRaw(power);
 	}
+
+	@Override
+	/**
+	 * Returns the motor speed/power of the front left motor
+	 */
+	public double getLeftMotorsSpeed() {
+		return frontLeft.getSpeed();
+	}
+
+	@Override
+	/**
+	 * Returns the motor speed/power of the front right motor
+	 */
+	public double getRightMotorsSpeed() {
+		return frontRight.getSpeed();
+	}
 }
-	
