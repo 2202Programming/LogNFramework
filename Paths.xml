@@ -169,14 +169,15 @@
 
 	<Path Id="L3-1">
 
-		<DriveCommand Power="0.5">
-			<DistanceStopCondition Dist_Inches="70">
-			</DistanceStopCondition>
-		</DriveCommand>
+		<!-- <DriveCommand Power="0.5"> <DistanceStopCondition Dist_Inches="30"> 
+			</DistanceStopCondition> </DriveCommand> <DecelCommand MaxAcceleration=".1"> 
+			</DecelCommand> -->
 
-		<DecelCommand MaxAccerleration=".1">
-		</DecelCommand>
-
+		<TurnCommand Angle="-90">
+		</TurnCommand>
+		<OuttakeCommand>
+			<TimerStopCondition Timer="500"></TimerStopCondition>
+		</OuttakeCommand>
 	</Path>
 
 	<Path Id="L3-2">

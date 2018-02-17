@@ -47,9 +47,9 @@ public class NotVlad extends RobotDefinitionBase {
 		_properties.put("BLMOTORPIN", "4");
 		_properties.put("FRMOTORPIN", "1");
 		_properties.put("BRMOTORPIN", "2");
-		_properties.put("CLIMBMOTORPIN", "7");
-		_properties.put("INTAKELEFTPIN", "5");
-		_properties.put("INTAKERIGHTPIN", "6");
+		//_properties.put("CLIMBMOTORPIN", "4");
+		_properties.put("INTAKELEFTPIN", "6");
+		_properties.put("INTAKERIGHTPIN", "7");
 	}
 	/***
 	 * 
@@ -87,15 +87,17 @@ public class NotVlad extends RobotDefinitionBase {
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 		MotionProfiler sneak = new MotionProfiler(drive);
 		
-		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
-		Climber climber = new Climber(climbMotor);
+		//IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
+		//Climber climber = new Climber(climbMotor);
 		
 		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"),true);
 		IMotor intakeRight = new SparkMotor(getInt("INTAKERIGHTPIN"),true);
 		Intake intake = new Intake(intakeLeft,intakeRight);
 		
-		TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
-		Lift lift = new Lift(liftMotor);
+		iControlMap.put("INTAKE", intake);
+		
+		//TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
+		//Lift lift = new Lift(liftMotor);
 		
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);

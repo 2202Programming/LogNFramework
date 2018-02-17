@@ -12,22 +12,28 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import NotVlad.components.LiftPosition;
 import auto.CommandList;
 import auto.ICommand;
 import auto.IStopCondition;
 import auto.commands.DecelCommand;
+import auto.commands.DriveAtAngle;
 import auto.commands.DriveCommand;
+import auto.commands.IntakeCommand;
+import auto.commands.LiftCommand;
+import auto.commands.OuttakeCommand;
 import auto.commands.SneakDriveCommand;
 import auto.commands.TurnCommand;
 import auto.stopConditions.DistanceStopCondition;
+import auto.stopConditions.TalonDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
+import physicalOutput.motors.TalonSRXMotor;
+import robot.Global;
 
 public class NotVladXMLInterpreter {
 
-	// somebody update pls
-	private static List<Encoder> tempEnc;
 	private Document xmlFile;
 
 	/**
@@ -38,10 +44,6 @@ public class NotVladXMLInterpreter {
 	 */
 	public NotVladXMLInterpreter(File f) {
 		readFile(f);
-		tempEnc = new ArrayList<Encoder>();
-		SensorController sensorController = SensorController.getInstance();
-		tempEnc.add((Encoder) sensorController.getSensor("ENCODER0"));
-		tempEnc.add((Encoder) sensorController.getSensor("ENCODER1"));
 	}
 
 	/**
@@ -82,7 +84,7 @@ public class NotVladXMLInterpreter {
 			if (currentNode.getAttributes().item(0).getNodeName().equals("Id")) {
 				// If the id matches the one we are looking for
 				if (currentNode.getAttributes().item(0).getNodeValue().equals(id)) {
-					System.out.println("Found Path");
+					System.out.println("Found Path: " + id);
 					xmlPath = currentNode;
 				}
 			}
@@ -120,41 +122,108 @@ public class NotVladXMLInterpreter {
 			double turnDegrees = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
 			return new TurnCommand(turnDegrees);
 		}
+
 		case ("DriveCommand"): {
 			// double power =
 			// Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
-			Node stopConditionNode = null;
-			for (int i = 0; i < n.getChildNodes().getLength(); i++) {
-				// System.out.println(n.getChildNodes().item(i));
-				if (n.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
-					stopConditionNode = n.getChildNodes().item(i);
-				}
-			}
-			// System.out.println(stopConditionNode);
-			String stopConditionType = stopConditionNode.getNodeName();
-			IStopCondition stopCondition = new TimerStopCondition(0);
 
-			if (stopConditionType.equals("DistanceStopCondition")) {
-				int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
-				stopCondition = new DistanceStopCondition(tempEnc, stopDistance);
-			} else if (stopConditionType.equals("TimerStopCondition")) {
-				long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
-				stopCondition = new TimerStopCondition(stopTime);
-			}
-
-			return new SneakDriveCommand(stopCondition, .01);
+//			return new SneakDriveCommand(getStopCondition(n), .01);
+			return new DriveAtAngle(getStopCondition(n), .3, 0.0);
 		}
+
 		case ("DecelCommand"): {
 			double maxAcceleration = Double.parseDouble(attributes.getNamedItem("MaxAcceleration").getNodeValue());
 			return new DecelCommand(maxAcceleration);
 		}
 
+		case ("LiftCommand"): {
+			LiftPosition targetPosition = null;
+			switch (attributes.getNamedItem("Height").getNodeValue()) {
+			case ("SWITCH"): {
+				targetPosition = LiftPosition.SWITCH;
+			}
+			case ("SCALE"): {
+				targetPosition = LiftPosition.SCALE;
+			}
+			case ("BOTTOM"): {
+				targetPosition = LiftPosition.BOTTOM;
+			}
+			}
+			return new LiftCommand(targetPosition, getStopCondition(n));
 		}
-		return new DriveCommand(new TimerStopCondition(0), 0.6);
+
+		case ("OuttakeCommand"): {
+			return new OuttakeCommand(getStopCondition(n));
+		}
+
+		case ("IntakeCommand"): {
+			return new IntakeCommand(getStopCondition(n));
+		}
+		}
+
+		return new DriveCommand(new TimerStopCondition(0), 0.0);
 	}
 
 	/**
+	 * Gets the stop condition of a command
 	 * 
+	 * Precondition: The stop condition is a child node of the command
+	 * 
+	 * @param parentNode
+	 *            The parent node of the stop condition/ command
+	 * @return The stop condition for the command
+	 */
+	public IStopCondition getStopCondition(Node parentNode) {
+		Node stopConditionNode = null;
+		for (int i = 0; i < parentNode.getChildNodes().getLength(); i++) {
+			// System.out.println(n.getChildNodes().item(i));
+			if (parentNode.getChildNodes().item(i).getNodeType() == Node.ELEMENT_NODE) {
+				stopConditionNode = parentNode.getChildNodes().item(i);
+			}
+		}
+		// System.out.println(stopConditionNode);
+		String stopConditionType = stopConditionNode.getNodeName();
+
+		switch (stopConditionType) {
+		case ("DistanceStopCondition"): {
+			int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
+			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
+			SensorController sensorController = SensorController.getInstance();
+			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
+			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
+			return new DistanceStopCondition(encoders, stopDistance);
+		}
+		case ("TimerStopCondition"): {
+			long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
+			return new TimerStopCondition(stopTime);
+		}
+		case ("TalonDistanceStopCondition"): {
+			// Get Talon motors
+			List<TalonSRXMotor> talons = new ArrayList<TalonSRXMotor>(1);
+			talons.add((TalonSRXMotor) Global.controlObjects.get("LIFT_TALON"));
+
+			// Get target position
+			LiftPosition targetPosition = null;
+			switch (parentNode.getAttributes().getNamedItem("Height").getNodeValue()) {
+			case ("SWITCH"): {
+				targetPosition = LiftPosition.SWITCH;
+			}
+			case ("SCALE"): {
+				targetPosition = LiftPosition.SCALE;
+			}
+			case ("BOTTOM"): {
+				targetPosition = LiftPosition.BOTTOM;
+			}
+			}
+
+			return new TalonDistanceStopCondition(talons, targetPosition);
+		}
+		}
+		return new TimerStopCondition(0);
+	}
+
+	/**
+	 * Prints the xml file on console
 	 */
 	public void printFile() {
 		printFile(xmlFile.getDocumentElement(), 0);

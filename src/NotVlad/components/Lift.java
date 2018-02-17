@@ -26,16 +26,16 @@ public class Lift extends IControl {
 		index = 0;
 		settling = false;
 	}
-	
-	public void setLiftPosition(LiftPosition position){
+
+	public void setLiftPosition(LiftPosition position) {
 		setPosition = position.getNumber();
 	}
-	
-	public void setLiftPosition(int position){
+
+	public void setLiftPosition(int position) {
 		setPosition = position;
 	}
-	
-	public int getLiftPosition(){
+
+	public int getLiftPosition() {
 		return setPosition;
 	}
 	
@@ -73,14 +73,14 @@ public class Lift extends IControl {
 		SmartWriter.putD("LiftCurrent", motor.getTalon().getOutputCurrent());
 		motor.set(setPosition);
 	}
-	
-	public void autonomousInit(){
+
+	public void autonomousInit() {
 		motor.reset();
 		setLiftPosition(LiftPosition.BOTTOM);
 		motor.set(setPosition);
 	}
-	
-	public void autonomousPeriodic(){
+
+	public void autonomousPeriodic() {
 		motor.set(setPosition);
 	}
 	
