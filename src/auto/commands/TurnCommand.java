@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import input.SensorController;
+import physicalOutput.TurnController;
 import robot.Global;
 import robot.Robot;
 import robotDefinitions.RobotDefinitionBase;
@@ -27,7 +28,6 @@ public class TurnCommand implements ICommand {
 	
 	
 	public TurnCommand(double degreesToTurn) {
-		//With FRC PID we might not need to set tolerance in the stop condition, we do it with the PIDController
 		this(new AngleStopCondition(degreesToTurn, 2, 0.3));
 	}
 	
@@ -44,6 +44,11 @@ public class TurnCommand implements ICommand {
 	public void init() {
 		controller=new PIDController(0.0, 0.0, 0.0, source, output);
 		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
+		output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
+		controller.setInputRange(-180, 180);
+		controller.setOutputRange(-1.0, 1.0);
+		controller.setPercentTolerance(1.0);
+		
 		drive = (IDrive)Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		stopCondition.init();
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
