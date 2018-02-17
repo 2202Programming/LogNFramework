@@ -18,11 +18,12 @@ public class Lift extends IControl {
 		controller = (MiyamotoControl)Global.controllers;
 		this.motor = motor;
 		this.setPosition = 0;
-		positions = new LiftPosition[4];
+		positions = new LiftPosition[5];
 		positions[0] = LiftPosition.BOTTOM;
 		positions[1] = LiftPosition.SWITCH;
-		positions[2] = LiftPosition.SCALE;
-		positions[3] = LiftPosition.CLIMB;
+		positions[2] = LiftPosition.LOWSCALE;
+		positions[3] = LiftPosition.HIGHSCALE;
+		positions[4] = LiftPosition.CLIMB;
 		index = 0;
 		settling = false;
 	}
