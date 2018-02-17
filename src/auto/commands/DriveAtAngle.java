@@ -1,7 +1,6 @@
 package auto.commands;
 
 import com.kauailabs.navx.frc.AHRS;
-
 import auto.ICommand;
 import auto.IStopCondition;
 import comms.SmartWriter;
@@ -9,7 +8,6 @@ import drive.DriveControl;
 import drive.IDrive;
 import edu.wpi.first.wpilibj.PIDController;
 import input.SensorController;
-import physicalOutput.TurnController;
 import physicalOutput.motors.FakePIDMotor;
 import robot.Global;
 import robotDefinitions.RobotDefinitionBase;
@@ -76,8 +74,9 @@ public class DriveAtAngle implements ICommand {
 		stopCondition.init();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
-		controller.enable();
+		controller.reset();
 		controller.setSetpoint(angle);
+		controller.enable();
 	}
 
 	public boolean run() {
@@ -117,7 +116,7 @@ public class DriveAtAngle implements ICommand {
 	 * @return error
 	 */
 	public double getError() {
-		return this.angle-getAngle();
+		return controller.getError();
 	}
 	
 	public double getAngle() {
@@ -133,7 +132,7 @@ public class DriveAtAngle implements ICommand {
 	}
 
 	public void stop() {
-		controller.disable();
+		controller.reset();
 		drive.setLeftMotors(0);
 		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
