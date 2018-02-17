@@ -73,6 +73,11 @@ public class MiyamotoControl extends ControlBase implements ReversableController
 	public boolean climbSlow(){
 		return controllers[2].getBackHeld();
 	}
+	
+	public boolean climbReverse(){
+		return controllers[2].getL3Held() && controllers[2].getR3Held() && controllers[1].getL3Held() && controllers[1].getR3Held();
+	}
+	
 	/**
 	 * returns if the robot should intake
 	 * @return if the robot should intake
