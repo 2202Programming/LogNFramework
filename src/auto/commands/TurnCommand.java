@@ -54,9 +54,8 @@ public class TurnCommand implements ICommand {
 	}
 
 	public void init() {
-		((AHRS) source).reset();
 		controller.reset();
-		controller.setSetpoint(degreesToTurn);
+		controller.setSetpoint(((AHRS) source).getYaw() + degreesToTurn);
 		controller.enable();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		stopCondition.init();
@@ -65,22 +64,17 @@ public class TurnCommand implements ICommand {
 
 	public boolean run() {
 		SmartWriter.putD("TurnCommandAngle", stopCondition.getError());
-		// TO-DO figure out how to use the FRC PID Controller for motorValue
-		// double motorValue = controller.get();
-		// SmartWriter.putD("PID Turning Motor Power", motorValue);
-		// drive.setLeftMotors(motorValue);
-		// drive.setRightMotors(-motorValue);
 		System.out.println("End Point: " + controller.getSetpoint());
 		System.out.println("Motor Power: " + controller.get());
 		System.out.println("Error: " + controller.getError());
-		
+
 		boolean stopNow = stopCondition.stopNow();
 		SmartWriter.putB("hghjkhjghg", stopNow);
 		return stopNow;
 	}
 
 	public void stop() {
-		controller.disable();
+		controller.reset();
 		drive.setLeftMotors(0);
 		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
@@ -102,9 +96,7 @@ public class TurnCommand implements ICommand {
 			// TODO setPIDVALUES
 			break;
 		case MIYAMOTO:
-			// With FRC PID values currently in wont work for sure
-			// controller.setPID(.06, 0.0001, 0.0); //.06 works for just P (for
-			// kinda low battery)
+			// With FRC PID values are (.045, .1, 0.0);
 			BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoPIDValues.txt"));
 			Double Kp = Double.parseDouble(in.readLine());
 			Double Kd = Double.parseDouble(in.readLine());

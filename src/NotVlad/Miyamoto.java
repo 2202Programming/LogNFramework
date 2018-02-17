@@ -103,8 +103,8 @@ public class Miyamoto extends RobotDefinitionBase {
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 		
 		MotionProfile[] profiles = {
-				new MotionProfile(0.1,1),
-				new MotionProfile(0.1,0.6)
+				new MotionProfile(0.05,1),
+				new MotionProfile(0.05,0.6)
 				};
 		MotionProfiler sneak = new MotionProfiler(drive,profiles);
 		ReverseDrive reverse = new ReverseDrive(drive);
@@ -117,7 +117,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		Intake intake = new Intake(intakeLeft, intakeRight);
 		iControlMap.put("INTAKE", intake);
 
-		TalonSRXMotor liftMotor = new TalonSRXMotor(11, true, 0.1, 0.0, 0.0, 0.0);
+		TalonSRXMotor liftMotor = new TalonSRXMotor(11, true, 0.3, 0.0, 0.0, 0.0);
 		iControlMap.put("LIFT_TALON", liftMotor);
 		Lift lift = new Lift(liftMotor);
 		iControlMap.put("LIFT", lift);

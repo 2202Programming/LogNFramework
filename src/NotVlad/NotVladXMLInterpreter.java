@@ -147,7 +147,7 @@ public class NotVladXMLInterpreter {
 				break;
 			}
 			case ("SCALE"): {
-				targetPosition = LiftPosition.SCALE;
+				targetPosition = LiftPosition.HIGHSCALE;
 				break;
 			}
 			case ("BOTTOM"): {
@@ -216,7 +216,7 @@ public class NotVladXMLInterpreter {
 				targetPosition = LiftPosition.SWITCH;
 			}
 			case ("SCALE"): {
-				targetPosition = LiftPosition.SCALE;
+				targetPosition = LiftPosition.HIGHSCALE;
 			}
 			case ("BOTTOM"): {
 				targetPosition = LiftPosition.BOTTOM;
