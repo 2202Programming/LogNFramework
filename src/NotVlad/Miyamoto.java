@@ -90,10 +90,12 @@ public class Miyamoto extends RobotDefinitionBase {
 		IMotor BL = new SparkMotor(getInt("BLMOTORPIN"), false);
 		IMotor BR = new SparkMotor(getInt("BRMOTORPIN"), true);
 
-		IDrive drive = new TwoStickDrive(new ChainMotor(FR, BR), new ChainMotor(FL, BL), 4, false);
+		ChainMotor left = new ChainMotor(FR, BR);
+		ChainMotor right = new ChainMotor(FL, BL);
+		IDrive drive = new TwoStickDrive(left, right, 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 		
-		TurnController turnController = new TurnController(new ChainMotor(FR, BR), new ChainMotor(FL, BL));
+		TurnController turnController = new TurnController(left, right);
 		iControlMap.put("TURNCONTROLLER", turnController);
 		
 		SneakMode sneak = new SneakMode(drive);
