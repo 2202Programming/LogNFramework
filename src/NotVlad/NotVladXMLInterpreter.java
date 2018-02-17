@@ -65,8 +65,8 @@ public class NotVladXMLInterpreter {
 	}
 
 	/**
-	 * Searches for a specific path in the xml file and returns a command list of
-	 * the commands in the xml file
+	 * Searches for a specific path in the xml file and returns a command list
+	 * of the commands in the xml file
 	 * 
 	 * @param id
 	 *            path id 1st character: starting position 2nd character: target
@@ -127,8 +127,10 @@ public class NotVladXMLInterpreter {
 			// double power =
 			// Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 
-//			return new SneakDriveCommand(getStopCondition(n), .01);
-			return new DriveAtAngle(getStopCondition(n), .3, 0.0);
+			// return new SneakDriveCommand(getStopCondition(n), .01);
+
+			double angle = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
+			return new DriveAtAngle(getStopCondition(n), .5, angle);
 		}
 
 		case ("DecelCommand"): {
@@ -141,14 +143,18 @@ public class NotVladXMLInterpreter {
 			switch (attributes.getNamedItem("Height").getNodeValue()) {
 			case ("SWITCH"): {
 				targetPosition = LiftPosition.SWITCH;
+				break;
 			}
 			case ("SCALE"): {
 				targetPosition = LiftPosition.SCALE;
+				break;
 			}
 			case ("BOTTOM"): {
 				targetPosition = LiftPosition.BOTTOM;
+				break;
 			}
 			}
+			System.out.println("Target: " + targetPosition.getNumber());
 			return new LiftCommand(targetPosition, getStopCondition(n));
 		}
 
