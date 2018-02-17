@@ -1,7 +1,8 @@
 package auto.commands;
 
 
-import PID.PIDValues;
+import com.kauailabs.navx.frc.AHRS;
+
 import auto.ICommand;
 import auto.stopConditions.AngleStopCondition;
 import comms.SmartWriter;
@@ -10,6 +11,7 @@ import drive.IDrive;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
+import input.SensorController;
 import robot.Global;
 import robot.Robot;
 import robotDefinitions.RobotDefinitionBase;
@@ -41,7 +43,8 @@ public class TurnCommand implements ICommand {
 	
 	public void init() {
 		controller=new PIDController(0.0, 0.0, 0.0, source, output);
-		drive=(IDrive)Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
+		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
+		drive = (IDrive)Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		stopCondition.init();
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 	}
@@ -50,7 +53,7 @@ public class TurnCommand implements ICommand {
 		
 		SmartWriter.putD("TurnCommandAngle", stopCondition.getError());
 		//TO-DO figure out how to use the FRC PID Controller for motorValue
-		double motorValue = controller.calculate();
+		double motorValue = controller.get();
 		SmartWriter.putD("PID Turning Motor Power", motorValue);
 		drive.setLeftMotors(motorValue);
 		drive.setRightMotors(-motorValue);
