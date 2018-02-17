@@ -23,7 +23,7 @@ public class TurnController extends IControl implements PIDOutput {
 
 	@Override
 	public void pidWrite(double output) {
-		left.set(output);
-		right.set(-output);
+		left.set(-output);
+		right.set(output);
 	}
 }
