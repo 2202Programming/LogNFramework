@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 import NotVlad.components.Climber;
 import NotVlad.components.Intake;
@@ -46,11 +47,20 @@ public class Miyamoto extends RobotDefinitionBase {
 	protected void loadManualDefinitions() {
 		_properties = new HashMap<String, String>();
 
-		// Default Motor Pins
-		_properties.put("FLMOTORPIN", "3");
-		_properties.put("BLMOTORPIN", "2");
-		_properties.put("FRMOTORPIN", "1");
-		_properties.put("BRMOTORPIN", "0");
+		// Old Motor Pins
+		// _properties.put("FLMOTORPIN", "3");
+		// _properties.put("BLMOTORPIN", "2");
+		// _properties.put("FRMOTORPIN", "1");
+		// _properties.put("BRMOTORPIN", "0");
+		// _properties.put("CLIMBMOTORPIN", "4");
+		// _properties.put("INTAKELEFTPIN", "5");
+		// _properties.put("INTAKERIGHTPIN", "6");
+
+		// New Motor Pins
+		_properties.put("FLMOTORPIN", "0");
+		_properties.put("BLMOTORPIN", "1");
+		_properties.put("FRMOTORPIN", "3");
+		_properties.put("BRMOTORPIN", "2");
 		_properties.put("CLIMBMOTORPIN", "4");
 		_properties.put("INTAKELEFTPIN", "5");
 		_properties.put("INTAKERIGHTPIN", "6");
@@ -69,13 +79,13 @@ public class Miyamoto extends RobotDefinitionBase {
 		Global.controllers = new MiyamotoControl();
 
 		// Encoder stuff
-		Encoder encoder0 = new Encoder(10, 11, true); // Right
-		Encoder encoder1 = new Encoder(12, 13); // Left
+		Encoder encoder0 = new Encoder(0, 1, true); // Right
+		Encoder encoder1 = new Encoder(2, 3); // Left
 		encoder0.setDistancePerPulse(0.05318);
 		encoder1.setDistancePerPulse(0.05321);
 
 		SensorController sensorController = SensorController.getInstance();
-		AHRS navX = new AHRS(Port.kMXP);
+		AHRS navX = new AHRS(SerialPort.Port.kUSB);
 		System.out.println(navX == null);
 		sensorController.registerSensor("NAVX", navX);
 
@@ -86,7 +96,7 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		sensorController.registerSensor("ENCODER0", encoder0);
 		sensorController.registerSensor("ENCODER1", encoder1);
-		sensorController.registerSensor("INTAKE", new DigitalInput(2));
+		sensorController.registerSensor("INTAKE", new DigitalInput(4));
 
 		IMotor FL = new SparkMotor(getInt("FLMOTORPIN"), false);
 		IMotor FR = new SparkMotor(getInt("FRMOTORPIN"), true);
@@ -95,20 +105,17 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		ChainMotor left = new ChainMotor(FR, BR);
 		ChainMotor right = new ChainMotor(FL, BL);
-		
+
 		TurnController turnController = new TurnController(left, right);
 		iControlMap.put("TURNCONTROLLER", turnController);
-		
+
 		IDrive drive = new TwoStickDrive(left, right, 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
-		
-		MotionProfile[] profiles = {
-				new MotionProfile(0.05,1),
-				new MotionProfile(0.05,0.6)
-				};
-		MotionProfiler sneak = new MotionProfiler(drive,profiles);
+
+		MotionProfile[] profiles = { new MotionProfile(0.05, 1), new MotionProfile(0.05, 0.6) };
+		MotionProfiler sneak = new MotionProfiler(drive, profiles);
 		ReverseDrive reverse = new ReverseDrive(drive);
-		
+
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
 		Climber climber = new Climber(climbMotor);
 
