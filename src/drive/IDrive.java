@@ -19,13 +19,6 @@ public abstract class IDrive extends IControl {
 	protected DriveControl driveControl = DriveControl.DRIVE_CONTROLLED;
 
 	/**
-	 * This is the maxAcceleration of the robot between 0 and 2 This represents the
-	 * max change in output voltage
-	 */
-	protected double maxAcceleration;
-	protected double maxVelocity;
-
-	/**
 	 * Sets the drive control so that it is controlled by this IDrive in case
 	 * someone changed it in auto and never set it back
 	 */
@@ -133,23 +126,6 @@ public abstract class IDrive extends IControl {
 	 */
 	public DriveControl getDriveControl() {
 		return driveControl;
-	}
-
-	/**
-	 * Sets the max acceleration of the robot<br>
-	 * <br>
-	 * Preconditions: maxAcceleration is between 0 and 2<br>
-	 * Postconditions: the max acceleration will be set
-	 * 
-	 * @param maxAcceleration
-	 *            the max acceleration of the robot
-	 */
-	public void setMaxAcceleration(double maxAcceleration) {
-		this.maxAcceleration = maxAcceleration;
-	}
-
-	public void setMaxVelocity(double maxVelocity) {
-		this.maxVelocity = maxVelocity;
 	}
 
 	/**

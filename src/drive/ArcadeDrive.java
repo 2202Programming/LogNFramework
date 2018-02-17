@@ -4,7 +4,7 @@ import comms.DebugMode;
 import comms.SmartWriter;
 import physicalOutput.motors.IMotor;
 import robot.Global;
-import robotDefinitions.ControlBase;
+import robotDefinitions.controls.ControlBase;
 
 /**
  * An arcade drive that uses only the left JoyStick to move. <br>
@@ -14,7 +14,7 @@ import robotDefinitions.ControlBase;
  * 
  * @author SecondThread
  */
-public class ArcadeDrive extends IDrive {
+public class ArcadeDrive extends IDrive implements MotionProfileable{
 
 	/**
 	 * The motor corresponding to the front right wheel
@@ -36,6 +36,8 @@ public class ArcadeDrive extends IDrive {
 	 */
 	private IMotor backLeft;
 
+	private double maxAcceleration;
+	
 	/**
 	 * Used for controller input
 	 */
@@ -323,6 +325,16 @@ public class ArcadeDrive extends IDrive {
 	 */
 	public double getRightMotorsSpeed() {
 		return frontRight.getSpeed();
+	}
+	
+	@Override
+	public void setMaxAcceleration(double maxAcceleration) {
+		this.maxAcceleration = maxAcceleration;
+	}
+	
+	@Override
+	public void setMaxVelocity(double maxVelocity) {
+		//TODO:May want to add this
 	}
 }
 

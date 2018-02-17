@@ -2,7 +2,7 @@ package drive;
 
 import physicalOutput.motors.IMotor;
 import robot.Global;
-import robotDefinitions.ControlBase;
+import robotDefinitions.controls.ControlBase;
 
 /**
  * A class that uses one joystick as forward/backwards movement and another for
@@ -11,7 +11,7 @@ import robotDefinitions.ControlBase;
  * @author Daniel
  *
  */
-public class TwoStickDrive extends IDrive {
+public class TwoStickDrive extends IDrive implements Reversable, MotionProfileable{
 	private IMotor leftMotors;
 	private IMotor rightMotors;
 	private ControlBase controller;
@@ -23,6 +23,9 @@ public class TwoStickDrive extends IDrive {
 	private int turnSmoothingExponent;
 	private boolean invertSticks;
 	private double lastForward;
+	private boolean backwardsDrive;
+	private double maxAcceleration;
+	private double maxVelocity;
 
 	/**
 	 * A class that uses one joystick as forward/backwards movement and another for
@@ -41,6 +44,7 @@ public class TwoStickDrive extends IDrive {
 		turnSmoothingExponent = 1;
 		invertSticks = false;
 		lastForward = 0;
+		backwardsDrive = false;
 	}
 
 	/**
@@ -67,6 +71,20 @@ public class TwoStickDrive extends IDrive {
 	public void invertJoysticks(boolean invert) {
 		invertSticks = invert;
 	}
+	
+	public void reverseDrive(boolean reverse){
+		backwardsDrive = reverse;
+	}
+	
+	@Override
+	public void setMaxAcceleration(double maxAcceleration) {
+		this.maxAcceleration = maxAcceleration;
+	}
+	
+	@Override
+	public void setMaxVelocity(double maxVelocity) {
+		this.maxVelocity = maxVelocity;
+	}
 
 	@Override
 	protected void teleopUpdate() {
@@ -90,6 +108,10 @@ public class TwoStickDrive extends IDrive {
 		lastForward = forwardStick;
 		toReturn.leftPower = forwardStick;
 		toReturn.rightPower = forwardStick;
+		if(backwardsDrive){
+			toReturn.leftPower = -toReturn.leftPower;
+			toReturn.rightPower = -toReturn.rightPower;
+		}
 		return toReturn;
 	}
 

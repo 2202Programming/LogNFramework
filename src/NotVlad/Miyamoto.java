@@ -10,8 +10,10 @@ import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.IDrive;
-import drive.SneakMode;
+import drive.MotionProfile;
+import drive.MotionProfiler;
 import drive.TwoStickDrive;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SPI.Port;
@@ -84,6 +86,7 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		sensorController.registerSensor("ENCODER0", encoder0);
 		sensorController.registerSensor("ENCODER1", encoder1);
+		sensorController.registerSensor("INTAKE", new DigitalInput(2));
 
 		IMotor FL = new SparkMotor(getInt("FLMOTORPIN"), false);
 		IMotor FR = new SparkMotor(getInt("FRMOTORPIN"), true);
@@ -98,8 +101,15 @@ public class Miyamoto extends RobotDefinitionBase {
 		TurnController turnController = new TurnController(left, right);
 		iControlMap.put("TURNCONTROLLER", turnController);
 		
-		SneakMode sneak = new SneakMode(drive);
-
+		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL),4,false);
+		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
+		MotionProfile[] profiles = {
+				new MotionProfile(0.1,1),
+				new MotionProfile(0.1,0.6)
+				};
+		MotionProfiler sneak = new MotionProfiler(drive,profiles);
+		ReverseDrive reverse = new ReverseDrive(drive);
+		
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
 		Climber climber = new Climber(climbMotor);
 

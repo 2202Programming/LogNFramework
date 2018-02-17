@@ -10,7 +10,7 @@ import NotVlad.components.Intake;
 import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.IDrive;
-import drive.SneakMode;
+import drive.MotionProfiler;
 import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -85,7 +85,7 @@ public class NotVlad extends RobotDefinitionBase {
 		
 		IDrive drive=new TwoStickDrive(new ChainMotor(FR,BR), new ChainMotor(FL, BL),4,false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
-		SneakMode sneak = new SneakMode(drive);
+		MotionProfiler sneak = new MotionProfiler(drive);
 		
 		//IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
 		//Climber climber = new Climber(climbMotor);
