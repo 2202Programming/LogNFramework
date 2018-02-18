@@ -22,9 +22,8 @@ import auto.commands.DriveCommand;
 import auto.commands.IntakeCommand;
 import auto.commands.LiftCommand;
 import auto.commands.OuttakeCommand;
-import auto.commands.SneakDriveCommand;
 import auto.commands.TurnCommand;
-import auto.stopConditions.AndStopCondition;
+import auto.commands.WaitCommand;
 import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.OrStopCondition;
@@ -170,6 +169,11 @@ public class NotVladXMLInterpreter {
 
 		case ("IntakeCommand"): {
 			return new IntakeCommand(getStopCondition(n));
+		}
+
+		case ("WaitCommand"): {
+			long waitTime = Long.parseLong(attributes.getNamedItem("Time").getNodeValue());
+			return new WaitCommand(new TimerStopCondition(waitTime));
 		}
 		}
 
