@@ -7,6 +7,7 @@ import java.io.IOException;
 import com.kauailabs.navx.frc.AHRS;
 
 import auto.ICommand;
+import auto.IStopCondition;
 import auto.stopConditions.AngleStopCondition;
 import comms.SmartWriter;
 import drive.DriveControl;
@@ -22,7 +23,7 @@ import robotDefinitions.RobotDefinitionBase;
 
 public class TurnCommand implements ICommand {
 	private double degreesToTurn;
-	private AngleStopCondition stopCondition;
+	private IStopCondition stopCondition;
 	private PIDController controller;
 	private PIDOutput output;
 	private PIDSource source;
@@ -52,6 +53,23 @@ public class TurnCommand implements ICommand {
 			e.printStackTrace();
 		}
 	}
+	
+	public TurnCommand(IStopCondition stop, double turnDegrees) {
+		stopCondition = stop;
+		degreesToTurn = turnDegrees;
+		output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
+		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
+		controller = new PIDController(0.0, 0.0, 0.0, source, output, 0.02);
+		controller.setInputRange(-180, 180);
+		controller.setOutputRange(-1.0, 1.0);
+		controller.setPercentTolerance(1.0);
+		try {
+			loadPIDValues();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void init() { 
 		controller.reset();
@@ -63,7 +81,6 @@ public class TurnCommand implements ICommand {
 	}
 
 	public boolean run() {
-		SmartWriter.putD("TurnCommandAngle", stopCondition.getError());
 		System.out.println("End Point: " + controller.getSetpoint());
 		System.out.println("Motor Power: " + controller.get());
 		System.out.println("Error: " + controller.getError());
