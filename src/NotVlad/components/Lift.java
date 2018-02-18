@@ -1,5 +1,8 @@
 package NotVlad.components;
 
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+
 import NotVlad.MiyamotoControl;
 import comms.SmartWriter;
 import physicalOutput.motors.TalonSRXMotor;
@@ -26,6 +29,8 @@ public class Lift extends IControl {
 		positions[4] = LiftPosition.CLIMB;
 		index = 0;
 		settling = false;
+		motor.getTalon().configForwardLimitSwitchSource(LimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 0);
+		motor.getTalon().configReverseLimitSwitchSource(LimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 0);
 	}
 
 	public void setLiftPosition(LiftPosition position) {
@@ -57,7 +62,6 @@ public class Lift extends IControl {
 			settling = true;
 			index = Math.max(0, index-1);
 		}
-		
 		if(settling){
 			settleLift(index);
 		}
@@ -72,6 +76,7 @@ public class Lift extends IControl {
 		SmartWriter.putD("SetPosition", setPosition);
 		SmartWriter.putD("LiftPos", motor.getTalon().getSelectedSensorPosition(0));
 		SmartWriter.putD("LiftCurrent", motor.getTalon().getOutputCurrent());
+		System.out.println(motor.getTalon().getFirmwareVersion());
 		motor.set(setPosition);
 	}
 

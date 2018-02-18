@@ -36,8 +36,8 @@ public class Intake extends IControl {
 	}
 
 	public void intake() {
-		intakeMotorLeft.set(0.8);
-		intakeMotorRight.set(-0.8);
+		intakeMotorLeft.set(0.6);
+		intakeMotorRight.set(-0.6);
 	}
 
 	public void outtake() {
@@ -63,10 +63,11 @@ public class Intake extends IControl {
 		}
 		else {
 			if (controller.intake()) {
-				if (sensorCount>500) {
+				if (sensorCount>100) {
 					stop();
 				}
 				else {
+					sensorCount = 0;
 					intake();
 				}
 			}

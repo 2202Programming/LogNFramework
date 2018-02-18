@@ -14,8 +14,10 @@ import drive.IDrive;
 import drive.MotionProfile;
 import drive.MotionProfiler;
 import drive.TwoStickDrive;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SPI.Port;
 import input.EncoderMonitor;
@@ -48,22 +50,22 @@ public class Miyamoto extends RobotDefinitionBase {
 		_properties = new HashMap<String, String>();
 
 		// Old Motor Pins
-		// _properties.put("FLMOTORPIN", "3");
-		// _properties.put("BLMOTORPIN", "2");
-		// _properties.put("FRMOTORPIN", "1");
-		// _properties.put("BRMOTORPIN", "0");
-		// _properties.put("CLIMBMOTORPIN", "4");
-		// _properties.put("INTAKELEFTPIN", "5");
-		// _properties.put("INTAKERIGHTPIN", "6");
+		 _properties.put("FLMOTORPIN", "3");
+		 _properties.put("BLMOTORPIN", "2");
+		 _properties.put("FRMOTORPIN", "1");
+		 _properties.put("BRMOTORPIN", "0");
+		 _properties.put("CLIMBMOTORPIN", "4");
+		 _properties.put("INTAKELEFTPIN", "5");
+		 _properties.put("INTAKERIGHTPIN", "6");
 
 		// New Motor Pins
-		_properties.put("FLMOTORPIN", "0");
-		_properties.put("BLMOTORPIN", "1");
-		_properties.put("FRMOTORPIN", "3");
-		_properties.put("BRMOTORPIN", "2");
-		_properties.put("CLIMBMOTORPIN", "4");
-		_properties.put("INTAKELEFTPIN", "5");
-		_properties.put("INTAKERIGHTPIN", "6");
+//		_properties.put("FLMOTORPIN", "0");
+//		_properties.put("BLMOTORPIN", "1");
+//		_properties.put("FRMOTORPIN", "3");
+//		_properties.put("BRMOTORPIN", "2");
+//		_properties.put("CLIMBMOTORPIN", "4");
+//		_properties.put("INTAKELEFTPIN", "5");
+//		_properties.put("INTAKERIGHTPIN", "6");
 	}
 
 	/***
@@ -77,15 +79,17 @@ public class Miyamoto extends RobotDefinitionBase {
 		Map<String, IControl> iControlMap = super.loadControlObjects();
 
 		Global.controllers = new MiyamotoControl();
+		
+		CameraServer.getInstance().startAutomaticCapture();
 
 		// Encoder stuff
-		Encoder encoder0 = new Encoder(0, 1, true); // Right
-		Encoder encoder1 = new Encoder(2, 3); // Left
+		Encoder encoder0 = new Encoder(10, 11, true); // Right
+		Encoder encoder1 = new Encoder(12, 13); // Left
 		encoder0.setDistancePerPulse(0.05318);
 		encoder1.setDistancePerPulse(0.05321);
 
 		SensorController sensorController = SensorController.getInstance();
-		AHRS navX = new AHRS(SerialPort.Port.kUSB);
+		AHRS navX = new AHRS(SPI.Port.kMXP);
 		System.out.println(navX == null);
 		sensorController.registerSensor("NAVX", navX);
 
