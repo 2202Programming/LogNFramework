@@ -83,13 +83,13 @@ public class Miyamoto extends RobotDefinitionBase {
 		CameraServer.getInstance().startAutomaticCapture();
 
 		// Encoder stuff
-		Encoder encoder0 = new Encoder(10, 11, true); // Right
-		Encoder encoder1 = new Encoder(12, 13); // Left
+		Encoder encoder0 = new Encoder(0, 1, false); // Right
+		Encoder encoder1 = new Encoder(2, 3, true); // Left
 		encoder0.setDistancePerPulse(0.05318);
 		encoder1.setDistancePerPulse(0.05321);
 
 		SensorController sensorController = SensorController.getInstance();
-		AHRS navX = new AHRS(SPI.Port.kMXP);
+		AHRS navX = new AHRS(Port.kMXP);
 		System.out.println(navX == null);
 		sensorController.registerSensor("NAVX", navX);
 
@@ -120,7 +120,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		MotionProfiler sneak = new MotionProfiler(drive, profiles);
 		ReverseDrive reverse = new ReverseDrive(drive);
 
-		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
+		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), false);
 		Climber climber = new Climber(climbMotor);
 
 		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"), true);
