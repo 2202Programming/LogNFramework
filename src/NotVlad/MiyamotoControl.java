@@ -21,7 +21,9 @@ public class MiyamotoControl extends ControlBase implements ReversableController
 	 * @return The Start Position- defaults to Left side
 	 */
 	public StartPosition getStartPosition() {
-		if (controllers[2].getAHeld()) {
+		if(controllers[2].getAHeld() && controllers[2].getBHeld() && controllers[2].getXHeld()) {
+			return StartPosition.D;
+		} else if (controllers[2].getAHeld()) {
 			return StartPosition.L;
 		} else if (controllers[2].getBHeld()) {
 			return StartPosition.M;
@@ -97,6 +99,10 @@ public class MiyamotoControl extends ControlBase implements ReversableController
 		return controllers[1].getXHeld();
 	}
 	
+	public boolean rotateIntake(){
+		return controllers[1].getYHeld();
+	}
+	
 	public boolean raiseLift(){
 		return controllers[1].getRightBumperPressed();
 	}
@@ -119,6 +125,10 @@ public class MiyamotoControl extends ControlBase implements ReversableController
 	
 	public boolean manualLiftDown(){
 		return controllers[1].getLeftTriggerHeld();
+	}
+	
+	public boolean resetLift(){
+		return controllers[1].getStartPressed();
 	}
 
 	@Override
