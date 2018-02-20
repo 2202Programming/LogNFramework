@@ -131,6 +131,10 @@ public class AutoRunner extends IControl {
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
 		path += switchboard.getStartPosition();
 
+		if (path.equals("D")) {
+			return path;
+		}
+
 		int pathNum = 1; // Defaults to front approach of the scale
 
 		if (switchboard.getApproach()) {
