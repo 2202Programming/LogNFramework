@@ -7,6 +7,7 @@ import java.io.IOException;
 import com.kauailabs.navx.frc.AHRS;
 
 import auto.ICommand;
+import auto.IStopCondition;
 import auto.stopConditions.AngleStopCondition;
 import comms.SmartWriter;
 import drive.DriveControl;
@@ -22,7 +23,7 @@ import robotDefinitions.RobotDefinitionBase;
 
 public class TurnCommand implements ICommand {
 	private double degreesToTurn;
-	private AngleStopCondition stopCondition;
+	private IStopCondition stopCondition;
 	private PIDController controller;
 	private PIDOutput output;
 	private PIDSource source;
@@ -41,7 +42,24 @@ public class TurnCommand implements ICommand {
 		stopCondition = stop;
 		output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
 		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
-		controller = new PIDController(0.0, 0.0, 0.0, source, output);
+		controller = new PIDController(0.0, 0.0, 0.0, source, output, 0.02);
+		controller.setInputRange(-180, 180);
+		controller.setOutputRange(-1.0, 1.0);
+		controller.setPercentTolerance(1.0);
+		try {
+			loadPIDValues();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public TurnCommand(IStopCondition stop, double turnDegrees) {
+		stopCondition = stop;
+		degreesToTurn = turnDegrees;
+		output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
+		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
+		controller = new PIDController(0.0, 0.0, 0.0, source, output, 0.02);
 		controller.setInputRange(-180, 180);
 		controller.setOutputRange(-1.0, 1.0);
 		controller.setPercentTolerance(1.0);
@@ -53,8 +71,7 @@ public class TurnCommand implements ICommand {
 		}
 	}
 
-	public void init() {
-		((AHRS) source).reset();
+	public void init() { 
 		controller.reset();
 		controller.setSetpoint(degreesToTurn);
 		controller.enable();
@@ -64,23 +81,18 @@ public class TurnCommand implements ICommand {
 	}
 
 	public boolean run() {
-		SmartWriter.putD("TurnCommandAngle", stopCondition.getError());
-		// TO-DO figure out how to use the FRC PID Controller for motorValue
-		// double motorValue = controller.get();
-		// SmartWriter.putD("PID Turning Motor Power", motorValue);
-		// drive.setLeftMotors(motorValue);
-		// drive.setRightMotors(-motorValue);
 		System.out.println("End Point: " + controller.getSetpoint());
 		System.out.println("Motor Power: " + controller.get());
 		System.out.println("Error: " + controller.getError());
-		
+
 		boolean stopNow = stopCondition.stopNow();
 		SmartWriter.putB("hghjkhjghg", stopNow);
 		return stopNow;
 	}
 
 	public void stop() {
-		controller.disable();
+		controller.reset();
+		System.out.println("Turn Command Finished");
 		drive.setLeftMotors(0);
 		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
@@ -102,9 +114,7 @@ public class TurnCommand implements ICommand {
 			// TODO setPIDVALUES
 			break;
 		case MIYAMOTO:
-			// With FRC PID values currently in wont work for sure
-			// controller.setPID(.06, 0.0001, 0.0); //.06 works for just P (for
-			// kinda low battery)
+			// With FRC PID values are (.045, .1, 0.0);
 			BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoPIDValues.txt"));
 			Double Kp = Double.parseDouble(in.readLine());
 			Double Kd = Double.parseDouble(in.readLine());

@@ -1,7 +1,7 @@
 package NotVlad.components;
 
 public enum LiftPosition {
-	BOTTOM(0),SWITCH(10000),SCALE(25000),CLIMB(12800),MAX(30000);
+	BOTTOM(0),SWITCH(10000),LOWSCALE(20000),HIGHSCALE(27000),CLIMB(16000),MAX(28000);
 	
 	private final int number;
 	private LiftPosition(int number){

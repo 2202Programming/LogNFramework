@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 import NotVlad.components.Climber;
 import NotVlad.components.Intake;
@@ -13,8 +14,10 @@ import drive.IDrive;
 import drive.MotionProfile;
 import drive.MotionProfiler;
 import drive.TwoStickDrive;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SPI.Port;
 import input.EncoderMonitor;
@@ -46,14 +49,23 @@ public class Miyamoto extends RobotDefinitionBase {
 	protected void loadManualDefinitions() {
 		_properties = new HashMap<String, String>();
 
-		// Default Motor Pins
-		_properties.put("FLMOTORPIN", "3");
-		_properties.put("BLMOTORPIN", "2");
-		_properties.put("FRMOTORPIN", "1");
-		_properties.put("BRMOTORPIN", "0");
-		_properties.put("CLIMBMOTORPIN", "4");
-		_properties.put("INTAKELEFTPIN", "5");
-		_properties.put("INTAKERIGHTPIN", "6");
+		// Old Motor Pins
+		 _properties.put("FLMOTORPIN", "3");
+		 _properties.put("BLMOTORPIN", "2");
+		 _properties.put("FRMOTORPIN", "1");
+		 _properties.put("BRMOTORPIN", "0");
+		 _properties.put("CLIMBMOTORPIN", "4");
+		 _properties.put("INTAKELEFTPIN", "5");
+		 _properties.put("INTAKERIGHTPIN", "6");
+
+		// New Motor Pins
+//		_properties.put("FLMOTORPIN", "0");
+//		_properties.put("BLMOTORPIN", "1");
+//		_properties.put("FRMOTORPIN", "3");
+//		_properties.put("BRMOTORPIN", "2");
+//		_properties.put("CLIMBMOTORPIN", "4");
+//		_properties.put("INTAKELEFTPIN", "5");
+//		_properties.put("INTAKERIGHTPIN", "6");
 	}
 
 	/***
@@ -67,10 +79,12 @@ public class Miyamoto extends RobotDefinitionBase {
 		Map<String, IControl> iControlMap = super.loadControlObjects();
 
 		Global.controllers = new MiyamotoControl();
+		
+		CameraServer.getInstance().startAutomaticCapture();
 
 		// Encoder stuff
-		Encoder encoder0 = new Encoder(10, 11, true); // Right
-		Encoder encoder1 = new Encoder(12, 13); // Left
+		Encoder encoder0 = new Encoder(0, 1, false); // Right
+		Encoder encoder1 = new Encoder(2, 3, true); // Left
 		encoder0.setDistancePerPulse(0.05318);
 		encoder1.setDistancePerPulse(0.05321);
 
@@ -86,7 +100,7 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		sensorController.registerSensor("ENCODER0", encoder0);
 		sensorController.registerSensor("ENCODER1", encoder1);
-		sensorController.registerSensor("INTAKE", new DigitalInput(2));
+		sensorController.registerSensor("INTAKE", new DigitalInput(4));
 
 		IMotor FL = new SparkMotor(getInt("FLMOTORPIN"), false);
 		IMotor FR = new SparkMotor(getInt("FRMOTORPIN"), true);
@@ -95,21 +109,18 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		ChainMotor left = new ChainMotor(FR, BR);
 		ChainMotor right = new ChainMotor(FL, BL);
-		
+
 		TurnController turnController = new TurnController(left, right);
 		iControlMap.put("TURNCONTROLLER", turnController);
-		
+
 		IDrive drive = new TwoStickDrive(left, right, 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
-		
-		MotionProfile[] profiles = {
-				new MotionProfile(0.1,1),
-				new MotionProfile(0.1,0.6)
-				};
-		MotionProfiler sneak = new MotionProfiler(drive,profiles);
+
+		MotionProfile[] profiles = { new MotionProfile(0.05, 1), new MotionProfile(0.05, 0.6) };
+		MotionProfiler sneak = new MotionProfiler(drive, profiles);
 		ReverseDrive reverse = new ReverseDrive(drive);
-		
-		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), true);
+
+		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), false);
 		Climber climber = new Climber(climbMotor);
 
 		IMotor intakeLeft = new SparkMotor(getInt("INTAKELEFTPIN"), true);
@@ -117,7 +128,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		Intake intake = new Intake(intakeLeft, intakeRight);
 		iControlMap.put("INTAKE", intake);
 
-		TalonSRXMotor liftMotor = new TalonSRXMotor(11, true, 0.1, 0.0, 0.0, 0.0);
+		TalonSRXMotor liftMotor = new TalonSRXMotor(11, true, 0.3, 0.0, 0.0, 0.0);
 		iControlMap.put("LIFT_TALON", liftMotor);
 		Lift lift = new Lift(liftMotor);
 		iControlMap.put("LIFT", lift);

@@ -1,5 +1,8 @@
 package NotVlad.components;
 
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+
 import NotVlad.MiyamotoControl;
 import comms.SmartWriter;
 import physicalOutput.motors.TalonSRXMotor;
@@ -18,13 +21,18 @@ public class Lift extends IControl {
 		controller = (MiyamotoControl)Global.controllers;
 		this.motor = motor;
 		this.setPosition = 0;
-		positions = new LiftPosition[4];
+		positions = new LiftPosition[5];
 		positions[0] = LiftPosition.BOTTOM;
 		positions[1] = LiftPosition.SWITCH;
-		positions[2] = LiftPosition.SCALE;
-		positions[3] = LiftPosition.CLIMB;
+		positions[2] = LiftPosition.CLIMB;
+		positions[3] = LiftPosition.LOWSCALE;
+		positions[4] = LiftPosition.HIGHSCALE;
 		index = 0;
 		settling = false;
+		
+		motor.getTalon().overrideLimitSwitchesEnable(false);
+		//motor.getTalon().configForwardLimitSwitchSource(LimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 0);
+		//motor.getTalon().configReverseLimitSwitchSource(LimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 0);
 	}
 
 	public void setLiftPosition(LiftPosition position) {
@@ -40,9 +48,9 @@ public class Lift extends IControl {
 	}
 	
 	public void teleopInit(){
-		motor.reset();
+		//motor.reset();
 		index = 0;
-		setLiftPosition(LiftPosition.BOTTOM);
+		//setLiftPosition(LiftPosition.BOTTOM);
 		motor.set(setPosition);
 		settling = false;
 	}
@@ -50,13 +58,12 @@ public class Lift extends IControl {
 	public void teleopPeriodic(){
 		if(controller.raiseLift()){
 			settling = true;
-			index = Math.min(positions.length, index+1);
+			index = Math.min(positions.length-1, index+1);
 		}
 		if(controller.lowerLift()){
 			settling = true;
 			index = Math.max(0, index-1);
 		}
-		
 		if(settling){
 			settleLift(index);
 		}
@@ -66,6 +73,10 @@ public class Lift extends IControl {
 		}
 		if(controller.manualLiftDown()){
 			setPosition -= 100;
+		}
+		
+		if(controller.resetLift()){
+			motor.reset();
 		}
 		
 		SmartWriter.putD("SetPosition", setPosition);

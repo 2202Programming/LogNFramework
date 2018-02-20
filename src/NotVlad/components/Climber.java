@@ -13,7 +13,7 @@ public class Climber extends IControl {
 	
 	public Climber(IMotor climbMotor) {
 		this.climbMotor=climbMotor;
-		pdp = new PowerDistributionPanel();
+		//pdp = new PowerDistributionPanel();
 	}
 	private void init(){
 		climbMotor.set(0);
@@ -33,9 +33,9 @@ public class Climber extends IControl {
 			climbMotor.set(0.5);
 		}
 		else if(controller.climbReverse()){
-			if(pdp.getCurrent(2) < 2){
+			//if(pdp.getCurrent(2) < 2){
 				climbMotor.set(-0.5);				
-			}
+			//}
 		}
 		else{
 			climbMotor.set(0);
