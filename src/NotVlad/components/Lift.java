@@ -24,13 +24,15 @@ public class Lift extends IControl {
 		positions = new LiftPosition[5];
 		positions[0] = LiftPosition.BOTTOM;
 		positions[1] = LiftPosition.SWITCH;
-		positions[2] = LiftPosition.LOWSCALE;
-		positions[3] = LiftPosition.HIGHSCALE;
-		positions[4] = LiftPosition.CLIMB;
+		positions[2] = LiftPosition.CLIMB;
+		positions[3] = LiftPosition.LOWSCALE;
+		positions[4] = LiftPosition.HIGHSCALE;
 		index = 0;
 		settling = false;
-		motor.getTalon().configForwardLimitSwitchSource(LimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 0);
-		motor.getTalon().configReverseLimitSwitchSource(LimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 0);
+		
+		motor.getTalon().overrideLimitSwitchesEnable(false);
+		//motor.getTalon().configForwardLimitSwitchSource(LimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 0);
+		//motor.getTalon().configReverseLimitSwitchSource(LimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 0);
 	}
 
 	public void setLiftPosition(LiftPosition position) {
@@ -46,9 +48,9 @@ public class Lift extends IControl {
 	}
 	
 	public void teleopInit(){
-		motor.reset();
+		//motor.reset();
 		index = 0;
-		setLiftPosition(LiftPosition.BOTTOM);
+		//setLiftPosition(LiftPosition.BOTTOM);
 		motor.set(setPosition);
 		settling = false;
 	}
@@ -56,7 +58,7 @@ public class Lift extends IControl {
 	public void teleopPeriodic(){
 		if(controller.raiseLift()){
 			settling = true;
-			index = Math.min(positions.length, index+1);
+			index = Math.min(positions.length-1, index+1);
 		}
 		if(controller.lowerLift()){
 			settling = true;
@@ -73,10 +75,13 @@ public class Lift extends IControl {
 			setPosition -= 100;
 		}
 		
+		if(controller.resetLift()){
+			motor.reset();
+		}
+		
 		SmartWriter.putD("SetPosition", setPosition);
 		SmartWriter.putD("LiftPos", motor.getTalon().getSelectedSensorPosition(0));
 		SmartWriter.putD("LiftCurrent", motor.getTalon().getOutputCurrent());
-		System.out.println(motor.getTalon().getFirmwareVersion());
 		motor.set(setPosition);
 	}
 
