@@ -42,6 +42,11 @@ public class AutoRunner extends IControl {
 
 	public void autonomousInit() {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+
+		if (gameData == null || gameData.length() != 0) {
+			createCommandList("D");
+		}
+
 		if (gameData.charAt(0) == 'L') {
 			Global.ourSwitchPosition = TargetSide.L;
 		} else {
@@ -62,14 +67,19 @@ public class AutoRunner extends IControl {
 
 		AHRS navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
 		navX.reset();
-		
+
+		createCommandList(choosePath());
+
+	}
+
+	public void createCommandList(String path) {
 		finished = false;
 		long start = System.currentTimeMillis();
 		System.out.println("Start: " + start);
 		File file = new File("/home/lvuser/Paths.xml");
 		System.out.println(file.getName());
 		XMLInterpreter = new NotVladXMLInterpreter(file);
-		CommandList list = XMLInterpreter.getPathList(choosePath());
+		CommandList list = XMLInterpreter.getPathList(path);
 		long end = System.currentTimeMillis();
 		System.out.println("Parse End: " + end);
 		System.out.println("Parse Time: " + (end - start));
@@ -110,7 +120,9 @@ public class AutoRunner extends IControl {
 
 	public void disabledInit() {
 		SmartWriter.putS("Path", "EnterPath", DebugMode.COMPETITION);
-		runner.stop();
+		if (runner != null) {
+			runner.stop();
+		}
 	}
 
 	public static String choosePath() {
