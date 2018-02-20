@@ -164,11 +164,13 @@ public class NotVladXMLInterpreter {
 		}
 
 		case ("OuttakeCommand"): {
-			return new OuttakeCommand(getStopCondition(n));
+			double speed = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			return new OuttakeCommand(speed, getStopCondition(n));
 		}
 
 		case ("IntakeCommand"): {
-			return new IntakeCommand(getStopCondition(n));
+			double speed = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			return new IntakeCommand(speed, getStopCondition(n));
 		}
 
 		case ("WaitCommand"): {
