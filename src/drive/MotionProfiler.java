@@ -34,6 +34,16 @@ public class MotionProfiler extends IControl {
 		this.profiles = profiles;
 	}
 	
+	/**
+	 * Sets the index for which motion profile to use
+	 * @param index the index of the profile
+	 */
+	public void setProfileIndex(int index){
+		if(index > 0 && index < profiles.length){
+			this.index = index;			
+		}
+	}
+	
 	public void teleopInit(){
 		index = 0;
 	}
