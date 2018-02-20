@@ -29,7 +29,7 @@ public class Global {
 	};
 
 	public enum StartPosition {
-		L, M, R
+		L, M, R, D
 	};
 	
 	public static TargetSide ourSwitchPosition;
