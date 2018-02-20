@@ -34,6 +34,11 @@ public class Intake extends IControl {
 	public void teleopInit() {
 		init();
 	}
+	
+	public void runIntake(double speed){
+		intakeMotorLeft.set(speed);
+		intakeMotorRight.set(-speed);
+	}
 
 	public void intake() {
 		intakeMotorLeft.set(0.6);
