@@ -83,9 +83,9 @@ public class NotVladXMLInterpreter {
 		for (int i = 0; i < paths.getLength(); i++) {
 			Node currentNode = paths.item(i);
 			// If there is an id attribute on the path
-			if (currentNode.getAttributes().item(0).getNodeName().equals("Id")) {
+			if (currentNode.getAttributes().item(0).getNodeName().equalsIgnoreCase("Id")) {
 				// If the id matches the one we are looking for
-				if (currentNode.getAttributes().item(0).getNodeValue().equals(id)) {
+				if (currentNode.getAttributes().item(0).getNodeValue().equalsIgnoreCase(id)) {
 					System.out.println("Found Path: " + id);
 					xmlPath = currentNode;
 				}
