@@ -22,9 +22,11 @@ import auto.commands.DriveCommand;
 import auto.commands.IntakeCommand;
 import auto.commands.LiftCommand;
 import auto.commands.OuttakeCommand;
-import auto.commands.SneakDriveCommand;
 import auto.commands.TurnCommand;
+import auto.commands.WaitCommand;
+import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
+import auto.stopConditions.OrStopCondition;
 import auto.stopConditions.TalonDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
@@ -81,9 +83,9 @@ public class NotVladXMLInterpreter {
 		for (int i = 0; i < paths.getLength(); i++) {
 			Node currentNode = paths.item(i);
 			// If there is an id attribute on the path
-			if (currentNode.getAttributes().item(0).getNodeName().equals("Id")) {
+			if (currentNode.getAttributes().item(0).getNodeName().equalsIgnoreCase("Id")) {
 				// If the id matches the one we are looking for
-				if (currentNode.getAttributes().item(0).getNodeValue().equals(id)) {
+				if (currentNode.getAttributes().item(0).getNodeValue().equalsIgnoreCase(id)) {
 					System.out.println("Found Path: " + id);
 					xmlPath = currentNode;
 				}
@@ -120,7 +122,9 @@ public class NotVladXMLInterpreter {
 		switch (commandName) {
 		case ("TurnCommand"): {
 			double turnDegrees = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
-			return new TurnCommand(turnDegrees);
+			AngleStopCondition angleStop = new AngleStopCondition(turnDegrees, 2, 0.3);
+			TimerStopCondition timeStop = new TimerStopCondition(1800);
+			return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees);
 		}
 
 		case ("DriveCommand"): {
@@ -147,7 +151,7 @@ public class NotVladXMLInterpreter {
 				break;
 			}
 			case ("SCALE"): {
-				targetPosition = LiftPosition.SCALE;
+				targetPosition = LiftPosition.HIGHSCALE;
 				break;
 			}
 			case ("BOTTOM"): {
@@ -160,11 +164,18 @@ public class NotVladXMLInterpreter {
 		}
 
 		case ("OuttakeCommand"): {
-			return new OuttakeCommand(getStopCondition(n));
+			double speed = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			return new OuttakeCommand(speed, getStopCondition(n));
 		}
 
 		case ("IntakeCommand"): {
-			return new IntakeCommand(getStopCondition(n));
+			double speed = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			return new IntakeCommand(speed, getStopCondition(n));
+		}
+
+		case ("WaitCommand"): {
+			long waitTime = Long.parseLong(attributes.getNamedItem("Time").getNodeValue());
+			return new WaitCommand(new TimerStopCondition(waitTime));
 		}
 		}
 
@@ -193,7 +204,7 @@ public class NotVladXMLInterpreter {
 
 		switch (stopConditionType) {
 		case ("DistanceStopCondition"): {
-			int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
+			int stopDistance = (int) (Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue()) * .8);
 			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 			SensorController sensorController = SensorController.getInstance();
 			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
@@ -216,7 +227,7 @@ public class NotVladXMLInterpreter {
 				targetPosition = LiftPosition.SWITCH;
 			}
 			case ("SCALE"): {
-				targetPosition = LiftPosition.SCALE;
+				targetPosition = LiftPosition.HIGHSCALE;
 			}
 			case ("BOTTOM"): {
 				targetPosition = LiftPosition.BOTTOM;

@@ -15,16 +15,16 @@ public class Intake extends IControl {
 	private int sensorCount;
 
 	public Intake(IMotor intakeMotorLeft, IMotor intakeMotorRight) {
-		this.intakeMotorLeft=intakeMotorLeft;
-		this.intakeMotorRight=intakeMotorRight;
+		this.intakeMotorLeft = intakeMotorLeft;
+		this.intakeMotorRight = intakeMotorRight;
 	}
 
 	private void init() {
 		intakeMotorLeft.set(0);
 		intakeMotorRight.set(0);
-		controller=(MiyamotoControl)(Global.controllers);
-		sensor=(DigitalInput)SensorController.getInstance().getSensor("INTAKE");
-		sensorCount=0;
+		controller = (MiyamotoControl) (Global.controllers);
+		sensor = (DigitalInput) SensorController.getInstance().getSensor("INTAKE");
+		sensorCount = 0;
 	}
 
 	public void autonomousInit() {
@@ -34,6 +34,11 @@ public class Intake extends IControl {
 	public void teleopInit() {
 		init();
 	}
+	
+	public void runIntake(double speed){
+		intakeMotorLeft.set(speed);
+		intakeMotorRight.set(-speed);
+	}
 
 	public void intake() {
 		intakeMotorLeft.set(0.6);
@@ -41,8 +46,13 @@ public class Intake extends IControl {
 	}
 
 	public void outtake() {
-		intakeMotorLeft.set(-1);
-		intakeMotorRight.set(1);
+		intakeMotorLeft.set(-0.6);
+		intakeMotorRight.set(0.6);
+	}
+
+	public void rotate() {
+		intakeMotorLeft.set(-0.3);
+		intakeMotorRight.set(-0.3);
 	}
 
 	public void stop() {
@@ -53,30 +63,27 @@ public class Intake extends IControl {
 	public void teleopPeriodic() {
 		if (sensor.get()) {
 			sensorCount++;
-		}
-		else {
-			sensorCount=0;
+		} else {
+			sensorCount = 0;
 		}
 
 		if (controller.overrideIntake()) {
 			intake();
-		}
-		else {
+		} else {
 			if (controller.intake()) {
-				if (sensorCount>100) {
+				if (sensorCount > 100) {
 					stop();
-				}
-				else {
+				} else {
+					sensorCount = 0;
 					intake();
 				}
+			} else if (controller.outtake()) {
+				outtake();
+			} else if (controller.rotateIntake()) {
+				rotate();
+			}else {
+				stop();
 			}
-			else
-				if (controller.outtake()) {
-					outtake();
-				}
-				else {
-					stop();
-				}
 		}
 	}
 }

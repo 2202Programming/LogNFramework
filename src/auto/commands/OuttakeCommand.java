@@ -8,6 +8,7 @@ import robot.Global;
 public class OuttakeCommand implements ICommand {
 	private IStopCondition stopCondition;
 	private Intake intake;
+	private double speed;
 
 	/**
 	 * Outtakes at a constant speed until a condition is fulfilled
@@ -15,8 +16,9 @@ public class OuttakeCommand implements ICommand {
 	 * @param stop
 	 *            The condition that stops the command
 	 */
-	public OuttakeCommand(IStopCondition stop) {
+	public OuttakeCommand(double speed, IStopCondition stop) {
 		stopCondition = stop;
+		this.speed = speed;
 	}
 
 	public void init() {
@@ -28,7 +30,7 @@ public class OuttakeCommand implements ICommand {
 		if (intake == null) {
 			init();
 		}
-		intake.outtake();
+		intake.runIntake(-speed);
 
 		return stopCondition.stopNow();
 	}
