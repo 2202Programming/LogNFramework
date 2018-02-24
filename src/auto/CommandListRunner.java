@@ -1,7 +1,6 @@
 package auto;
 
 import auto.commands.EmptyCommand;
-import robot.IControl;
 
 public class CommandListRunner {
 	public int commandNum;
