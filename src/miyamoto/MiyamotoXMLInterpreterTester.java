@@ -6,9 +6,10 @@ import auto.CommandList;
 import auto.ICommand;
 
 /**
- * Class to test the auto path chosen by printing the commands associated with said path
+ * Class to test the auto path chosen by printing the commands associated with
+ * said path
  */
-public class NotVladXMLInterpreterTester {
+public class MiyamotoXMLInterpreterTester {
 	public static void main(String[] args) {
 		CommandList test = new CommandList();
 		long startParse = System.nanoTime();
