@@ -67,8 +67,8 @@ public class MiyamotoXMLInterpreter {
 	}
 
 	/**
-	 * Searches for a specific path in the xml file and returns a command list
-	 * of the commands in the xml file
+	 * Searches for a specific path in the xml file and returns a command list of
+	 * the commands in the xml file
 	 * 
 	 * @param id
 	 *            path id 1st character: starting position 2nd character: target
@@ -92,7 +92,10 @@ public class MiyamotoXMLInterpreter {
 			}
 		}
 
-		// Will throw nullPointer if the path doesn't exist
+		if (xmlPath == null) {
+			xmlPath = paths.item(0); // Defaults to the first path in the xml file
+		}
+
 		NodeList xmlCommands = xmlPath.getChildNodes();
 
 		CommandList path = new CommandList();
