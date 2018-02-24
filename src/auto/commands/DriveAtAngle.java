@@ -6,9 +6,7 @@ import auto.IStopCondition;
 import comms.SmartWriter;
 import drive.DriveControl;
 import drive.IDrive;
-import edu.wpi.first.wpilibj.PIDController;
 import input.SensorController;
-import physicalOutput.motors.FakePIDMotor;
 import robot.Global;
 import robotDefinitions.RobotDefinitionBase;
 
@@ -22,11 +20,11 @@ public class DriveAtAngle implements ICommand {
 	private boolean usePID;
 
 	/**
-	 * Creates the command using pid controlled angle
+	 * Drives straight at a specified angle using PID (proportions)
 	 * 
-	 * @param stop
-	 * @param speed
-	 * @param angle
+	 * @param stop The stop condition
+	 * @param speed The speed at which to drive
+	 * @param angle The maintained angel
 	 */
 	public DriveAtAngle(IStopCondition stop, double speed, double angle) {
 		usePID = true;
@@ -39,12 +37,12 @@ public class DriveAtAngle implements ICommand {
 	}
 
 	/**
-	 * Creates the command that waddles back and forth
+	 * Drives straight at a specified angle using two speeds 
 	 * 
-	 * @param stop
-	 * @param slowSpeed
-	 * @param fastSpeed
-	 * @param angle
+	 * @param stop The stop condition
+	 * @param slowSpeed The slow driving speed
+	 * @param fastSpeed The fast driving speed
+	 * @param angle The maintained angle
 	 */
 	public DriveAtAngle(IStopCondition stop, double slowSpeed, double fastSpeed, double angle) {
 		usePID = false;
@@ -54,10 +52,19 @@ public class DriveAtAngle implements ICommand {
 		this.angle = angle;
 	}
 
+	/**
+	 * Sets the main speed for PID
+	 * @param speed
+	 */
 	public void setSpeed(double speed) {
 		this.slowSpeed = speed;
 	}
 
+	/**
+	 * Sets the slow and fast speed for the alternate method of driving
+	 * @param slowSpeed
+	 * @param fastSpeed
+	 */
 	public void setSpeed(double slowSpeed, double fastSpeed) {
 		this.slowSpeed = slowSpeed;
 		this.fastSpeed = fastSpeed;
@@ -79,7 +86,10 @@ public class DriveAtAngle implements ICommand {
 
 		return stopCondition.stopNow();
 	}
-
+	
+	/**
+	 * Sets the motor speeds based on a proportion PID
+	 */
 	private void withGyro() {
 		double Kp = .012;
 		double change = getError() * Kp;
@@ -95,6 +105,9 @@ public class DriveAtAngle implements ICommand {
 		}
 	}
 
+	/**
+	 * Set's the motor speeds based on the slow and fast speed
+	 */
 	private void nonGyro() {
 		if (getError() > 0) {
 			drive.setLeftMotors(slowSpeed);
@@ -114,6 +127,10 @@ public class DriveAtAngle implements ICommand {
 		return angle - navX.getYaw();
 	}
 
+	/**
+	 * Returns the angle the robot is at
+	 * @return The yaw angle
+	 */
 	public double getAngle() {
 		return navX.getYaw();
 	}
