@@ -1,8 +1,8 @@
 package auto.commands;
 
-import NotVlad.components.Intake;
 import auto.ICommand;
 import auto.IStopCondition;
+import miyamoto.components.Intake;
 import robot.Global;
 
 public class OuttakeCommand implements ICommand {

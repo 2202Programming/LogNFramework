@@ -1,4 +1,4 @@
-package NotVlad;
+package miyamoto;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import NotVlad.components.LiftPosition;
 import auto.CommandList;
 import auto.ICommand;
 import auto.IStopCondition;
@@ -31,10 +30,11 @@ import auto.stopConditions.TalonDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
+import miyamoto.components.LiftPosition;
 import physicalOutput.motors.TalonSRXMotor;
 import robot.Global;
 
-public class NotVladXMLInterpreter {
+public class MiyamotoXMLInterpreter {
 
 	private Document xmlFile;
 
@@ -44,7 +44,7 @@ public class NotVladXMLInterpreter {
 	 * @param f
 	 *            xml file path
 	 */
-	public NotVladXMLInterpreter(File f) {
+	public MiyamotoXMLInterpreter(File f) {
 		readFile(f);
 	}
 

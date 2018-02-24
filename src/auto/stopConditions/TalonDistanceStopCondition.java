@@ -2,9 +2,9 @@ package auto.stopConditions;
 
 import java.util.List;
 
-import NotVlad.components.LiftPosition;
 import auto.IStopCondition;
 import comms.SmartWriter;
+import miyamoto.components.LiftPosition;
 import physicalOutput.motors.TalonSRXMotor;
 
 /**

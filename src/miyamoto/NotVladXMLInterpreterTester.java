@@ -1,16 +1,19 @@
-package NotVlad;
+package miyamoto;
 
 import java.io.File;
 
 import auto.CommandList;
 import auto.ICommand;
 
+/**
+ * Class to test the auto path chosen by printing the commands associated with said path
+ */
 public class NotVladXMLInterpreterTester {
 	public static void main(String[] args) {
 		CommandList test = new CommandList();
 		long startParse = System.nanoTime();
 		try {
-			NotVladXMLInterpreter interp = new NotVladXMLInterpreter(new File("Paths.xml"));
+			MiyamotoXMLInterpreter interp = new MiyamotoXMLInterpreter(new File("Paths.xml"));
 			test = interp.getPathList("L3-1");
 		} catch (NullPointerException e) {
 			System.out.println("OOF");

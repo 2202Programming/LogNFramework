@@ -1,4 +1,4 @@
-package NotVlad;
+package miyamoto;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +20,7 @@ import robot.Global.TargetSide;
 import robot.IControl;
 
 public class AutoRunner extends IControl {
-	NotVladXMLInterpreter XMLInterpreter;
+	MiyamotoXMLInterpreter XMLInterpreter;
 	CommandListRunner runner;
 	private double timeCost;
 	private boolean finished;
@@ -40,6 +40,7 @@ public class AutoRunner extends IControl {
 	public void robotInit() {
 	}
 
+	// Parse game data from FMS and set enums for auto switch/scale positions
 	public void autonomousInit() {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
@@ -72,13 +73,14 @@ public class AutoRunner extends IControl {
 
 	}
 
+	// Creates list of auto commands to be run
 	public void createCommandList(String path) {
 		finished = false;
 		long start = System.currentTimeMillis();
 		System.out.println("Start: " + start);
 		File file = new File("/home/lvuser/Paths.xml");
 		System.out.println(file.getName());
-		XMLInterpreter = new NotVladXMLInterpreter(file);
+		XMLInterpreter = new MiyamotoXMLInterpreter(file);
 		CommandList list = XMLInterpreter.getPathList(path);
 		long end = System.currentTimeMillis();
 		System.out.println("Parse End: " + end);
@@ -125,6 +127,8 @@ public class AutoRunner extends IControl {
 		}
 	}
 
+	// 2017-18 specific; construct the correct path from switchboard input, robot
+	// field position, and switch/scale position enums
 	public static String choosePath() {
 		String path = "";
 

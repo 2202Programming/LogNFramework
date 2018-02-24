@@ -1,8 +1,8 @@
-package NotVlad.components;
+package miyamoto.components;
 
-import NotVlad.MiyamotoControl;
 import edu.wpi.first.wpilibj.DigitalInput;
 import input.SensorController;
+import miyamoto.MiyamotoControl;
 import physicalOutput.motors.IMotor;
 import robot.Global;
 import robot.IControl;
@@ -14,6 +14,11 @@ public class Intake extends IControl {
 	private DigitalInput sensor;
 	private int sensorCount;
 
+	/**
+	 * Self-evident intake class
+	 * @param intakeMotorLeft 
+	 * @param intakeMotorRight
+	 */
 	public Intake(IMotor intakeMotorLeft, IMotor intakeMotorRight) {
 		this.intakeMotorLeft = intakeMotorLeft;
 		this.intakeMotorRight = intakeMotorRight;

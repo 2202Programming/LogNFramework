@@ -1,13 +1,10 @@
-package NotVlad;
+package miyamoto;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import NotVlad.components.Climber;
-import NotVlad.components.Intake;
-import NotVlad.components.Lift;
 import comms.SmartWriter;
 import drive.IDrive;
 import drive.MotionProfile;
@@ -20,6 +17,9 @@ import edu.wpi.first.wpilibj.SPI.Port;
 import input.EncoderMonitor;
 import input.NavXMonitor;
 import input.SensorController;
+import miyamoto.components.Climber;
+import miyamoto.components.Intake;
+import miyamoto.components.Lift;
 import physicalOutput.TurnController;
 import physicalOutput.motors.ChainMotor;
 import physicalOutput.motors.IMotor;
@@ -30,7 +30,7 @@ import robot.IControl;
 import robotDefinitions.RobotDefinitionBase;
 
 /**
- * The Piper implementation of IDefinition.<br>
+ * The Miyamoto implementation of IDefinition.<br>
  * <br>
  * Comments are in IDefinition
  */
