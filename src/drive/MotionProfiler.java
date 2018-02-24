@@ -7,7 +7,7 @@ import robotDefinitions.controls.ControlBase;
 import robotDefinitions.controls.MotionProfileableController;
 
 /**
- * Caps the max acceleration of the robot so that it can be maneuvered more easily
+ * Caps the max acceleration and velocity of the robot so that it can be maneuvered more easily
  * @author Daniel
  *
  */
