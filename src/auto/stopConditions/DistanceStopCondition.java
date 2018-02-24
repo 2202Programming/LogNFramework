@@ -1,6 +1,7 @@
 package auto.stopConditions;
 
 import java.util.List;
+
 import auto.IStopCondition;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.Encoder;

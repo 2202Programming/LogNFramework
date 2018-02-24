@@ -2,8 +2,6 @@ package drive;
 
 import robot.Global;
 import robot.IControl;
-import robotDefinitions.RobotDefinitionBase;
-import robotDefinitions.controls.ControlBase;
 import robotDefinitions.controls.MotionProfileableController;
 
 /**

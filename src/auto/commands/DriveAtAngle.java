@@ -1,6 +1,7 @@
 package auto.commands;
 
 import com.kauailabs.navx.frc.AHRS;
+
 import auto.ICommand;
 import auto.IStopCondition;
 import comms.SmartWriter;

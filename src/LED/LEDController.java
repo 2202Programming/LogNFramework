@@ -1,8 +1,5 @@
 package LED;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Relay;

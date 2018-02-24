@@ -1,8 +1,5 @@
 package miyamoto.components;
 
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
-
 import comms.SmartWriter;
 import miyamoto.MiyamotoControl;
 import physicalOutput.motors.TalonSRXMotor;

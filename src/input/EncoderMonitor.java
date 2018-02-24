@@ -3,8 +3,6 @@ package input;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import com.kauailabs.navx.frc.AHRS;
-
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.Encoder;
