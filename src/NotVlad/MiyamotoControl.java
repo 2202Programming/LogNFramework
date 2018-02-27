@@ -130,6 +130,14 @@ public class MiyamotoControl extends ControlBase implements ReversableController
 	public boolean resetLift(){
 		return controllers[1].getStartPressed();
 	}
+	
+	public boolean autoClimb(){
+		return controllers[0].getAPressed();
+	}
+	
+	public boolean cancelClimb(){
+		return controllers[0].getBPressed();
+	}
 
 	@Override
 	public XboxController[] getControllers() {
