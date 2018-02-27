@@ -43,10 +43,15 @@ public class AutoRunner extends IControl {
 
 	// Parse game data from FMS and set enums for auto switch/scale positions
 	public void autonomousInit() {
+		runner = null;
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
-		if (gameData == null || gameData.length() != 0) {
+		AHRS navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
+		navX.reset();
+
+		if (gameData == null || gameData.length() != 3) {
 			createCommandList("D");
+			return;
 		}
 
 		if (gameData.charAt(0) == 'L') {
@@ -67,16 +72,13 @@ public class AutoRunner extends IControl {
 			Global.opponentSwitchPosition = TargetSide.R;
 		}
 
-		AHRS navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
-		navX.reset();
-
 		createCommandList(choosePath());
-
 	}
 
 	// Creates list of auto commands to be run
 	public void createCommandList(String path) {
 		finished = false;
+		timeCost = System.currentTimeMillis();
 		long start = System.currentTimeMillis();
 		System.out.println("Start: " + start);
 		File file = new File("/home/lvuser/Paths.xml");
@@ -87,7 +89,6 @@ public class AutoRunner extends IControl {
 		System.out.println("Parse End: " + end);
 		System.out.println("Parse Time: " + (end - start));
 		runner = new CommandListRunner(list);
-		timeCost = System.currentTimeMillis();
 		SmartWriter.putS("Game Data & Path Name",
 				DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
 	}
@@ -95,7 +96,7 @@ public class AutoRunner extends IControl {
 	public void autonomousPeriodic() {
 		if (runner == null) {
 			System.out.println("Runner is null");
-			return;
+			autonomousInit();
 		}
 
 		EncoderMonitor encoderMonitor = (EncoderMonitor) Global.controlObjects.get("ENCODERMONITOR");
@@ -128,7 +129,8 @@ public class AutoRunner extends IControl {
 		}
 	}
 
-	// 2017-18 specific; construct the correct path from switchboard input, robot
+	// 2017-18 specific; construct the correct path from switchboard input,
+	// robot
 	// field position, and switch/scale position enums
 	public static String choosePath() {
 		String path = "";
@@ -174,5 +176,4 @@ public class AutoRunner extends IControl {
 
 		return path;
 	}
-
 }
