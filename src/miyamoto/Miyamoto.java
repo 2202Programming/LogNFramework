@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import LED.LEDController;
 import comms.SmartWriter;
 import drive.IDrive;
 import drive.MotionProfile;
@@ -131,6 +132,8 @@ public class Miyamoto extends RobotDefinitionBase {
 		iControlMap.put("LIFT_TALON", liftMotor);
 		Lift lift = new Lift(liftMotor);
 		iControlMap.put("LIFT", lift);
+		
+		LEDController LED = new LEDController();
 
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
