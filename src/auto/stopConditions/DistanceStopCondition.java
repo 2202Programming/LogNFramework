@@ -1,6 +1,7 @@
 package auto.stopConditions;
 
 import java.util.List;
+
 import auto.IStopCondition;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.Encoder;
@@ -9,6 +10,11 @@ public class DistanceStopCondition implements IStopCondition {
 	private List<Encoder> enc;
 	private int duration;
 
+	/**
+	 * StopCondition that uses an encoder count to inches conversion to stop
+	 * @param encoder	List of drive encoders
+	 * @param inches		Distance (in inches) at which to be stopped at
+	 */
 	public DistanceStopCondition(List<Encoder> encoder, int inches) {
 		enc = encoder;
 		duration = inches;

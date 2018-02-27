@@ -1,11 +1,9 @@
 package robot;
 
-import NotVlad.Miyamoto;
-import NotVlad.NotVlad;
 import comms.DebugMode;
 import comms.SmartWriter;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import miyamoto.Miyamoto;
 import robotDefinitions.IRobotDefinition;
 import robotDefinitions.RobotName;
 

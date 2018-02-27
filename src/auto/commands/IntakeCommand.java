@@ -1,21 +1,23 @@
 package auto.commands;
 
-import NotVlad.components.Intake;
 import auto.ICommand;
 import auto.IStopCondition;
+import miyamoto.components.Intake;
 import robot.Global;
 
 public class IntakeCommand implements ICommand {
 	private IStopCondition stopCondition;
 	private Intake intake;
+	private double speed;
 
 	/**
 	 * Intakes at a constant speed until a condition is fulfilled
 	 * @param stop
 	 *            The condition that stops the command
 	 */
-	public IntakeCommand(IStopCondition stop) {
+	public IntakeCommand(double speed, IStopCondition stop) {
 		stopCondition = stop;
+		this.speed = speed;
 	}
 
 	public void init() {
@@ -27,7 +29,7 @@ public class IntakeCommand implements ICommand {
 		if (intake == null) {
 			init();
 		}
-		intake.intake();
+		intake.runIntake(speed);
 
 		return stopCondition.stopNow();
 	}
