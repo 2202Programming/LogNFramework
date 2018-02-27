@@ -29,8 +29,8 @@ public class NavXMonitor extends IControl {
 	public void teleopPeriodic() {
 		for (Entry<String, AHRS> entry : navXs.entrySet()) {
 			AHRS navX = entry.getValue();
-			SmartWriter.putD("NavX Roll Angle", navX.getYaw(), DebugMode.DEBUG);
-			SmartWriter.putD("NavX Pitch Angle", navX.getYaw(), DebugMode.DEBUG);
+			SmartWriter.putD("NavX Roll Angle", navX.getRoll(), DebugMode.DEBUG);
+			SmartWriter.putD("NavX Pitch Angle", navX.getPitch(), DebugMode.DEBUG);
 			SmartWriter.putD("NavX Yaw Angle", navX.getYaw(), DebugMode.COMPETITION);
 		}
 	}
@@ -41,8 +41,8 @@ public class NavXMonitor extends IControl {
 	public void autonomousPeriodic() {
 		for (Entry<String, AHRS> entry : navXs.entrySet()) {
 			AHRS navX = entry.getValue();
-			SmartWriter.putD("NavX Roll Angle", navX.getYaw(), DebugMode.DEBUG);
-			SmartWriter.putD("NavX Pitch Angle", navX.getYaw(), DebugMode.DEBUG);
+			SmartWriter.putD("NavX Roll Angle", navX.getRoll(), DebugMode.DEBUG);
+			SmartWriter.putD("NavX Pitch Angle", navX.getPitch(), DebugMode.DEBUG);
 			SmartWriter.putD("NavX Yaw Angle", navX.getYaw(), DebugMode.COMPETITION);
 		}
 	}
