@@ -8,9 +8,8 @@ import edu.wpi.first.wpilibj.Relay.Value;
 import robot.IControl;
 
 public class LEDController extends IControl {
-	private Relay red = new Relay(1, Direction.kForward);
-	private Relay blue = new Relay(2, Direction.kForward);
-	private Relay green = new Relay(0, Direction.kForward);
+	private Relay red = new Relay(0, Direction.kForward);
+	private Relay blue = new Relay(1, Direction.kForward);
 
 	private DriverStation ds = DriverStation.getInstance();
 
@@ -29,7 +28,6 @@ public class LEDController extends IControl {
 	private void resetLEDs() {
 		red.set(Value.kOff);
 		blue.set(Value.kOff);
-		green.set(Value.kOff);
 	}
 
 	/**
@@ -37,15 +35,13 @@ public class LEDController extends IControl {
 	 */
 	private void activateLEDs() {
 		// resetLEDs();
-		if (ds.getAlliance() == Alliance.Red){
+		if (isRedTeam()) {
+			blue.set(Value.kOff);
+			red.set(Value.kOn);
+		} else {
 			red.set(Value.kOff);
 			blue.set(Value.kOn);
 		}
-		else{
-			blue.set(Value.kOff);
-			red.set(Value.kOn);
-		}
-		green.set(Value.kOn);
 	}
 
 	public void robotInit() {
