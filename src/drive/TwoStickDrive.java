@@ -11,7 +11,7 @@ import robotDefinitions.controls.ControlBase;
  * @author Daniel
  *
  */
-public class TwoStickDrive extends IDrive implements Reversable, MotionProfileable{
+public class TwoStickDrive extends IDrive implements Reversible, MotionProfileable{
 	private IMotor leftMotors;
 	private IMotor rightMotors;
 	private ControlBase controller;

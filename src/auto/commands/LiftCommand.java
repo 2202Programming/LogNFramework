@@ -1,9 +1,9 @@
 package auto.commands;
 
-import NotVlad.components.Lift;
-import NotVlad.components.LiftPosition;
 import auto.ICommand;
 import auto.IStopCondition;
+import miyamoto.components.Lift;
+import miyamoto.components.LiftPosition;
 import robot.Global;
 
 public class LiftCommand implements ICommand {

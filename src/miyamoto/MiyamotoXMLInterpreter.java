@@ -1,4 +1,4 @@
-package NotVlad;
+package miyamoto;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import NotVlad.components.LiftPosition;
 import auto.CommandList;
 import auto.ICommand;
 import auto.IStopCondition;
@@ -31,10 +30,11 @@ import auto.stopConditions.TalonDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
+import miyamoto.components.LiftPosition;
 import physicalOutput.motors.TalonSRXMotor;
 import robot.Global;
 
-public class NotVladXMLInterpreter {
+public class MiyamotoXMLInterpreter {
 
 	private Document xmlFile;
 
@@ -44,7 +44,7 @@ public class NotVladXMLInterpreter {
 	 * @param f
 	 *            xml file path
 	 */
-	public NotVladXMLInterpreter(File f) {
+	public MiyamotoXMLInterpreter(File f) {
 		readFile(f);
 	}
 
@@ -67,8 +67,8 @@ public class NotVladXMLInterpreter {
 	}
 
 	/**
-	 * Searches for a specific path in the xml file and returns a command list
-	 * of the commands in the xml file
+	 * Searches for a specific path in the xml file and returns a command list of
+	 * the commands in the xml file
 	 * 
 	 * @param id
 	 *            path id 1st character: starting position 2nd character: target
@@ -83,16 +83,19 @@ public class NotVladXMLInterpreter {
 		for (int i = 0; i < paths.getLength(); i++) {
 			Node currentNode = paths.item(i);
 			// If there is an id attribute on the path
-			if (currentNode.getAttributes().item(0).getNodeName().equals("Id")) {
+			if (currentNode.getAttributes().item(0).getNodeName().equalsIgnoreCase("Id")) {
 				// If the id matches the one we are looking for
-				if (currentNode.getAttributes().item(0).getNodeValue().equals(id)) {
+				if (currentNode.getAttributes().item(0).getNodeValue().equalsIgnoreCase(id)) {
 					System.out.println("Found Path: " + id);
 					xmlPath = currentNode;
 				}
 			}
 		}
 
-		// Will throw nullPointer if the path doesn't exist
+		if (xmlPath == null) {
+			xmlPath = paths.item(0); // Defaults to the first path in the xml file
+		}
+
 		NodeList xmlCommands = xmlPath.getChildNodes();
 
 		CommandList path = new CommandList();
@@ -164,11 +167,13 @@ public class NotVladXMLInterpreter {
 		}
 
 		case ("OuttakeCommand"): {
-			return new OuttakeCommand(getStopCondition(n));
+			double speed = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			return new OuttakeCommand(speed, getStopCondition(n));
 		}
 
 		case ("IntakeCommand"): {
-			return new IntakeCommand(getStopCondition(n));
+			double speed = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			return new IntakeCommand(speed, getStopCondition(n));
 		}
 
 		case ("WaitCommand"): {

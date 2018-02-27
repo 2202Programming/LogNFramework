@@ -1,4 +1,4 @@
-package NotVlad.components;
+package miyamoto.components;
 
 public enum LiftPosition {
 	BOTTOM(0),SWITCH(10000),LOWSCALE(20000),HIGHSCALE(27000),CLIMB(16000),MAX(28000);

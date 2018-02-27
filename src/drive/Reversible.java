@@ -5,7 +5,7 @@ package drive;
  * @author Daniel
  *
  */
-public interface Reversable {
+public interface Reversible {
 	/**
 	 * Reverses the direction that the drive system drives
 	 * @param reverse if the drive should be reversed

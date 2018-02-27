@@ -1,5 +1,5 @@
 package robotDefinitions.controls;
 
-public interface ReversableController {
+public interface ReversibleController {
 	public boolean reverseDrive();
 }

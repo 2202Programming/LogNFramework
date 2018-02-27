@@ -5,6 +5,10 @@ import java.util.List;
 public class ChainMotor extends IMotor{
 	private IMotor[] motors;
 	
+	/**
+	 * Links two IMotors to be one motor
+	 * @param motorsIn
+	 */
 	public ChainMotor(List<IMotor> motorsIn){
 		motors=new IMotor[motorsIn.size()];
 		//n efficiency for linked list

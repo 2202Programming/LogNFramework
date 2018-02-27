@@ -1,12 +1,12 @@
-package NotVlad;
+package miyamoto;
 
 import comms.XboxController;
 import robot.Global.StartPosition;
 import robotDefinitions.controls.ControlBase;
 import robotDefinitions.controls.MotionProfileableController;
-import robotDefinitions.controls.ReversableController;
+import robotDefinitions.controls.ReversibleController;
 
-public class MiyamotoControl extends ControlBase implements ReversableController, MotionProfileableController{
+public class MiyamotoControl extends ControlBase implements ReversibleController, MotionProfileableController{
 
 	// Controllers 0 and 1 are xbox controllers used to control the robot
 	// Controller 2 is the switchboard that controls auto

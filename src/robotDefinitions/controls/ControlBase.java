@@ -1,7 +1,6 @@
 package robotDefinitions.controls;
 
 import comms.XboxController;
-import robot.Global;
 import robot.IControl;
 
 public abstract class ControlBase extends IControl {

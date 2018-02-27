@@ -1,7 +1,7 @@
-package NotVlad.components;
+package miyamoto.components;
 
-import NotVlad.MiyamotoControl;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import miyamoto.MiyamotoControl;
 import physicalOutput.motors.IMotor;
 import robot.Global;
 import robot.IControl;
