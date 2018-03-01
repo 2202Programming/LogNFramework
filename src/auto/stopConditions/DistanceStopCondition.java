@@ -33,7 +33,7 @@ public class DistanceStopCondition implements IStopCondition {
 		}
 		SmartWriter.putD("Current Distance Per Pulse", enc.get(0).getDistancePerPulse());
 		SmartWriter.putD("AUTO - AVG Encoder Count", sum / enc.size());
-		return (sum / enc.size()) > duration;
+		return Math.abs(sum / enc.size()) > duration;
 	}
 
 	public boolean stopNow1() { // Used for one encoder
@@ -43,7 +43,7 @@ public class DistanceStopCondition implements IStopCondition {
 
 		SmartWriter.putD("Current Distance Per Pulse", enc.get(1).getDistancePerPulse());
 		SmartWriter.putD("AUTO - AVG Encoder Count", sum);
-		return (sum) > duration;
+		return Math.abs(sum) > duration;
 	}
 
 }

@@ -137,6 +137,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		LEDController LED = new LEDController();
 		
 		AutomationController AC = new AutomationController(lift,sneak);
+		iControlMap.put("AC", AC);
 
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);

@@ -34,7 +34,7 @@ public class AutomationController extends IControl{
 		this.profiler = profiler;
 		tiltAngles = new double[5];
 		tiltAngles[4] = 10;
-		tiltAngles[3] = 20;
+		tiltAngles[3] = 10;
 		tiltAngles[2] = 25;
 		tiltAngles[1] = 30;
 		tiltAngles[0] = 45;
@@ -43,9 +43,10 @@ public class AutomationController extends IControl{
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER0"));
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER1"));
 		CommandList list = new CommandList();
-		list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, -4), 0.3));
-		list.addCommand(new LiftCommand(LiftPosition.CLIMB, new TimerStopCondition(1000)));
-		list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 4), 0.3));
+		list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
+		list.addCommand(new LiftCommand(LiftPosition.CLIMB, new TimerStopCondition(2000)));
+		list.addCommand(new DriveCommand(new TimerStopCondition(1000), -0.3));
+		list.addCommand(new LiftCommand(LiftPosition.BOTTOM, new TimerStopCondition(10)));
 		runner = new CommandListRunner(list);
 	}
 	
@@ -80,6 +81,10 @@ public class AutomationController extends IControl{
 	private void keepLiftSafe(){
 		double tiltAngle = Math.abs(gyro.getPitch()+4.5);
 		int liftSeverity = getLiftSeverity();
+		
+		System.out.println(tiltAngle);
+		System.out.println(liftSeverity);
+		
 		if(tiltAngle > tiltAngles[liftSeverity]){
 			lift.setLiftPosition(LiftPosition.BOTTOM);
 		}
@@ -89,6 +94,7 @@ public class AutomationController extends IControl{
 		if(controller.cancelClimb()){
 			runner.stop();
 			doneRunning = true;
+			lift.setLiftPosition(LiftPosition.BOTTOM);
 		}
 		if(!doneRunning){
 			doneRunning = runner.runList();
