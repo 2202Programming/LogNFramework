@@ -1,11 +1,9 @@
-package NotVlad;
+package miyamoto;
 
 import java.util.ArrayList;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import NotVlad.components.Lift;
-import NotVlad.components.LiftPosition;
 import auto.CommandList;
 import auto.CommandListRunner;
 import auto.commands.DriveCommand;
@@ -15,6 +13,8 @@ import auto.stopConditions.TimerStopCondition;
 import drive.MotionProfiler;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
+import miyamoto.components.Lift;
+import miyamoto.components.LiftPosition;
 import robot.Global;
 import robot.IControl;
 
@@ -27,17 +27,17 @@ public class AutomationController extends IControl{
 	private CommandListRunner runner;
 	private boolean doneRunning;
 	
-	public AutomationController(){
+	public AutomationController(Lift lift, MotionProfiler profiler){
 		controller = (MiyamotoControl)Global.controllers;
 		gyro = (AHRS)SensorController.getInstance().getSensor("NAVX");
-		lift = (Lift)Global.controlObjects.get("LIFT");
-		profiler = (MotionProfiler)Global.controlObjects.get("PROFILER");
+		this.lift = lift;
+		this.profiler = profiler;
 		tiltAngles = new double[5];
-		tiltAngles[0] = 10;
-		tiltAngles[1] = 20;
+		tiltAngles[4] = 10;
+		tiltAngles[3] = 20;
 		tiltAngles[2] = 25;
-		tiltAngles[3] = 30;
-		tiltAngles[4] = 45;
+		tiltAngles[1] = 30;
+		tiltAngles[0] = 45;
 		
 		ArrayList<Encoder> encoders = new ArrayList<>();
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER0"));
@@ -78,7 +78,7 @@ public class AutomationController extends IControl{
 	}
 	
 	private void keepLiftSafe(){
-		double tiltAngle = gyro.getPitch();
+		double tiltAngle = Math.abs(gyro.getPitch()+4.5);
 		int liftSeverity = getLiftSeverity();
 		if(tiltAngle > tiltAngles[liftSeverity]){
 			lift.setLiftPosition(LiftPosition.BOTTOM);

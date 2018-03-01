@@ -132,6 +132,8 @@ public class Miyamoto extends RobotDefinitionBase {
 		iControlMap.put("LIFT_TALON", liftMotor);
 		Lift lift = new Lift(liftMotor);
 		iControlMap.put("LIFT", lift);
+		
+		AutomationController AC = new AutomationController(lift,sneak);
 
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
