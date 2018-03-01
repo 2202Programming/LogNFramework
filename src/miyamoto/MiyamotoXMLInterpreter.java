@@ -207,7 +207,7 @@ public class MiyamotoXMLInterpreter {
 
 		switch (stopConditionType) {
 		case ("DistanceStopCondition"): {
-			int stopDistance = (int) (Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue()) * .8);
+			int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
 			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 			SensorController sensorController = SensorController.getInstance();
 			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
