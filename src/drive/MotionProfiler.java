@@ -37,7 +37,7 @@ public class MotionProfiler extends IControl {
 	 * @param index the index of the profile
 	 */
 	public void setProfileIndex(int index){
-		if(index > 0 && index < profiles.length){
+		if(index >= 0 && index < profiles.length){
 			this.index = index;			
 		}
 	}
@@ -55,5 +55,8 @@ public class MotionProfiler extends IControl {
 			drive.setMaxAcceleration(profiles[index].getAcceleration());
 			drive.setMaxVelocity(profiles[index].getVelocity());			
 		}
+		System.out.println("index "+index);
+		System.out.println("accel "+profiles[index].getAcceleration());
+		System.out.println("speed "+profiles[index].getVelocity());
 	}
 }

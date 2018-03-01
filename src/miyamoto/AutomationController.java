@@ -76,15 +76,12 @@ public class AutomationController extends IControl{
 	 */
 	private void setMotionProfile(int severity){
 		profiler.setProfileIndex(severity);
+		System.out.println(severity);
 	}
 	
 	private void keepLiftSafe(){
 		double tiltAngle = Math.abs(gyro.getPitch()+4.5);
-		int liftSeverity = getLiftSeverity();
-		
-		System.out.println(tiltAngle);
-		System.out.println(liftSeverity);
-		
+		int liftSeverity = getLiftSeverity();		
 		if(tiltAngle > tiltAngles[liftSeverity]){
 			lift.setLiftPosition(LiftPosition.BOTTOM);
 		}
