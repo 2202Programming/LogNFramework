@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Direction;
 import edu.wpi.first.wpilibj.Relay.Value;
+import miyamoto.MiyamotoControl;
+import robot.Global;
 import robot.IControl;
 
 public class LEDController extends IControl {
@@ -12,6 +14,10 @@ public class LEDController extends IControl {
 	private Relay blue = new Relay(1, Direction.kForward);
 
 	private DriverStation ds = DriverStation.getInstance();
+	private MiyamotoControl controller = (MiyamotoControl)Global.controllers;
+	private boolean flashing = false;
+	private boolean on = true;
+	private int timer = 0;
 
 	/**
 	 * Checks to see if we are on the red alliance
@@ -49,7 +55,26 @@ public class LEDController extends IControl {
 	}
 
 	public void teleopInit() {
-		activateLEDs();
+		if(controller.reverseDrive()){
+			flashing = !flashing;
+			timer = 0;
+			on = true;
+		}
+		
+		if(flashing){
+			if(timer > 10){
+				on = !on;
+				timer = 0;
+			}else{
+				timer++;
+			}
+		}
+		
+		if(on){
+			activateLEDs();			
+		}else{
+			resetLEDs();
+		}
 	}
 
 	public void autonomousInit() {
