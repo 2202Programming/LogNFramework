@@ -56,18 +56,32 @@ public class AutomationController extends IControl{
 	 */
 	private int getLiftSeverity(){
 		int liftPosition = lift.getLiftPosition();
-		if(liftPosition > LiftPosition.HIGHSCALE.getNumber()){
-			return 4;
-		}else if(liftPosition > LiftPosition.LOWSCALE.getNumber()){
-			return 3;
-		}else if(liftPosition > LiftPosition.CLIMB.getNumber()){
-			return 2;
-		}else if(liftPosition > LiftPosition.SWITCH.getNumber()){
-			return 1;
-		}else if(liftPosition > LiftPosition.BOTTOM.getNumber()){			
-			return 0;
+		LiftPosition[] positions = {LiftPosition.BOTTOM, LiftPosition.SWITCH, LiftPosition.CLIMB,LiftPosition.LOWSCALE,LiftPosition.HIGHSCALE};
+		
+		int closestDistance = Math.abs(positions[0].getNumber()-liftPosition);
+		int closestIndex = 0;
+		for(int i = 1; i < positions.length; i++){
+			int tempDistance = Math.abs(positions[i].getNumber() - liftPosition);
+			if(tempDistance < closestDistance){
+				closestDistance = tempDistance;
+				closestIndex = i;
+			}
 		}
-		return 0;
+		
+		switch(positions[closestIndex]){
+			case HIGHSCALE:
+				return 4;
+			case LOWSCALE:
+				return 3;
+			case CLIMB:
+				return 2;
+			case SWITCH:
+				return 1;
+			case BOTTOM:
+				return 0;
+			default:
+				return 0;
+		}
 	}
 	
 	/**
