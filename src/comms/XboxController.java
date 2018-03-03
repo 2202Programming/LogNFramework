@@ -9,7 +9,7 @@ import robot.IControl;
  */
 public class XboxController extends IControl {
 	private String _port;
-	
+
 	private Joystick leftJoystick, rightJoystick;
 	private boolean teehee = true;
 
@@ -63,8 +63,8 @@ public class XboxController extends IControl {
 	private boolean[] pressed = new boolean[NUMBER_OF_BUTTONS];
 	private boolean[] held = new boolean[NUMBER_OF_BUTTONS];
 	private boolean[] released = new boolean[NUMBER_OF_BUTTONS];
-	
-	private final static double DEADZONE=0.05;
+
+	private final static double DEADZONE = 0.05;
 
 	/**
 	 * The singleton instance of this class. <i>xboxController</i> is null if
@@ -72,9 +72,10 @@ public class XboxController extends IControl {
 	 */
 	private static XboxController[] xboxController = new XboxController[4];
 
-	public static XboxController getXboxController(){
+	public static XboxController getXboxController() {
 		return getXboxController(0);
 	}
+
 	/**
 	 * Gets the singleton xboxController instance. Only one xboxController is
 	 * ever created so that different systems get consistent readings. <br>
@@ -127,10 +128,17 @@ public class XboxController extends IControl {
 		SmartWriter.putD("StickX", getLeftJoystickX(), DebugMode.DEBUG);
 	}
 	
+	public void robotInit() {
+		update();
+	}
+
+	public void autonomousInit() {
+		update();
+	}
+
 	public void autonomousPeriodic() {
 		update();
 	}
-	
 
 	/**
 	 * Updates the pressed/held values for each of the buttons and joystick
@@ -164,19 +172,17 @@ public class XboxController extends IControl {
 	 * @param currentlyDown
 	 */
 	private void updateButton(int buttonCode, boolean currentlyDown) {
-		SmartWriter.putB(buttonCode +" " + _port, currentlyDown, DebugMode.FULL);
+		SmartWriter.putB(buttonCode + " " + _port, currentlyDown, DebugMode.FULL);
 		lastFrame[buttonCode] = thisFrame[buttonCode];
-		if ( !currentlyDown) {
+		if (!currentlyDown) {
 			debounceCounters[buttonCode] = 0;
 			thisFrame[buttonCode] = false;
-		}
-		else {
+		} else {
 			debounceCounters[buttonCode]++;
 			if (debounceCounters[buttonCode] >= maxDebounceCounter) {
 				debounceCounters[buttonCode] = maxDebounceCounter;
 				thisFrame[buttonCode] = true;
-			}
-			else {
+			} else {
 				thisFrame[buttonCode] = false;
 			}
 		}
@@ -190,7 +196,7 @@ public class XboxController extends IControl {
 	}
 
 	public double getRightJoystickY() {
-		return ( -1.0) * rightJoystick.getRawAxis(AXIS_RIGHT_Y_WIPCODE);
+		return (-1.0) * rightJoystick.getRawAxis(AXIS_RIGHT_Y_WIPCODE);
 	}
 
 	public double getLeftJoystickX() {
@@ -198,33 +204,33 @@ public class XboxController extends IControl {
 	}
 
 	public double getLeftJoystickY() {
-		return ( -1.0) * leftJoystick.getRawAxis(AXIS_LEFT_Y_WIPCODE);
+		return (-1.0) * leftJoystick.getRawAxis(AXIS_LEFT_Y_WIPCODE);
 	}
-	
+
 	public double getRightJoystickX(boolean includeDeadzone) {
-		double unzoned=getRightJoystickX();
+		double unzoned = getRightJoystickX();
 		if (includeDeadzone) {
-			if (Math.abs(unzoned)<DEADZONE) {
+			if (Math.abs(unzoned) < DEADZONE) {
 				return 0;
 			}
 		}
 		return unzoned;
 	}
-	
+
 	public double getRightJoystickY(boolean includeDeadzone) {
-		double unzoned=getRightJoystickY();
+		double unzoned = getRightJoystickY();
 		if (includeDeadzone) {
-			if (Math.abs(unzoned)<DEADZONE) {
+			if (Math.abs(unzoned) < DEADZONE) {
 				return 0;
 			}
 		}
 		return unzoned;
 	}
-	
+
 	public double getLeftJoystickX(boolean includeDeadzone) {
-		double unzoned=getLeftJoystickX();
+		double unzoned = getLeftJoystickX();
 		if (includeDeadzone) {
-			if (Math.abs(unzoned)<DEADZONE) {
+			if (Math.abs(unzoned) < DEADZONE) {
 				return 0;
 			}
 		}
@@ -232,9 +238,9 @@ public class XboxController extends IControl {
 	}
 
 	public double getLeftJoystickY(boolean includeDeadzone) {
-		double unzoned=getLeftJoystickY();
+		double unzoned = getLeftJoystickY();
 		if (includeDeadzone) {
-			if (Math.abs(unzoned)<DEADZONE) {
+			if (Math.abs(unzoned) < DEADZONE) {
 				return 0;
 			}
 		}
@@ -386,11 +392,11 @@ public class XboxController extends IControl {
 	}
 
 	public void setRumble(boolean shouldRumble) {// of course it should!
-		setRumble(shouldRumble?1:0);
+		setRumble(shouldRumble ? 1 : 0);
 	}
 
 	public void setRumble(double rumblyness) {
-		float radness = (float)rumblyness;
+		float radness = (float) rumblyness;
 		rightJoystick.setRumble(Joystick.RumbleType.kLeftRumble, radness);
 		rightJoystick.setRumble(Joystick.RumbleType.kRightRumble, radness);
 		leftJoystick.setRumble(Joystick.RumbleType.kLeftRumble, radness);
