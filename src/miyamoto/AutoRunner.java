@@ -63,7 +63,7 @@ public class AutoRunner extends IControl {
 
 	// Creates list of auto commands to be run
 	public void createCommandList(String path) {
-		if(path == null) {
+		if (path == null || path.equals("null") || path.equals("")) {
 			return;
 		}
 		finished = false;
@@ -83,7 +83,6 @@ public class AutoRunner extends IControl {
 	}
 
 	public void autonomousPeriodic() {
-
 		if (runner == null) {
 			autonomousInit();
 			System.out.println("Runner is null");
