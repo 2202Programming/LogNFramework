@@ -55,7 +55,7 @@ public class AutomationController extends IControl{
 	 * @return the severity level
 	 */
 	private int getLiftSeverity(){
-		int liftPosition = lift.getLiftPosition();
+		int liftPosition = lift.getLiftCounts();
 		LiftPosition[] positions = {LiftPosition.BOTTOM, LiftPosition.SWITCH, LiftPosition.CLIMB,LiftPosition.LOWSCALE,LiftPosition.HIGHSCALE};
 		
 		int closestDistance = Math.abs(positions[0].getNumber()-liftPosition);
