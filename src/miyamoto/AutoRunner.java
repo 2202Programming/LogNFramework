@@ -63,6 +63,9 @@ public class AutoRunner extends IControl {
 
 	// Creates list of auto commands to be run
 	public void createCommandList(String path) {
+		if(path == null) {
+			return;
+		}
 		finished = false;
 		timeCost = System.currentTimeMillis();
 		long start = System.currentTimeMillis();
