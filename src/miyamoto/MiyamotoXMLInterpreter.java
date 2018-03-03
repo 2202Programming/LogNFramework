@@ -92,9 +92,9 @@ public class MiyamotoXMLInterpreter {
 			}
 		}
 
-		if (xmlPath == null) {
-			xmlPath = paths.item(0); // Defaults to the first path in the xml file
-		}
+//		if (xmlPath == null) {
+//			xmlPath = paths.item(0); // Defaults to the first path in the xml file
+//		}
 
 		NodeList xmlCommands = xmlPath.getChildNodes();
 

@@ -1,10 +1,6 @@
 package miyamoto;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -13,8 +9,6 @@ import auto.CommandListRunner;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Encoder;
-import input.EncoderMonitor;
 import input.SensorController;
 import robot.Global;
 import robot.Global.TargetSide;
@@ -25,17 +19,8 @@ public class AutoRunner extends IControl {
 	CommandListRunner runner;
 	private double timeCost;
 	private boolean finished;
-	private PrintWriter writer;
-	private File distanceLogs;
 
 	public AutoRunner() {
-		distanceLogs = new File("/home/lvuser/distanceLogs.txt");
-		try {
-			writer = new PrintWriter(new FileOutputStream(distanceLogs, false));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void robotInit() {
@@ -44,6 +29,7 @@ public class AutoRunner extends IControl {
 	// Parse game data from FMS and set enums for auto switch/scale positions
 	public void autonomousInit() {
 		runner = null;
+
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
 		AHRS navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
@@ -94,20 +80,11 @@ public class AutoRunner extends IControl {
 	}
 
 	public void autonomousPeriodic() {
+
 		if (runner == null) {
-			System.out.println("Runner is null");
 			autonomousInit();
+			System.out.println("Runner is null");
 		}
-
-		EncoderMonitor encoderMonitor = (EncoderMonitor) Global.controlObjects.get("ENCODERMONITOR");
-		Map<String, Encoder> encoders = encoderMonitor.getEncoders();
-
-		writer.print("Encoder0 Counts: " + encoders.get("ENCODER0").get() + "\t" + "Encoder0 Distance: "
-				+ encoders.get("ENCODER0").getDistance() + "\t");
-		writer.print("Encoder1 Counts: " + encoders.get("ENCODER1").get() + "\t" + "Encoder1 Distance: "
-				+ encoders.get("ENCODER1").getDistance() + "\t");
-		writer.print("Time: " + (System.currentTimeMillis() - timeCost) + "\t");
-		writer.println("Command Number: " + runner.commandNum);
 
 		if (!finished) {
 			SmartWriter.putD("TimeCost", System.currentTimeMillis() - timeCost);
@@ -138,8 +115,14 @@ public class AutoRunner extends IControl {
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
 		path += switchboard.getStartPosition();
 
-		if (path.equals("D")) {
-			return path;
+		System.out.println("Start Position: " + switchboard.getStartPosition());
+		System.out.println("Approach: " + switchboard.getApproach());
+		System.out.println("Objective: " + switchboard.getObjective());
+		System.out.println("Path Type: " + switchboard.getPathType());
+		System.out.println(path);
+
+		if (path.equals("null") || path.equals("")) {
+			return null;
 		}
 
 		int pathNum = 1; // Defaults to front approach of the scale
@@ -147,10 +130,12 @@ public class AutoRunner extends IControl {
 		if (switchboard.getApproach()) {
 			// If we are approaching from the side
 			pathNum++;
+			System.out.println("Approach from side");
 		}
 
 		if (switchboard.getObjective()) {
 			// If we are going for the scale
+			System.out.println("Going for scale");
 			pathNum += 4;
 			if (Global.scalePosition == TargetSide.L) {
 				// If we are going for the left side of the scale
@@ -158,6 +143,7 @@ public class AutoRunner extends IControl {
 			}
 		} else {
 			// If we are going for the switch
+			System.out.println("Going for switch");
 			if (Global.ourSwitchPosition == TargetSide.L) {
 				// If we are gong for the left side of the switch
 				pathNum += 2;
@@ -165,6 +151,7 @@ public class AutoRunner extends IControl {
 		}
 
 		path += pathNum + "-";
+		System.out.println(path);
 
 		if (switchboard.getPathType()) {
 			// If we take the long path
@@ -174,6 +161,7 @@ public class AutoRunner extends IControl {
 			path += "1";
 		}
 
+		System.out.println(path);
 		return path;
 	}
 }
