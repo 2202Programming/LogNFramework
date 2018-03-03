@@ -94,15 +94,15 @@ public class DriveAtAngle implements ICommand {
 	private void withGyro() {
 		double Kp = .012;
 		double change = getError() * Kp;
-		System.out.println("PID error: " + getError());
-		System.out.println("Base motor speed: " + slowSpeed);
+		//System.out.println("PID error: " + getError());
+		//System.out.println("Base motor speed: " + slowSpeed);
 		if (Math.abs(getError()) < 1) {
 			drive.setLeftMotors(slowSpeed);
 			drive.setRightMotors(slowSpeed);
 		} else {
 			drive.setLeftMotors(slowSpeed + change);
 			drive.setRightMotors(slowSpeed - change);
-			System.out.println("PID offset: " + change);
+			//System.out.println("PID offset: " + change);
 		}
 	}
 

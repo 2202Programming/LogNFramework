@@ -5,7 +5,9 @@ import robot.IControl;
 import robotDefinitions.controls.MotionProfileableController;
 
 /**
- * Caps the max acceleration and velocity of the robot so that it can be maneuvered more easily
+ * Caps the max acceleration and velocity of the robot so that it can be
+ * maneuvered more easily
+ * 
  * @author Daniel
  *
  */
@@ -14,49 +16,48 @@ public class MotionProfiler extends IControl {
 	private MotionProfile[] profiles;
 	private int index;
 	private MotionProfileable drive;
-	
-	public MotionProfiler(IDrive drive){
+
+	public MotionProfiler(IDrive drive) {
 		profiles = new MotionProfile[2];
-		profiles[0] = new MotionProfile (2,1);
+		profiles[0] = new MotionProfile(2, 1);
 		index = 0;
-		if(drive instanceof MotionProfileable){
-			this.drive = (MotionProfileable)drive;			
+		if (drive instanceof MotionProfileable) {
+			this.drive = (MotionProfileable) drive;
 		}
-		if(Global.controllers instanceof MotionProfileableController){
-			controller = (MotionProfileableController)Global.controllers;			
+		if (Global.controllers instanceof MotionProfileableController) {
+			controller = (MotionProfileableController) Global.controllers;
 		}
 	}
-	
-	public MotionProfiler(IDrive drive, MotionProfile[] profiles){
+
+	public MotionProfiler(IDrive drive, MotionProfile[] profiles) {
 		this(drive);
 		this.profiles = profiles;
 	}
-	
+
 	/**
 	 * Sets the index for which motion profile to use
-	 * @param index the index of the profile
+	 * 
+	 * @param index
+	 *            the index of the profile
 	 */
-	public void setProfileIndex(int index){
-		if(index >= 0 && index < profiles.length){
-			this.index = index;			
+	public void setProfileIndex(int index) {
+		if (index >= 0 && index < profiles.length) {
+			this.index = index;
 		}
 	}
-	
-	public void teleopInit(){
+
+	public void teleopInit() {
 		index = 0;
 	}
-	
-	public void teleopPeriodic(){
-		if(drive != null && controller != null){
-			if(controller.cycleMotionProfile()){
+
+	public void teleopPeriodic() {
+		if (drive != null && controller != null) {
+			if (controller.cycleMotionProfile()) {
 				index++;
 			}
-			index%=profiles.length;
+			index %= profiles.length;
 			drive.setMaxAcceleration(profiles[index].getAcceleration());
-			drive.setMaxVelocity(profiles[index].getVelocity());			
+			drive.setMaxVelocity(profiles[index].getVelocity());
 		}
-		System.out.println("index "+index);
-		System.out.println("accel "+profiles[index].getAcceleration());
-		System.out.println("speed "+profiles[index].getVelocity());
 	}
 }

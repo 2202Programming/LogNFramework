@@ -90,7 +90,6 @@ public class AutomationController extends IControl{
 	 */
 	private void setMotionProfile(int severity){
 		profiler.setProfileIndex(severity);
-		System.out.println(severity);
 	}
 	
 	private void keepLiftSafe(){
