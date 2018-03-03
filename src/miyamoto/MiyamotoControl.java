@@ -6,7 +6,7 @@ import robotDefinitions.controls.ControlBase;
 import robotDefinitions.controls.MotionProfileableController;
 import robotDefinitions.controls.ReversibleController;
 
-public class MiyamotoControl extends ControlBase implements ReversibleController, MotionProfileableController{
+public class MiyamotoControl extends ControlBase implements ReversibleController, MotionProfileableController {
 
 	// Controllers 0 and 1 are xbox controllers used to control the robot
 	// Controller 2 is the switchboard that controls auto
@@ -21,7 +21,7 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	 * @return The Start Position- defaults to Left side
 	 */
 	public StartPosition getStartPosition() {
-		if(controllers[2].getAHeld() && controllers[2].getBHeld() && controllers[2].getXHeld()) {
+		if (controllers[2].getAHeld() && controllers[2].getBHeld() && controllers[2].getXHeld()) {
 			return StartPosition.D;
 		} else if (controllers[2].getAHeld()) {
 			return StartPosition.L;
@@ -30,7 +30,7 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 		} else if (controllers[2].getXHeld()) {
 			return StartPosition.R;
 		} else {
-			return StartPosition.L;
+			return null;
 		}
 	}
 
@@ -44,8 +44,8 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	}
 
 	/**
-	 * Returns the approach option- true is from front and false is from the side
-	 * from the driver's perspective
+	 * Returns the approach option- true is from front and false is from the
+	 * side from the driver's perspective
 	 * 
 	 * @return The approach option
 	 */
@@ -61,81 +61,89 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	public boolean getPathType() {
 		return controllers[2].getRightBumperHeld();
 	}
+
 	/**
 	 * returns if the climber should climb fast
+	 * 
 	 * @return if the climber should climb fast
 	 */
-	public boolean climbFast(){
+	public boolean climbFast() {
 		return controllers[2].getStartHeld();
 	}
+
 	/**
 	 * returns if the climber should climb slow
+	 * 
 	 * @return if the climber should climb slow
 	 */
-	public boolean climbSlow(){
+	public boolean climbSlow() {
 		return controllers[2].getBackHeld();
 	}
-	
-	public boolean climbReverse(){
-		return controllers[2].getL3Held() && controllers[2].getR3Held() && controllers[1].getL3Held() && controllers[1].getR3Held();
+
+	public boolean climbReverse() {
+		return controllers[2].getL3Held() && controllers[2].getR3Held() && controllers[1].getL3Held()
+				&& controllers[1].getR3Held();
 	}
-	
+
 	/**
 	 * returns if the robot should intake
+	 * 
 	 * @return if the robot should intake
 	 */
-	public boolean intake(){
+	public boolean intake() {
 		return controllers[1].getAHeld();
 	}
+
 	/**
 	 * returns if the robot should outtake
+	 * 
 	 * @return if the robot should outtake
 	 */
-	public boolean outtake(){
+	public boolean outtake() {
 		return controllers[1].getBHeld();
 	}
-	
-	public boolean overrideIntake(){
+
+	public boolean overrideIntake() {
 		return controllers[1].getXHeld();
 	}
-	
-	public boolean rotateIntake(){
+
+	public boolean rotateIntake() {
 		return controllers[1].getYHeld();
 	}
-	
-	public boolean raiseLift(){
+
+	public boolean raiseLift() {
 		return controllers[1].getRightBumperPressed();
 	}
-	
-	public boolean lowerLift(){
+
+	public boolean lowerLift() {
 		return controllers[1].getLeftBumperPressed();
 	}
-	
-	public boolean cycleMotionProfile(){
+
+	public boolean cycleMotionProfile() {
 		return controllers[0].getRightBumperPressed();
 	}
-	
-	public boolean reverseDrive(){
+
+	public boolean reverseDrive() {
 		return controllers[0].getLeftBumperPressed();
 	}
-	
-	public boolean manualLiftUp(){
+
+	public boolean manualLiftUp() {
 		return controllers[1].getRightTriggerHeld();
 	}
-	
-	public boolean manualLiftDown(){
+
+	public boolean manualLiftDown() {
 		return controllers[1].getLeftTriggerHeld();
 	}
-	
-	public boolean resetLift(){
+
+	public boolean resetLift() {
 		return controllers[1].getStartPressed();
 	}
-	
-	public boolean autoClimb(){
+
+	public boolean autoClimb() {
 		return controllers[0].getAPressed();
 	}
-	
-	public boolean cancelClimb(){
+
+	public boolean cancelClimb() {
 		return controllers[0].getBPressed();
 	}
 
