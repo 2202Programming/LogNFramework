@@ -55,6 +55,13 @@ public class LEDController extends IControl {
 	}
 
 	public void teleopInit() {
+		activateLEDs();
+		on = true;
+		timer = 0;
+		flashing = false;
+	}
+	
+	public void teleopPeriodic(){
 		if(controller.reverseDrive()){
 			flashing = !flashing;
 			timer = 0;
@@ -62,7 +69,7 @@ public class LEDController extends IControl {
 		}
 		
 		if(flashing){
-			if(timer > 10){
+			if(timer > 5){
 				on = !on;
 				timer = 0;
 			}else{

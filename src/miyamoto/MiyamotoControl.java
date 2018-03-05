@@ -91,7 +91,7 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	 * @return if the robot should intake
 	 */
 	public boolean intake() {
-		return controllers[1].getAHeld();
+		return controllers[1].getYHeld();
 	}
 
 	/**
@@ -104,11 +104,11 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	}
 
 	public boolean overrideIntake() {
-		return controllers[1].getXHeld();
+		return controllers[1].getAHeld();
 	}
 
 	public boolean rotateIntake() {
-		return controllers[1].getYHeld();
+		return controllers[1].getXHeld();
 	}
 
 	public boolean raiseLift() {
