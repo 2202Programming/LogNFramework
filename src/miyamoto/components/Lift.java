@@ -47,6 +47,14 @@ public class Lift extends IControl {
 		return setPosition;
 	}
 	
+	/**
+	 * Gets the encoder position of the lift
+	 * @return
+	 */
+	public int getLiftCounts(){
+		return motor.getTalon().getSelectedSensorPosition(0);
+	}
+	
 	public void teleopInit(){
 		//motor.reset();
 		index = 0;
