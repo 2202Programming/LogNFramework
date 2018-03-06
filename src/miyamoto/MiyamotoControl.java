@@ -90,7 +90,7 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	 * 
 	 * @return if the robot should intake
 	 */
-	public boolean intake() {
+	public boolean outtakeSlow() {
 		return controllers[1].getYHeld();
 	}
 

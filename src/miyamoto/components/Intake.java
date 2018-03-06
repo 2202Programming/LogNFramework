@@ -54,6 +54,11 @@ public class Intake extends IControl {
 		intakeMotorLeft.set(-0.6);
 		intakeMotorRight.set(0.6);
 	}
+	
+	public void outtakeSlow(){
+		intakeMotorLeft.set(-0.3);
+		intakeMotorRight.set(0.3);
+	}
 
 	public void rotate() {
 		intakeMotorLeft.set(-0.3);
@@ -66,29 +71,17 @@ public class Intake extends IControl {
 	}
 
 	public void teleopPeriodic() {
-		if (sensor.get()) {
-			sensorCount++;
-		} else {
-			sensorCount = 0;
-		}
-
 		if (controller.overrideIntake()) {
 			intake();
-		} else {
-			if (controller.intake()) {
-				if (sensorCount > 100) {
-					stop();
-				} else {
-					sensorCount = 0;
-					intake();
-				}
-			} else if (controller.outtake()) {
-				outtake();
-			} else if (controller.rotateIntake()) {
-				rotate();
-			}else {
-				stop();
-			}
+		} else if (controller.outtake()) {
+			outtake();
+		} else if (controller.outtakeSlow()){
+			outtakeSlow();
+		} else if (controller.rotateIntake()) {
+			rotate();
+		}else {
+			stop();
 		}
+		
 	}
 }
