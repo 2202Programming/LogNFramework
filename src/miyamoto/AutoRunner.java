@@ -171,7 +171,7 @@ public class AutoRunner extends IControl {
 		// If we can do 2 block auto
 		if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
 				&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
-			pathType += 1;
+			pathType += 2;
 		}
 
 		path += pathType;
