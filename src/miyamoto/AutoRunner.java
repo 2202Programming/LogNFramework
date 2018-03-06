@@ -115,7 +115,7 @@ public class AutoRunner extends IControl {
 		String path = "";
 
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
-		path += switchboard.getStartPosition().toString();
+		path += switchboard.getStartPosition();
 
 		System.out.println("Start Position: " + switchboard.getStartPosition());
 		System.out.println("Approach: " + switchboard.getApproach());
