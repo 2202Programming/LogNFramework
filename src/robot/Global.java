@@ -17,37 +17,13 @@ public class Global {
 	public static ControlBase controllers;
 
 	public enum TargetSide {
-		L {
-			public String toString() {
-				return "Left";
-			}
-		}, R {
-			public String toString() {
-				return "Right";
-			}
-		}
+		L, R
 	};
 
 	public enum StartPosition {
-		L {
-			public String toString() {
-				return "Left";
-			}
-		}, M {
-			public String toString() {
-				return "Middle";
-			}
-		}, R {
-			public String toString() {
-				return "Right";
-			}
-		}, D {
-			public String toString() {
-				return "Default";
-			}
-		}
+		L, M, R, D
 	};
-	
+
 	public static TargetSide ourSwitchPosition;
 	public static TargetSide scalePosition;
 	public static TargetSide opponentSwitchPosition;
