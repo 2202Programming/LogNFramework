@@ -115,7 +115,7 @@ public class AutoRunner extends IControl {
 		String path = "";
 
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
-		path += switchboard.getStartPosition();
+		path += switchboard.getStartPosition().toString();
 
 		System.out.println("Start Position: " + switchboard.getStartPosition());
 		System.out.println("Approach: " + switchboard.getApproach());
@@ -127,13 +127,7 @@ public class AutoRunner extends IControl {
 			return null;
 		}
 
-		int pathNum = 1; // Defaults to front approach of the scale
-
-		if (switchboard.getApproach()) {
-			// If we are approaching from the side
-			pathNum++;
-			System.out.println("Approach from side");
-		}
+		int pathNum = 1; // Defaults to front approach of the switch
 
 		if (switchboard.getObjective()) {
 			// If we are going for the scale
@@ -143,23 +137,32 @@ public class AutoRunner extends IControl {
 				// If we are going for the left side of the scale
 				pathNum += 2;
 			}
+			if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
+				// If scale is same side
+				pathNum++;
+			}
 		} else {
 			// If we are going for the switch
 			System.out.println("Going for switch");
 			if (Global.ourSwitchPosition == TargetSide.L) {
-				// If we are gong for the left side of the switch
+				// If going for the left side of the switch
 				pathNum += 2;
 			}
+			if (path.charAt(0) != 'M') {
+				// If not starting mid
+				pathNum++;
+			}
 		}
-
+		
 		path += pathNum + "-";
 		System.out.println(path);
 
+		//Determines primary (optimal) path or alternate path
 		if (switchboard.getPathType()) {
-			// If we take the long path
+			// If we take the alternate path
 			path += "2";
 		} else {
-			// If we take the short path
+			// If we take the primary path
 			path += "1";
 		}
 
