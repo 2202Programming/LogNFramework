@@ -29,7 +29,23 @@ public class Global {
 	};
 
 	public enum StartPosition {
-		L, M, R, D
+		L {
+			public String toString() {
+				return "Left";
+			}
+		}, M {
+			public String toString() {
+				return "Middle";
+			}
+		}, R {
+			public String toString() {
+				return "Right";
+			}
+		}, D {
+			public String toString() {
+				return "Default";
+			}
+		}
 	};
 	
 	public static TargetSide ourSwitchPosition;
