@@ -1145,7 +1145,7 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="0" Power="0.5">
+		<DriveCommand Angle="0" Power=".5">
 			<DistanceStopCondition Dist_Inches="110">
 			</DistanceStopCondition>
 		</DriveCommand>
@@ -1153,7 +1153,7 @@
 		<TurnCommand Angle="-90">
 		</TurnCommand>
 
-		<DriveCommand Angle="-90" Power="0.5">
+		<DriveCommand Angle="-90" Power=".5">
 			<TimerStopCondition Timer="300">
 			</TimerStopCondition>
 		</DriveCommand>
@@ -1169,7 +1169,7 @@
 			<DistanceStopCondition Dist_Inches="190">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<WaitCommand Time="200">
 		</WaitCommand>
 
@@ -1185,7 +1185,7 @@
 			<DistanceStopCondition Dist_Inches="185">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<WaitCommand Time="400">
 		</WaitCommand>
 
@@ -1328,11 +1328,11 @@
 	</Path>
 
 	<Path Id="R7-1">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="183">
+		<DriveCommand Angle="0" Power="1.0">
+			<DistanceStopCondition Dist_Inches="157">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<WaitCommand Time="200">
 		</WaitCommand>
 
@@ -1344,28 +1344,28 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="-90" Power="0.7">
-			<DistanceStopCondition Dist_Inches="122">
+		<DriveCommand Angle="-90" Power="1.0">
+			<DistanceStopCondition Dist_Inches="105">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<WaitCommand Time="700">
 		</WaitCommand>
 
-		<TurnCommand Angle="90">
+		<TurnCommand Angle="108">
 		</TurnCommand>
 		
 		<LiftCommand Height="SCALE">
 			<TimerStopCondition Timer="2400">
 			</TimerStopCondition>
 		</LiftCommand>
-
-		<DriveCommand Angle="95" Power="0.3">
-			<DistanceStopCondition Dist_Inches="5">
+		
+		<DriveCommand Angle="108" Power="0.3">
+			<DistanceStopCondition Dist_Inches="14">
 			</DistanceStopCondition>
 		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
+		
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
