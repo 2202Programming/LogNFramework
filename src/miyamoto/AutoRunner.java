@@ -79,7 +79,7 @@ public class AutoRunner extends IControl {
 		System.out.println("Parse Time: " + (end - start));
 		runner = new CommandListRunner(list);
 		SmartWriter.putS("Game Data & Path Name",
-				DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
+				DriverStation.getInstance().getGameSpecificMessage() + " " + path);
 	}
 
 	public void autonomousPeriodic() {
@@ -125,6 +125,10 @@ public class AutoRunner extends IControl {
 
 		if (path.equals("null") || path.equals("")) {
 			return null;
+		}
+		
+		if(path.charAt(0)=='D'){
+			return path;
 		}
 
 		int pathNum = 1; // Defaults to front approach of the switch
