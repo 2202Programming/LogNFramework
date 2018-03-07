@@ -157,18 +157,28 @@ public class AutoRunner extends IControl {
 				pathNum++;
 			}
 		}
-		
+
 		path += pathNum + "-";
 		System.out.println(path);
 
-		//Determines primary (optimal) path or alternate path
+		int pathType = 0;
+
+		// Determines primary (optimal) path or alternate path
 		if (switchboard.getPathType()) {
 			// If we take the alternate path
-			path += "2";
+			pathType += 2;
 		} else {
 			// If we take the primary path
-			path += "1";
+			pathType += 1;
 		}
+
+		// If we can do 2 block auto
+		if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
+				&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
+			pathType += 2;
+		}
+
+		path += pathType;
 
 		System.out.println(path);
 		return path;
