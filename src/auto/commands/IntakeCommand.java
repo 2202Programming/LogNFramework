@@ -35,6 +35,6 @@ public class IntakeCommand implements ICommand {
 	}
 
 	public void stop() {
-		intake.stop();
+		intake.holdBlock();
 	}
 }
