@@ -51,7 +51,7 @@ public class Lift extends IControl {
 	 * @return
 	 */
 	public int getLiftCounts(){
-		return motor.getTalon().getSelectedSensorPosition(0);
+		return Math.abs(motor.getTalon().getSelectedSensorPosition(0));
 	}
 	
 	public void teleopInit(){
