@@ -19,6 +19,7 @@ public class AutoRunner extends IControl {
 	CommandListRunner runner;
 	private double timeCost;
 	private boolean finished;
+	private String gameData;
 
 	public AutoRunner() {
 	}
@@ -30,7 +31,7 @@ public class AutoRunner extends IControl {
 	public void autonomousInit() {
 		runner = null;
 
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
 
 		AHRS navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
 		navX.reset();
@@ -58,7 +59,8 @@ public class AutoRunner extends IControl {
 			Global.opponentSwitchPosition = TargetSide.R;
 		}
 
-		createCommandList(choosePath());
+		String pathChosen = choosePath();
+		createCommandList(pathChosen);
 	}
 
 	// Creates list of auto commands to be run
@@ -68,18 +70,22 @@ public class AutoRunner extends IControl {
 		}
 		finished = false;
 		timeCost = System.currentTimeMillis();
-		long start = System.currentTimeMillis();
-		System.out.println("Start: " + start);
+		long startRead = System.currentTimeMillis();
 		File file = new File("/home/lvuser/Paths.xml");
-		System.out.println(file.getName());
 		XMLInterpreter = new MiyamotoXMLInterpreter(file);
+		long interpretEnd = System.currentTimeMillis();
+
+		
+		System.out.println(file.getName());
+		System.out.println("File read and Parse Time Only: " + (interpretEnd - startRead));
+
+		long commandListBuildingStart = System.currentTimeMillis();
 		CommandList list = XMLInterpreter.getPathList(path);
-		long end = System.currentTimeMillis();
-		System.out.println("Parse End: " + end);
-		System.out.println("Parse Time: " + (end - start));
+		long commandListBuildingEnd = System.currentTimeMillis();
+	
+		System.out.println("CommandList creation time ONLY): " + (commandListBuildingEnd - commandListBuildingStart));
 		runner = new CommandListRunner(list);
-		SmartWriter.putS("Game Data & Path Name",
-				DriverStation.getInstance().getGameSpecificMessage() + " " + path);
+		SmartWriter.putS("Game Data & Path Name", gameData + " " + path);
 	}
 
 	public void autonomousPeriodic() {
