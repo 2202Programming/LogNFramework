@@ -1,10 +1,6 @@
 package miyamoto;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -13,8 +9,6 @@ import auto.CommandListRunner;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Encoder;
-import input.EncoderMonitor;
 import input.SensorController;
 import robot.Global;
 import robot.Global.TargetSide;
@@ -25,17 +19,8 @@ public class AutoRunner extends IControl {
 	CommandListRunner runner;
 	private double timeCost;
 	private boolean finished;
-	private PrintWriter writer;
-	private File distanceLogs;
 
 	public AutoRunner() {
-		distanceLogs = new File("/home/lvuser/distanceLogs.txt");
-		try {
-			writer = new PrintWriter(new FileOutputStream(distanceLogs, false));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void robotInit() {
@@ -44,6 +29,7 @@ public class AutoRunner extends IControl {
 	// Parse game data from FMS and set enums for auto switch/scale positions
 	public void autonomousInit() {
 		runner = null;
+
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
 		AHRS navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
@@ -77,6 +63,9 @@ public class AutoRunner extends IControl {
 
 	// Creates list of auto commands to be run
 	public void createCommandList(String path) {
+		if (path == null || path.equals("null") || path.equals("")) {
+			return;
+		}
 		finished = false;
 		timeCost = System.currentTimeMillis();
 		long start = System.currentTimeMillis();
@@ -90,24 +79,14 @@ public class AutoRunner extends IControl {
 		System.out.println("Parse Time: " + (end - start));
 		runner = new CommandListRunner(list);
 		SmartWriter.putS("Game Data & Path Name",
-				DriverStation.getInstance().getGameSpecificMessage() + " " + choosePath());
+				DriverStation.getInstance().getGameSpecificMessage() + " " + path);
 	}
 
 	public void autonomousPeriodic() {
 		if (runner == null) {
-			System.out.println("Runner is null");
 			autonomousInit();
+			System.out.println("Runner is null");
 		}
-
-		EncoderMonitor encoderMonitor = (EncoderMonitor) Global.controlObjects.get("ENCODERMONITOR");
-		Map<String, Encoder> encoders = encoderMonitor.getEncoders();
-
-		writer.print("Encoder0 Counts: " + encoders.get("ENCODER0").get() + "\t" + "Encoder0 Distance: "
-				+ encoders.get("ENCODER0").getDistance() + "\t");
-		writer.print("Encoder1 Counts: " + encoders.get("ENCODER1").get() + "\t" + "Encoder1 Distance: "
-				+ encoders.get("ENCODER1").getDistance() + "\t");
-		writer.print("Time: " + (System.currentTimeMillis() - timeCost) + "\t");
-		writer.println("Command Number: " + runner.commandNum);
 
 		if (!finished) {
 			SmartWriter.putD("TimeCost", System.currentTimeMillis() - timeCost);
@@ -138,42 +117,70 @@ public class AutoRunner extends IControl {
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
 		path += switchboard.getStartPosition();
 
-		if (path.equals("D")) {
+		System.out.println("Start Position: " + switchboard.getStartPosition());
+		System.out.println("Approach: " + switchboard.getApproach());
+		System.out.println("Objective: " + switchboard.getObjective());
+		System.out.println("Path Type: " + switchboard.getPathType());
+		System.out.println(path);
+
+		if (path.equals("null") || path.equals("")) {
+			return null;
+		}
+		
+		if(path.charAt(0)=='D'){
 			return path;
 		}
 
-		int pathNum = 1; // Defaults to front approach of the scale
-
-		if (switchboard.getApproach()) {
-			// If we are approaching from the side
-			pathNum++;
-		}
+		int pathNum = 1; // Defaults to front approach of the switch
 
 		if (switchboard.getObjective()) {
 			// If we are going for the scale
+			System.out.println("Going for scale");
 			pathNum += 4;
 			if (Global.scalePosition == TargetSide.L) {
 				// If we are going for the left side of the scale
 				pathNum += 2;
 			}
+			if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
+				// If scale is same side
+				pathNum++;
+			}
 		} else {
 			// If we are going for the switch
+			System.out.println("Going for switch");
 			if (Global.ourSwitchPosition == TargetSide.L) {
-				// If we are gong for the left side of the switch
+				// If going for the left side of the switch
 				pathNum += 2;
+			}
+			if (path.charAt(0) != 'M') {
+				// If not starting mid
+				pathNum++;
 			}
 		}
 
 		path += pathNum + "-";
+		System.out.println(path);
 
+		int pathType = 0;
+
+		// Determines primary (optimal) path or alternate path
 		if (switchboard.getPathType()) {
-			// If we take the long path
-			path += "2";
+			// If we take the alternate path
+			pathType += 2;
 		} else {
-			// If we take the short path
-			path += "1";
+			// If we take the primary path
+			pathType += 1;
 		}
 
+		// If we can do 2 block auto
+		if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
+				&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
+			pathType += 2;
+		}
+
+		path += pathType;
+
+		System.out.println(path);
 		return path;
 	}
 }

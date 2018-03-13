@@ -12,7 +12,7 @@ public class Intake extends IControl {
 	private IMotor intakeMotorRight;
 	private MiyamotoControl controller;
 	private DigitalInput sensor;
-	private int sensorCount;
+	private boolean holding;
 
 	/**
 	 * Self-evident intake class
@@ -29,7 +29,7 @@ public class Intake extends IControl {
 		intakeMotorRight.set(0);
 		controller = (MiyamotoControl) (Global.controllers);
 		sensor = (DigitalInput) SensorController.getInstance().getSensor("INTAKE");
-		sensorCount = 0;
+		holding = false;
 	}
 
 	public void autonomousInit() {
@@ -54,10 +54,20 @@ public class Intake extends IControl {
 		intakeMotorLeft.set(-0.6);
 		intakeMotorRight.set(0.6);
 	}
+	
+	public void outtakeSlow(){
+		intakeMotorLeft.set(-0.3);
+		intakeMotorRight.set(0.3);
+	}
 
 	public void rotate() {
 		intakeMotorLeft.set(-0.3);
 		intakeMotorRight.set(-0.3);
+	}
+	
+	public void holdBlock() {
+		intakeMotorLeft.set(0.2);
+		intakeMotorRight.set(-0.2);
 	}
 
 	public void stop() {
@@ -66,29 +76,26 @@ public class Intake extends IControl {
 	}
 
 	public void teleopPeriodic() {
-		if (sensor.get()) {
-			sensorCount++;
-		} else {
-			sensorCount = 0;
+		if(sensor.get()) {
+			holding = true;
 		}
-
+		
+		
 		if (controller.overrideIntake()) {
 			intake();
+		} else if (controller.outtake()) {
+			holding = false;
+			outtake();
+		} else if (controller.outtakeSlow()){
+			holding = false;
+			outtakeSlow();
+		} else if (controller.rotateIntake()) {
+			rotate();
+		} else if(holding) {
+			holdBlock();
 		} else {
-			if (controller.intake()) {
-				if (sensorCount > 100) {
-					stop();
-				} else {
-					sensorCount = 0;
-					intake();
-				}
-			} else if (controller.outtake()) {
-				outtake();
-			} else if (controller.rotateIntake()) {
-				rotate();
-			}else {
-				stop();
-			}
+			stop();
 		}
+		
 	}
 }

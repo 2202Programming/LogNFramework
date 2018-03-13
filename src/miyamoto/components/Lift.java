@@ -13,17 +13,17 @@ public class Lift extends IControl {
 	private LiftPosition[] positions;
 	private int index;
 	private boolean settling;
+	private LiftPosition autoPosition;
 	
 	public Lift(TalonSRXMotor motor){
 		controller = (MiyamotoControl)Global.controllers;
 		this.motor = motor;
 		this.setPosition = 0;
-		positions = new LiftPosition[5];
+		positions = new LiftPosition[4];
 		positions[0] = LiftPosition.BOTTOM;
 		positions[1] = LiftPosition.SWITCH;
-		positions[2] = LiftPosition.CLIMB;
-		positions[3] = LiftPosition.LOWSCALE;
-		positions[4] = LiftPosition.HIGHSCALE;
+		positions[2] = LiftPosition.LOWSCALE;
+		positions[3] = LiftPosition.HIGHSCALE;
 		index = 0;
 		settling = false;
 		
@@ -34,6 +34,8 @@ public class Lift extends IControl {
 
 	public void setLiftPosition(LiftPosition position) {
 		setPosition = position.getNumber();
+		autoPosition = position;
+		settling = true;
 	}
 
 	public void setLiftPosition(int position) {
@@ -42,6 +44,14 @@ public class Lift extends IControl {
 
 	public int getLiftPosition() {
 		return setPosition;
+	}
+	
+	/**
+	 * Gets the encoder position of the lift
+	 * @return
+	 */
+	public int getLiftCounts(){
+		return Math.abs(motor.getTalon().getSelectedSensorPosition(0));
 	}
 	
 	public void teleopInit(){
@@ -84,20 +94,33 @@ public class Lift extends IControl {
 
 	public void autonomousInit() {
 		motor.reset();
-		setLiftPosition(LiftPosition.BOTTOM);
+		setLiftPosition(LiftPosition.BOTTOM.getNumber());
 		motor.set(setPosition);
 	}
 
 	public void autonomousPeriodic() {
+		if(settling){
+			settleLift(autoPosition);
+		}
 		motor.set(setPosition);
 	}
 	
 	public void settleLift(int index){
 		int counts = Math.abs(motor.getTalon().getSelectedSensorPosition(0));
 		if(counts < positions[index].getNumber()){
-			setLiftPosition(LiftPosition.MAX);
+			setLiftPosition(LiftPosition.MAX.getNumber());
 		}else{
-			setLiftPosition(positions[index]);
+			setLiftPosition(positions[index].getNumber());
+			settling = false;
+		}
+	}
+	
+	public void settleLift(LiftPosition setPosition){
+		int counts = Math.abs(motor.getTalon().getSelectedSensorPosition(0));
+		if(counts < setPosition.getNumber()){
+			setLiftPosition(LiftPosition.MAX.getNumber());
+		}else{
+			setLiftPosition(setPosition.getNumber());
 			settling = false;
 		}
 	}

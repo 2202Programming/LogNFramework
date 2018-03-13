@@ -3,160 +3,26 @@
 	<!-- Make sure that the default path is at the top -->
 
 	<Path Id="D">
+		<!-- <LiftCommand Height="SCALE"> <TimerStopCondition Timer="3300"> </TimerStopCondition> 
+			</LiftCommand> <DriveCommand Angle="0.0" Power="0.3"> <DistanceStopCondition 
+			Dist_Inches="14"> </DistanceStopCondition> </DriveCommand> <OuttakeCommand 
+			Power="0.4"> <TimerStopCondition Timer="500"> </TimerStopCondition> </OuttakeCommand> -->
+
 		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="120">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-	</Path>
-
-
-
-	<Path Id="L1-1">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="165">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
 			<DistanceStopCondition Dist_Inches="70">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
 	</Path>
-
-
-	<Path Id="L1-2">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="245">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="255">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="137">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="55">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<TimerStopCondition Timer="200">
-			</TimerStopCondition>
-		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-
 
 	<Path Id="L2-1">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="255">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
+		<IntakeCommand Power="0.0">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
-		</LiftCommand>
+		</IntakeCommand>
 
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="96">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="27">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-
-
-	<Path Id="L2-2">
 		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="196">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<WaitCommand Time="200">
-		</WaitCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="204">
+			<DistanceStopCondition Dist_Inches="198">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -172,120 +38,41 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="57">
+			<DistanceStopCondition Dist_Inches="185">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<WaitCommand Time="200">
+		<WaitCommand Time="400">
 		</WaitCommand>
 
-		<TurnCommand Angle="90">
+		<TurnCommand Angle="135">
 		</TurnCommand>
 
-		<DriveCommand Angle="90" Power="0.5">
-			<TimerStopCondition Timer="300">
+		<DriveCommand Angle="135" Power="0.5">
+			<TimerStopCondition Timer="1000">
 			</TimerStopCondition>
 		</DriveCommand>
 
-		<OuttakeCommand Power="0.6">
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 
 	</Path>
-
-
-
-	<Path Id="L3-1">
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-		
-		<DriveCommand Angle="0" Power=".5">
-			<DistanceStopCondition Dist_Inches="60">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="45">
-		</TurnCommand>
-
-		<DriveCommand Angle="45" Power="0.5">
-			<DistanceStopCondition Dist_Inches="20">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<WaitCommand Time="100"></WaitCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-	<Path Id="L3-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="207">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="212">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="164">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="68">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
 
 	<Path Id="L4-1">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<LiftCommand Height="SWITCH">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</LiftCommand>
 
 		<DriveCommand Angle="0" Power=".5">
-			<DistanceStopCondition Dist_Inches="115">
+			<DistanceStopCondition Dist_Inches="118">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -297,436 +84,183 @@
 			</TimerStopCondition>
 		</DriveCommand>
 
-		<OuttakeCommand Power="0.6">
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 	</Path>
-
-
-	<Path Id="L4-2">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="218">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="250">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="73">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="32">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-
 
 	<Path Id="L5-1">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
+		<DriveCommand Angle="0" Power="1.0">
+			<DistanceStopCondition Dist_Inches="168">
 			</DistanceStopCondition>
 		</DriveCommand>
+
+		<WaitCommand Time="200">
+		</WaitCommand>
 
 		<TurnCommand Angle="90">
 		</TurnCommand>
 
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
 
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="172">
+		<DriveCommand Angle="90" Power=".7">
+			<DistanceStopCondition Dist_Inches="165">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="-90">
-		</TurnCommand>
+		<WaitCommand Time="500">
+		</WaitCommand>
 
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="53">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-	<Path Id="L5-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="218">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="44">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-
-
-
-	<Path Id="L6-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="218">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="257">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
+		<TurnCommand Angle="-108">
 		</TurnCommand>
 
 		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
+			<TimerStopCondition Timer="3300">
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-	<Path Id="L6-1">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
+		<DriveCommand Angle="-108" Power="0.3">
+			<DistanceStopCondition Dist_Inches="14">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="232">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="90">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-
-
-
-	<Path Id="L7-1">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="33">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="53">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-
-	<Path Id="L7-2">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="218">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 	</Path>
-
-
 
 	<Path Id="L8-1">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<LiftCommand Height="SWITCH">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="0" Power="0.7">
-			<DistanceStopCondition Dist_Inches="185">
+		<DriveCommand Angle="0" Power="0.8">
+			<DistanceStopCondition Dist_Inches="192">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
-		<WaitCommand Time="200"></WaitCommand>
 
-		<TurnCommand Angle="30">
+		<WaitCommand Time="600">
+		</WaitCommand>
+
+		<TurnCommand Angle="25">
 		</TurnCommand>
 
 		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="2500">
+			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</LiftCommand>
+
+		<OuttakeCommand Power="0.7">
+			<TimerStopCondition Timer="500">
+			</TimerStopCondition>
+		</OuttakeCommand>
+
+		<LiftCommand Height="BOTTOM">
+			<TimerStopCondition Timer="2000">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<TurnCommand Angle="138">
+		</TurnCommand>
+
+		<DriveCommand Angle="138" Power="0.7">
+			<DistanceStopCondition Dist_Inches="35">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<IntakeCommand Power="0.8">
+			<TimerStopCondition Timer="700">
+			</TimerStopCondition>
+		</IntakeCommand>
+	</Path>
+
+	<Path Id="L8-3">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
+		<LiftCommand Height="SWITCH">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<DriveCommand Angle="0" Power="0.8">
+			<DistanceStopCondition Dist_Inches="192">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<WaitCommand Time="600">
+		</WaitCommand>
+
+		<TurnCommand Angle="25">
+		</TurnCommand>
+
+		<LiftCommand Height="SCALE">
+			<TimerStopCondition Timer="1500">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<OuttakeCommand Power="0.7">
+			<TimerStopCondition Timer="500">
+			</TimerStopCondition>
+		</OuttakeCommand>
+
+		<LiftCommand Height="BOTTOM">
+			<TimerStopCondition Timer="2000">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<TurnCommand Angle="138">
+		</TurnCommand>
+
+		<DriveCommand Angle="138" Power="0.7">
+			<DistanceStopCondition Dist_Inches="35">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<IntakeCommand Power="0.8">
+			<TimerStopCondition Timer="700">
+			</TimerStopCondition>
+		</IntakeCommand>
+
+		<LiftCommand Height="SWITCH">
+			<TimerStopCondition Timer="1000">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<DriveCommand Angle="138" Power="0.5">
+			<DistanceStopCondition Dist_Inches="8">
+			</DistanceStopCondition>
+		</DriveCommand>
 
 		<OuttakeCommand Power="0.8">
-			<TimerStopCondition Timer="500">
+			<TimerStopCondition Timer="300">
 			</TimerStopCondition>
 		</OuttakeCommand>
 
 	</Path>
-
-
-	<Path Id="L8-2">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="218">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="226">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="88">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-
 
 	<Path Id="M1-1">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="48">
+			<DistanceStopCondition Dist_Inches="20">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -739,7 +273,7 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="48">
+			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -747,19 +281,23 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="68">
-			</DistanceStopCondition>
+			<TimerStopCondition Timer="1000">
+			</TimerStopCondition>
 		</DriveCommand>
 
-		<OuttakeCommand Power="0.6">
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 
 	</Path>
 
-
 	<Path Id="M1-2">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="38">
 			</DistanceStopCondition>
@@ -825,9 +363,12 @@
 
 	</Path>
 
-
-
 	<Path Id="M2-1">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="38">
 			</DistanceStopCondition>
@@ -863,8 +404,12 @@
 		</OuttakeCommand>
 	</Path>
 
-
 	<Path Id="M2-2">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="38">
 			</DistanceStopCondition>
@@ -922,10 +467,14 @@
 
 	</Path>
 
-
 	<Path Id="M3-1">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="48">
+			<DistanceStopCondition Dist_Inches="20">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -938,7 +487,7 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="77">
+			<DistanceStopCondition Dist_Inches="18">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -946,19 +495,42 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="68">
-			</DistanceStopCondition>
+			<TimerStopCondition Timer="1000">
+			</TimerStopCondition>
 		</DriveCommand>
 
 
-		<OuttakeCommand Power="0.6">
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 
+		<DriveCommand Angle="90" Power="-0.5">
+			<DistanceStopCondition Dist_Inches="18">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<TurnCommand Angle="45">
+		</TurnCommand>
+
+		<DriveCommand Angle="45" Power="0.5">
+			<DistanceStopCondition Dist_Inches="18">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<IntakeCommand Power="0.4">
+			<TimerStopCondition Timer="500">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 	</Path>
 
 	<Path Id="M3-2">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="38">
 			</DistanceStopCondition>
@@ -1023,9 +595,11 @@
 		</OuttakeCommand>
 	</Path>
 
-
-
 	<Path Id="M4-1">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="38">
@@ -1062,9 +636,12 @@
 		</OuttakeCommand>
 	</Path>
 
-
-
 	<Path Id="M4-2">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="38">
 			</DistanceStopCondition>
@@ -1126,429 +703,14 @@
 		</OuttakeCommand>
 	</Path>
 
-	<Path Id="M5-1">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="109">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="161">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="30">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="48">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="M5-2">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="101">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="167">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="44">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="41">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-
-	<Path Id="M6-1">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="111">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="257">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="M6-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="101">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="167">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="250">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="87">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-
-
-	<Path Id="M7-1">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="109">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="161">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="178">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="47">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="M7-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="101">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="164">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="27">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="47">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="M8-1">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="119">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="261">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="M8-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="101">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="167">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="226">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="88">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-
 	<Path Id="R1-1">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Angle="0" Dist_Inches="90">
+			<DistanceStopCondition Angle="0" Dist_Inches="98">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -1579,282 +741,49 @@
 		</OuttakeCommand>
 	</Path>
 
-
-	<Path Id="R1-2">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="207">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="212">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="164">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCOndition Dist_Inches="68">
-			</DistanceStopCOndition>
-		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-
-
 	<Path Id="R2-1">
-		<LiftCommand Height="SWITCH">
+		<IntakeCommand Power="0.0">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="153">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="R2-2">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="218">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="169">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="250">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
+		</IntakeCommand>
 
 		<LiftCommand Height="SWITCH">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="73">
+		<DriveCommand Angle="0" Power=".5">
+			<DistanceStopCondition Dist_Inches="118">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="90">
+		<TurnCommand Angle="-90">
 		</TurnCommand>
 
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="32">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
+		<DriveCommand Angle="-90" Power=".5">
+			<TimerStopCondition Timer="300">
 			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="R3-1">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="160">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="65">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-	<Path Id="R3-2">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="214">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="137">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="55">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="31">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-
-	</Path>
-
-
-	<Path Id="R4-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="73">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="32">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<OuttakeCommand Power="0.6">
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 	</Path>
 
 	<Path Id="R4-1">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
+			<DistanceStopCondition Dist_Inches="198">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="205">
-			</DistanceStopCondition>
-		</DriveCommand>
+		<WaitCommand Time="200">
+		</WaitCommand>
 
 		<TurnCommand Angle="-90">
 		</TurnCommand>
@@ -1865,369 +794,189 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="72">
+			<DistanceStopCondition Dist_Inches="185">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="-90">
+		<WaitCommand Time="400">
+		</WaitCommand>
+
+		<TurnCommand Angle="-135">
 		</TurnCommand>
 
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="21">
-			</DistanceStopCondition>
+		<DriveCommand Angle="-135" Power="0.5">
+			<TimerStopCondition Timer="1000">
+			</TimerStopCondition>
 		</DriveCommand>
 
-		<OuttakeCommand Power="0.6">
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 	</Path>
-
-	<Path Id="R5-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="170">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="175">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="R5-1">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="33">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="53">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
 
 	<Path Id="R6-1">
-		<LiftCommand Height="SWITCH">
+		<IntakeCommand Power="0.0">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="300">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="R6-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="170">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
+		</IntakeCommand>
 
 		<LiftCommand Height="SWITCH">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
+		<DriveCommand Angle="0" Power="0.8">
+			<DistanceStopCondition Dist_Inches="192">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="-90">
+		<WaitCommand Time="600">
+		</WaitCommand>
+
+		<TurnCommand Angle="-25">
 		</TurnCommand>
 
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="87">
-			</DistanceStopCondition>
-		</DriveCommand>
-
 		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
+			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<OuttakeCommand Power="0.6">
+		<OuttakeCommand Power="0.7">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 
+		<LiftCommand Height="BOTTOM">
+			<TimerStopCondition Timer="2000">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<TurnCommand Angle="-138">
+		</TurnCommand>
+
+		<DriveCommand Angle="-138" Power="0.7">
+			<DistanceStopCondition Dist_Inches="35">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<IntakeCommand Power="0.8">
+			<TimerStopCondition Timer="700">
+			</TimerStopCondition>
+		</IntakeCommand>
+
 	</Path>
 
+	<Path Id="R6-3">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
+		<LiftCommand Height="SWITCH">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<DriveCommand Angle="0" Power="0.8">
+			<DistanceStopCondition Dist_Inches="192">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<WaitCommand Time="600">
+		</WaitCommand>
+
+		<TurnCommand Angle="-25">
+		</TurnCommand>
+
+		<LiftCommand Height="SCALE">
+			<TimerStopCondition Timer="1500">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<OuttakeCommand Power="0.7">
+			<TimerStopCondition Timer="500">
+			</TimerStopCondition>
+		</OuttakeCommand>
+
+		<LiftCommand Height="BOTTOM">
+			<TimerStopCondition Timer="2000">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<TurnCommand Angle="-138">
+		</TurnCommand>
+
+		<DriveCommand Angle="-138" Power="0.7">
+			<DistanceStopCondition Dist_Inches="35">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<IntakeCommand Power="0.8">
+			<TimerStopCondition Timer="700">
+			</TimerStopCondition>
+		</IntakeCommand>
+
+		<LiftCommand Height="SWITCH">
+			<TimerStopCondition Timer="1000">
+			</TimerStopCondition>
+		</LiftCommand>
+
+		<DriveCommand Angle="-138" Power="0.5">
+			<DistanceStopCondition Dist_Inches="8">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<OuttakeCommand Power="0.8">
+			<TimerStopCondition Timer="300">
+			</TimerStopCondition>
+		</OuttakeCommand>
+
+	</Path>
 
 	<Path Id="R7-1">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
+		<IntakeCommand Power="0.0">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</IntakeCommand>
+
+		<DriveCommand Angle="0" Power="1.0">
+			<DistanceStopCondition Dist_Inches="168">
 			</DistanceStopCondition>
 		</DriveCommand>
+
+		<WaitCommand Time="200">
+		</WaitCommand>
 
 		<TurnCommand Angle="-90">
 		</TurnCommand>
 
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="172">
+		<DriveCommand Angle="-90" Power="0.7">
+			<DistanceStopCondition Dist_Inches="165">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="90">
+		<WaitCommand Time="500">
+		</WaitCommand>
+
+		<TurnCommand Angle="108">
 		</TurnCommand>
 
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="53">
-			</DistanceStopCondition>
-		</DriveCommand>
-
 		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
+			<TimerStopCondition Timer="3300">
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<OuttakeCommand Power="0.6">
+		<DriveCommand Angle="108" Power="0.3">
+			<DistanceStopCondition Dist_Inches="14">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<OuttakeCommand Power="0.4">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
 
 	</Path>
 
-	<Path Id="R7-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="210">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="170">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="40">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="R8-1">
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="208">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="232">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="90">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
-
-	<Path Id="R8-2">
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="38">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="-90">
-		</TurnCommand>
-
-		<DriveCommand Angle="-90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="206">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SWITCH">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="268">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<TurnCommand Angle="90">
-		</TurnCommand>
-
-		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<OuttakeCommand Power="0.6">
-			<TimerStopCondition Timer="500">
-			</TimerStopCondition>
-		</OuttakeCommand>
-	</Path>
 </Paths>
