@@ -2,7 +2,6 @@ package miyamoto;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,13 +24,14 @@ import auto.commands.TurnCommand;
 import auto.commands.WaitCommand;
 import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
+import auto.stopConditions.LiftStopCondition;
 import auto.stopConditions.OrStopCondition;
 import auto.stopConditions.TalonDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
+import miyamoto.components.Lift;
 import miyamoto.components.LiftPosition;
-import physicalOutput.motors.TalonSRXMotor;
 import robot.Global;
 
 public class MiyamotoXMLInterpreter {
@@ -147,22 +147,28 @@ public class MiyamotoXMLInterpreter {
 		}
 
 		case ("LiftCommand"): {
-			LiftPosition targetPosition = null;
-			switch (attributes.getNamedItem("Height").getNodeValue()) {
+			int targetPosition = 0;
+
+			String height = attributes.getNamedItem("Height").getNodeValue();
+			switch (height) {
 			case ("SWITCH"): {
-				targetPosition = LiftPosition.SWITCH;
+				targetPosition = LiftPosition.SWITCH.getNumber();
 				break;
 			}
 			case ("SCALE"): {
-				targetPosition = LiftPosition.HIGHSCALE;
+				targetPosition = LiftPosition.HIGHSCALE.getNumber();
 				break;
 			}
 			case ("BOTTOM"): {
-				targetPosition = LiftPosition.BOTTOM;
+				targetPosition = LiftPosition.BOTTOM.getNumber();
+				break;
+			}
+			default: {
+				targetPosition = Integer.parseInt(height);
 				break;
 			}
 			}
-			System.out.println("Scale Target: " + targetPosition.getNumber());
+			System.out.println("Scale Target: " + targetPosition);
 			return new LiftCommand(targetPosition, getStopCondition(n));
 		}
 
@@ -218,26 +224,34 @@ public class MiyamotoXMLInterpreter {
 			long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
 			return new TimerStopCondition(stopTime);
 		}
-		case ("TalonDistanceStopCondition"): {
-			// Get Talon motors
-			List<TalonSRXMotor> talons = new ArrayList<TalonSRXMotor>(1);
-			talons.add((TalonSRXMotor) Global.controlObjects.get("LIFT_TALON"));
+		case ("LiftStopCondition"): {
+			// Get Lift component
+			Lift lift = (Lift) Global.controlObjects.get("LIFT");
 
 			// Get target position
-			LiftPosition targetPosition = null;
-			switch (parentNode.getAttributes().getNamedItem("Height").getNodeValue()) {
+			int targetPosition = lift.getLiftCounts();
+
+			String height = parentNode.getAttributes().getNamedItem("Height").getNodeValue();
+			switch (height) {
 			case ("SWITCH"): {
-				targetPosition = LiftPosition.SWITCH;
+				targetPosition = LiftPosition.SWITCH.getNumber();
+				break;
 			}
 			case ("SCALE"): {
-				targetPosition = LiftPosition.HIGHSCALE;
+				targetPosition = LiftPosition.HIGHSCALE.getNumber();
+				break;
 			}
 			case ("BOTTOM"): {
-				targetPosition = LiftPosition.BOTTOM;
+				targetPosition = LiftPosition.BOTTOM.getNumber();
+				break;
+			}
+			default: {
+				targetPosition = Integer.parseInt(height);
+				break;
 			}
 			}
 
-			return new TalonDistanceStopCondition(talons, targetPosition);
+			return new LiftStopCondition(lift, targetPosition);
 		}
 		}
 		return new TimerStopCondition(0);
