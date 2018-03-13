@@ -29,8 +29,7 @@ public class TalonDistanceStopCondition implements IStopCondition {
 
 	public void init() {
 		for (TalonSRXMotor t : talons) {
-			t.getTalon().setIntegralAccumulator(0.0, 0, 0);
-			t.getTalon().setSelectedSensorPosition(0, 0, 0);
+			t.reset();
 		}
 	}
 
