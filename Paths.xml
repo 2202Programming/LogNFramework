@@ -3,6 +3,11 @@
 	<!-- Make sure that the default path is at the top -->
 
 	<Path Id="D">
+		<!-- <LiftCommand Height="SCALE"> <TimerStopCondition Timer="3300"> </TimerStopCondition> 
+			</LiftCommand> <DriveCommand Angle="0.0" Power="0.3"> <DistanceStopCondition 
+			Dist_Inches="14"> </DistanceStopCondition> </DriveCommand> <OuttakeCommand 
+			Power="0.4"> <TimerStopCondition Timer="500"> </TimerStopCondition> </OuttakeCommand> -->
+
 		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="70">
 			</DistanceStopCondition>
@@ -92,7 +97,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="1.0">
-			<DistanceStopCondition Dist_Inches="165">
+			<DistanceStopCondition Dist_Inches="168">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -104,18 +109,18 @@
 
 
 		<DriveCommand Angle="90" Power=".7">
-			<DistanceStopCondition Dist_Inches="155">
+			<DistanceStopCondition Dist_Inches="165">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<WaitCommand Time="200">
+		<WaitCommand Time="500">
 		</WaitCommand>
 
 		<TurnCommand Angle="-108">
 		</TurnCommand>
 
 		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="3600">
+			<TimerStopCondition Timer="3300">
 			</TimerStopCondition>
 		</LiftCommand>
 
@@ -135,18 +140,18 @@
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</IntakeCommand>
-		
+
 		<LiftCommand Height="SWITCH">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</LiftCommand>
-		
-		<DriveCommand Angle="0" Power="0.87">
-			<DistanceStopCondition Dist_Inches="194">
+
+		<DriveCommand Angle="0" Power="0.8">
+			<DistanceStopCondition Dist_Inches="192">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
-		<WaitCommand Time="500">
+
+		<WaitCommand Time="600">
 		</WaitCommand>
 
 		<TurnCommand Angle="25">
@@ -192,12 +197,12 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="0" Power="0.87">
-			<DistanceStopCondition Dist_Inches="194">
+		<DriveCommand Angle="0" Power="0.8">
+			<DistanceStopCondition Dist_Inches="192">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<WaitCommand Time="500">
+		<WaitCommand Time="600">
 		</WaitCommand>
 
 		<TurnCommand Angle="25">
@@ -235,7 +240,7 @@
 			<TimerStopCondition Timer="1000">
 			</TimerStopCondition>
 		</LiftCommand>
-		
+
 		<DriveCommand Angle="138" Power="0.5">
 			<DistanceStopCondition Dist_Inches="8">
 			</DistanceStopCondition>
@@ -815,18 +820,18 @@
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</IntakeCommand>
-		
+
 		<LiftCommand Height="SWITCH">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="0" Power="0.87">
-			<DistanceStopCondition Dist_Inches="194">
+		<DriveCommand Angle="0" Power="0.8">
+			<DistanceStopCondition Dist_Inches="192">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<WaitCommand Time="500">
+		<WaitCommand Time="600">
 		</WaitCommand>
 
 		<TurnCommand Angle="-25">
@@ -867,18 +872,18 @@
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</IntakeCommand>
-		
+
 		<LiftCommand Height="SWITCH">
 			<TimerStopCondition Timer="10">
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="0" Power="0.9">
-			<DistanceStopCondition Dist_Inches="194">
+		<DriveCommand Angle="0" Power="0.8">
+			<DistanceStopCondition Dist_Inches="192">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<WaitCommand Time="500">
+		<WaitCommand Time="600">
 		</WaitCommand>
 
 		<TurnCommand Angle="-25">
@@ -916,7 +921,7 @@
 			<TimerStopCondition Timer="1000">
 			</TimerStopCondition>
 		</LiftCommand>
-		
+
 		<DriveCommand Angle="-138" Power="0.5">
 			<DistanceStopCondition Dist_Inches="8">
 			</DistanceStopCondition>
@@ -936,7 +941,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="1.0">
-			<DistanceStopCondition Dist_Inches="165">
+			<DistanceStopCondition Dist_Inches="168">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -947,18 +952,18 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="-90" Power="0.7">
-			<DistanceStopCondition Dist_Inches="155">
+			<DistanceStopCondition Dist_Inches="165">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<WaitCommand Time="200">
+		<WaitCommand Time="500">
 		</WaitCommand>
 
 		<TurnCommand Angle="108">
 		</TurnCommand>
 
 		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="3600">
+			<TimerStopCondition Timer="3300">
 			</TimerStopCondition>
 		</LiftCommand>
 
