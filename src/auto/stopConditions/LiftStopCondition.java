@@ -30,7 +30,7 @@ public class LiftStopCondition implements IStopCondition {
 
 	@Override
 	public boolean stopNow() {
-		return lift.getLiftPosition() >= stopPosition;
+		return Math.abs(stopPosition - lift.getLiftCounts()) <= 100;
 	}
 
 }
