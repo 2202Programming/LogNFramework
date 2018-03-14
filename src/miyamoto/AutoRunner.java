@@ -1,14 +1,18 @@
 package miyamoto;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import auto.CommandList;
 import auto.CommandListRunner;
+import auto.commands.DriveAtAngle;
+import auto.stopConditions.DistanceStopCondition;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
 import robot.Global;
 import robot.Global.TargetSide;
@@ -68,7 +72,21 @@ public class AutoRunner extends IControl {
 		}
 
 		String pathChosen = choosePath();
-		createCommandList(pathChosen);
+		try {
+			createCommandList(pathChosen);
+		} catch (Exception e) {
+			CommandList defaultPath = new CommandList();
+
+			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
+			SensorController sensorController = SensorController.getInstance();
+			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
+			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
+			DistanceStopCondition stop = new DistanceStopCondition(encoders, 70);
+
+			defaultPath.addCommand(new DriveAtAngle(stop, .5, 0));
+
+			runner = new CommandListRunner(defaultPath);
+		}
 	}
 
 	// Creates list of auto commands to be run
@@ -82,7 +100,7 @@ public class AutoRunner extends IControl {
 		long commandListBuildingStart = System.currentTimeMillis();
 		CommandList list = XMLInterpreter.getPathList(path);
 		long commandListBuildingEnd = System.currentTimeMillis();
-	
+
 		System.out.println("CommandList creation time ONLY): " + (commandListBuildingEnd - commandListBuildingStart));
 		runner = new CommandListRunner(list);
 		SmartWriter.putS("Game Data & Path Name", gameData + " " + path);
@@ -132,8 +150,8 @@ public class AutoRunner extends IControl {
 		if (path.equals("null") || path.equals("")) {
 			return null;
 		}
-		
-		if(path.charAt(0)=='D'){
+
+		if (path.charAt(0) == 'D') {
 			return path;
 		}
 
