@@ -25,6 +25,14 @@ public class AutoRunner extends IControl {
 	}
 
 	public void robotInit() {
+		long startRead = System.currentTimeMillis();
+		File file = new File("/home/lvuser/Paths.xml");
+		XMLInterpreter = new MiyamotoXMLInterpreter(file);
+		long interpretEnd = System.currentTimeMillis();
+
+		
+		System.out.println(file.getName());
+		System.out.println("File read and Parse Time Only: " + (interpretEnd - startRead));
 	}
 
 	// Parse game data from FMS and set enums for auto switch/scale positions
@@ -70,14 +78,6 @@ public class AutoRunner extends IControl {
 		}
 		finished = false;
 		timeCost = System.currentTimeMillis();
-		long startRead = System.currentTimeMillis();
-		File file = new File("/home/lvuser/Paths.xml");
-		XMLInterpreter = new MiyamotoXMLInterpreter(file);
-		long interpretEnd = System.currentTimeMillis();
-
-		
-		System.out.println(file.getName());
-		System.out.println("File read and Parse Time Only: " + (interpretEnd - startRead));
 
 		long commandListBuildingStart = System.currentTimeMillis();
 		CommandList list = XMLInterpreter.getPathList(path);
