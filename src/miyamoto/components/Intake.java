@@ -46,7 +46,7 @@ public class Intake extends IControl {
 	}
 
 	public void intake() {
-		intakeMotorLeft.set(0.6);
+		intakeMotorLeft.set(0.8);
 		intakeMotorRight.set(-0.6);
 	}
 

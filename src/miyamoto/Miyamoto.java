@@ -116,7 +116,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		IDrive drive = new TwoStickDrive(left, right, 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 
-		MotionProfile[] profiles = { new MotionProfile(0.08, 1), new MotionProfile(0.06, 1), new MotionProfile(0.05,0.6), new MotionProfile(0.03
+		MotionProfile[] profiles = { new MotionProfile(0.08, 1), new MotionProfile(0.05, 1), new MotionProfile(0.05,0.6), new MotionProfile(0.03
 				,0.4),new MotionProfile(0.03,0.3) };
 		MotionProfiler sneak = new MotionProfiler(drive, profiles);
 		iControlMap.put("PROFILER", sneak);
