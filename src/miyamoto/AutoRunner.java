@@ -21,6 +21,7 @@ import robot.IControl;
 public class AutoRunner extends IControl {
 	MiyamotoXMLInterpreter XMLInterpreter;
 	CommandListRunner runner;
+	CommandList defaultPathList;
 	private double timeCost;
 	private boolean finished;
 	private String gameData;
@@ -33,14 +34,28 @@ public class AutoRunner extends IControl {
 		File file = new File("/home/lvuser/Paths.xml");
 		XMLInterpreter = new MiyamotoXMLInterpreter(file);
 		long interpretEnd = System.currentTimeMillis();
-
-		
 		System.out.println(file.getName());
 		System.out.println("File read and Parse Time Only: " + (interpretEnd - startRead));
+		try {
+			createCommandList("D");
+		} catch (Exception e) {
+			defaultPathList = new CommandList();
+
+			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
+			SensorController sensorController = SensorController.getInstance();
+			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
+			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
+
+			defaultPathList.addCommand(new DriveAtAngle(new DistanceStopCondition(encoders, 70), 0.5, 0));
+			System.out.println("**********Caught error and will run default path**********");
+			e.printStackTrace();
+		}
+		System.out.println("**********Successfully ran default path**********");
 	}
 
 	// Parse game data from FMS and set enums for auto switch/scale positions
 	public void autonomousInit() {
+		long autoInitStart = System.currentTimeMillis();
 		runner = null;
 
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -49,48 +64,46 @@ public class AutoRunner extends IControl {
 		navX.reset();
 
 		if (gameData == null || gameData.length() != 3) {
-			createCommandList("D");
+			try {
+
+				runner = new CommandListRunner(defaultPathList);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return;
 		}
-
-		if (gameData.charAt(0) == 'L') {
-			Global.ourSwitchPosition = TargetSide.L;
-		} else {
-			Global.ourSwitchPosition = TargetSide.R;
-		}
-
-		if (gameData.charAt(1) == 'L') {
-			Global.scalePosition = TargetSide.L;
-		} else {
-			Global.scalePosition = TargetSide.R;
-		}
-
-		if (gameData.charAt(2) == 'L') {
-			Global.opponentSwitchPosition = TargetSide.L;
-		} else {
-			Global.opponentSwitchPosition = TargetSide.R;
-		}
-
-		String pathChosen = choosePath();
 		try {
+			if (gameData.charAt(0) == 'L') {
+				Global.ourSwitchPosition = TargetSide.L;
+			} else {
+				Global.ourSwitchPosition = TargetSide.R;
+			}
+
+			if (gameData.charAt(1) == 'L') {
+				Global.scalePosition = TargetSide.L;
+			} else {
+				Global.scalePosition = TargetSide.R;
+			}
+
+			if (gameData.charAt(2) == 'L') {
+				Global.opponentSwitchPosition = TargetSide.L;
+			} else {
+				Global.opponentSwitchPosition = TargetSide.R;
+			}
+
+			String pathChosen = choosePath();
+
 			createCommandList(pathChosen);
 		} catch (Exception e) {
-			CommandList defaultPath = new CommandList();
-
-			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
-			SensorController sensorController = SensorController.getInstance();
-			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
-			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
-			DistanceStopCondition stop = new DistanceStopCondition(encoders, 70);
-
-			defaultPath.addCommand(new DriveAtAngle(stop, .5, 0));
-
-			runner = new CommandListRunner(defaultPath);
+			System.out.println("Inavlid path construction from pathChosen; will run default path");
+			runner = new CommandListRunner(defaultPathList);
 		}
+		long autoInitEnd = System.currentTimeMillis();
+		System.out.println("Auto Init run time: " + (autoInitEnd-autoInitStart));
 	}
 
 	// Creates list of auto commands to be run
-	public void createCommandList(String path) {
+	public void createCommandList(String path) throws Exception {
 		if (path == null || path.equals("null") || path.equals("")) {
 			return;
 		}
