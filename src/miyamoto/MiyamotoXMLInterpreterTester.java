@@ -1,7 +1,6 @@
 package miyamoto;
 
 import java.io.File;
-
 import auto.CommandList;
 import auto.ICommand;
 
@@ -15,9 +14,13 @@ public class MiyamotoXMLInterpreterTester {
 		long startParse = System.nanoTime();
 		try {
 			MiyamotoXMLInterpreter interp = new MiyamotoXMLInterpreter(new File("Paths.xml"));
-			test = interp.getPathList("L3-1");
-		} catch (NullPointerException e) {
-			System.out.println("OOF");
+			test = interp.getPathList("R2-1");
+		} catch (Exception e) {
+			System.out.println("Parse error");
+			System.out.println(e.getMessage());
+			System.out.println(e.toString());
+			System.out.println(e.getClass().getName());
+			e.printStackTrace();
 		}
 		long endParse = System.nanoTime();
 		System.out.println((endParse - startParse) / 1000000 + " Millisecond runtime");
