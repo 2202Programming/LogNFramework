@@ -2,22 +2,9 @@
 <Paths>
 	<!-- Make sure that the default path is at the top -->
 
-	<Path Id="D">
-		<!-- <LiftCommand Height="SCALE"> <TimerStopCondition Timer="3300"> </TimerStopCondition> 
-			</LiftCommand> <DriveCommand Angle="0.0" Power="0.3"> <DistanceStopCondition 
-			Dist_Inches="14"> </DistanceStopCondition> </DriveCommand> <OuttakeCommand 
-			Power="0.4"> <TimerStopCondition Timer="500"> </TimerStopCondition> </OuttakeCommand> -->
-
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="70">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-	</Path>
-
 	<Path Id="L2-1">
 		<IntakeCommand Power="0.0">
-			<TimerStopCondition Timer="10">
+			<TimerStopCondition Timer="10'>
 			</TimerStopCondition>
 		</IntakeCommand>
 
@@ -636,6 +623,19 @@
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
+
+	</Path>
+	
+	<Path Id="D">
+		<!-- <LiftCommand Height="SCALE"> <TimerStopCondition Timer="3300"> </TimerStopCondition> 
+			</LiftCommand> <DriveCommand Angle="0.0" Power="0.3"> <DistanceStopCondition 
+			Dist_Inches="14"> </DistanceStopCondition> </DriveCommand> <OuttakeCommand 
+			Power="0.4"> <TimerStopCondition Timer="500"> </TimerStopCondition> </OuttakeCommand> -->
+
+		<DriveCommand Angle="0" Power="0.5">
+			<DistanceStopCondition Dist_Inches="70">
+			</DistanceStopCondition>
+		</DriveCommand>
 
 	</Path>
 
