@@ -26,7 +26,6 @@ import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.LiftStopCondition;
 import auto.stopConditions.OrStopCondition;
-import auto.stopConditions.TalonDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
@@ -76,7 +75,7 @@ public class MiyamotoXMLInterpreter {
 	 * @return command list of specified path
 	 * 
 	 */
-	public CommandList getPathList(String id) {
+	public CommandList getPathList(String id) throws Exception {
 		// Searches the paths for the correct one
 		Node xmlPath = null;
 		NodeList paths = xmlFile.getElementsByTagName("Path");
