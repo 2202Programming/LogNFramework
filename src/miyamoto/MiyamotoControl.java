@@ -91,7 +91,7 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	 * @return if the robot should intake
 	 */
 	public boolean outtakeSlow() {
-		return controllers[1].getYHeld();
+		return controllers[0].getLeftBumperHeld();
 	}
 
 	/**
@@ -100,15 +100,15 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	 * @return if the robot should outtake
 	 */
 	public boolean outtake() {
-		return controllers[1].getBHeld();
+		return controllers[0].getLeftTriggerHeld();
 	}
 
 	public boolean overrideIntake() {
-		return controllers[1].getAHeld();
+		return controllers[0].getRightTriggerHeld();
 	}
 
 	public boolean rotateIntake() {
-		return controllers[1].getXHeld();
+		return controllers[0].getRightBumperHeld();
 	}
 
 	public boolean raiseLift() {
@@ -124,7 +124,7 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	}
 
 	public boolean reverseDrive() {
-		return controllers[0].getLeftBumperPressed();
+		return controllers[0].getXPressed();
 	}
 
 	public boolean manualLiftUp() {

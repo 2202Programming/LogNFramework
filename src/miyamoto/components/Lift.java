@@ -82,13 +82,14 @@ public class Lift extends IControl {
 			setPosition -= 100;
 		}
 		
-		if(controller.resetLift()){
-			motor.reset();
-		}
-		
+//		if(controller.resetLift()){
+//			motor.reset();
+//		}
+//		
 		SmartWriter.putD("SetPosition", setPosition);
 		SmartWriter.putD("LiftPos", motor.getTalon().getSelectedSensorPosition(0));
 		SmartWriter.putD("LiftCurrent", motor.getTalon().getOutputCurrent());
+		//System.out.println("LiftPower: " + motor.getTalon().getSelectedSensorVelocity(0));
 		motor.set(setPosition);
 	}
 

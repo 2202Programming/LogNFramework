@@ -90,6 +90,7 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 	protected void teleopUpdate() {
 		MotorPowers forward = setForwardSpeed();
 		MotorPowers turn = setTurnAmount();
+		System.out.println(turn.leftPower + " " + turn.rightPower);
 		leftPower = forward.leftPower + turn.leftPower;
 		rightPower = forward.rightPower + turn.rightPower;
 	}
@@ -112,6 +113,13 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 			toReturn.leftPower = -toReturn.leftPower;
 			toReturn.rightPower = -toReturn.rightPower;
 		}
+		
+		if(Math.abs(toReturn.leftPower) > maxVelocity){
+			toReturn.leftPower = Math.signum(toReturn.leftPower) * maxVelocity;
+		}
+		if(Math.abs(toReturn.rightPower) > maxVelocity){
+			toReturn.rightPower = Math.signum(toReturn.rightPower) * maxVelocity;
+		}
 		return toReturn;
 	}
 
@@ -131,12 +139,12 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 
 	@Override
 	protected void setMotors() {
-		if (Math.abs(leftPower) > maxVelocity) {
-			leftPower = Math.signum(leftPower) * maxVelocity;
-		}
-		if (Math.abs(rightPower) > maxVelocity) {
-			rightPower = Math.signum(rightPower) * maxVelocity;
-		}
+//		if (Math.abs(leftPower) > maxVelocity) {
+//			leftPower = Math.signum(leftPower) * maxVelocity;
+//		}
+//		if (Math.abs(rightPower) > maxVelocity) {
+//			rightPower = Math.signum(rightPower) * maxVelocity;
+//		}
 		rightMotors.set(rightPower);
 		leftMotors.set(leftPower);
 	}
