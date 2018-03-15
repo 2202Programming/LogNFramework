@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
 import robot.Global;
+import robot.Global.StartPosition;
 import robot.Global.TargetSide;
 import robot.IControl;
 
@@ -34,7 +35,6 @@ public class AutoRunner extends IControl {
 		XMLInterpreter = new MiyamotoXMLInterpreter(file);
 		long interpretEnd = System.currentTimeMillis();
 
-		
 		System.out.println(file.getName());
 		System.out.println("File read and Parse Time Only: " + (interpretEnd - startRead));
 	}
@@ -157,54 +157,65 @@ public class AutoRunner extends IControl {
 
 		int pathNum = 1; // Defaults to front approach of the switch
 
-		if (switchboard.getObjective()) {
-			// If we are going for the scale
-			System.out.println("Going for scale");
-			pathNum += 4;
-			if (Global.scalePosition == TargetSide.L) {
-				// If we are going for the left side of the scale
-				pathNum += 2;
-			}
-			if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
-				// If scale is same side
-				pathNum++;
-			}
-		} else {
-			// If we are going for the switch
-			System.out.println("Going for switch");
-			if (Global.ourSwitchPosition == TargetSide.L) {
-				// If going for the left side of the switch
-				pathNum += 2;
-			}
-			if (path.charAt(0) != 'M') {
-				// If not starting mid
-				pathNum++;
-			}
-		}
-
-		path += pathNum + "-";
-		System.out.println(path);
-
-		int pathType = 0;
-
-		// Determines primary (optimal) path or alternate path
-		if (switchboard.getPathType()) {
-			// If we take the alternate path
-			pathType += 2;
-		} else {
-			// If we take the primary path
-			pathType += 1;
-		}
-
-		// If we can do 2 block auto
+		// Chooses 2 block (scale and switch) above all else whenever possible
 		if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
-				&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
-			pathType += 2;
+				&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString())) {
+			if (switchboard.getStartPosition().equals(StartPosition.L)) {
+				return "L8-3";
+			} else if (switchboard.getStartPosition().equals(StartPosition.R)) {
+				return "R6-3";
+			}
+		} else {
+			if (switchboard.getObjective()) {
+				// If we are going for the scale
+				System.out.println("Going for scale");
+				pathNum += 4;
+				if (Global.scalePosition == TargetSide.L) {
+					// If we are going for the left side of the scale
+					pathNum += 2;
+				}
+				if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
+					// If scale is same side
+					pathNum++;
+				}
+			} else {
+				// If we are going for the switch
+				System.out.println("Going for switch");
+				if (Global.ourSwitchPosition == TargetSide.L) {
+					// If going for the left side of the switch
+					pathNum += 2;
+				}
+				if (path.charAt(0) != 'M') {
+					// If not starting mid
+					pathNum++;
+				}
+			}
+
+			path += pathNum + "-";
+			System.out.println(path);
+
+			int pathType = 0;
+
+			// Determines primary (optimal) path or alternate path
+			if (switchboard.getPathType()) {
+				// If we take the alternate path
+				pathType += 2;
+			} else {
+				// If we take the primary path
+				pathType += 1;
+			}
+
+			// If we can do 2 block auto
+			if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
+					&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
+				pathType += 2;
+			}
+
+			path += pathType;
+
+			System.out.println(path);
 		}
-
-		path += pathType;
-
-		System.out.println(path);
+		
 		return path;
 	}
 }
