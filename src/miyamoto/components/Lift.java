@@ -15,7 +15,7 @@ public class Lift extends IControl {
 	private int mainIndex;
 	private int utilityIndex;
 	private boolean settling;
-	private LiftPosition settlePosition;
+	private int settlePosition;
 	
 	public Lift(TalonSRXMotor motor){
 		controller = (MiyamotoControl)Global.controllers;
@@ -45,11 +45,17 @@ public class Lift extends IControl {
 
 	public void setLiftPosition(LiftPosition position) {
 		setPosition = position.getNumber();
-		settlePosition = position;
+		settlePosition = position.getNumber();
 		settling = true;
 	}
 
 	public void setLiftPosition(int position) {
+		setPosition = position;
+		settlePosition = position;
+		settling = true;
+	}
+	
+	private void setLiftNoSettle(int position) {
 		setPosition = position;
 	}
 
@@ -136,22 +142,12 @@ public class Lift extends IControl {
 		motor.set(setPosition);
 	}
 	
-	public void settleLift(int index){
+	public void settleLift(int setPosition){
 		int counts = Math.abs(motor.getTalon().getSelectedSensorPosition(0));
-		if(counts < mainPositions[index].getNumber()){
-			setLiftPosition(LiftPosition.MAX.getNumber());
+		if(counts < setPosition){
+			setLiftNoSettle(LiftPosition.MAX.getNumber());
 		}else{
-			setLiftPosition(mainPositions[index].getNumber());
-			settling = false;
-		}
-	}
-	
-	public void settleLift(LiftPosition setPosition){
-		int counts = Math.abs(motor.getTalon().getSelectedSensorPosition(0));
-		if(counts < setPosition.getNumber()){
-			setLiftPosition(LiftPosition.MAX.getNumber());
-		}else{
-			setLiftPosition(setPosition.getNumber());
+			setLiftNoSettle(setPosition);
 			settling = false;
 		}
 	}
