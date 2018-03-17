@@ -20,7 +20,12 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="198">
+			<DistanceStopCondition Dist_Inches="170">
+			</DistanceStopCondition>
+		</DriveCommand>
+		
+		<DriveCommand Angle="0" Power="0.2">
+			<DistanceStopCondition Dist_Inches="25">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -36,7 +41,12 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="185">
+			<DistanceStopCondition Dist_Inches="165">
+			</DistanceStopCondition>
+		</DriveCommand>
+		
+		<DriveCommand Angle="90" Power="0.2">
+			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -99,8 +109,13 @@
 			</TimerStopCondition>
 		</IntakeCommand>
 
-		<DriveCommand Angle="0" Power="1.0">
-			<DistanceStopCondition Dist_Inches="168">
+		<DriveCommand Angle="90" Power="0.9">
+			<DistanceStopCondition Dist_Inches="160">
+			</DistanceStopCondition>
+		</DriveCommand>
+		
+		<DriveCommand Angle="90" Power="0.2">
+			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -110,9 +125,13 @@
 		<TurnCommand Angle="90">
 		</TurnCommand>
 
-
-		<DriveCommand Angle="90" Power=".7">
-			<DistanceStopCondition Dist_Inches="165">
+		<DriveCommand Angle="90" Power=".5">
+			<DistanceStopCondition Dist_Inches="150">
+			</DistanceStopCondition>
+		</DriveCommand>
+		
+		<DriveCommand Angle="90" Power=".2">
+			<DistanceStopCondition Dist_Inches="25">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -160,7 +179,7 @@
 		</DriveCommand>
 
 		<DriveCommand Angle="0" Power="0.2">
-			<DistanceStopCondition Dist_Inches="30">
+			<DistanceStopCondition Dist_Inches="42">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -171,8 +190,7 @@
 		</TurnCommand>
 
 		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="1500">
-			</TimerStopCondition>
+			<LiftStopCondition Height="SCALE"></LiftStopCondition>
 		</LiftCommand>
 
 		<OuttakeCommand Power="0.7">
@@ -181,8 +199,7 @@
 		</OuttakeCommand>
 
 		<LiftCommand Height="BOTTOM">
-			<TimerStopCondition Timer="2000">
-			</TimerStopCondition>
+			<LiftStopCondition Height="BOTTOM"></LiftStopCondition>
 		</LiftCommand>
 
 		<TurnCommand Angle="138">
@@ -210,8 +227,18 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="0" Power="0.8">
-			<DistanceStopCondition Dist_Inches="192">
+		<DriveCommand Angle="0" Power="0.9">
+			<DistanceStopCondition Dist_Inches="120">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<DriveCommand Angle="0" Power="0.5">
+			<DistanceStopCondition Dist_Inches="50">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<DriveCommand Angle="0" Power="0.2">
+			<DistanceStopCondition Dist_Inches="42">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -222,8 +249,7 @@
 		</TurnCommand>
 
 		<LiftCommand Height="SCALE">
-			<TimerStopCondition Timer="1500">
-			</TimerStopCondition>
+			<LiftStopCondition Height="SCALE"></LiftStopCondition>
 		</LiftCommand>
 
 		<OuttakeCommand Power="0.7">
@@ -232,8 +258,7 @@
 		</OuttakeCommand>
 
 		<LiftCommand Height="BOTTOM">
-			<TimerStopCondition Timer="2000">
-			</TimerStopCondition>
+			<LiftStopCondition Height="BOTTOM"></LiftStopCondition>
 		</LiftCommand>
 
 		<TurnCommand Angle="138">
