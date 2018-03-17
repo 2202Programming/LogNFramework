@@ -127,6 +127,10 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 		return controllers[1].getBHeld();
 	}
 	
+	public boolean secondBlockLift(){
+		return controllers[1].getYHeld();
+	}
+	
 	public boolean climbLift(){
 		return controllers[1].getXHeld();
 	}
