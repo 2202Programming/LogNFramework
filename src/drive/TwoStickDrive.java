@@ -90,7 +90,6 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 	protected void teleopUpdate() {
 		MotorPowers forward = setForwardSpeed();
 		MotorPowers turn = setTurnAmount();
-		System.out.println(turn.leftPower + " " + turn.rightPower);
 		leftPower = forward.leftPower + turn.leftPower;
 		rightPower = forward.rightPower + turn.rightPower;
 	}
