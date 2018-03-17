@@ -130,9 +130,9 @@ public class MiyamotoXMLInterpreter {
 		case ("TurnCommand"): {
 			double turnDegrees = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
 			AngleStopCondition angleStop = new AngleStopCondition(turnDegrees, 2, 0.1);
-			TimerStopCondition timeStop = new TimerStopCondition(1800);
-			return new TurnCommand(angleStop, turnDegrees);
-			//return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees);
+			TimerStopCondition timeStop = new TimerStopCondition(1500);
+			//return new TurnCommand(angleStop, turnDegrees);
+			return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees);
 			//return new TurnCommand(angleStop, turnDegrees, -180, 180, -0.25, 0.25, 1);
 		}
 
