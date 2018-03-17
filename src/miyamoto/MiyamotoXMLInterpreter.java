@@ -130,7 +130,7 @@ public class MiyamotoXMLInterpreter {
 			double turnDegrees = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
 			double maxPower = Math.abs(Double.parseDouble(attributes.getNamedItem("MaxPower").getNodeValue()));
 			AngleStopCondition angleStop = new AngleStopCondition(turnDegrees, 2, 0.1);
-			TimerStopCondition timeStop = new TimerStopCondition(10000);
+			TimerStopCondition timeStop = new TimerStopCondition(1500);
 			// return new TurnCommand(angleStop, turnDegrees);
 			// return new TurnCommand(new OrStopCondition(angleStop, timeStop),
 			// turnDegrees);
@@ -176,7 +176,7 @@ public class MiyamotoXMLInterpreter {
 				targetPosition = LiftPosition.MIDSCALE.getNumber();
 				break;
 			}
-			case ("SCALE"): {
+			case ("HIGHSCALE"): {
 				targetPosition = LiftPosition.HIGHSCALE.getNumber();
 				break;
 			}
@@ -268,7 +268,7 @@ public class MiyamotoXMLInterpreter {
 				targetPosition = LiftPosition.MIDSCALE.getNumber();
 				break;
 			}
-			case ("SCALE"): {
+			case ("HIGHSCALE"): {
 				targetPosition = LiftPosition.HIGHSCALE.getNumber();
 				break;
 			}
