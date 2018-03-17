@@ -1,6 +1,7 @@
 package miyamoto;
 
 import java.io.File;
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -220,11 +221,12 @@ public class MiyamotoXMLInterpreter {
 			}
 		}
 		// System.out.println(stopConditionNode);
+		NamedNodeMap attributes = stopConditionNode.getAttributes();
 		String stopConditionType = stopConditionNode.getNodeName();
 		
 		switch (stopConditionType) {
 		case ("DistanceStopCondition"): {
-			int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
+			int stopDistance = Integer.parseInt(attributes.getNamedItem("Dist_Inches").getNodeValue());
 			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 			SensorController sensorController = SensorController.getInstance();
 			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
@@ -232,7 +234,7 @@ public class MiyamotoXMLInterpreter {
 			return new DistanceStopCondition(encoders, stopDistance);
 		}
 		case ("TimerStopCondition"): {
-			long stopTime = Long.parseLong(stopConditionNode.getAttributes().item(0).getNodeValue());
+			long stopTime = Long.parseLong(attributes.getNamedItem("Timer").getNodeValue());
 			return new TimerStopCondition(stopTime);
 		}
 		case ("LiftStopCondition"): {
@@ -242,7 +244,7 @@ public class MiyamotoXMLInterpreter {
 			// Get target position
 			int targetPosition = lift.getLiftCounts();
 
-			String height = stopConditionNode.getAttributes().item(0).getNodeValue();
+			String height = attributes.getNamedItem("Height").getNodeValue();
 			switch (height) {
 			case ("SWITCH"): {
 				targetPosition = LiftPosition.SWITCH.getNumber();
