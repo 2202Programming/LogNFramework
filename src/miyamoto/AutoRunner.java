@@ -113,6 +113,7 @@ public class AutoRunner extends IControl {
 		if (runner == null) {
 			autonomousInit();
 			System.out.println("Runner is null");
+			return;
 		}
 
 		if (!finished) {
