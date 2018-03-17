@@ -1,7 +1,6 @@
 package miyamoto;
 
 import java.io.File;
-import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,7 +22,6 @@ import auto.commands.LiftCommand;
 import auto.commands.OuttakeCommand;
 import auto.commands.TurnCommand;
 import auto.commands.WaitCommand;
-import auto.stopConditions.AndStopCondition;
 import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.LiftStopCondition;
@@ -136,7 +134,7 @@ public class MiyamotoXMLInterpreter {
 			// return new TurnCommand(angleStop, turnDegrees);
 			// return new TurnCommand(new OrStopCondition(angleStop, timeStop),
 			// turnDegrees);
-			//Turning stalls at .25 power
+			// Turning stalls at .25 power
 			return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees, -180, 180, -maxPower,
 					maxPower, 1);
 		}
@@ -162,16 +160,24 @@ public class MiyamotoXMLInterpreter {
 
 			String height = attributes.getNamedItem("Height").getNodeValue();
 			switch (height) {
+			case ("BOTTOM"): {
+				targetPosition = LiftPosition.BOTTOM.getNumber();
+				break;
+			}
 			case ("SWITCH"): {
 				targetPosition = LiftPosition.SWITCH.getNumber();
 				break;
 			}
-			case ("SCALE"): {
-				targetPosition = LiftPosition.HIGHSCALE.getNumber();
+			case ("LOWSCALE"): {
+				targetPosition = LiftPosition.LOWSCALE.getNumber();
 				break;
 			}
-			case ("BOTTOM"): {
-				targetPosition = LiftPosition.BOTTOM.getNumber();
+			case ("MIDSCALE"): {
+				targetPosition = LiftPosition.MIDSCALE.getNumber();
+				break;
+			}
+			case ("SCALE"): {
+				targetPosition = LiftPosition.HIGHSCALE.getNumber();
 				break;
 			}
 			default: {
@@ -223,7 +229,7 @@ public class MiyamotoXMLInterpreter {
 		// System.out.println(stopConditionNode);
 		NamedNodeMap attributes = stopConditionNode.getAttributes();
 		String stopConditionType = stopConditionNode.getNodeName();
-		
+
 		switch (stopConditionType) {
 		case ("DistanceStopCondition"): {
 			int stopDistance = Integer.parseInt(attributes.getNamedItem("Dist_Inches").getNodeValue());
@@ -246,16 +252,24 @@ public class MiyamotoXMLInterpreter {
 
 			String height = attributes.getNamedItem("Height").getNodeValue();
 			switch (height) {
+			case ("BOTTOM"): {
+				targetPosition = LiftPosition.BOTTOM.getNumber();
+				break;
+			}
 			case ("SWITCH"): {
 				targetPosition = LiftPosition.SWITCH.getNumber();
 				break;
 			}
-			case ("SCALE"): {
-				targetPosition = LiftPosition.HIGHSCALE.getNumber();
+			case ("LOWSCALE"): {
+				targetPosition = LiftPosition.LOWSCALE.getNumber();
 				break;
 			}
-			case ("BOTTOM"): {
-				targetPosition = LiftPosition.BOTTOM.getNumber();
+			case ("MIDSCALE"): {
+				targetPosition = LiftPosition.MIDSCALE.getNumber();
+				break;
+			}
+			case ("SCALE"): {
+				targetPosition = LiftPosition.HIGHSCALE.getNumber();
 				break;
 			}
 			default: {
