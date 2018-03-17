@@ -22,6 +22,7 @@ import auto.commands.LiftCommand;
 import auto.commands.OuttakeCommand;
 import auto.commands.TurnCommand;
 import auto.commands.WaitCommand;
+import auto.stopConditions.AndStopCondition;
 import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.LiftStopCondition;
@@ -42,8 +43,9 @@ public class MiyamotoXMLInterpreter {
 	 * 
 	 * @param f
 	 *            xml file path
+	 * @throws BadXMLReadException 
 	 */
-	public MiyamotoXMLInterpreter(File f) {
+	public MiyamotoXMLInterpreter(File f) throws BadXMLReadException {
 		readFile(f);
 	}
 
@@ -52,8 +54,9 @@ public class MiyamotoXMLInterpreter {
 	 * 
 	 * @param f
 	 *            xml file path
+	 * @throws BadXMLReadException 
 	 */
-	public void readFile(File f) {
+	public void readFile(File f) throws BadXMLReadException {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			dbFactory.setIgnoringElementContentWhitespace(true);
@@ -61,7 +64,9 @@ public class MiyamotoXMLInterpreter {
 			xmlFile = dBuilder.parse(f);
 			xmlFile.getDocumentElement().normalize();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Reading of file broke");
+			
+			throw new BadXMLReadException();
 		}
 	}
 
@@ -124,9 +129,11 @@ public class MiyamotoXMLInterpreter {
 		switch (commandName) {
 		case ("TurnCommand"): {
 			double turnDegrees = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
-			AngleStopCondition angleStop = new AngleStopCondition(turnDegrees, 2, 0.3);
+			AngleStopCondition angleStop = new AngleStopCondition(turnDegrees, 2, 0.1);
 			TimerStopCondition timeStop = new TimerStopCondition(1800);
-			return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees);
+			return new TurnCommand(angleStop, turnDegrees);
+			//return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees);
+			//return new TurnCommand(angleStop, turnDegrees, -180, 180, -0.25, 0.25, 1);
 		}
 
 		case ("DriveCommand"): {
@@ -168,7 +175,7 @@ public class MiyamotoXMLInterpreter {
 			}
 			}
 			System.out.println("Scale Target: " + targetPosition);
-			return new LiftCommand(targetPosition, getStopCondition(n));
+			return new LiftCommand(targetPosition,  new OrStopCondition(new TimerStopCondition(4000), getStopCondition(n)));
 		}
 
 		case ("OuttakeCommand"): {
@@ -230,7 +237,7 @@ public class MiyamotoXMLInterpreter {
 			// Get target position
 			int targetPosition = lift.getLiftCounts();
 
-			String height = parentNode.getAttributes().getNamedItem("Height").getNodeValue();
+			String height = stopConditionNode.getAttributes().item(0).getNodeValue();
 			switch (height) {
 			case ("SWITCH"): {
 				targetPosition = LiftPosition.SWITCH.getNumber();

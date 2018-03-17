@@ -22,7 +22,6 @@ import robot.IControl;
 public class AutoRunner extends IControl {
 	MiyamotoXMLInterpreter XMLInterpreter;
 	CommandListRunner runner;
-	CommandList defaultPathList;
 	private double timeCost;
 	private boolean finished;
 	private String gameData;
@@ -33,26 +32,20 @@ public class AutoRunner extends IControl {
 	public void robotInit() {
 		long startRead = System.currentTimeMillis();
 		File file = new File("/home/lvuser/Paths.xml");
-		XMLInterpreter = new MiyamotoXMLInterpreter(file);
-		long interpretEnd = System.currentTimeMillis();
-
-		System.out.println(file.getName());
-		System.out.println("File read and Parse Time Only: " + (interpretEnd - startRead));
 		try {
+			XMLInterpreter = new MiyamotoXMLInterpreter(file);
+			long interpretEnd = System.currentTimeMillis();
 			createCommandList("D");
+
+			System.out.println("**********Successfully made XMLInterpreter**********");
+			System.out.println(file.getName());
+			System.out.println("File Read Time: " + (interpretEnd - startRead));
 		} catch (Exception e) {
-			defaultPathList = new CommandList();
-
-			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
-			SensorController sensorController = SensorController.getInstance();
-			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
-			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
-
-			defaultPathList.addCommand(new DriveAtAngle(new DistanceStopCondition(encoders, 70), 0.5, 0));
-			System.out.println("**********Caught error and will run default path**********");
+			XMLInterpreter = null;
+			System.out.println("**********Caught Path File Loading Error**********");
 			e.printStackTrace();
+
 		}
-		System.out.println("**********Successfully ran default path**********");
 	}
 
 	// Parse game data from FMS and set enums for auto switch/scale positions
@@ -66,47 +59,43 @@ public class AutoRunner extends IControl {
 		navX.reset();
 
 		if (gameData == null || gameData.length() != 3) {
-			try {
-
-				runner = new CommandListRunner(defaultPathList);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			useDefaultCommandList();
 			return;
 		}
+
+		if (gameData.charAt(0) == 'L') {
+			Global.ourSwitchPosition = TargetSide.L;
+		} else {
+			Global.ourSwitchPosition = TargetSide.R;
+		}
+
+		if (gameData.charAt(1) == 'L') {
+			Global.scalePosition = TargetSide.L;
+		} else {
+			Global.scalePosition = TargetSide.R;
+		}
+
+		if (gameData.charAt(2) == 'L') {
+			Global.opponentSwitchPosition = TargetSide.L;
+		} else {
+			Global.opponentSwitchPosition = TargetSide.R;
+		}
+
 		try {
-			if (gameData.charAt(0) == 'L') {
-				Global.ourSwitchPosition = TargetSide.L;
-			} else {
-				Global.ourSwitchPosition = TargetSide.R;
-			}
-
-			if (gameData.charAt(1) == 'L') {
-				Global.scalePosition = TargetSide.L;
-			} else {
-				Global.scalePosition = TargetSide.R;
-			}
-
-			if (gameData.charAt(2) == 'L') {
-				Global.opponentSwitchPosition = TargetSide.L;
-			} else {
-				Global.opponentSwitchPosition = TargetSide.R;
-			}
-
 			String pathChosen = choosePath();
 
 			createCommandList(pathChosen);
 		} catch (Exception e) {
 			System.out.println("Inavlid path construction from pathChosen; will run default path");
-			runner = new CommandListRunner(defaultPathList);
+			useDefaultCommandList();
 		}
 		long autoInitEnd = System.currentTimeMillis();
-		System.out.println("Auto Init run time: " + (autoInitEnd-autoInitStart));
+		System.out.println("Auto Init run time: " + (autoInitEnd - autoInitStart));
 	}
 
 	// Creates list of auto commands to be run
 	public void createCommandList(String path) throws Exception {
-		if (path == null || path.equals("null") || path.equals("")) {
+		if (path == null || path.equals("null") || path.equals("") || runner != null) {
 			return;
 		}
 		finished = false;
@@ -172,65 +161,69 @@ public class AutoRunner extends IControl {
 
 		int pathNum = 1; // Defaults to front approach of the switch
 
-		// Chooses 2 block (scale and switch) above all else whenever possible
-		if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
-				&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString())) {
-			if (switchboard.getStartPosition().equals(StartPosition.L)) {
-				return "L8-3";
-			} else if (switchboard.getStartPosition().equals(StartPosition.R)) {
-				return "R6-3";
+		if (switchboard.getObjective()) {
+			// If we are going for the scale
+			System.out.println("Going for scale");
+			pathNum += 4;
+			if (Global.scalePosition == TargetSide.L) {
+				// If we are going for the left side of the scale
+				pathNum += 2;
+			}
+			if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
+				// If scale is same side
+				pathNum++;
 			}
 		} else {
-			if (switchboard.getObjective()) {
-				// If we are going for the scale
-				System.out.println("Going for scale");
-				pathNum += 4;
-				if (Global.scalePosition == TargetSide.L) {
-					// If we are going for the left side of the scale
-					pathNum += 2;
-				}
-				if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
-					// If scale is same side
-					pathNum++;
-				}
-			} else {
-				// If we are going for the switch
-				System.out.println("Going for switch");
-				if (Global.ourSwitchPosition == TargetSide.L) {
-					// If going for the left side of the switch
-					pathNum += 2;
-				}
-				if (path.charAt(0) != 'M') {
-					// If not starting mid
-					pathNum++;
-				}
+			// If we are going for the switch
+			System.out.println("Going for switch");
+			if (Global.ourSwitchPosition == TargetSide.L) {
+				// If going for the left side of the switch
+				pathNum += 2;
 			}
-
-			path += pathNum + "-";
-			System.out.println(path);
-
-			int pathType = 0;
-
-			// Determines primary (optimal) path or alternate path
-			if (switchboard.getPathType()) {
-				// If we take the alternate path
-				pathType += 2;
-			} else {
-				// If we take the primary path
-				pathType += 1;
+			if (path.charAt(0) != 'M') {
+				// If not starting mid
+				pathNum++;
 			}
-
-			// If we can do 2 block auto
-			if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
-					&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
-				pathType += 2;
-			}
-
-			path += pathType;
-
-			System.out.println(path);
 		}
-		
+
+		path += pathNum + "-";
+		System.out.println(path);
+
+		int pathType = 0;
+
+		// Determines primary (optimal) path or alternate path
+		if (switchboard.getPathType()) {
+			// If we take the alternate path
+			pathType += 2;
+		} else {
+			// If we take the primary path
+			pathType += 1;
+		}
+
+		// If we can do 2 block auto
+		if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
+				&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
+			pathType += 2;
+		}
+
+		path += pathType;
+
+		System.out.println(path);
+
 		return path;
+	}
+
+	public void useDefaultCommandList() {
+		CommandList defaultPathList = new CommandList();
+
+		ArrayList<Encoder> encoders = new ArrayList<Encoder>();
+		SensorController sensorController = SensorController.getInstance();
+		encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
+		encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
+
+		defaultPathList.addCommand(new DriveAtAngle(new DistanceStopCondition(encoders, 70), 0.5, 0));
+		System.out.println("**********Caught error and will run default path**********");
+
+		runner = new CommandListRunner(defaultPathList);
 	}
 }
