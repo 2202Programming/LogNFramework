@@ -130,7 +130,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		Intake intake = new Intake(intakeLeft, intakeRight);
 		iControlMap.put("INTAKE", intake);
 
-		TalonSRXMotor liftMotor = new TalonSRXMotor(11, true, 0.3, 0.0, 0.0, 0.0);
+		TalonSRXMotor liftMotor = new TalonSRXMotor(11, true, 0.2, 0.0, 0.0, 0.0);
 		iControlMap.put("LIFT_TALON", liftMotor);
 		Lift lift = new Lift(liftMotor);
 		iControlMap.put("LIFT", lift);
