@@ -13,7 +13,6 @@ public class Lift extends IControl {
 	private LiftPosition[] mainPositions;
 	private LiftPosition[] utilityPositions;
 	private int mainIndex;
-	private int utilityIndex;
 	private boolean settling;
 	private int settlePosition;
 	
@@ -28,12 +27,6 @@ public class Lift extends IControl {
 		mainPositions[2] = LiftPosition.LOWSCALE;
 		mainPositions[3] = LiftPosition.MIDSCALE;
 		mainPositions[4] = LiftPosition.HIGHSCALE;
-		
-		utilityPositions = new LiftPosition[4];
-		utilityPositions[0] = LiftPosition.BOTTOM;
-		utilityPositions[1] = LiftPosition.EXCHANGE;
-		utilityPositions[2] = LiftPosition.PORTAL;
-		utilityPositions[3] = LiftPosition.CLIMB;
 		
 		mainIndex = 0;
 		settling = false;
@@ -78,7 +71,6 @@ public class Lift extends IControl {
 	public void teleopInit(){
 		//motor.reset();
 		mainIndex = 0;
-		utilityIndex = 0;
 		//setLiftPosition(LiftPosition.BOTTOM);
 		motor.set(setPosition);
 		settling = false;
@@ -86,25 +78,25 @@ public class Lift extends IControl {
 	
 	public void teleopPeriodic(){
 		if(controller.raiseLift()){
-			utilityIndex = 0;
 			mainIndex = Math.min(mainPositions.length-1, mainIndex+1);
 			setLiftPosition(mainPositions[mainIndex]);
 		}
 		if(controller.lowerLift()){
-			utilityIndex = 0;
 			mainIndex = Math.max(0, mainIndex-1);
 			setLiftPosition(mainPositions[mainIndex]);
 		}
 		
-		if(controller.raiseLiftUtility()){
+		if(controller.exchangeLift()){
 			mainIndex = 0;
-			utilityIndex = Math.min(utilityPositions.length-1, utilityIndex+1);
-			setLiftPosition(utilityPositions[utilityIndex]);
+			setLiftPosition(LiftPosition.EXCHANGE);
 		}
-		if(controller.lowerLiftUtility()){
+		if(controller.portalLift()){
 			mainIndex = 0;
-			utilityIndex = Math.max(0, utilityIndex-1);
-			setLiftPosition(utilityPositions[utilityIndex]);
+			setLiftPosition(LiftPosition.PORTAL);
+		}
+		if(controller.climbLift()){
+			mainIndex = 0;
+			setLiftPosition(LiftPosition.CLIMB);
 		}
 		
 		if(settling){

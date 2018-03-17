@@ -119,12 +119,16 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 		return controllers[1].getLeftBumperPressed();
 	}
 	
-	public boolean raiseLiftUtility(){
-		return controllers[1].getStartPressed();
+	public boolean exchangeLift(){
+		return controllers[1].getAHeld();
 	}
 	
-	public boolean lowerLiftUtility(){
-		return controllers[1].getBackPressed();
+	public boolean portalLift(){
+		return controllers[1].getBHeld();
+	}
+	
+	public boolean climbLift(){
+		return controllers[1].getXHeld();
 	}
 
 	public boolean cycleMotionProfile() {
