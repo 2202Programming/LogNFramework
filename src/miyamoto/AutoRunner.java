@@ -85,7 +85,8 @@ public class AutoRunner extends IControl {
 
 			createCommandList(pathChosen);
 		} catch (Exception e) {
-			System.out.println("Inavlid path construction from pathChosen; will run default path");
+			System.out.println("Invalid path construction from pathChosen; will run default path");
+			e.printStackTrace();
 			useDefaultCommandList();
 		}
 		long autoInitEnd = System.currentTimeMillis();
@@ -145,13 +146,14 @@ public class AutoRunner extends IControl {
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
 		path += switchboard.getStartPosition();
 
-		System.out.println("Start Position: " + switchboard.getStartPosition());
-		System.out.println("Approach: " + switchboard.getApproach());
-		System.out.println("Objective: " + switchboard.getObjective());
-		System.out.println("Path Type: " + switchboard.getPathType());
+		System.out.println("Start Position: " + switchboard.getStartPosition() + 
+				"\n" + "Approach: " + switchboard.getApproach() + 
+				"\n" + "Objective: " + switchboard.getObjective() + 
+				"\n" + "Path Type: " + switchboard.getPathType());
 		System.out.println(path);
 
 		if (path.equals("null") || path.equals("")) {
+			System.out.println("Path is Bad; no switchboard input");
 			return null;
 		}
 
