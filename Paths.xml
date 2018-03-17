@@ -6,10 +6,10 @@
 
 		<!-- <TurnCommand Angle="135" MaxPower="1.0"> </TurnCommand> -->
 
-		<DriveCommand Angle="0" Power="0.5">
-			<DistanceStopCondition Dist_Inches="70">
-			</DistanceStopCondition>
-		</DriveCommand>
+		<!-- <LiftCommand Height="SWITCH"> <LiftStopCondition Height="SWITCH"> 
+			</LiftStopCondition> </LiftCommand> -->
+		<TurnCommand Angle="90" MaxPower="1.0">
+		</TurnCommand>
 
 	</Path>
 
@@ -19,11 +19,11 @@
 			</TimerStopCondition>
 		</IntakeCommand>
 
-		<DriveCommand Angle="0" Power="0.5">
+		<DriveCommand Angle="0" Power="0.9">
 			<DistanceStopCondition Dist_Inches="170">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<DriveCommand Angle="0" Power="0.2">
 			<DistanceStopCondition Dist_Inches="25">
 			</DistanceStopCondition>
@@ -44,7 +44,7 @@
 			<DistanceStopCondition Dist_Inches="165">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<DriveCommand Angle="90" Power="0.2">
 			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
@@ -78,12 +78,12 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="0" Power=".5">
+		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="90">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<DriveCommand Angle="0" Power=".2">
+		<DriveCommand Angle="0" Power="0.2">
 			<DistanceStopCondition Dist_Inches="30">
 			</DistanceStopCondition>
 		</DriveCommand>
@@ -91,7 +91,7 @@
 		<TurnCommand Angle="90" MaxPower="1.0">
 		</TurnCommand>
 
-		<DriveCommand Angle="90" Power=".5">
+		<DriveCommand Angle="90" Power="0.5">
 			<TimerStopCondition Timer="300">
 			</TimerStopCondition>
 		</DriveCommand>
@@ -112,7 +112,7 @@
 			<DistanceStopCondition Dist_Inches="160">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<DriveCommand Angle="0" Power="0.2">
 			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
@@ -124,12 +124,12 @@
 		<TurnCommand Angle="90" MaxPower="1.0">
 		</TurnCommand>
 
-		<DriveCommand Angle="90" Power=".5">
+		<DriveCommand Angle="90" Power="0.5">
 			<DistanceStopCondition Dist_Inches="150">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
-		<DriveCommand Angle="90" Power=".2">
+
+		<DriveCommand Angle="90" Power="0.2">
 			<DistanceStopCondition Dist_Inches="25">
 			</DistanceStopCondition>
 		</DriveCommand>
@@ -149,7 +149,7 @@
 			<DistanceStopCondition Dist_Inches="14">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<LiftCommand Height="LOWSCALE">
 			<LiftStopCondition Height="LOWSCALE"></LiftStopCondition>
 		</LiftCommand>
@@ -286,7 +286,7 @@
 			<DistanceStopCondition Dist_Inches="8">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<LiftCommand Height="SWITCH">
 			<LiftStopCondition Height="8500"></LiftStopCondition>
 		</LiftCommand>
@@ -490,7 +490,7 @@
 			<DistanceStopCondition Dist_Inches="170">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<DriveCommand Angle="0" Power="0.2">
 			<DistanceStopCondition Dist_Inches="25">
 			</DistanceStopCondition>
@@ -511,7 +511,7 @@
 			<DistanceStopCondition Dist_Inches="165">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<DriveCommand Angle="-90" Power="0.2">
 			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
@@ -660,7 +660,7 @@
 			<DistanceStopCondition Dist_Inches="8">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<LiftCommand Height="SWITCH">
 			<LiftStopCondition Height="8500"></LiftStopCondition>
 		</LiftCommand>
@@ -681,7 +681,7 @@
 			<DistanceStopCondition Dist_Inches="160">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<DriveCommand Angle="0" Power="0.2">
 			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
@@ -697,7 +697,7 @@
 			<DistanceStopCondition Dist_Inches="150">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<DriveCommand Angle="-90" Power=".2">
 			<DistanceStopCondition Dist_Inches="25">
 			</DistanceStopCondition>
@@ -718,7 +718,7 @@
 			<DistanceStopCondition Dist_Inches="14">
 			</DistanceStopCondition>
 		</DriveCommand>
-		
+
 		<LiftCommand Height="LOWSCALE">
 			<LiftStopCondition Height="LOWSCALE"></LiftStopCondition>
 		</LiftCommand>
