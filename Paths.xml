@@ -4,7 +4,7 @@
 
 	<Path Id="D">
 
-		<!-- <TurnCommand Angle="135"> </TurnCommand> -->
+		<!-- <TurnCommand Angle="135" MaxPower="1.0"> </TurnCommand> -->
 
 		<DriveCommand Angle="0" Power="0.5">
 			<DistanceStopCondition Dist_Inches="70">
@@ -27,7 +27,7 @@
 		<WaitCommand Time="200">
 		</WaitCommand>
 
-		<TurnCommand Angle="90">
+		<TurnCommand Angle="90" MaxPower="1.0">
 		</TurnCommand>
 
 		<LiftCommand Height="SWITCH">
@@ -43,7 +43,7 @@
 		<WaitCommand Time="400">
 		</WaitCommand>
 
-		<TurnCommand Angle="135">
+		<TurnCommand Angle="135" MaxPower="1.0">
 		</TurnCommand>
 
 		<DriveCommand Angle="135" Power="0.5">
@@ -79,7 +79,7 @@
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="90">
+		<TurnCommand Angle="90" MaxPower="1.0">
 		</TurnCommand>
 
 		<DriveCommand Angle="90" Power=".5">
