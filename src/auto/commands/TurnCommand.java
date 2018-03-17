@@ -171,13 +171,13 @@ public class TurnCommand implements ICommand {
 			// TODO setPIDVALUES
 			break;
 		case MIYAMOTO:
-			// With FRC PID values are (.045, .1, 0.0);
-			BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoPIDValues.txt"));
-			Double Kp = Double.parseDouble(in.readLine());
-			Double Kd = Double.parseDouble(in.readLine());
-			Double Ki = Double.parseDouble(in.readLine());
-			in.close();
-			controller.setPID(Kp, Ki, Kd);
+			// With FRC PID values are (.055, .5, 0.0);
+//			BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoPIDValues.txt"));
+//			Double Kp = Double.parseDouble(in.readLine());
+//			Double Kd = Double.parseDouble(in.readLine());
+//			Double Ki = Double.parseDouble(in.readLine());
+//			in.close();
+			controller.setPID(.055, .5, 0.0);
 			break;
 		case UNKNOWN:
 			// TODO setPIDVALUES
