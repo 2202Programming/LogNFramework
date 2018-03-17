@@ -20,7 +20,7 @@ public class CommandListRunner {
 		commands = xCommands;
 		init();
 	}
-	
+
 	/**
 	 * Initializes to first command
 	 */
@@ -31,11 +31,13 @@ public class CommandListRunner {
 
 	/**
 	 * Runs the current list of commands
+	 * 
 	 * @return if the list has finished
 	 */
 	public boolean runList() {
 		curCommand = commands.getCommand(commandNum);
-		if(curCommand instanceof EmptyCommand) return true;
+		if (curCommand instanceof EmptyCommand)
+			return true;
 		if (prevCommandNum != commandNum) {
 			prevCommandNum = commandNum;
 			curCommand.init();
@@ -48,7 +50,9 @@ public class CommandListRunner {
 	}
 
 	public void stop() {
-		commandNum=commands.size();
-		curCommand.stop();
+		commandNum = commands.size();
+		if (curCommand != null) {
+			curCommand.stop();
+		}
 	}
 }
