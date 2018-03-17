@@ -43,7 +43,7 @@ public class MiyamotoXMLInterpreter {
 	 * 
 	 * @param f
 	 *            xml file path
-	 * @throws BadXMLReadException 
+	 * @throws BadXMLReadException
 	 */
 	public MiyamotoXMLInterpreter(File f) throws BadXMLReadException {
 		readFile(f);
@@ -54,7 +54,7 @@ public class MiyamotoXMLInterpreter {
 	 * 
 	 * @param f
 	 *            xml file path
-	 * @throws BadXMLReadException 
+	 * @throws BadXMLReadException
 	 */
 	public void readFile(File f) throws BadXMLReadException {
 		try {
@@ -65,7 +65,7 @@ public class MiyamotoXMLInterpreter {
 			xmlFile.getDocumentElement().normalize();
 		} catch (Exception e) {
 			System.out.println("Reading of file broke");
-			
+
 			throw new BadXMLReadException();
 		}
 	}
@@ -129,11 +129,15 @@ public class MiyamotoXMLInterpreter {
 		switch (commandName) {
 		case ("TurnCommand"): {
 			double turnDegrees = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
+			double maxPower = Math.abs(Double.parseDouble(attributes.getNamedItem("MaxPower").getNodeValue()));
 			AngleStopCondition angleStop = new AngleStopCondition(turnDegrees, 2, 0.1);
 			TimerStopCondition timeStop = new TimerStopCondition(1500);
-			//return new TurnCommand(angleStop, turnDegrees);
-			return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees);
-			//return new TurnCommand(angleStop, turnDegrees, -180, 180, -0.25, 0.25, 1);
+			// return new TurnCommand(angleStop, turnDegrees);
+			// return new TurnCommand(new OrStopCondition(angleStop, timeStop),
+			// turnDegrees);
+			//Turning stalls at .25 power
+			return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees, -180, 180, -maxPower,
+					maxPower, 1);
 		}
 
 		case ("DriveCommand"): {
@@ -175,7 +179,8 @@ public class MiyamotoXMLInterpreter {
 			}
 			}
 			System.out.println("Scale Target: " + targetPosition);
-			return new LiftCommand(targetPosition,  new OrStopCondition(new TimerStopCondition(4000), getStopCondition(n)));
+			return new LiftCommand(targetPosition,
+					new OrStopCondition(new TimerStopCondition(4000), getStopCondition(n)));
 		}
 
 		case ("OuttakeCommand"): {
@@ -216,7 +221,7 @@ public class MiyamotoXMLInterpreter {
 		}
 		// System.out.println(stopConditionNode);
 		String stopConditionType = stopConditionNode.getNodeName();
-
+		
 		switch (stopConditionType) {
 		case ("DistanceStopCondition"): {
 			int stopDistance = Integer.parseInt(stopConditionNode.getAttributes().item(0).getNodeValue());
