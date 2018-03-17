@@ -58,7 +58,7 @@ public class AutoRunner extends IControl {
 		AHRS navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
 		navX.reset();
 
-		if (gameData == null || gameData.length() != 3) {
+		if (gameData == null || gameData.length() < 3) {
 			useDefaultCommandList();
 			return;
 		}
