@@ -169,6 +169,7 @@ public class TurnCommand implements ICommand {
 			// TODO setPIDVALUES
 			break;
 		case MIYAMOTO:
+			//Old Pid was (.045, 0.1, 0.0)
 			// With FRC PID values are (.055, .5, 0.0);
 //			BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoPIDValues.txt"));
 //			Double Kp = Double.parseDouble(in.readLine());
