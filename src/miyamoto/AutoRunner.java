@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
 import robot.Global;
-import robot.Global.StartPosition;
 import robot.Global.TargetSide;
 import robot.IControl;
 
