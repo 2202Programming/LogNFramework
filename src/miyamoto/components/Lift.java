@@ -94,6 +94,10 @@ public class Lift extends IControl {
 			mainIndex = 0;
 			setLiftPosition(LiftPosition.PORTAL);
 		}
+		if(controller.secondBlockLift()) {
+			mainIndex = 0;
+			setLiftPosition(LiftPosition.SECONDBLOCK);
+		}
 		if(controller.climbLift()){
 			mainIndex = 0;
 			setLiftPosition(LiftPosition.CLIMB);
