@@ -61,8 +61,8 @@ public class Intake extends IControl {
 	}
 
 	public void rotate() {
-		intakeMotorLeft.set(-0.3);
-		intakeMotorRight.set(-0.3);
+		intakeMotorLeft.set(0.3);
+		intakeMotorRight.set(0.3);
 	}
 	
 	public void holdBlock() {
