@@ -39,7 +39,7 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="160">
+			<DistanceStopCondition Dist_Inches="180">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -48,12 +48,12 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<DriveCommand Angle="90" Power="0.2">
-			<DistanceStopCondition Dist_Inches="35">
+		<DriveCommand Angle="112" Power="0.2">
+			<DistanceStopCondition Dist_Inches="38">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<WaitCommand Time="400">
+		<WaitCommand Time="200">
 		</WaitCommand>
 
 		<TurnCommand Angle="135" MaxPower="1.0">
@@ -64,7 +64,7 @@
 			</TimerStopCondition>
 		</DriveCommand>
 
-		<OuttakeCommand Power="0.4">
+		<OuttakeCommand Power="0.3">
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
@@ -133,7 +133,7 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="165">
+			<DistanceStopCondition Dist_Inches="180">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -154,7 +154,7 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="-108" Power="0.3">
-			<DistanceStopCondition Dist_Inches="16">
+			<DistanceStopCondition Dist_Inches="10">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -176,7 +176,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="0.9">
-			<DistanceStopCondition Dist_Inches="135">
+			<DistanceStopCondition Dist_Inches="138">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -220,7 +220,7 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="120" Power="0.5">
-			<DistanceStopCondition Dist_Inches="33">
+			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -237,7 +237,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="0.9">
-			<DistanceStopCondition Dist_Inches="135">
+			<DistanceStopCondition Dist_Inches="138">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -281,7 +281,7 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="120" Power="0.5">
-			<DistanceStopCondition Dist_Inches="33">
+			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
 		</DriveCommand>
 
