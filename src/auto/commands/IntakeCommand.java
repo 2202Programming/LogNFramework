@@ -9,15 +9,18 @@ public class IntakeCommand implements ICommand {
 	private IStopCondition stopCondition;
 	private Intake intake;
 	private double speed;
+	private double holdSpeed;
 
 	/**
 	 * Intakes at a constant speed until a condition is fulfilled
+	 * 
 	 * @param stop
 	 *            The condition that stops the command
 	 */
-	public IntakeCommand(double speed, IStopCondition stop) {
+	public IntakeCommand(double speed, double holdSpeed, IStopCondition stop) {
 		stopCondition = stop;
 		this.speed = speed;
+		this.holdSpeed = holdSpeed;
 	}
 
 	public void init() {
@@ -35,6 +38,6 @@ public class IntakeCommand implements ICommand {
 	}
 
 	public void stop() {
-		intake.holdBlock();
+		intake.runIntake(holdSpeed);
 	}
 }

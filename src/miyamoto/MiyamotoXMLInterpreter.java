@@ -197,7 +197,14 @@ public class MiyamotoXMLInterpreter {
 
 		case ("IntakeCommand"): {
 			double speed = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
-			return new IntakeCommand(speed, getStopCondition(n));
+			Node holdSpeedNode = attributes.getNamedItem("HoldPower");
+			IStopCondition stop = getStopCondition(n);
+			if (holdSpeedNode == null) {
+				return new IntakeCommand(speed, 0.2, stop);
+			} else {
+				double holdSpeed = Double.parseDouble(holdSpeedNode.getNodeValue());
+				return new IntakeCommand(speed, holdSpeed, stop);
+			}
 		}
 
 		case ("WaitCommand"): {
