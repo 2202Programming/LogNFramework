@@ -133,7 +133,7 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
-			<DistanceStopCondition Dist_Inches="180">
+			<DistanceStopCondition Dist_Inches="175">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -154,7 +154,7 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="-108" Power="0.3">
-			<DistanceStopCondition Dist_Inches="10">
+			<DistanceStopCondition Dist_Inches="16">
 			</DistanceStopCondition>
 		</DriveCommand>
 
