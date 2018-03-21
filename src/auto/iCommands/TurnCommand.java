@@ -1,4 +1,4 @@
-package auto.commands;
+package auto.iCommands;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +23,6 @@ import robotDefinitions.RobotDefinitionBase;
 
 public class TurnCommand implements ICommand {
 	private double degreesToTurn;
-	private IStopCondition stopCondition;
 	private PIDController controller;
 	private PIDOutput output;
 	private PIDSource source;
@@ -36,7 +35,7 @@ public class TurnCommand implements ICommand {
 	 *            The angle to turn to where positive is clockwise
 	 */
 	public TurnCommand(double degreesToTurn) {
-		this(new AngleStopCondition(degreesToTurn, 2, 0.3), degreesToTurn, -180.0, 180.0, -1.0, 1.0, 1.0);
+		this(degreesToTurn, -180.0, 180.0, -1.0, 1.0, 1.0);
 	}
 
 	/**
@@ -47,12 +46,9 @@ public class TurnCommand implements ICommand {
 	 * @param maxError
 	 *            The range of error in degrees for which the bot is considered at
 	 *            the correct target angle
-	 * @param timeInRange
-	 *            The time, in seconds, that the bot has to be facing at the correct
-	 *            angle to be considered on target
 	 */
-	public TurnCommand(double degreesToTurn, double maxError, double timeInRange) {
-		this(new AngleStopCondition(degreesToTurn, maxError, timeInRange), degreesToTurn, -180.0, 180.0, -1.0, 1.0,
+	public TurnCommand(double degreesToTurn, double maxError) {
+		this(degreesToTurn, -180.0, 180.0, -1.0, 1.0,
 				maxError / 180.0);
 	}
 
@@ -73,47 +69,8 @@ public class TurnCommand implements ICommand {
 	 *            The range of error in percentage for which the bot is considered
 	 *            at the correct target angle
 	 */
-
-	public TurnCommand(double degreesToTurn, double maxError, double timeInRange, double minInput, double maxInput,
-			double minOutput, double maxOutput, double percentTolerance) {
-		this(new AngleStopCondition(degreesToTurn, maxError, timeInRange), degreesToTurn, minInput, maxInput, minOutput,
-				maxOutput, percentTolerance);
-	}
-
-	/**
-	 * Turns to an angle
-	 * 
-	 * @param stop
-	 *            A specified stop condition
-	 * @param degreesToTurn
-	 *            The angle to turn to where positive is clockwise
-	 */
-	public TurnCommand(IStopCondition stop, double degreesToTurn) {
-		this(stop, degreesToTurn, -180.0, 180.0, -1.0, 1.0, 1.0);
-	}
-
-	/**
-	 * Turns to an angle
-	 * 
-	 * @param stop
-	 *            A specified stop condition
-	 * @param turnDegrees
-	 *            The angle to turn to where positive is clockwise
-	 * @param minInput
-	 *            The minimum angle
-	 * @param maxInput
-	 *            The maximum angle
-	 * @param minOutput
-	 *            The minimum motor power
-	 * @param maxOutput
-	 *            The maximum motor power
-	 * @param percentTolerance
-	 *            The range of error in percentage for which the bot is considered
-	 *            at the correct target angle
-	 */
-	public TurnCommand(IStopCondition stop, double turnDegrees, double minInput, double maxInput, double minOutput,
+	public TurnCommand(double turnDegrees, double minInput, double maxInput, double minOutput,
 			double maxOutput, double percentTolerance) {
-		stopCondition = stop;
 		degreesToTurn = turnDegrees;
 		output = (TurnController) Global.controlObjects.get("TURNCONTROLLER");
 		source = (AHRS) SensorController.getInstance().getSensor("NAVX");
@@ -134,18 +91,13 @@ public class TurnCommand implements ICommand {
 		controller.setSetpoint(degreesToTurn);
 		controller.enable();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
-		stopCondition.init();
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 	}
 
-	public boolean run() {
+	public void run() {
 		System.out.println("End Point: " + controller.getSetpoint());
 		System.out.println("Motor Power: " + controller.get());
 		System.out.println("Error: " + controller.getError());
-
-		boolean stopNow = stopCondition.stopNow();
-		SmartWriter.putB("hghjkhjghg", stopNow);
-		return stopNow;
 	}
 
 	public void stop() {

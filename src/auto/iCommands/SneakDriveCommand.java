@@ -1,4 +1,4 @@
-package auto.commands;
+package auto.iCommands;
 
 import auto.ICommand;
 import auto.IStopCondition;
@@ -9,7 +9,6 @@ import robotDefinitions.RobotDefinitionBase;
 
 public class SneakDriveCommand implements ICommand {
 
-	private IStopCondition stopCondition;
 	private IDrive drive;
 	private double maxAcceleration;
 	private double prevSpeed;
@@ -25,25 +24,22 @@ public class SneakDriveCommand implements ICommand {
 	 * @param maxAcceleration
 	 *            The acceleration of motor power
 	 */
-	public SneakDriveCommand(IStopCondition stop, double maxAcceleration) {
-		stopCondition = stop;
+	public SneakDriveCommand(double maxAcceleration) {
 		this.maxAcceleration = maxAcceleration;
 		prevSpeed = 0.0;
 	}
 
 	public void init() {
-		stopCondition.init();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 		prevSpeed = drive.getLeftMotorsSpeed();
 	}
 
-	public boolean run() {
+	public void run() {
 		if (drive == null) {
 			init();
 		}
 		setDriveSpeed();
-		return stopCondition.stopNow();
 	}
 
 	private void setDriveSpeed() {

@@ -2,18 +2,18 @@ package auto;
 
 import java.util.ArrayList;
 
-import auto.commands.EmptyCommand;
+import auto.iCommands.EmptyCommand;
 import auto.stopConditions.TimerStopCondition;
 
 
 
 public class CommandList {
 	// holds the list of iCommands to be run
-	private ArrayList<ICommand> iCommands;
+	private ArrayList<IRunnableCommand> iCommands;
 
 	// default constructor creates an empty command list
 	public CommandList() {
-		iCommands=new ArrayList<ICommand>();
+		iCommands=new ArrayList<IRunnableCommand>();
 	}
 
 	/**
@@ -24,7 +24,7 @@ public class CommandList {
 	 * @param CommandIn
 	 *            the command to be inputed
 	 */
-	public void addCommand(ICommand CommandIn) {
+	public void addCommand(IRunnableCommand CommandIn) {
 		iCommands.add(CommandIn);
 	}
 
@@ -37,11 +37,11 @@ public class CommandList {
 	 *            the number of the command
 	 * @return the type, power, and distance for the command
 	 */
-	public ICommand getCommand(int commandNum) {
+	public IRunnableCommand getCommand(int commandNum) {
 		if (commandNum<iCommands.size()) {
 			return iCommands.get(commandNum);
 		}
-		return new EmptyCommand(new TimerStopCondition(1));
+		return null;
 	}
 	
 	public int size() {

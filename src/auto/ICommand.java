@@ -8,9 +8,8 @@ public interface ICommand {
 	public void init();
 	/**
 	 * Runs the command 
-	 * @return true if the command is finished
 	 */
-	public boolean run();
+	public void run();
 	
 	/**
 	 * Stops the command

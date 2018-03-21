@@ -1,4 +1,4 @@
-package auto.commands;
+package auto.iCommands;
 
 import auto.ICommand;
 import auto.IStopCondition;
@@ -6,7 +6,6 @@ import miyamoto.components.Intake;
 import robot.Global;
 
 public class OuttakeCommand implements ICommand {
-	private IStopCondition stopCondition;
 	private Intake intake;
 	private double speed;
 
@@ -16,23 +15,20 @@ public class OuttakeCommand implements ICommand {
 	 * @param stop
 	 *            The condition that stops the command
 	 */
-	public OuttakeCommand(double speed, IStopCondition stop) {
-		stopCondition = stop;
+	public OuttakeCommand(double speed) {
 		this.speed = speed;
 	}
 
 	public void init() {
-		stopCondition.init();
 		intake = (Intake) Global.controlObjects.get("INTAKE");
 	}
 
-	public boolean run() {
+	public void run() {
 		if (intake == null) {
 			init();
 		}
 		intake.runIntake(-speed);
 
-		return stopCondition.stopNow();
 	}
 
 	public void stop() {

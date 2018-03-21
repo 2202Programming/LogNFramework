@@ -6,8 +6,8 @@ import com.kauailabs.navx.frc.AHRS;
 
 import auto.CommandList;
 import auto.CommandListRunner;
-import auto.commands.DriveCommand;
-import auto.commands.LiftCommand;
+import auto.iCommands.DriveCommand;
+import auto.iCommands.LiftCommand;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import drive.MotionProfiler;

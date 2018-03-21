@@ -1,12 +1,12 @@
 package auto;
 
-import auto.commands.EmptyCommand;
+import auto.iCommands.EmptyCommand;
 
 public class CommandListRunner {
 	public int commandNum;
 	private int prevCommandNum;
 	private CommandList commands;
-	private ICommand curCommand;
+	private IRunnableCommand curCommand;
 
 	/**
 	 * Constructor for CommandListRunner<br>
@@ -36,14 +36,14 @@ public class CommandListRunner {
 	 */
 	public boolean runList() {
 		curCommand = commands.getCommand(commandNum);
-		if (curCommand instanceof EmptyCommand)
+		if (curCommand == null)
 			return true;
 		if (prevCommandNum != commandNum) {
 			prevCommandNum = commandNum;
 			curCommand.init();
 		}
-		if (curCommand.run()) {
-			curCommand.stop();
+		if (curCommand.runCommands()) {
+			curCommand.stopCommands();
 			commandNum++;
 		}
 		return false;
@@ -52,7 +52,7 @@ public class CommandListRunner {
 	public void stop() {
 		commandNum = commands.size();
 		if (curCommand != null) {
-			curCommand.stop();
+			curCommand.stopCommands();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package auto.commands;
+package auto.iCommands;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -13,7 +13,6 @@ import robotDefinitions.RobotDefinitionBase;
 
 public class DriveAtAngle implements ICommand {
 
-	private IStopCondition stopCondition;
 	private IDrive drive;
 	private double slowSpeed, fastSpeed;
 	private double angle;
@@ -27,12 +26,11 @@ public class DriveAtAngle implements ICommand {
 	 * @param speed The speed at which to drive
 	 * @param angle The maintained angel
 	 */
-	public DriveAtAngle(IStopCondition stop, double speed, double angle) {
+	public DriveAtAngle(double speed, double angle) {
 		usePID = true;
 		// these will most likely be small as the value needs to be under 1.0/
 		// -1.0
 		navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
-		stopCondition = stop;
 		this.angle = angle;
 		slowSpeed = speed;
 	}
@@ -45,9 +43,8 @@ public class DriveAtAngle implements ICommand {
 	 * @param fastSpeed The fast driving speed
 	 * @param angle The maintained angle
 	 */
-	public DriveAtAngle(IStopCondition stop, double slowSpeed, double fastSpeed, double angle) {
+	public DriveAtAngle(double slowSpeed, double fastSpeed, double angle) {
 		usePID = false;
-		stopCondition = stop;
 		this.slowSpeed = slowSpeed;
 		this.fastSpeed = fastSpeed;
 		this.angle = angle;
@@ -72,20 +69,17 @@ public class DriveAtAngle implements ICommand {
 	}
 
 	public void init() {
-		stopCondition.init();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 	}
 
-	public boolean run() {
+	public void run() {
 		SmartWriter.putS("TargetAngle driveAtAngle ", getError() + ", NavXAngle: " + navX.getYaw());
 		if (usePID) {
 			withGyro();
 		} else {
 			nonGyro();
 		}
-
-		return stopCondition.stopNow();
 	}
 	
 	/**

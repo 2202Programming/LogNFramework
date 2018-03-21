@@ -1,4 +1,4 @@
-package auto.commands;
+package auto.iCommands;
 
 import auto.ICommand;
 import auto.IStopCondition;
@@ -7,7 +7,6 @@ import miyamoto.components.LiftPosition;
 import robot.Global;
 
 public class LiftCommand implements ICommand {
-	private IStopCondition stopCondition;
 	private Lift lift;
 	private int finalPosition;
 
@@ -20,29 +19,25 @@ public class LiftCommand implements ICommand {
 	 *            The stop condition
 	 */
 
-	public LiftCommand(int finalPosition, IStopCondition stop) {
-		stopCondition = stop;
+	public LiftCommand(int finalPosition) {
 		this.finalPosition = finalPosition;
 	}
 
-	public LiftCommand(LiftPosition finalPosition, IStopCondition stop) {
-		stopCondition = stop;
+	public LiftCommand(LiftPosition finalPosition) {
 		this.finalPosition = finalPosition.getNumber();
 	}
 
 	public void init() {
-		stopCondition.init();
 		lift = (Lift) Global.controlObjects.get("LIFT");
 	}
 
-	public boolean run() {
+	public void run() {
 		if (lift == null) {
 			init();
 		}
 
 		lift.setLiftPosition(finalPosition);
 
-		return stopCondition.stopNow();
 	}
 
 	public void stop() {

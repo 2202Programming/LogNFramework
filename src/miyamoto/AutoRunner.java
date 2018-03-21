@@ -7,7 +7,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import auto.CommandList;
 import auto.CommandListRunner;
-import auto.commands.DriveAtAngle;
+import auto.iCommands.DriveAtAngle;
 import auto.stopConditions.DistanceStopCondition;
 import comms.DebugMode;
 import comms.SmartWriter;

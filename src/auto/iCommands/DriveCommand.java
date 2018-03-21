@@ -1,4 +1,4 @@
-package auto.commands;
+package auto.iCommands;
 
 import auto.ICommand;
 import auto.IStopCondition;
@@ -9,7 +9,6 @@ import robotDefinitions.RobotDefinitionBase;
 
 public class DriveCommand implements ICommand {
 
-	private IStopCondition stopCondition;
 	private IDrive drive;
 	private double speed;
 	
@@ -20,24 +19,21 @@ public class DriveCommand implements ICommand {
 	 * @param speed
 	 * The speed to drive at, between 0 and 1
 	 */
-	public DriveCommand(IStopCondition stop, double speed) {
-		stopCondition=stop;
+	public DriveCommand(double speed) {
 		this.speed=speed;
 	}
 	
 	public void init() {
-		stopCondition.init();
 		drive=(IDrive)Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 	}
 
-	public boolean run() {
+	public void run() {
 		if (drive==null) {
 			init();
 		}
 		drive.setLeftMotors(speed);
 		drive.setRightMotors(speed);
-		return stopCondition.stopNow();
 	}
 	
 	public void stop(){
