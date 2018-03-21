@@ -8,6 +8,7 @@ import auto.CommandList;
 import auto.CommandListRunner;
 import auto.iCommands.DriveCommand;
 import auto.iCommands.LiftCommand;
+import auto.runnables.SingleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import drive.MotionProfiler;
@@ -43,8 +44,8 @@ public class AutomationController extends IControl{
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER0"));
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER1"));
 		CommandList list = new CommandList();
-		list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
-		list.addCommand(new LiftCommand(LiftPosition.CLIMB, new TimerStopCondition(2000)));
+		list.addCommand(new SingleStopCondition(new DriveCommand(0.5),new DistanceStopCondition(encoders, 2)));
+		list.addCommand(new SingleStopCondition(new LiftCommand(LiftPosition.CLIMB), new TimerStopCondition(2000)));
 		list.addCommand(new DriveCommand(new TimerStopCondition(1000), -0.3));
 		list.addCommand(new LiftCommand(LiftPosition.BOTTOM, new TimerStopCondition(10)));
 		runner = new CommandListRunner(list);
