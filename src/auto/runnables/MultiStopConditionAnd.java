@@ -1,5 +1,6 @@
 package auto.runnables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import auto.ICommand;
@@ -9,6 +10,12 @@ import auto.IStopCondition;
 public class MultiStopConditionAnd implements IRunnableCommand {
 	private List<ICommand> commandsToRun;
 	private List<IStopCondition> conditionsToCheck;
+	
+	public MultiStopConditionAnd(ICommand command, List<IStopCondition> stopConditions){
+		commandsToRun = new ArrayList<>();
+		commandsToRun.add(command);
+		conditionsToCheck = stopConditions;
+	}
 	
 	public MultiStopConditionAnd(List<ICommand> commands, List<IStopCondition> stopConditions){
 		commandsToRun = commands;

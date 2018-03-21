@@ -12,22 +12,22 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import auto.CommandList;
-import auto.ICommand;
+import auto.IRunnableCommand;
 import auto.IStopCondition;
-import auto.iCommands.DecelCommand;
 import auto.iCommands.DriveAtAngle;
 import auto.iCommands.DriveCommand;
 import auto.iCommands.IntakeCommand;
 import auto.iCommands.LiftCommand;
 import auto.iCommands.OuttakeCommand;
 import auto.iCommands.TurnCommand;
-import auto.iCommands.WaitCommand;
+import auto.runnables.MultiStopConditionOr;
 import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.LiftStopCondition;
 import auto.stopConditions.OrStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import input.SensorController;
 import miyamoto.components.Lift;
 import miyamoto.components.LiftPosition;
@@ -121,7 +121,7 @@ public class MiyamotoXMLInterpreter {
 	 *            the Node created of the command within a path
 	 * @return ICommand version of the command
 	 */
-	public ICommand getCommand(Node n) {
+	public IRunnableCommand getCommand(Node n) {
 		NamedNodeMap attributes = n.getAttributes();
 		String commandName = n.getNodeName();
 
@@ -135,8 +135,11 @@ public class MiyamotoXMLInterpreter {
 			// return new TurnCommand(new OrStopCondition(angleStop, timeStop),
 			// turnDegrees);
 			// Turning stalls at .25 power
-			return new TurnCommand(new OrStopCondition(angleStop, timeStop), turnDegrees, -180, 180, -maxPower,
-					maxPower, 1);
+			ArrayList<IStopCondition> stopConditions = new ArrayList<>();
+			stopConditions.add(angleStop);
+			stopConditions.add(timeStop);
+			return new MultiStopConditionOr(new TurnCommand(turnDegrees, -180, 180, -maxPower,
+					maxPower, 1),stopConditions);
 		}
 
 		case ("DriveCommand"): {
@@ -186,8 +189,10 @@ public class MiyamotoXMLInterpreter {
 			}
 			}
 			System.out.println("Scale Target: " + targetPosition);
-			return new LiftCommand(targetPosition,
-					new OrStopCondition(new TimerStopCondition(4000), getStopCondition(n)));
+			ArrayList<IStopCondition> stopConditions = new ArrayList<>();
+			stopConditions.add(new TimerStopCondition(4000));
+			stopConditions.add(getStopCondition(n));
+			return new MultiStopConditionOr(new LiftCommand(targetPosition),stopConditions);
 		}
 
 		case ("OuttakeCommand"): {
