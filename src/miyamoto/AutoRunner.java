@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import auto.CommandList;
 import auto.CommandListRunner;
 import auto.iCommands.DriveAtAngle;
+import auto.runnables.SingleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import comms.DebugMode;
 import comms.SmartWriter;
@@ -223,7 +224,7 @@ public class AutoRunner extends IControl {
 		encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
 		encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
 
-		defaultPathList.addCommand(new DriveAtAngle(new DistanceStopCondition(encoders, 70), 0.5, 0));
+		defaultPathList.addCommand(new SingleStopCondition(new DriveAtAngle(0.5, 0),new DistanceStopCondition(encoders, 70)));
 		System.out.println("**********Caught error and will run default path**********");
 
 		runner = new CommandListRunner(defaultPathList);
