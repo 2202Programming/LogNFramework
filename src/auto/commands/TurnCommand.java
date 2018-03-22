@@ -139,9 +139,9 @@ public class TurnCommand implements ICommand {
 	}
 
 	public boolean run() {
-		System.out.println("End Point: " + controller.getSetpoint());
-		System.out.println("Motor Power: " + controller.get());
-		System.out.println("Error: " + controller.getError());
+//		System.out.println("End Point: " + controller.getSetpoint());
+//		System.out.println("Motor Power: " + controller.get());
+//		System.out.println("Error: " + controller.getError());
 
 		boolean stopNow = stopCondition.stopNow();
 		SmartWriter.putB("hghjkhjghg", stopNow);
