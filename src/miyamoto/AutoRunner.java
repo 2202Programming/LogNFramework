@@ -43,7 +43,6 @@ public class AutoRunner extends IControl {
 			XMLInterpreter = null;
 			System.out.println("**********Caught Path File Loading Error**********");
 			e.printStackTrace();
-
 		}
 	}
 

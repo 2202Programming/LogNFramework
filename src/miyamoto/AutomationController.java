@@ -93,7 +93,7 @@ public class AutomationController extends IControl{
 	}
 	
 	private void keepLiftSafe(){
-		double tiltAngle = Math.abs(gyro.getPitch()+4.5);
+		double tiltAngle = Math.abs(gyro.getPitch());
 		int liftSeverity = getLiftSeverity();		
 		if(tiltAngle > tiltAngles[liftSeverity]){
 			lift.setLiftPosition(LiftPosition.BOTTOM);
