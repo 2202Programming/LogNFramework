@@ -380,8 +380,10 @@
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<!-- <TurnCommand Angle="-90" MaxPower="1.0"> </TurnCommand> <IntakeCommand 
-			Power="0.0" HoldPower="0.8"> <TimerStopCondition Timer="10"></TimerStopCondition> 
+		<TurnCommand Angle="-90" MaxPower="0.7">
+		</TurnCommand>
+
+		<!-- <IntakeCommand Power="0.0" HoldPower="0.8"> <TimerStopCondition Timer="10"></TimerStopCondition> 
 			</IntakeCommand> <DriveCommand Angle="-90" Power="0.5"> <DistanceStopCondition 
 			Dist_Inches="24"> </DistanceStopCondition> </DriveCommand> <LiftCommand Height="BOTTOM"> 
 			<LiftStopCondition Height="BOTTOM"></LiftStopCondition> </LiftCommand> <IntakeCommand 
@@ -449,6 +451,9 @@
 			<DistanceStopCondition Dist_Inches="3">
 			</DistanceStopCondition>
 		</DriveCommand>
+		
+		<TurnCommand Angle="-90" MaxPower="0.7">
+		</TurnCommand>
 	</Path>
 
 	<Path Id="R2-1">
