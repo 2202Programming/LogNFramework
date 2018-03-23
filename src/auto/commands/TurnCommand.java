@@ -139,9 +139,9 @@ public class TurnCommand implements ICommand {
 	}
 
 	public boolean run() {
-//		System.out.println("End Point: " + controller.getSetpoint());
-//		System.out.println("Motor Power: " + controller.get());
-//		System.out.println("Error: " + controller.getError());
+		// System.out.println("End Point: " + controller.getSetpoint());
+		// System.out.println("Motor Power: " + controller.get());
+		// System.out.println("Error: " + controller.getError());
 
 		boolean stopNow = stopCondition.stopNow();
 		SmartWriter.putB("hghjkhjghg", stopNow);
@@ -150,7 +150,8 @@ public class TurnCommand implements ICommand {
 
 	public void stop() {
 		controller.reset();
-		System.out.println("Turn Command Finished");
+		AHRS navX = (AHRS) (SensorController.getInstance().getSensor("NAVX"));
+		System.out.println("Turn Command Finished at: " + navX.getYaw());
 		drive.setLeftMotors(0);
 		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
@@ -173,12 +174,13 @@ public class TurnCommand implements ICommand {
 		case MIYAMOTO:
 			// Old Pid was (.045, 0.0, 0.1)
 			// With FRC PID values are (.055, 0.0, 0.5);
-//			BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoPIDValues.txt"));
-//			Double Kp = Double.parseDouble(in.readLine());
-//			Double Ki = Double.parseDouble(in.readLine());
-//			Double Kd = Double.parseDouble(in.readLine());
-//
-//			in.close();
+			// BufferedReader in = new BufferedReader(new
+			// FileReader("/home/lvuser/MiyamotoPIDValues.txt"));
+			// Double Kp = Double.parseDouble(in.readLine());
+			// Double Ki = Double.parseDouble(in.readLine());
+			// Double Kd = Double.parseDouble(in.readLine());
+			//
+			// in.close();
 			controller.setPID(.055, 0.0, .5);
 			break;
 		case UNKNOWN:

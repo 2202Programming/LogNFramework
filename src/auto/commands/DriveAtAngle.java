@@ -7,6 +7,7 @@ import auto.IStopCondition;
 import comms.SmartWriter;
 import drive.DriveControl;
 import drive.IDrive;
+import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
 import robot.Global;
 import robotDefinitions.RobotDefinitionBase;
@@ -23,9 +24,12 @@ public class DriveAtAngle implements ICommand {
 	/**
 	 * Drives straight at a specified angle using PID (proportions)
 	 * 
-	 * @param stop The stop condition
-	 * @param speed The speed at which to drive
-	 * @param angle The maintained angel
+	 * @param stop
+	 *            The stop condition
+	 * @param speed
+	 *            The speed at which to drive
+	 * @param angle
+	 *            The maintained angel
 	 */
 	public DriveAtAngle(IStopCondition stop, double speed, double angle) {
 		usePID = true;
@@ -38,12 +42,16 @@ public class DriveAtAngle implements ICommand {
 	}
 
 	/**
-	 * Drives straight at a specified angle using two speeds 
+	 * Drives straight at a specified angle using two speeds
 	 * 
-	 * @param stop The stop condition
-	 * @param slowSpeed The slow driving speed
-	 * @param fastSpeed The fast driving speed
-	 * @param angle The maintained angle
+	 * @param stop
+	 *            The stop condition
+	 * @param slowSpeed
+	 *            The slow driving speed
+	 * @param fastSpeed
+	 *            The fast driving speed
+	 * @param angle
+	 *            The maintained angle
 	 */
 	public DriveAtAngle(IStopCondition stop, double slowSpeed, double fastSpeed, double angle) {
 		usePID = false;
@@ -55,6 +63,7 @@ public class DriveAtAngle implements ICommand {
 
 	/**
 	 * Sets the main speed for PID
+	 * 
 	 * @param speed
 	 */
 	public void setSpeed(double speed) {
@@ -63,6 +72,7 @@ public class DriveAtAngle implements ICommand {
 
 	/**
 	 * Sets the slow and fast speed for the alternate method of driving
+	 * 
 	 * @param slowSpeed
 	 * @param fastSpeed
 	 */
@@ -87,22 +97,22 @@ public class DriveAtAngle implements ICommand {
 
 		return stopCondition.stopNow();
 	}
-	
+
 	/**
 	 * Sets the motor speeds based on a proportion PID
 	 */
 	private void withGyro() {
 		double Kp = .012;
 		double change = getError() * Kp;
-		//System.out.println("PID error: " + getError());
-		//System.out.println("Base motor speed: " + slowSpeed);
+		// System.out.println("PID error: " + getError());
+		// System.out.println("Base motor speed: " + slowSpeed);
 		if (Math.abs(getError()) < 1) {
 			drive.setLeftMotors(slowSpeed);
 			drive.setRightMotors(slowSpeed);
 		} else {
 			drive.setLeftMotors(slowSpeed + change);
 			drive.setRightMotors(slowSpeed - change);
-			//System.out.println("PID offset: " + change);
+			// System.out.println("PID offset: " + change);
 		}
 	}
 
@@ -130,6 +140,7 @@ public class DriveAtAngle implements ICommand {
 
 	/**
 	 * Returns the angle the robot is at
+	 * 
 	 * @return The yaw angle
 	 */
 	public double getAngle() {
@@ -148,5 +159,11 @@ public class DriveAtAngle implements ICommand {
 		drive.setLeftMotors(0);
 		drive.setRightMotors(0);
 		drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
+		SensorController sensorController = SensorController.getInstance();
+		Encoder encoder0 = (Encoder) sensorController.getSensor("ENCODER0");
+		Encoder encoder1 = (Encoder) sensorController.getSensor("ENCODER1");
+		System.out.println("DriveAtAngle Command Finished" + "\n" + 
+		"Encoder0 Distance| Counts: " + encoder0.get() + "\t" + "Inches: " + encoder0.getDistance() + "\n" + 
+		"Encoder1 Distance| Counts: " + encoder1.get() + "\t" + "Inches: " + encoder1.getDistance());
 	}
 }
