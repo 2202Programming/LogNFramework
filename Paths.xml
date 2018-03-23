@@ -174,7 +174,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="0.9">
-			<DistanceStopCondition Dist_Inches="138">
+			<DistanceStopCondition Dist_Inches="143">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -245,7 +245,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="0.9">
-			<DistanceStopCondition Dist_Inches="138">
+			<DistanceStopCondition Dist_Inches="143">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -557,7 +557,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="0.9">
-			<DistanceStopCondition Dist_Inches="138">
+			<DistanceStopCondition Dist_Inches="143">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -628,7 +628,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="0" Power="0.9">
-			<DistanceStopCondition Dist_Inches="138">
+			<DistanceStopCondition Dist_Inches="143">
 			</DistanceStopCondition>
 		</DriveCommand>
 
