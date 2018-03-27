@@ -7,17 +7,17 @@ import auto.ICommand;
 import auto.IRunnableCommand;
 import auto.IStopCondition;
 
-public class SingleStopCondition implements IRunnableCommand {
+public class RunnableCommand implements IRunnableCommand {
 	private List<ICommand> commands;
 	private IStopCondition stopCondition;
 	
-	public SingleStopCondition(ICommand command, IStopCondition stopCondition){
+	public RunnableCommand(ICommand command, IStopCondition stopCondition){
 		commands = new ArrayList<ICommand>();
 		commands.add(command);
 		this.stopCondition = stopCondition;
 	}
 	
-	public SingleStopCondition(List<ICommand> command, IStopCondition stopCondition) {
+	public RunnableCommand(List<ICommand> command, IStopCondition stopCondition) {
 		this.commands = command;
 		this.stopCondition = stopCondition;
 	}

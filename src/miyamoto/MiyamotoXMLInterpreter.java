@@ -21,7 +21,7 @@ import auto.iCommands.IntakeCommand;
 import auto.iCommands.LiftCommand;
 import auto.iCommands.OuttakeCommand;
 import auto.iCommands.TurnCommand;
-import auto.runnables.SingleStopCondition;
+import auto.runnables.RunnableCommand;
 import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.LiftStopCondition;
@@ -135,7 +135,7 @@ public class MiyamotoXMLInterpreter {
 			// return new TurnCommand(new OrStopCondition(angleStop, timeStop),
 			// turnDegrees);
 			// Turning stalls at .25 power
-			return new SingleStopCondition(new TurnCommand(turnDegrees, -180, 180, -maxPower,
+			return new RunnableCommand(new TurnCommand(turnDegrees, -180, 180, -maxPower,
 					maxPower, 1),new OrStopCondition(angleStop, timeStop));
 		}
 
@@ -147,7 +147,7 @@ public class MiyamotoXMLInterpreter {
 
 			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 			double angle = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
-			return new SingleStopCondition(new DriveAtAngle(power, angle),getStopCondition(n));
+			return new RunnableCommand(new DriveAtAngle(power, angle),getStopCondition(n));
 		}
 
 		case ("LiftCommand"): {
@@ -181,12 +181,12 @@ public class MiyamotoXMLInterpreter {
 			}
 			}
 			System.out.println("Scale Target: " + targetPosition);
-			return new SingleStopCondition(new LiftCommand(targetPosition),new OrStopCondition(new TimerStopCondition(4000), getStopCondition(n)));
+			return new RunnableCommand(new LiftCommand(targetPosition),new OrStopCondition(new TimerStopCondition(4000), getStopCondition(n)));
 		}
 
 		case ("OuttakeCommand"): {
 			double speed = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
-			return new SingleStopCondition(new OuttakeCommand(speed), getStopCondition(n));
+			return new RunnableCommand(new OuttakeCommand(speed), getStopCondition(n));
 		}
 
 		case ("IntakeCommand"): {
@@ -194,20 +194,20 @@ public class MiyamotoXMLInterpreter {
 			Node holdSpeedNode = attributes.getNamedItem("HoldPower");
 			IStopCondition stop = getStopCondition(n);
 			if (holdSpeedNode == null) {
-				return new SingleStopCondition(new IntakeCommand(speed, 0.2),stop);
+				return new RunnableCommand(new IntakeCommand(speed, 0.2),stop);
 			} else {
 				double holdSpeed = Double.parseDouble(holdSpeedNode.getNodeValue());
-				return new SingleStopCondition(new IntakeCommand(speed, holdSpeed),stop);
+				return new RunnableCommand(new IntakeCommand(speed, holdSpeed),stop);
 			}
 		}
 
 		case ("WaitCommand"): {
 			long waitTime = Long.parseLong(attributes.getNamedItem("Time").getNodeValue());
-			return new SingleStopCondition(new EmptyCommand(),new TimerStopCondition(waitTime));
+			return new RunnableCommand(new EmptyCommand(),new TimerStopCondition(waitTime));
 		}
 		}
 
-		return new SingleStopCondition(new DriveCommand(0.0),new TimerStopCondition(0));
+		return new RunnableCommand(new DriveCommand(0.0),new TimerStopCondition(0));
 	}
 
 	/**
