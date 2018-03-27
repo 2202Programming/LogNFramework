@@ -21,11 +21,11 @@ import auto.iCommands.IntakeCommand;
 import auto.iCommands.LiftCommand;
 import auto.iCommands.OuttakeCommand;
 import auto.iCommands.TurnCommand;
-import auto.runnables.MultiStopConditionOr;
 import auto.runnables.SingleStopCondition;
 import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.LiftStopCondition;
+import auto.stopConditions.OrStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
@@ -135,11 +135,8 @@ public class MiyamotoXMLInterpreter {
 			// return new TurnCommand(new OrStopCondition(angleStop, timeStop),
 			// turnDegrees);
 			// Turning stalls at .25 power
-			ArrayList<IStopCondition> stopConditions = new ArrayList<>();
-			stopConditions.add(angleStop);
-			stopConditions.add(timeStop);
-			return new MultiStopConditionOr(new TurnCommand(turnDegrees, -180, 180, -maxPower,
-					maxPower, 1),stopConditions);
+			return new SingleStopCondition(new TurnCommand(turnDegrees, -180, 180, -maxPower,
+					maxPower, 1),new OrStopCondition(angleStop, timeStop));
 		}
 
 		case ("DriveCommand"): {
@@ -184,10 +181,7 @@ public class MiyamotoXMLInterpreter {
 			}
 			}
 			System.out.println("Scale Target: " + targetPosition);
-			ArrayList<IStopCondition> stopConditions = new ArrayList<>();
-			stopConditions.add(new TimerStopCondition(4000));
-			stopConditions.add(getStopCondition(n));
-			return new MultiStopConditionOr(new LiftCommand(targetPosition),stopConditions);
+			return new SingleStopCondition(new LiftCommand(targetPosition),new OrStopCondition(new TimerStopCondition(4000), getStopCondition(n)));
 		}
 
 		case ("OuttakeCommand"): {
