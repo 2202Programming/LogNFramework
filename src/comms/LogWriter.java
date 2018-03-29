@@ -15,7 +15,13 @@ public class LogWriter {
 		loggables.put(name, logRule);
 	}
 	
-	public static boolean runLog(String name){
+	/**
+	 * Logs the data according to the chosen log rule
+	 * @param name the name of the log rule that was registered
+	 * @param extraData any extra data to append to the end of the log rule's basic text
+	 * @return true if the log ran successfully, false otherwise
+	 */
+	public static boolean runLog(String name, String extraData){
 		ILoggable item = loggables.get(name);
 		if(item == null){
 			return false;

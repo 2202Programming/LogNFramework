@@ -53,11 +53,6 @@ public class CommandListRunner {
 		if (curCommand.run()) {
 			curCommand.stop();
 			commandNum++;
-			long logTime = System.currentTimeMillis();
-			String fileName = "/RobotLog" + logTime;
-			String contents = "Encoder 0: " + ((Encoder)sensors.getSensor("ENCODER0")).get() + "/nEncoder 1: " + ((Encoder)sensors.getSensor("ENCODER1")) + "/nTime to run: " + (logTime-commandTime);
-			FileLoader.writeToFile(fileName, contents);
-			FileLoader.writeToFile(fileName, "Logging took: " + (System.currentTimeMillis()-logTime));
 		}
 		return false;
 	}
