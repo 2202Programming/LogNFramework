@@ -26,6 +26,21 @@ public class LogWriter {
 		if(item == null){
 			return false;
 		}else{
+			FileLoader.writeToFile(item.getLogFileName(), item.getLogData() + extraData);
+			return true;
+		}
+	}
+	
+	/**
+	 * Logs the data according to the chosen log rule
+	 * @param name the name of the log rule that was registered
+	 * @return true if the log ran successfully, false otherwise
+	 */
+	public static boolean runLog(String name){
+		ILoggable item = loggables.get(name);
+		if(item == null){
+			return false;
+		}else{
 			FileLoader.writeToFile(item.getLogFileName(), item.getLogData());
 			return true;
 		}

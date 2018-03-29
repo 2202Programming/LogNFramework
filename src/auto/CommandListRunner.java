@@ -2,6 +2,7 @@ package auto;
 
 import auto.commands.EmptyCommand;
 import comms.FileLoader;
+import comms.LogWriter;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
 
@@ -10,7 +11,6 @@ public class CommandListRunner {
 	private int prevCommandNum;
 	private CommandList commands;
 	private ICommand curCommand;
-	private SensorController sensors;
 	private long commandTime;
 
 	/**
@@ -22,7 +22,6 @@ public class CommandListRunner {
 	 *            Name of the robot for unique commands
 	 */
 	public CommandListRunner(CommandList xCommands) {
-		sensors = SensorController.getInstance();
 		commands = xCommands;
 		init();
 	}
@@ -53,6 +52,7 @@ public class CommandListRunner {
 		if (curCommand.run()) {
 			curCommand.stop();
 			commandNum++;
+			LogWriter.runLog("AutonomousLog", commandTime + "");
 		}
 		return false;
 	}
