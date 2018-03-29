@@ -8,6 +8,7 @@ import auto.CommandList;
 import auto.CommandListRunner;
 import auto.commands.DriveCommand;
 import auto.commands.LiftCommand;
+import auto.commands.TurnCommand;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import drive.MotionProfiler;
@@ -26,6 +27,7 @@ public class AutomationController extends IControl{
 	private MiyamotoControl controller;
 	private CommandListRunner runner;
 	private boolean doneRunning;
+	private ArrayList<Encoder> encoders;
 	
 	public AutomationController(Lift lift, MotionProfiler profiler){
 		controller = (MiyamotoControl)Global.controllers;
@@ -39,15 +41,9 @@ public class AutomationController extends IControl{
 		tiltAngles[1] = 30;
 		tiltAngles[0] = 45;
 		
-		ArrayList<Encoder> encoders = new ArrayList<>();
+		encoders = new ArrayList<>();
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER0"));
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER1"));
-		CommandList list = new CommandList();
-		list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
-		list.addCommand(new LiftCommand(LiftPosition.CLIMB, new TimerStopCondition(2000)));
-		list.addCommand(new DriveCommand(new TimerStopCondition(1000), -0.3));
-		list.addCommand(new LiftCommand(LiftPosition.BOTTOM, new TimerStopCondition(10)));
-		runner = new CommandListRunner(list);
 	}
 	
 	/**
@@ -111,6 +107,21 @@ public class AutomationController extends IControl{
 		}else{
 			runner.init();
 			if(controller.autoClimb()){
+				CommandList list = new CommandList();
+				list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
+				list.addCommand(new LiftCommand(LiftPosition.CLIMB, new TimerStopCondition(2000)));
+				list.addCommand(new DriveCommand(new TimerStopCondition(1000), -0.3));
+				list.addCommand(new LiftCommand(LiftPosition.BOTTOM, new TimerStopCondition(2000)));
+				if(Math.abs(controller.getLeftJoystickX(0)) > 0.2){
+					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
+					if(controller.getLeftJoystickX(0) > 0){
+						list.addCommand(new TurnCommand(-90));
+					}else{
+						list.addCommand(new TurnCommand(90));
+					}
+					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 10), 0.5));
+				}
+				runner = new CommandListRunner(list);
 				doneRunning = false;
 			}
 		}
