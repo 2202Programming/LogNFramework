@@ -1,5 +1,7 @@
 package auto.commands;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class PIDDriveAtAngle implements ICommand {
 	private PIDController controller;
 	private AHRS navX;
 	private double Kp;
+	private int frameCounter;
 
 	/**
 	 * Drives straight at a specified angle using PID for distance and P for Angle
@@ -48,8 +51,8 @@ public class PIDDriveAtAngle implements ICommand {
 	 * @param percentTolerance
 	 *            The percent tolerance
 	 */
-	public PIDDriveAtAngle(IStopCondition stop, List<Encoder> encoders, double distanceInCounts, double minOutput, double maxOutput,
-			double percentTolerance, double angle, double Kp) {
+	public PIDDriveAtAngle(IStopCondition stop, List<Encoder> encoders, double distanceInCounts, double minOutput,
+			double maxOutput, double percentTolerance, double angle, double Kp) {
 		navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
 		stopCondition = stop;
 		this.angle = angle;
@@ -80,6 +83,7 @@ public class PIDDriveAtAngle implements ICommand {
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 		driveEncoders.reset();
+		frameCounter = 0;
 	}
 
 	public boolean run() {
@@ -87,9 +91,6 @@ public class PIDDriveAtAngle implements ICommand {
 
 		// Result from Distance PID Controller
 		double baseSpeed = controller.get();
-
-		// System.out.println("PID error: " + getError());
-		// System.out.println("Base motor speed: " + slowSpeed);
 
 		// Self-made Angle P Controller
 		double Kp = this.Kp;
@@ -100,7 +101,11 @@ public class PIDDriveAtAngle implements ICommand {
 		} else {
 			drive.setLeftMotors(baseSpeed + change);
 			drive.setRightMotors(baseSpeed - change);
-			// System.out.println("PID offset: " + change);
+		}
+		frameCounter++;
+		if (frameCounter % 10 == 0) {
+			System.out.println("Distance PID error: " + controller.getError() + "\n" + "Base motor speed: " + baseSpeed
+					+ "\n" + "Angle PID error: " + getError() + "\n" + "PID offset: " + change);
 		}
 		return stopCondition.stopNow();
 	}
@@ -158,16 +163,13 @@ public class PIDDriveAtAngle implements ICommand {
 			// TODO setPIDVALUES
 			break;
 		case MIYAMOTO:
-			// Old Pid was (.045, 0.0, 0.1)
-			// With FRC PID values are (.055, 0.0, 0.5);
-			// BufferedReader in = new BufferedReader(new
-			// FileReader("/home/lvuser/MiyamotoPIDValues.txt"));
-			// Double Kp = Double.parseDouble(in.readLine());
-			// Double Ki = Double.parseDouble(in.readLine());
-			// Double Kd = Double.parseDouble(in.readLine());
-			//
-			// in.close();
-			controller.setPID(.055, 0.0, .5);
+			BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoDistancePIDValues.txt"));
+			Double Kp = Double.parseDouble(in.readLine());
+			Double Ki = Double.parseDouble(in.readLine());
+			Double Kd = Double.parseDouble(in.readLine());
+			controller.setPID(Kp, Ki, Kd);
+			in.close();
+			// controller.setPID(.055, 0.0, .5);
 			break;
 		case UNKNOWN:
 			// TODO setPIDVALUES

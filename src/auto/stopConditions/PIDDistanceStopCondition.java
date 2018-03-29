@@ -38,7 +38,6 @@ public class PIDDistanceStopCondition implements IStopCondition {
 		for (Encoder x : enc) {
 			x.reset();
 		}
-
 		initialTargetTime = Long.MAX_VALUE;
 	}
 
@@ -49,6 +48,7 @@ public class PIDDistanceStopCondition implements IStopCondition {
 		}
 		SmartWriter.putD("Current Distance Per Pulse", enc.get(0).getDistancePerPulse());
 		SmartWriter.putD("AUTO - AVG Encoder Count", sum / enc.size());
+		SmartWriter.putD("AUTO - AVG Encoder Error Count", distance - sum / enc.size());
 
 		double error = sum / enc.size() - distance;
 		boolean onTarget = Math.abs(error) <= marginOfError;

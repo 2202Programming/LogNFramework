@@ -89,10 +89,12 @@ public class Miyamoto extends RobotDefinitionBase {
 		navXMonitor.add("NAVX", navX);
 
 		// Encoder stuff
+		double CPI = 19.04; // use same calibration for left/right.Sensors are very very close. - DPL/TG
+							// 3/28
 		Encoder encoder0 = new Encoder(0, 1, false); // Right
 		Encoder encoder1 = new Encoder(2, 3, true); // Left
-		encoder0.setDistancePerPulse(0.05318);
-		encoder1.setDistancePerPulse(0.05321);
+		encoder0.setDistancePerPulse(1.0 / CPI); // was 0.05318);
+		encoder1.setDistancePerPulse(1.0 / CPI); // was 0.05321);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
 		encoderMonitor.add("ENCODER1", encoder1);
@@ -116,8 +118,8 @@ public class Miyamoto extends RobotDefinitionBase {
 		IDrive drive = new TwoStickDrive(left, right, 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 
-		MotionProfile[] profiles = { new MotionProfile(0.08, 1), new MotionProfile(0.05, 1), new MotionProfile(0.05,0.6), new MotionProfile(0.03
-				,0.4),new MotionProfile(0.03,0.3) };
+		MotionProfile[] profiles = { new MotionProfile(0.08, 1), new MotionProfile(0.05, 1),
+				new MotionProfile(0.05, 0.6), new MotionProfile(0.03, 0.4), new MotionProfile(0.03, 0.3) };
 		MotionProfiler sneak = new MotionProfiler(drive, profiles);
 		iControlMap.put("PROFILER", sneak);
 		ReverseDrive reverse = new ReverseDrive(drive);
@@ -134,10 +136,10 @@ public class Miyamoto extends RobotDefinitionBase {
 		iControlMap.put("LIFT_TALON", liftMotor);
 		Lift lift = new Lift(liftMotor);
 		iControlMap.put("LIFT", lift);
-		
+
 		LEDController LED = new LEDController();
-		
-		AutomationController AC = new AutomationController(lift,sneak);
+
+		AutomationController AC = new AutomationController(lift, sneak);
 		iControlMap.put("AC", AC);
 
 		AutoRunner AR = new AutoRunner();
