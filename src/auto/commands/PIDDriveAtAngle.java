@@ -47,7 +47,6 @@ public class PIDDriveAtAngle implements ICommand {
 	 *            The maximum motor power
 	 * @param percentTolerance
 	 *            The percent tolerance
-	 * @throws IOException
 	 */
 	public PIDDriveAtAngle(IStopCondition stop, List<Encoder> encoders, double distanceInCounts, double minOutput, double maxOutput,
 			double percentTolerance, double angle, double Kp) {
