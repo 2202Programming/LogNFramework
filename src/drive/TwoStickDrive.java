@@ -161,18 +161,42 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 
 	@Override
 	public void setLeftMotors(double power) {
+		setLeftMotors(power,false);
+	}
+
+	public void setLeftMotors(double power, boolean useMotionProfiling){
 		if (super.driveControl == DriveControl.EXTERNAL_CONTROL) {
+			if(useMotionProfiling){
+				if(Math.abs(power - leftMotors.getSpeed()) > maxAcceleration){
+					power = leftMotors.getSpeed() + Math.signum(power - leftMotors.getSpeed())*maxAcceleration;
+				}
+				if(Math.abs(power) > maxVelocity){
+					power = Math.signum(power) * maxVelocity;
+				}
+			}
 			leftMotors.set(power);
 		}
 	}
-
+	
 	@Override
 	public void setRightMotors(double power) {
-		if (super.driveControl == DriveControl.EXTERNAL_CONTROL) {
-			rightMotors.set(power);
-		}
+		setRightMotors(power,false);
 	}
 
+	public void setRightMotors(double power, boolean useMotionProfiling){
+		if (super.driveControl == DriveControl.EXTERNAL_CONTROL) {
+			if(useMotionProfiling){
+				if(Math.abs(power - rightMotors.getSpeed()) > maxAcceleration){
+					power = rightMotors.getSpeed() + Math.signum(power - rightMotors.getSpeed())*maxAcceleration;
+				}
+				if(Math.abs(power) > maxVelocity){
+					power = Math.signum(power) * maxVelocity;
+				}
+			}
+			leftMotors.set(power);
+		}
+	}
+	
 	@Override
 	/**
 	 * Returns the motor speed/power of the left motors
