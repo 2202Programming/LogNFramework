@@ -100,7 +100,6 @@ public class AutomationController extends IControl{
 		if(controller.cancelClimb()){
 			runner.stop();
 			doneRunning = true;
-			lift.setLiftPosition(LiftPosition.BOTTOM);
 		}
 		if(!doneRunning){
 			doneRunning = runner.runList();
