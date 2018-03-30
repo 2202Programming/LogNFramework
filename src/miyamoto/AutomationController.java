@@ -6,10 +6,14 @@ import com.kauailabs.navx.frc.AHRS;
 
 import auto.CommandList;
 import auto.CommandListRunner;
+import auto.ICommand;
 import auto.commands.DriveCommand;
 import auto.commands.LiftCommand;
 import auto.commands.TurnCommand;
+import auto.commands.WaitCommand;
+import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
+import auto.stopConditions.OrStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import drive.MotionProfiler;
 import edu.wpi.first.wpilibj.Encoder;
@@ -104,7 +108,6 @@ public class AutomationController extends IControl{
 		if(!doneRunning){
 			doneRunning = runner.runList();
 		}else{
-			runner.init();
 			if(controller.autoClimb()){
 				CommandList list = new CommandList();
 				list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
@@ -112,15 +115,17 @@ public class AutomationController extends IControl{
 				list.addCommand(new DriveCommand(new TimerStopCondition(1000), -0.3));
 				list.addCommand(new LiftCommand(LiftPosition.BOTTOM, new TimerStopCondition(2000)));
 				if(Math.abs(controller.getLeftJoystickX(0)) > 0.2){
-					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
+					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 1), 0.5));
+					list.addCommand(new WaitCommand(new TimerStopCondition(200)));
 					if(controller.getLeftJoystickX(0) > 0){
-						list.addCommand(new TurnCommand(-90));
+						list.addCommand(new TurnCommand(new OrStopCondition(new TimerStopCondition(1000), new AngleStopCondition(-90, 3, .5)),-90));
 					}else{
-						list.addCommand(new TurnCommand(90));
+						list.addCommand(new TurnCommand(new OrStopCondition(new TimerStopCondition(1000), new AngleStopCondition(90, 3, .5)),90));
 					}
-					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 10), 0.5));
+					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 15), 0.5));
 				}
 				runner = new CommandListRunner(list);
+				runner.init();
 				doneRunning = false;
 			}
 		}
@@ -128,7 +133,6 @@ public class AutomationController extends IControl{
 	
 	public void teleopInit(){
 		doneRunning = true;
-		runner.init();
 	}
 	
 	public void teleopPeriodic(){
