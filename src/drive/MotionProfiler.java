@@ -67,7 +67,7 @@ public class MotionProfiler extends IControl {
 	
 	public void autonomousPeriodic(){
 		if (drive != null && controller != null) {
-			drive.setMaxAcceleration(profiles[0].getAcceleration());
+			drive.setMaxAcceleration(profiles[1].getAcceleration());
 			drive.setMaxVelocity(profiles[0].getVelocity());
 		}
 	}

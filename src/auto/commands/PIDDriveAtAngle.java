@@ -96,11 +96,11 @@ public class PIDDriveAtAngle implements ICommand {
 		double Kp = this.Kp;
 		double change = getError() * Kp;
 		if (Math.abs(getError()) < 1) {
-			drive.setLeftMotors(baseSpeed);
-			drive.setRightMotors(baseSpeed);
+			drive.setLeftMotors(baseSpeed,false);
+			drive.setRightMotors(baseSpeed,false);
 		} else {
-			drive.setLeftMotors(baseSpeed + change);
-			drive.setRightMotors(baseSpeed - change);
+			drive.setLeftMotors(baseSpeed + change,false);
+			drive.setRightMotors(baseSpeed - change,false);
 		}
 		frameCounter++;
 		if (frameCounter % 10 == 0) {

@@ -3,7 +3,7 @@
 	<!-- Make sure that the default path is at the top -->
 
 	<Path Id="D">
-		<DriveCommand Angle="0" Power="0.7" Inches="140">
+		<DriveCommand Angle="0" Power="0.95" Inches="140">
 			<DistanceStopCondition Dist_Inches="140">
 			</DistanceStopCondition>
 		</DriveCommand>
