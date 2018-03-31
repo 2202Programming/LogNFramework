@@ -17,22 +17,18 @@ public class MotionProfiler extends IControl {
 	private MotionProfileableController controller;
 	private MotionProfile[] profiles;
 	private int index;
-	private MotionProfileable drive;
 
-	public MotionProfiler(IDrive drive) {
+	public MotionProfiler() {
 		profiles = new MotionProfile[2];
 		profiles[0] = new MotionProfile(2, 1);
 		index = 0;
-		if (drive instanceof MotionProfileable) {
-			this.drive = (MotionProfileable) drive;
-		}
 		if (Global.controllers instanceof MotionProfileableController) {
 			controller = (MotionProfileableController) Global.controllers;
 		}
 	}
 
-	public MotionProfiler(IDrive drive, MotionProfile[] profiles) {
-		this(drive);
+	public MotionProfiler(MotionProfile[] profiles) {
+		this();
 		this.profiles = profiles;
 	}
 
@@ -90,24 +86,15 @@ public class MotionProfiler extends IControl {
 	}
 
 	public void teleopPeriodic() {
-		if (drive != null && controller != null) {
+		if (controller != null) {
 			if (controller.cycleMotionProfile()) {
 				index++;
 			}
 			index %= profiles.length;
-			drive.setMaxAcceleration(profiles[index].getAcceleration());
-			drive.setMaxVelocity(profiles[index].getVelocity());
 		}
 	}
 	
 	public void autonomousInit(){
 		index = 0;
-	}
-	
-	public void autonomousPeriodic(){
-		if (drive != null) {
-			drive.setMaxAcceleration(profiles[0].getAcceleration());
-			drive.setMaxVelocity(profiles[0].getVelocity());
-		}
 	}
 }

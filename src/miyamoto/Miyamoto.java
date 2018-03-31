@@ -115,13 +115,13 @@ public class Miyamoto extends RobotDefinitionBase {
 		TurnController turnController = new TurnController(left, right);
 		iControlMap.put("TURNCONTROLLER", turnController);
 
-		IDrive drive = new TwoStickDrive(left, right, 4, false);
+		IDrive drive = new TwoStickDrive(left, right, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 
 		MotionProfile[] profiles = { new MotionProfile(0.08, 1), new MotionProfile(0.05, 1),
 				new MotionProfile(0.05, 0.6), new MotionProfile(0.03, 0.4), new MotionProfile(0.03, 0.3) };
-		MotionProfiler sneak = new MotionProfiler(drive, profiles);
-		iControlMap.put("PROFILER", sneak);
+		MotionProfiler driveProfiler = new MotionProfiler(profiles);
+		iControlMap.put("PROFILER", driveProfiler);
 		ReverseDrive reverse = new ReverseDrive(drive);
 
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), false);
@@ -139,7 +139,7 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		LEDController LED = new LEDController();
 
-		AutomationController AC = new AutomationController(lift, sneak);
+		AutomationController AC = new AutomationController(lift, driveProfiler);
 		iControlMap.put("AC", AC);
 
 		AutoRunner AR = new AutoRunner();

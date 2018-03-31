@@ -11,7 +11,7 @@ import robotDefinitions.controls.ControlBase;
  * @author Daniel
  *
  */
-public class TwoStickDrive extends IDrive implements Reversible, MotionProfileable{
+public class TwoStickDrive extends IDrive implements Reversible{
 	private IMotor leftMotors;
 	private IMotor rightMotors;
 	private ControlBase controller;
@@ -24,8 +24,7 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 	private boolean invertSticks;
 	private double lastForward;
 	private boolean backwardsDrive;
-	private double maxAcceleration;
-	private double maxVelocity;
+	private MotionProfiler powerControl;
 
 	/**
 	 * A class that uses one joystick as forward/backwards movement and another for
@@ -40,7 +39,6 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 		controller = Global.controllers;
 		this.leftMotors = leftMotors;
 		this.rightMotors = rightMotors;
-		maxAcceleration = 2;
 		turnSmoothingExponent = 1;
 		invertSticks = false;
 		lastForward = 0;
@@ -58,9 +56,8 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 	 * @param maxAcceleration
 	 *            the max acceleration of the robot between 0 and 2
 	 */
-	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, double maxAcceleration, boolean invertSticks) {
+	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, boolean invertSticks) {
 		this(rightMotors, leftMotors);
-		this.maxAcceleration = maxAcceleration;
 		this.invertSticks = invertSticks;
 	}
 
@@ -74,16 +71,6 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 	
 	public void reverseDrive(boolean reverse){
 		backwardsDrive = reverse;
-	}
-	
-	@Override
-	public void setMaxAcceleration(double maxAcceleration) {
-		this.maxAcceleration = maxAcceleration;
-	}
-	
-	@Override
-	public void setMaxVelocity(double maxVelocity) {
-		this.maxVelocity = maxVelocity;
 	}
 
 	@Override
@@ -102,9 +89,7 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 			forwardStick = controller.getLeftJoystickY();
 		}
 		MotorPowers toReturn = new MotorPowers();
-		if (Math.abs(forwardStick - lastForward) > maxAcceleration) {
-			forwardStick = lastForward + Math.signum(forwardStick - lastForward) * maxAcceleration;
-		}
+		forwardStick = powerControl.capAcceleration(lastForward, forwardStick);
 		lastForward = forwardStick;
 		toReturn.leftPower = forwardStick;
 		toReturn.rightPower = forwardStick;
@@ -113,12 +98,8 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 			toReturn.rightPower = -toReturn.rightPower;
 		}
 		
-		if(Math.abs(toReturn.leftPower) > maxVelocity){
-			toReturn.leftPower = Math.signum(toReturn.leftPower) * maxVelocity;
-		}
-		if(Math.abs(toReturn.rightPower) > maxVelocity){
-			toReturn.rightPower = Math.signum(toReturn.rightPower) * maxVelocity;
-		}
+		leftPower = powerControl.capVelocity(leftPower);
+		rightPower = powerControl.capVelocity(rightPower);
 		return toReturn;
 	}
 
@@ -161,40 +142,12 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 
 	@Override
 	public void setLeftMotors(double power) {
-		setLeftMotors(power,false);
-	}
-
-	public void setLeftMotors(double power, boolean useMotionProfiling){
-		if (super.driveControl == DriveControl.EXTERNAL_CONTROL) {
-			if(useMotionProfiling){
-				if(Math.abs(power - leftMotors.getSpeed()) > maxAcceleration){
-					power = leftMotors.getSpeed() + Math.signum(power - leftMotors.getSpeed())*maxAcceleration;
-				}
-				if(Math.abs(power) > maxVelocity){
-					power = Math.signum(power) * maxVelocity;
-				}
-			}
-			leftMotors.set(power);
-		}
+		setLeftMotors(power);
 	}
 	
 	@Override
 	public void setRightMotors(double power) {
-		setRightMotors(power,false);
-	}
-
-	public void setRightMotors(double power, boolean useMotionProfiling){
-		if (super.driveControl == DriveControl.EXTERNAL_CONTROL) {
-			if(useMotionProfiling){
-				if(Math.abs(power - rightMotors.getSpeed()) > maxAcceleration){
-					power = rightMotors.getSpeed() + Math.signum(power - rightMotors.getSpeed())*maxAcceleration;
-				}
-				if(Math.abs(power) > maxVelocity){
-					power = Math.signum(power) * maxVelocity;
-				}
-			}
-			leftMotors.set(power);
-		}
+		setRightMotors(power);
 	}
 	
 	@Override
