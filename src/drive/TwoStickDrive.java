@@ -53,11 +53,12 @@ public class TwoStickDrive extends IDrive implements Reversible{
 	 *            all of the right motors
 	 * @param leftMotors
 	 *            all of the left motors
-	 * @param maxAcceleration
-	 *            the max acceleration of the robot between 0 and 2
+	 * @param turnSmootingExponent
+	 *            the exponential smoothing amount of turning
 	 */
-	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, boolean invertSticks) {
+	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, int turnSmoothingExponent, boolean invertSticks) {
 		this(rightMotors, leftMotors);
+		this.turnSmoothingExponent = turnSmoothingExponent;
 		this.invertSticks = invertSticks;
 	}
 
