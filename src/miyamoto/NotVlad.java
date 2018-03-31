@@ -87,7 +87,7 @@ public class NotVlad extends RobotDefinitionBase {
 		IMotor BL = new SparkMotor(getInt("BLMOTORPIN"), false);
 		IMotor BR = new SparkMotor(getInt("BRMOTORPIN"), true);
 
-		IDrive drive = new TwoStickDrive(new ChainMotor(FR, BR), new ChainMotor(FL, BL), false);
+		IDrive drive = new TwoStickDrive(new ChainMotor(FR, BR), new ChainMotor(FL, BL), 4, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 		MotionProfiler sneak = new MotionProfiler();
 
