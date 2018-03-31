@@ -45,6 +45,14 @@ public class MotionProfiler extends IControl {
 			this.index = index;
 		}
 	}
+	
+	/**
+	 * Gets the current motion profile that is being used
+	 * @return A MotionProfile object that contains a maxAcceleration and maxVelocity
+	 */
+	public MotionProfile getCurrentProfile(){
+		return profiles[index];
+	}
 
 	public void teleopInit() {
 		index = 0;
@@ -66,7 +74,7 @@ public class MotionProfiler extends IControl {
 	}
 	
 	public void autonomousPeriodic(){
-		if (drive != null && controller != null) {
+		if (drive != null) {
 			drive.setMaxAcceleration(profiles[0].getAcceleration());
 			drive.setMaxVelocity(profiles[0].getVelocity());
 		}
