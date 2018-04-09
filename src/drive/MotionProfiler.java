@@ -1,7 +1,5 @@
 package drive;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
-
 import robot.Global;
 import robot.IControl;
 import robotDefinitions.controls.MotionProfileableController;
