@@ -155,8 +155,7 @@ public class MiyamotoXMLInterpreter {
 			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
 			int stopDistance = Integer.parseInt(attributes.getNamedItem("Inches").getNodeValue());
 
-			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 2 / stopDistance,
-					angle, .012);
+			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 2, angle, .012);
 		}
 
 		case ("DecelCommand"): {

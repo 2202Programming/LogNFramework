@@ -34,6 +34,7 @@ public class PIDDriveAtAngle implements ICommand {
 	private AHRS navX;
 	private double Kp;
 	private int frameCounter;
+	private long initialOnTarget;
 
 	/**
 	 * Drives straight at a specified angle using PID for distance and P for Angle
@@ -48,11 +49,11 @@ public class PIDDriveAtAngle implements ICommand {
 	 *            The minimum motor power
 	 * @param maxOutput
 	 *            The maximum motor power
-	 * @param percentTolerance
-	 *            The percent tolerance
+	 * @param absoluteTolerance
+	 *            The absolute tolerance
 	 */
 	public PIDDriveAtAngle(IStopCondition stop, List<Encoder> encoders, double distanceInCounts, double minOutput,
-			double maxOutput, double percentTolerance, double angle, double Kp) {
+			double maxOutput, double absoluteTolerance, double angle, double Kp) {
 		navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
 		stopCondition = stop;
 		this.angle = angle;
@@ -65,7 +66,7 @@ public class PIDDriveAtAngle implements ICommand {
 		PIDOutput output = new FakePIDMotor();
 		controller = new PIDController(0.0, 0.0, 0.0, source, output, 0.02);
 		controller.setOutputRange(minOutput, maxOutput);
-		controller.setPercentTolerance(percentTolerance);
+		controller.setAbsoluteTolerance(absoluteTolerance);
 
 		try {
 			loadPIDValues();
@@ -96,18 +97,18 @@ public class PIDDriveAtAngle implements ICommand {
 		double Kp = this.Kp;
 		double change = getError() * Kp;
 		if (Math.abs(getError()) < 1) {
-			drive.setLeftMotors(baseSpeed,false);
-			drive.setRightMotors(baseSpeed,false);
+			drive.setLeftMotors(baseSpeed, true);
+			drive.setRightMotors(baseSpeed, true);
 		} else {
-			drive.setLeftMotors(baseSpeed + change,false);
-			drive.setRightMotors(baseSpeed - change,false);
+			drive.setLeftMotors(baseSpeed + change, true);
+			drive.setRightMotors(baseSpeed - change, true);
 		}
 		frameCounter++;
 		if (frameCounter % 10 == 0) {
 			System.out.println("Distance PID error: " + controller.getError() + "\n" + "Base motor speed: " + baseSpeed
 					+ "\n" + "Angle PID error: " + getError() + "\n" + "PID offset: " + change);
 		}
-		return stopCondition.stopNow();
+		return controller.onTarget();
 	}
 
 	/**
