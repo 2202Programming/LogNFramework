@@ -143,12 +143,16 @@ public class TwoStickDrive extends IDrive implements Reversible{
 
 	@Override
 	public void setLeftMotors(double power) {
-		setLeftMotors(power);
+		if(super.driveControl == DriveControl.EXTERNAL_CONTROL){
+			leftMotors.set(power);
+		}
 	}
 	
 	@Override
 	public void setRightMotors(double power) {
-		setRightMotors(power);
+		if(super.driveControl == DriveControl.EXTERNAL_CONTROL){
+			rightMotors.set(power);
+		}
 	}
 	
 	@Override
