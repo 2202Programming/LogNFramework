@@ -1,12 +1,17 @@
 package auto;
 
 import auto.commands.EmptyCommand;
+import comms.FileLoader;
+import comms.LogWriter;
+import edu.wpi.first.wpilibj.Encoder;
+import input.SensorController;
 
 public class CommandListRunner {
 	public int commandNum;
 	private int prevCommandNum;
 	private CommandList commands;
 	private ICommand curCommand;
+	private long commandTime;
 
 	/**
 	 * Constructor for CommandListRunner<br>
@@ -26,6 +31,7 @@ public class CommandListRunner {
 	 */
 	public void init() {
 		commandNum = 0;
+		commandTime = 0;
 		prevCommandNum = -1;
 	}
 
@@ -41,10 +47,12 @@ public class CommandListRunner {
 		if (prevCommandNum != commandNum) {
 			prevCommandNum = commandNum;
 			curCommand.init();
+			commandTime = System.currentTimeMillis();
 		}
 		if (curCommand.run()) {
 			curCommand.stop();
 			commandNum++;
+			LogWriter.runLog("AutonomousLog", "Command run time: " + (System.currentTimeMillis()-commandTime) + "");
 		}
 		return false;
 	}

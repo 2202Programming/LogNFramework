@@ -25,6 +25,7 @@ import auto.commands.TurnCommand;
 import auto.commands.WaitCommand;
 import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
+import auto.stopConditions.IntakeStopCondition;
 import auto.stopConditions.LiftStopCondition;
 import auto.stopConditions.OrStopCondition;
 import auto.stopConditions.PIDDistanceStopCondition;
@@ -295,6 +296,9 @@ public class MiyamotoXMLInterpreter {
 			}
 
 			return new LiftStopCondition(lift, targetPosition);
+		}
+		case ("IntakeStopCondition"): {
+			return new IntakeStopCondition();
 		}
 		}
 		return new TimerStopCondition(0);

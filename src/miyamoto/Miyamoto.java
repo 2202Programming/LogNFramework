@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kauailabs.navx.frc.AHRS;
 
 import LED.LEDController;
+import comms.LogWriter;
 import comms.SmartWriter;
 import drive.IDrive;
 import drive.MotionProfile;
@@ -144,6 +145,8 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
+		
+		LogWriter.registerLoggable("AutonomousLog", new AutoLog());
 
 		return iControlMap;
 	}
