@@ -14,7 +14,7 @@ import robotDefinitions.controls.ControlBase;
  * 
  * @author SecondThread
  */
-public class ArcadeDrive extends IDrive implements MotionProfileable{
+public class ArcadeDrive extends IDrive{
 
 	/**
 	 * The motor corresponding to the front right wheel
@@ -325,16 +325,6 @@ public class ArcadeDrive extends IDrive implements MotionProfileable{
 	 */
 	public double getRightMotorsSpeed() {
 		return frontRight.getSpeed();
-	}
-	
-	@Override
-	public void setMaxAcceleration(double maxAcceleration) {
-		this.maxAcceleration = maxAcceleration;
-	}
-	
-	@Override
-	public void setMaxVelocity(double maxVelocity) {
-		//TODO:May want to add this
 	}
 }
 

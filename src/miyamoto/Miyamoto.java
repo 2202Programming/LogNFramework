@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kauailabs.navx.frc.AHRS;
 
 import LED.LEDController;
+import comms.LogWriter;
 import comms.SmartWriter;
 import drive.IDrive;
 import drive.MotionProfile;
@@ -120,8 +121,8 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		MotionProfile[] profiles = { new MotionProfile(0.08, 1), new MotionProfile(0.05, 1),
 				new MotionProfile(0.05, 0.6), new MotionProfile(0.03, 0.4), new MotionProfile(0.03, 0.3) };
-		MotionProfiler sneak = new MotionProfiler(drive, profiles);
-		iControlMap.put("PROFILER", sneak);
+		MotionProfiler driveProfiler = new MotionProfiler(profiles);
+		iControlMap.put("PROFILER", driveProfiler);
 		ReverseDrive reverse = new ReverseDrive(drive);
 
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), false);
@@ -139,11 +140,13 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		LEDController LED = new LEDController();
 
-		AutomationController AC = new AutomationController(lift, sneak);
+		AutomationController AC = new AutomationController(lift, driveProfiler);
 		iControlMap.put("AC", AC);
 
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
+		
+		LogWriter.registerLoggable("AutonomousLog", new AutoLog());
 
 		return iControlMap;
 	}

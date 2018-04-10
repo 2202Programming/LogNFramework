@@ -12,6 +12,7 @@ import auto.IStopCondition;
 import comms.SmartWriter;
 import drive.DriveControl;
 import drive.IDrive;
+import drive.MotionProfiler;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -35,6 +36,8 @@ public class PIDDriveAtAngle implements ICommand {
 	private double Kp;
 	private int frameCounter;
 	private long initialOnTarget;
+	private double lastMotorPower;
+	private MotionProfiler powerRamp;
 
 	/**
 	 * Drives straight at a specified angle using PID for distance and P for Angle
@@ -85,6 +88,8 @@ public class PIDDriveAtAngle implements ICommand {
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 		driveEncoders.reset();
 		frameCounter = 0;
+		lastMotorPower = 0;
+		powerRamp = (MotionProfiler)Global.controlObjects.get("PROFILER");
 	}
 
 	public boolean run() {
@@ -93,6 +98,8 @@ public class PIDDriveAtAngle implements ICommand {
 		// Result from Distance PID Controller
 		double baseSpeed = controller.get();
 
+		baseSpeed = powerRamp.capAcceleration(lastMotorPower, baseSpeed);
+		lastMotorPower = baseSpeed;
 		// Self-made Angle P Controller
 		double Kp = this.Kp;
 		double change = getError() * Kp;
