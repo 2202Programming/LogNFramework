@@ -2,12 +2,18 @@ package miyamoto;
 import comms.ILoggable;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
+import robot.IControl;
 
-public class AutoLog implements ILoggable {
+public class AutoLog extends IControl implements ILoggable {
 	private SensorController sensors;
+	private String timeStamp;
 	
 	public AutoLog(){
 		sensors = SensorController.getInstance();
+	}
+	
+	public void autonomousInit(){
+		timeStamp = System.currentTimeMillis() + "";
 	}
 	
 	@Override
@@ -17,7 +23,7 @@ public class AutoLog implements ILoggable {
 
 	@Override
 	public String getLogFileName() {
-		return "/RobotLog";
+		return "/RobotLog" + timeStamp;
 	}
 
 }

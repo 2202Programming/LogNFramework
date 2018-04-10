@@ -149,7 +149,7 @@ public abstract class IDrive extends IControl {
 	 *            The power of the left motors
 	 */
 	public abstract void setLeftMotors(double power);
-
+	
 	/**
 	 * This is used by Auto commands. That's about it. Nowhere else as far as I
 	 * know. <br>
@@ -161,7 +161,7 @@ public abstract class IDrive extends IControl {
 	 *            The power of the right motors
 	 */
 	public abstract void setRightMotors(double power);
-
+	
 	/**
 	 * This is used by Auto commands to get the current motor speed. That's about
 	 * it. Nowhere else as far as I know. <br>

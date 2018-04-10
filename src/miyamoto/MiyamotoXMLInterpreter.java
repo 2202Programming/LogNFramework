@@ -20,6 +20,7 @@ import auto.commands.DriveCommand;
 import auto.commands.IntakeCommand;
 import auto.commands.LiftCommand;
 import auto.commands.OuttakeCommand;
+import auto.commands.PIDDriveAtAngle;
 import auto.commands.TurnCommand;
 import auto.commands.WaitCommand;
 import auto.stopConditions.AngleStopCondition;
@@ -27,6 +28,7 @@ import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.IntakeStopCondition;
 import auto.stopConditions.LiftStopCondition;
 import auto.stopConditions.OrStopCondition;
+import auto.stopConditions.PIDDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
@@ -148,7 +150,13 @@ public class MiyamotoXMLInterpreter {
 
 			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 			double angle = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
-			return new DriveAtAngle(getStopCondition(n), power, angle);
+			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
+			SensorController sensorController = SensorController.getInstance();
+			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
+			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
+			int stopDistance = Integer.parseInt(attributes.getNamedItem("Inches").getNodeValue());
+
+			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 2, angle, .012);
 		}
 
 		case ("DecelCommand"): {
@@ -245,7 +253,7 @@ public class MiyamotoXMLInterpreter {
 			SensorController sensorController = SensorController.getInstance();
 			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
 			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
-			return new DistanceStopCondition(encoders, stopDistance);
+			return new PIDDistanceStopCondition(encoders, stopDistance, 1, 200);
 		}
 		case ("TimerStopCondition"): {
 			long stopTime = Long.parseLong(attributes.getNamedItem("Timer").getNodeValue());

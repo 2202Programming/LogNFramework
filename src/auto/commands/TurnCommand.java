@@ -121,6 +121,7 @@ public class TurnCommand implements ICommand {
 		controller.setInputRange(minInput, maxInput);
 		controller.setOutputRange(minOutput, maxOutput);
 		controller.setPercentTolerance(percentTolerance);
+		controller.setContinuous(true);
 		try {
 			loadPIDValues();
 		} catch (IOException e) {

@@ -11,7 +11,7 @@ import robotDefinitions.controls.ControlBase;
  * @author Daniel
  *
  */
-public class TwoStickDrive extends IDrive implements Reversible, MotionProfileable{
+public class TwoStickDrive extends IDrive implements Reversible{
 	private IMotor leftMotors;
 	private IMotor rightMotors;
 	private ControlBase controller;
@@ -24,8 +24,7 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 	private boolean invertSticks;
 	private double lastForward;
 	private boolean backwardsDrive;
-	private double maxAcceleration;
-	private double maxVelocity;
+	private MotionProfiler powerControl;
 
 	/**
 	 * A class that uses one joystick as forward/backwards movement and another for
@@ -40,7 +39,6 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 		controller = Global.controllers;
 		this.leftMotors = leftMotors;
 		this.rightMotors = rightMotors;
-		maxAcceleration = 2;
 		turnSmoothingExponent = 1;
 		invertSticks = false;
 		lastForward = 0;
@@ -55,12 +53,12 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 	 *            all of the right motors
 	 * @param leftMotors
 	 *            all of the left motors
-	 * @param maxAcceleration
-	 *            the max acceleration of the robot between 0 and 2
+	 * @param turnSmootingExponent
+	 *            the exponential smoothing amount of turning
 	 */
-	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, double maxAcceleration, boolean invertSticks) {
+	public TwoStickDrive(IMotor rightMotors, IMotor leftMotors, int turnSmoothingExponent, boolean invertSticks) {
 		this(rightMotors, leftMotors);
-		this.maxAcceleration = maxAcceleration;
+		this.turnSmoothingExponent = turnSmoothingExponent;
 		this.invertSticks = invertSticks;
 	}
 
@@ -71,19 +69,9 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 	public void invertJoysticks(boolean invert) {
 		invertSticks = invert;
 	}
-	
-	public void reverseDrive(boolean reverse){
+
+	public void reverseDrive(boolean reverse) {
 		backwardsDrive = reverse;
-	}
-	
-	@Override
-	public void setMaxAcceleration(double maxAcceleration) {
-		this.maxAcceleration = maxAcceleration;
-	}
-	
-	@Override
-	public void setMaxVelocity(double maxVelocity) {
-		this.maxVelocity = maxVelocity;
 	}
 
 	@Override
@@ -102,23 +90,17 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 			forwardStick = controller.getLeftJoystickY();
 		}
 		MotorPowers toReturn = new MotorPowers();
-		if (Math.abs(forwardStick - lastForward) > maxAcceleration) {
-			forwardStick = lastForward + Math.signum(forwardStick - lastForward) * maxAcceleration;
-		}
+		forwardStick = powerControl.capAcceleration(lastForward, forwardStick);
 		lastForward = forwardStick;
 		toReturn.leftPower = forwardStick;
 		toReturn.rightPower = forwardStick;
-		if(backwardsDrive){
+		if (backwardsDrive) {
 			toReturn.leftPower = -toReturn.leftPower;
 			toReturn.rightPower = -toReturn.rightPower;
 		}
 		
-		if(Math.abs(toReturn.leftPower) > maxVelocity){
-			toReturn.leftPower = Math.signum(toReturn.leftPower) * maxVelocity;
-		}
-		if(Math.abs(toReturn.rightPower) > maxVelocity){
-			toReturn.rightPower = Math.signum(toReturn.rightPower) * maxVelocity;
-		}
+		leftPower = powerControl.capVelocity(leftPower);
+		rightPower = powerControl.capVelocity(rightPower);
 		return toReturn;
 	}
 
@@ -138,12 +120,12 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 
 	@Override
 	protected void setMotors() {
-//		if (Math.abs(leftPower) > maxVelocity) {
-//			leftPower = Math.signum(leftPower) * maxVelocity;
-//		}
-//		if (Math.abs(rightPower) > maxVelocity) {
-//			rightPower = Math.signum(rightPower) * maxVelocity;
-//		}
+		// if (Math.abs(leftPower) > maxVelocity) {
+		// leftPower = Math.signum(leftPower) * maxVelocity;
+		// }
+		// if (Math.abs(rightPower) > maxVelocity) {
+		// rightPower = Math.signum(rightPower) * maxVelocity;
+		// }
 		rightMotors.set(rightPower);
 		leftMotors.set(leftPower);
 	}
@@ -161,14 +143,14 @@ public class TwoStickDrive extends IDrive implements Reversible, MotionProfileab
 
 	@Override
 	public void setLeftMotors(double power) {
-		if (super.driveControl == DriveControl.EXTERNAL_CONTROL) {
+		if(super.driveControl == DriveControl.EXTERNAL_CONTROL){
 			leftMotors.set(power);
 		}
 	}
 
 	@Override
 	public void setRightMotors(double power) {
-		if (super.driveControl == DriveControl.EXTERNAL_CONTROL) {
+		if(super.driveControl == DriveControl.EXTERNAL_CONTROL){
 			rightMotors.set(power);
 		}
 	}
