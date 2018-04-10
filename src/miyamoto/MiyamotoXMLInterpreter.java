@@ -73,8 +73,8 @@ public class MiyamotoXMLInterpreter {
 	}
 
 	/**
-	 * Searches for a specific path in the xml file and returns a command list of
-	 * the commands in the xml file
+	 * Searches for a specific path in the xml file and returns a command list
+	 * of the commands in the xml file
 	 * 
 	 * @param id
 	 *            path id 1st character: starting position 2nd character: target
@@ -99,7 +99,8 @@ public class MiyamotoXMLInterpreter {
 		}
 
 		// if (xmlPath == null) {
-		// xmlPath = paths.item(0); // Defaults to the first path in the xml file
+		// xmlPath = paths.item(0); // Defaults to the first path in the xml
+		// file
 		// }
 
 		NodeList xmlCommands = xmlPath.getChildNodes();
@@ -150,6 +151,12 @@ public class MiyamotoXMLInterpreter {
 
 			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 			double angle = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
+			return new DriveAtAngle(getStopCondition(n), power, angle);
+		}
+
+		case ("PIDDriveAtAngle"): {
+			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
+			double angle = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
 			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 			SensorController sensorController = SensorController.getInstance();
 			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
@@ -158,7 +165,6 @@ public class MiyamotoXMLInterpreter {
 
 			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 2, angle, .012);
 		}
-
 		case ("DecelCommand"): {
 			double maxAcceleration = Double.parseDouble(attributes.getNamedItem("MaxAcceleration").getNodeValue());
 			return new DecelCommand(maxAcceleration);
