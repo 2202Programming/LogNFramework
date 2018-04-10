@@ -3,28 +3,10 @@
 	<!-- Make sure that the default path is at the top -->
 
 	<Path Id="D">
-		<DriveCommand Angle="0" Power="0.95" Inches="50">
-			<DistanceStopCondition Dist_Inches="50">
-			</DistanceStopCondition>
+		<DriveCommand Angle="0" Power="1.0" Inches="50">
+			<TimerStopCondition Timer="1000">
+			</TimerStopCondition>
 		</DriveCommand>
-
-		<WaitCommand Time="2000"></WaitCommand>
-		
-		<DriveCommand Angle="0" Power="0.95" Inches="50">
-			<DistanceStopCondition Dist_Inches="50">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<WaitCommand Time="2000"></WaitCommand>
-
-		<DriveCommand Angle="0" Power="0.95" Inches="50">
-			<DistanceStopCondition Dist_Inches="50">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<WaitCommand Time="2000"></WaitCommand>
-
-		<WaitCommand Time="5000"></WaitCommand>
 	</Path>
 
 	<Path Id="L2-1">

@@ -61,6 +61,10 @@ public class TwoStickDrive extends IDrive implements Reversible{
 		this.turnSmoothingExponent = turnSmoothingExponent;
 		this.invertSticks = invertSticks;
 	}
+	
+	public void robotInit() {
+		powerControl = (MotionProfiler) Global.controlObjects.get("PROFILER");
+	}
 
 	public void setTurnExponent(int exp) {
 		turnSmoothingExponent = exp;
