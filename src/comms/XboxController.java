@@ -134,6 +134,8 @@ public class XboxController extends IControl {
 
 	public void autonomousInit() {
 		update();
+		update();
+		update();
 	}
 
 	public void autonomousPeriodic() {
