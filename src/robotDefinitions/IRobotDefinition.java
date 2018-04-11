@@ -14,5 +14,13 @@ public interface IRobotDefinition {
 	 * @return Control Object List for robot class's main cycle
 	 */
 	Map<String, IControl> loadControlObjects();
+	
+	/**
+	 * Called to load control objects that are used for all robots. 
+	 * This should be called after the loadControl objects method.
+	 * 
+	 * @return a Map of the default control objects
+	 */
+	Map<String, IControl> loadDefaultControlObjects();
 
 }

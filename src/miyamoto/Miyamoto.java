@@ -123,7 +123,6 @@ public class Miyamoto extends RobotDefinitionBase {
 				new MotionProfile(0.05, 0.6), new MotionProfile(0.03, 0.4), new MotionProfile(0.03, 0.3) };
 		MotionProfiler driveProfiler = new MotionProfiler(profiles);
 		iControlMap.put("PROFILER", driveProfiler);
-		ReverseDrive reverse = new ReverseDrive(drive);
 
 		IMotor climbMotor = new SparkMotor(getInt("CLIMBMOTORPIN"), false);
 		Climber climber = new Climber(climbMotor);
