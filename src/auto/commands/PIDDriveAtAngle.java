@@ -87,7 +87,6 @@ public class PIDDriveAtAngle implements ICommand {
 		controller.enable();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
-		driveEncoders.reset();
 		frameCounter = 0;
 		lastMotorPower = 0;
 		powerRamp = (MotionProfiler) Global.controlObjects.get("PROFILER");
