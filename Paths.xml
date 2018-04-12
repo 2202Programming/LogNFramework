@@ -3,7 +3,7 @@
 	<!-- Make sure that the default path is at the top -->
 
 	<Path Id="D">
-		<DriveCommand Angle="0" Power="1.0" Inches="50">
+		<DriveCommand Angle="0" Power="0.7" Inches="50">
 			<TimerStopCondition Timer="1000">
 			</TimerStopCondition>
 		</DriveCommand>
