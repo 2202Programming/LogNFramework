@@ -29,6 +29,7 @@ import auto.stopConditions.IntakeStopCondition;
 import auto.stopConditions.LiftStopCondition;
 import auto.stopConditions.OrStopCondition;
 import auto.stopConditions.PIDDistanceStopCondition;
+import auto.stopConditions.SummativeDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
@@ -73,8 +74,8 @@ public class MiyamotoXMLInterpreter {
 	}
 
 	/**
-	 * Searches for a specific path in the xml file and returns a command list
-	 * of the commands in the xml file
+	 * Searches for a specific path in the xml file and returns a command list of
+	 * the commands in the xml file
 	 * 
 	 * @param id
 	 *            path id 1st character: starting position 2nd character: target
@@ -254,6 +255,22 @@ public class MiyamotoXMLInterpreter {
 
 		switch (stopConditionType) {
 		case ("DistanceStopCondition"): {
+			int stopDistance = Integer.parseInt(attributes.getNamedItem("Dist_Inches").getNodeValue());
+			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
+			SensorController sensorController = SensorController.getInstance();
+			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
+			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
+			return new DistanceStopCondition(encoders, stopDistance);
+		}
+		case ("SummativeDistanceStopCondition"): {
+			int stopDistance = Integer.parseInt(attributes.getNamedItem("Dist_Inches").getNodeValue());
+			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
+			SensorController sensorController = SensorController.getInstance();
+			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
+			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
+			return new SummativeDistanceStopCondition(encoders, stopDistance);
+		}
+		case ("PIDDistanceStopCondition"): {
 			int stopDistance = Integer.parseInt(attributes.getNamedItem("Dist_Inches").getNodeValue());
 			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 			SensorController sensorController = SensorController.getInstance();
