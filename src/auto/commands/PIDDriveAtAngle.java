@@ -38,6 +38,7 @@ public class PIDDriveAtAngle implements ICommand {
 	private long initialOnTarget;
 	private double lastMotorPower;
 	private MotionProfiler powerRamp;
+	private final short MILLISECONDS_IN_RANGE = 200;
 
 	/**
 	 * Drives straight at a specified angle using PID for distance and P for Angle
@@ -89,7 +90,8 @@ public class PIDDriveAtAngle implements ICommand {
 		driveEncoders.reset();
 		frameCounter = 0;
 		lastMotorPower = 0;
-		powerRamp = (MotionProfiler)Global.controlObjects.get("PROFILER");
+		powerRamp = (MotionProfiler) Global.controlObjects.get("PROFILER");
+		initialOnTarget = Long.MAX_VALUE;
 	}
 
 	public boolean run() {
@@ -110,12 +112,30 @@ public class PIDDriveAtAngle implements ICommand {
 			drive.setLeftMotors(baseSpeed + change);
 			drive.setRightMotors(baseSpeed - change);
 		}
-//		frameCounter++;
-//		if (frameCounter % 10 == 0) {
-//			System.out.println("Distance PID error: " + controller.getError() + "\n" + "Base motor speed: " + baseSpeed
-//					+ "\n" + "Angle PID error: " + getError() + "\n" + "PID offset: " + change);
-//		}
-		return controller.onTarget();
+		// frameCounter++;
+		// if (frameCounter % 10 == 0) {
+		// System.out.println("Distance PID error: " + controller.getError() + "\n" +
+		// "Base motor speed: " + baseSpeed
+		// + "\n" + "Angle PID error: " + getError() + "\n" + "PID offset: " + change);
+		// }
+		return PIDStop() || stopCondition.stopNow();
+	}
+
+	public boolean PIDStop() {
+		boolean onTarget = controller.onTarget();
+
+		if (onTarget) {
+			long curTime = System.currentTimeMillis();
+
+			if (curTime < initialOnTarget) {
+				initialOnTarget = curTime;
+			} else {
+				return Math.abs(curTime - initialOnTarget) >= MILLISECONDS_IN_RANGE;
+			}
+		} else {
+			initialOnTarget = Long.MAX_VALUE;
+		}
+		return false;
 	}
 
 	/**
