@@ -26,7 +26,7 @@ public class LogWriter {
 		if(item == null){
 			return false;
 		}else{
-			FileLoader.writeToFile(item.getLogFileName(), item.getLogData() + "/n" + extraData);
+			FileLoader.writeToFile(item.getLogFileName(), item.getLogData() + "\n" + extraData);
 			return true;
 		}
 	}
