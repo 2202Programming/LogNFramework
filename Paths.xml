@@ -3,10 +3,27 @@
 	<!-- Make sure that the default path is at the top -->
 
 	<Path Id="D">
-		<DriveCommand Angle="0" Power="0.7" Inches="50">
+		<!-- <DriveCommand Angle="0" Power="0.7">
+			<DistanceStopCondition Dist_Inches="10">
+			</DistanceStopCondition>
+		</DriveCommand>
+
+		<DriveCommand Angle="0" Power="0.7">
+			<SummativeDistanceStopCondition
+				Dist_Inches="50">
+			</SummativeDistanceStopCondition>
+		</DriveCommand>
+
+		<DriveCommand Angle="0" Power="0.7" Dist_Inches="65">
+			<TimerStopCondition Timer="2000">
+			</TimerStopCondition>
+		</DriveCommand> -->
+		
+		<DriveCommand Angle="0" Power="0.7">
 			<TimerStopCondition Timer="1000">
 			</TimerStopCondition>
 		</DriveCommand>
+
 	</Path>
 
 	<Path Id="L2-1">
