@@ -114,8 +114,8 @@ public class XboxController extends IControl {
 
 		// I don't know what this means or does, but we needed it for the c++
 		// version
-		leftJoystick.setAxisChannel(Joystick.AxisType.kX, 4);
-		rightJoystick.setAxisChannel(Joystick.AxisType.kY, 5);
+		leftJoystick.setXChannel(4);
+		rightJoystick.setYChannel(5);
 		if (teehee) {
 			setRumble(0.1);
 		}
