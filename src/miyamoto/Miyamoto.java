@@ -116,7 +116,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		TurnController turnController = new TurnController(left, right);
 		iControlMap.put("TURNCONTROLLER", turnController);
 
-		IDrive drive = new TwoStickDrive(left, right, 2, false);
+		IDrive drive = new TwoStickDrive(left, right, 1, false);
 		iControlMap.put(RobotDefinitionBase.DRIVENAME, drive);
 
 		MotionProfile[] profiles = { new MotionProfile(0.08, 1), new MotionProfile(0.05, 1),
