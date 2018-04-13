@@ -13,6 +13,7 @@ import drive.MotionProfile;
 import drive.MotionProfiler;
 import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI.Port;
@@ -92,8 +93,8 @@ public class Miyamoto extends RobotDefinitionBase {
 		// Encoder stuff
 		double CPI = 19.04; // use same calibration for left/right.Sensors are very very close. - DPL/TG
 							// 3/28
-		Encoder encoder0 = new Encoder(5, 6, false); // Right Changed from 0,1
-		Encoder encoder1 = new Encoder(7, 8, true); // Left CHanged from 2,3
+		Encoder encoder0 = new Encoder(5, 6, false, EncodingType.k1X); // Right Changed from 0,1
+		Encoder encoder1 = new Encoder(7, 8, true, EncodingType.k1X); // Left CHanged from 2,3
 		encoder0.setDistancePerPulse(1.0 / CPI); // was 0.05318);
 		encoder1.setDistancePerPulse(1.0 / CPI); // was 0.05321);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();

@@ -5,11 +5,13 @@ import java.util.Map;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import comms.LogWriter;
 import comms.SmartWriter;
 import drive.IDrive;
 import drive.MotionProfiler;
 import drive.TwoStickDrive;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.SerialPort;
 import input.EncoderMonitor;
 import input.NavXMonitor;
@@ -77,7 +79,7 @@ public class NotVlad extends RobotDefinitionBase {
 		sensorController.registerSensor("ENCODER1", encoder1);
 
 		// Create NavX
-		AHRS navX = new AHRS(SerialPort.Port.kMXP);
+		AHRS navX = new AHRS(Port.kMXP);
 		sensorController.registerSensor("NAVX", navX);
 		NavXMonitor navXMonitor = new NavXMonitor();
 		navXMonitor.add("NAVX", navX);
@@ -102,9 +104,16 @@ public class NotVlad extends RobotDefinitionBase {
 
 		// TalonSRXMotor liftMotor = new TalonSRXMotor(11,true,0.1,0.0,0.0,0.0);
 		// Lift lift = new Lift(liftMotor);
+		
 
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
+		
+		MotionProfiler profiler = new MotionProfiler();
+		iControlMap.put("PROFILER", profiler);
+		
+		AutoLog AL = new AutoLog();
+		LogWriter.registerLoggable("AutonomousLog", AL);
 
 		return iControlMap;
 	}

@@ -155,7 +155,7 @@ public class MiyamotoXMLInterpreter {
 			return new DriveAtAngle(getStopCondition(n), power, angle);
 		}
 
-		case ("PIDDriveAtAngle"): {
+		case ("PIDDriveAtAngleCommand"): {
 			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 			double angle = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
 			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
