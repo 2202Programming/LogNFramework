@@ -3,26 +3,26 @@
 	<!-- Make sure that the default path is at the top -->
 
 	<Path Id="D">
-		<!-- <DriveCommand Angle="0" Power="0.7">
-			<DistanceStopCondition Dist_Inches="10">
+		<DriveCommand Angle="0" Power="0.55">
+			<DistanceStopCondition Dist_Inches="40">
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<DriveCommand Angle="0" Power="0.7">
+		<DriveCommand Angle="0" Power="0.4">
 			<SummativeDistanceStopCondition
-				Dist_Inches="50">
+				Dist_Inches="80">
 			</SummativeDistanceStopCondition>
 		</DriveCommand>
 
-		<DriveCommand Angle="0" Power="0.7" Dist_Inches="65">
-			<TimerStopCondition Timer="2000">
+		<PIDDriveAtAngleCommand Angle="0" Power="0.55" Dist_Inches="140">
+			<TimerStopCondition Timer="10000">
 			</TimerStopCondition>
-		</DriveCommand> -->
+		</PIDDriveAtAngleCommand>
 		
 		<DriveCommand Angle="0" Power="0.55">
 			<TimerStopCondition Timer="3250">
 			</TimerStopCondition>
-		</DriveCommand>
+		</DriveCommand>-->
 
 	</Path>
 
