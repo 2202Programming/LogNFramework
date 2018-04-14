@@ -19,8 +19,8 @@
 			</TimerStopCondition>
 		</DriveCommand> -->
 		
-		<DriveCommand Angle="0" Power="0.7">
-			<TimerStopCondition Timer="1000">
+		<DriveCommand Angle="0" Power="0.55">
+			<TimerStopCondition Timer="3250">
 			</TimerStopCondition>
 		</DriveCommand>
 
