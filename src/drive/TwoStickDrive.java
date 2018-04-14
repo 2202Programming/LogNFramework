@@ -80,10 +80,12 @@ public class TwoStickDrive extends IDrive implements Reversible{
 
 	@Override
 	protected void teleopUpdate() {
-		MotorPowers forward = setForwardSpeed();
-		MotorPowers turn = setTurnAmount();
-		leftPower = forward.leftPower + turn.leftPower;
-		rightPower = forward.rightPower + turn.rightPower;
+		if(driveControl == DriveControl.DRIVE_CONTROLLED){
+			MotorPowers forward = setForwardSpeed();
+			MotorPowers turn = setTurnAmount();
+			leftPower = forward.leftPower + turn.leftPower;
+			rightPower = forward.rightPower + turn.rightPower;
+		}
 	}
 
 	private MotorPowers setForwardSpeed() {
