@@ -6,7 +6,6 @@ import com.kauailabs.navx.frc.AHRS;
 
 import auto.CommandList;
 import auto.CommandListRunner;
-import auto.ICommand;
 import auto.commands.DriveCommand;
 import auto.commands.LiftCommand;
 import auto.commands.TurnCommand;
@@ -15,6 +14,8 @@ import auto.stopConditions.AngleStopCondition;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.OrStopCondition;
 import auto.stopConditions.TimerStopCondition;
+import drive.DriveControl;
+import drive.IDrive;
 import drive.MotionProfiler;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
@@ -32,6 +33,8 @@ public class AutomationController extends IControl{
 	private CommandListRunner runner;
 	private boolean doneRunning;
 	private ArrayList<Encoder> encoders;
+	private IDrive drive;
+	private boolean hasReset;
 	
 	public AutomationController(Lift lift, MotionProfiler profiler){
 		controller = (MiyamotoControl)Global.controllers;
@@ -48,6 +51,10 @@ public class AutomationController extends IControl{
 		encoders = new ArrayList<>();
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER0"));
 		encoders.add((Encoder)SensorController.getInstance().getSensor("ENCODER1"));
+	}
+	
+	public void robotInit(){
+		drive = (IDrive)Global.controlObjects.get("DRIVE");
 	}
 	
 	/**
@@ -103,12 +110,21 @@ public class AutomationController extends IControl{
 	private void autoClimb(){
 		if(controller.cancelClimb()){
 			runner.stop();
+			drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
 			doneRunning = true;
 		}
 		if(!doneRunning){
+			if(drive.getDriveControl() != DriveControl.EXTERNAL_CONTROL){
+				drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
+			}
 			doneRunning = runner.runList();
 		}else{
+			if(!hasReset){
+				drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
+				hasReset = true;
+			}
 			if(controller.autoClimb()){
+				hasReset = false;
 				CommandList list = new CommandList();
 				list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
 				list.addCommand(new LiftCommand(LiftPosition.CLIMB, new TimerStopCondition(2000)));
@@ -133,6 +149,7 @@ public class AutomationController extends IControl{
 	
 	public void teleopInit(){
 		doneRunning = true;
+		hasReset = true;
 	}
 	
 	public void teleopPeriodic(){
