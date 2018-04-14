@@ -3,7 +3,7 @@
 	<!-- Make sure that the default path is at the top -->
 
 	<Path Id="D">
-		<DriveCommand Angle="0" Power="0.55">
+		<!-- <DriveCommand Angle="0" Power="0.55">
 			<DistanceStopCondition Dist_Inches="40">
 			</DistanceStopCondition>
 		</DriveCommand>
@@ -17,12 +17,12 @@
 		<PIDDriveAtAngleCommand Angle="0" Power="0.55" Dist_Inches="140">
 			<TimerStopCondition Timer="10000">
 			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
+		</PIDDriveAtAngleCommand>-->
 		
 		<DriveCommand Angle="0" Power="0.55">
 			<TimerStopCondition Timer="3250">
 			</TimerStopCondition>
-		</DriveCommand>-->
+		</DriveCommand>
 
 	</Path>
 
