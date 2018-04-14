@@ -49,7 +49,7 @@
 		<WaitCommand Time="200">
 		</WaitCommand>
 
-		<TurnCommand Angle="90" MaxPower="1.0">
+		<TurnCommand Angle="90" MaxPower="0.7">
 		</TurnCommand>
 
 		<LiftCommand Height="SWITCH">
@@ -75,7 +75,7 @@
 		<WaitCommand Time="200">
 		</WaitCommand>
 
-		<TurnCommand Angle="135" MaxPower="1.0">
+		<TurnCommand Angle="135" MaxPower="0.7">
 		</TurnCommand>
 
 		<DriveCommand Angle="135" Power="0.5">
@@ -115,7 +115,7 @@
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
 
-		<TurnCommand Angle="90" MaxPower="1.0">
+		<TurnCommand Angle="90" MaxPower="0.7">
 		</TurnCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
@@ -153,7 +153,7 @@
 		<WaitCommand Time="200">
 		</WaitCommand>
 
-		<TurnCommand Angle="90" MaxPower="1.0">
+		<TurnCommand Angle="90" MaxPower="0.7">
 		</TurnCommand>
 
 		<DriveCommand Angle="90" Power="0.5">
@@ -204,7 +204,7 @@
 		<WaitCommand Time="400">
 		</WaitCommand>
 
-		<TurnCommand Angle="40" MaxPower="1.0">
+		<TurnCommand Angle="40" MaxPower="0.7">
 		</TurnCommand>
 
 		<LiftCommand Height="LOWSCALE">
@@ -222,7 +222,7 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<TurnCommand Angle="120" MaxPower="1.0">
+		<TurnCommand Angle="120" MaxPower="0.7">
 		</TurnCommand>
 
 		<IntakeCommand Power="0.0" HoldPower="0.8">
@@ -275,7 +275,7 @@
 		<WaitCommand Time="400">
 		</WaitCommand>
 
-		<TurnCommand Angle="40" MaxPower="1.0">
+		<TurnCommand Angle="40" MaxPower="0.7">
 		</TurnCommand>
 
 		<LiftCommand Height="LOWSCALE">
@@ -293,7 +293,7 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<TurnCommand Angle="120" MaxPower="1.0">
+		<TurnCommand Angle="120" MaxPower="0.7">
 		</TurnCommand>
 
 		<IntakeCommand Power="0.0" HoldPower="0.8">
@@ -399,7 +399,7 @@
 			<DriveCommand Angle="-90" Power="-0.5"> <DistanceStopCondition Dist_Inches="28"> 
 			</DistanceStopCondition> </DriveCommand> <LiftCommand Height="SWITCH"> <LiftStopCondition 
 			Height="SWITCH"></LiftStopCondition> </LiftCommand> <TurnCommand Angle="90" 
-			MaxPower="1.0"> </TurnCommand> <DriveCommand Angle="90" Power="0.5"> <TimerStopCondition 
+			MaxPower="0.7"> </TurnCommand> <DriveCommand Angle="90" Power="0.5"> <TimerStopCondition 
 			Timer="500"> </TimerStopCondition> </DriveCommand> <OuttakeCommand Power="0.4"> 
 			<TimerStopCondition Timer="500"> </TimerStopCondition> </OuttakeCommand> -->
 	</Path>
@@ -485,7 +485,7 @@
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<TurnCommand Angle="-90" MaxPower="1.0">
+		<TurnCommand Angle="-90" MaxPower="0.7">
 		</TurnCommand>
 
 		<DriveCommand Angle="-90" Power="0.5">
@@ -523,7 +523,7 @@
 		<WaitCommand Time="200">
 		</WaitCommand>
 
-		<TurnCommand Angle="-90" MaxPower="1.0">
+		<TurnCommand Angle="-90" MaxPower="0.7">
 		</TurnCommand>
 
 		<DriveCommand Angle="-90" Power="0.5">
@@ -544,7 +544,7 @@
 		<WaitCommand Time="200">
 		</WaitCommand>
 
-		<TurnCommand Angle="-135" MaxPower="1.0">
+		<TurnCommand Angle="-135" MaxPower="0.7">
 		</TurnCommand>
 
 		<DriveCommand Angle="-135" Power="0.5">
@@ -587,7 +587,7 @@
 		<WaitCommand Time="400">
 		</WaitCommand>
 
-		<TurnCommand Angle="-40" MaxPower="1.0">
+		<TurnCommand Angle="-40" MaxPower="0.7">
 		</TurnCommand>
 
 		<LiftCommand Height="LOWSCALE">
@@ -605,7 +605,7 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<TurnCommand Angle="-120" MaxPower="1.0">
+		<TurnCommand Angle="-120" MaxPower="0.7">
 		</TurnCommand>
 
 		<IntakeCommand Power="0.0" HoldPower="0.8">
@@ -658,7 +658,7 @@
 		<WaitCommand Time="400">
 		</WaitCommand>
 
-		<TurnCommand Angle="-40" MaxPower="1.0">
+		<TurnCommand Angle="-40" MaxPower="0.7">
 		</TurnCommand>
 
 		<LiftCommand Height="LOWSCALE">
@@ -676,7 +676,7 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<TurnCommand Angle="-120" MaxPower="1.0">
+		<TurnCommand Angle="-120" MaxPower="0.7">
 		</TurnCommand>
 
 		<IntakeCommand Power="0.0" HoldPower="0.8">
@@ -734,7 +734,7 @@
 		<WaitCommand Time="200">
 		</WaitCommand>
 
-		<TurnCommand Angle="-90" MaxPower="1.0">
+		<TurnCommand Angle="-90" MaxPower="0.7">
 		</TurnCommand>
 
 		<DriveCommand Angle="-90" Power="0.5">
