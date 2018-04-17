@@ -74,8 +74,8 @@ public class MiyamotoXMLInterpreter {
 	}
 
 	/**
-	 * Searches for a specific path in the xml file and returns a command list of
-	 * the commands in the xml file
+	 * Searches for a specific path in the xml file and returns a command list
+	 * of the commands in the xml file
 	 * 
 	 * @param id
 	 *            path id 1st character: starting position 2nd character: target
@@ -164,6 +164,10 @@ public class MiyamotoXMLInterpreter {
 			encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
 			int stopDistance = Integer.parseInt(attributes.getNamedItem("Dist_Inches").getNodeValue());
 
+			if (power < 0) {
+				power *= -1;
+			}
+			
 			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 2, angle, .012);
 		}
 		case ("DecelCommand"): {

@@ -41,7 +41,8 @@ public class PIDDriveAtAngle implements ICommand {
 	private final short MILLISECONDS_IN_RANGE = 200;
 
 	/**
-	 * Drives straight at a specified angle using PID for distance and P for Angle
+	 * Drives straight at a specified angle using PID for distance and P for
+	 * Angle
 	 * 
 	 * @param stop
 	 *            The stop condition
@@ -113,9 +114,11 @@ public class PIDDriveAtAngle implements ICommand {
 		}
 		// frameCounter++;
 		// if (frameCounter % 10 == 0) {
-		// System.out.println("Distance PID error: " + controller.getError() + "\n" +
+		// System.out.println("Distance PID error: " + controller.getError() +
+		// "\n" +
 		// "Base motor speed: " + baseSpeed
-		// + "\n" + "Angle PID error: " + getError() + "\n" + "PID offset: " + change);
+		// + "\n" + "Angle PID error: " + getError() + "\n" + "PID offset: " +
+		// change);
 		// }
 		return PIDStop() || stopCondition.stopNow();
 	}

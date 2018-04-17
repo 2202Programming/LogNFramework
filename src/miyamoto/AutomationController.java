@@ -108,7 +108,7 @@ public class AutomationController extends IControl{
 	}
 	
 	private void autoClimb(){
-		if(controller.cancelClimb()){
+		if(controller.cancelClimb() && runner != null){
 			runner.stop();
 			drive.setDriveControl(DriveControl.DRIVE_CONTROLLED);
 			doneRunning = true;
