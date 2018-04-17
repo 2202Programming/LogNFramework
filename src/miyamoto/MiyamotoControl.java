@@ -54,11 +54,11 @@ public class MiyamotoControl extends ControlBase implements ReversibleController
 	}
 
 	/**
-	 * Returns the path type- true is the long path and false is the short path
+	 * Returns the choice of strat - safe if held, normal if not
 	 * 
 	 * @return The path type
 	 */
-	public boolean getPathType() {
+	public boolean getSafeAuto() {
 		return controllers[2].getRightBumperHeld();
 	}
 

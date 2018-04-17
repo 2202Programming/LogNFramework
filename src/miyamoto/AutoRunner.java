@@ -140,78 +140,88 @@ public class AutoRunner extends IControl {
 	// robot
 	// field position, and switch/scale position enums
 	public static String choosePath() {
+		
 		String path = "";
-
+		int pathNum = 1; // Defaults to front approach of the switch
+		
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
 		path += switchboard.getStartPosition();
+		
+		if (!switchboard.getSafeAuto()) {
+			System.out.println("Start Position: " + switchboard.getStartPosition() + 
+					"\n" + "Approach: " + switchboard.getApproach() + 
+					"\n" + "Objective: " + switchboard.getObjective());
+			System.out.println(path);
 
-		System.out.println("Start Position: " + switchboard.getStartPosition() + 
-				"\n" + "Approach: " + switchboard.getApproach() + 
-				"\n" + "Objective: " + switchboard.getObjective() + 
-				"\n" + "Path Type: " + switchboard.getPathType());
-		System.out.println(path);
-
-		if (path.equals("null") || path.equals("")) {
-			System.out.println("Path is Bad; no switchboard input");
-			return null;
-		}
-
-		if (path.charAt(0) == 'D') {
-			return path;
-		}
-
-		int pathNum = 1; // Defaults to front approach of the switch
-
-		if (switchboard.getObjective()) {
-			// If we are going for the scale
-			System.out.println("Going for scale");
-			pathNum += 4;
-			if (Global.scalePosition == TargetSide.L) {
-				// If we are going for the left side of the scale
-				pathNum += 2;
+			if (path.equals("null") || path.equals("")) {
+				System.out.println("Path is Bad; no switchboard input");
+				return null;
 			}
-			if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
-				// If scale is same side
-				pathNum++;
+
+			if (path.charAt(0) == 'D') {
+				return path;
 			}
-		} else {
-			// If we are going for the switch
-			System.out.println("Going for switch");
-			if (Global.ourSwitchPosition == TargetSide.L) {
-				// If going for the left side of the switch
-				pathNum += 2;
+
+			if (switchboard.getObjective()) {
+				// If we are going for the scale
+				System.out.println("Going for scale");
+				pathNum += 4;
+				if (Global.scalePosition == TargetSide.L) {
+					// If we are going for the left side of the scale
+					pathNum += 2;
+				}
+				if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
+					// If scale is same side
+					pathNum++;
+				}
+			} else {
+				// If we are going for the switch
+				System.out.println("Going for switch");
+				if (Global.ourSwitchPosition == TargetSide.L) {
+					// If going for the left side of the switch
+					pathNum += 2;
+				}
+				if (path.charAt(0) != 'M') {
+					// If not starting mid
+					pathNum++;
+				}
 			}
-			if (path.charAt(0) != 'M') {
-				// If not starting mid
-				pathNum++;
+
+			path += pathNum + "-";
+			System.out.println(path);
+
+			int pathType = 1;
+
+			// If we can do 2 block auto
+			if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
+					&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
+				pathType += 2;
 			}
+
+			path += pathType;
+
+			System.out.println(path);
 		}
-
-		path += pathNum + "-";
-		System.out.println(path);
-
-		int pathType = 0;
-
-		// Determines primary (optimal) path or alternate path
-		if (switchboard.getPathType()) {
-			// If we take the alternate path
-			pathType += 2;
-		} else {
-			// If we take the primary path
-			pathType += 1;
+		else {
+			if (Global.ourSwitchPosition.toString().equals(switchboard.getStartPosition().toString())) {
+				if (Global.ourSwitchPosition == TargetSide.L) {
+					// If going for the left side of the switch
+					pathNum += 2;
+				}
+				
+				pathNum++; //always start on side
+				
+				path += pathNum + "-1";
+			}
+			else {
+				path = "D";
+			}
+			
+			System.out.println(path);
 		}
-
-		// If we can do 2 block auto
-		if (Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())
-				&& Global.scalePosition.toString().equals(Global.ourSwitchPosition.toString()) && pathNum > 4) {
-			pathType += 2;
-		}
-
-		path += pathType;
-
-		System.out.println(path);
-
+		
 		return path;
+		
 	}
 
 	public void useDefaultCommandList() {
