@@ -213,8 +213,7 @@
 			</TimerStopCondition>
 		</LiftCommand>
 		
-		<PIDDriveAtAngleCommand Angle="0" Power="0.3"
-			Dist_Inches="250">
+		<PIDDriveAtAngleCommand Angle="0" Power="0.3" Dist_Inches="250">
 			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
@@ -231,11 +230,6 @@
 			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
-
-		<LiftCommand Height="LOWSCALE">
-			<LiftStopCondition Height="LOWSCALE">
-			</LiftStopCondition>
-		</LiftCommand>
 
 		<OuttakeCommand Power="0.8">
 			<TimerStopCondition Timer="500">
@@ -292,8 +286,7 @@
 			</TimerStopCondition>
 		</LiftCommand>
 		
-		<PIDDriveAtAngleCommand Angle="0" Power="0.3"
-			Dist_Inches="250">
+		<PIDDriveAtAngleCommand Angle="0" Power="0.3" Dist_Inches="250">
 			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
@@ -306,20 +299,10 @@
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<DriveCommand Angle="40" Power="0.55">
-			<DistanceStopCondition Dist_Inches="0">
-			</DistanceStopCondition>
-		</DriveCommand>
-
 		<PIDDriveAtAngleCommand Angle="40" Power="0.3" Dist_Inches="15">
-			<TimerStopCondition Timer="1500">
+			<TimerStopCondition Timer="800">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
-
-		<LiftCommand Height="LOWSCALE">
-			<LiftStopCondition Height="LOWSCALE">
-			</LiftStopCondition>
-		</LiftCommand>
 
 		<OuttakeCommand Power="0.8">
 			<TimerStopCondition Timer="500">
@@ -688,6 +671,11 @@
 			<SummativeDistanceStopCondition Dist_Inches="200">
 			</SummativeDistanceStopCondition>
 		</DriveCommand>
+		
+		<LiftCommand Height="LOWSCALE">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</LiftCommand>
 
 		<PIDDriveAtAngleCommand Angle="0" Power="0.3" Dist_Inches="250">
 			<TimerStopCondition Timer="1500">
@@ -706,11 +694,6 @@
 			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
-
-		<LiftCommand Height="LOWSCALE">
-			<LiftStopCondition Height="LOWSCALE">
-			</LiftStopCondition>
-		</LiftCommand>
 
 		<OuttakeCommand Power="0.8">
 			<TimerStopCondition Timer="500">
@@ -761,6 +744,11 @@
 			<SummativeDistanceStopCondition Dist_Inches="200">
 			</SummativeDistanceStopCondition>
 		</DriveCommand>
+		
+		<LiftCommand Height="LOWSCALE">
+			<TimerStopCondition Timer="10">
+			</TimerStopCondition>
+		</LiftCommand>
 
 		<PIDDriveAtAngleCommand Angle="0" Power="0.3" Dist_Inches="250">
 			<TimerStopCondition Timer="1500">
@@ -776,14 +764,9 @@
 		</DriveCommand>
 
 		<PIDDriveAtAngleCommand Angle="-40" Power="0.3" Dist_Inches="15">
-			<TimerStopCondition Timer="1500">
+			<TimerStopCondition Timer="800">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
-
-		<LiftCommand Height="LOWSCALE">
-			<LiftStopCondition Height="LOWSCALE">
-			</LiftStopCondition>
-		</LiftCommand>
 
 		<OuttakeCommand Power="0.8">
 			<TimerStopCondition Timer="500">
@@ -854,12 +837,12 @@
 		</TurnCommand>
 
 		<DriveCommand Angle="-90" Power="0.55">
-			<DistanceStopCondition Dist_Inches="130">
+			<DistanceStopCondition Dist_Inches="127">
 			</DistanceStopCondition>
 		</DriveCommand>
 
 		<DriveCommand Angle="-90" Power="0.3">
-			<SummativeDistanceStopCondition Dist_Inches="170">
+			<SummativeDistanceStopCondition Dist_Inches="167">
 			</SummativeDistanceStopCondition>
 		</DriveCommand>
 
@@ -868,7 +851,7 @@
 			</TimerStopCondition>
 		</LiftCommand>
 
-		<PIDDriveAtAngleCommand Angle="-90" Power="0.3" Dist_Inches="220">
+		<PIDDriveAtAngleCommand Angle="-90" Power="0.3" Dist_Inches="217">
 			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
@@ -886,7 +869,7 @@
 			</DistanceStopCondition>
 		</DriveCommand>
 
-		<PIDDriveAtAngleCommand Angle="108" Power="0.3" Dist_Inches="43">
+		<PIDDriveAtAngleCommand Angle="108" Power="0.3" Dist_Inches="38">
 			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
@@ -895,6 +878,11 @@
 			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</OuttakeCommand>
+		
+		<LiftCommand Height="BOTTOM">
+			<TimerStopCondition Timer="2000">
+			</TimerStopCondition>
+		</LiftCommand>
 	</Path>
 
 </Paths>
