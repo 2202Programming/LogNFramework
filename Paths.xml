@@ -4,9 +4,9 @@
 
 	<Path Id="D">
 		<!-- <DriveCommand Angle="0" Power="0.55"> <DistanceStopCondition Dist_Inches="40"> 
-			</DistanceStopCondition> </DriveCommand> <DriveCommand Angle="0" Power="0.4"> 
+			</DistanceStopCondition> </DriveCommand> <DriveCommand Angle="0" Power="0.3"> 
 			<SummativeDistanceStopCondition Dist_Inches="80"> </SummativeDistanceStopCondition> 
-			</DriveCommand> <PIDDriveAtAngleCommand Angle="0" Power="0.55" Dist_Inches="140"> 
+			</DriveCommand> <PIDDriveAtAngleCommand Angle="0" Power="0.3" Dist_Inches="140"> 
 			<TimerStopCondition Timer="10000"> </TimerStopCondition> </PIDDriveAtAngleCommand> -->
 
 		<DriveCommand Angle="0" Power="0.55">
