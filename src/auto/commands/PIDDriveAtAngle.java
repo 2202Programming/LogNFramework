@@ -46,7 +46,7 @@ public class PIDDriveAtAngle implements ICommand {
 	 * 
 	 * @param stop
 	 *            The stop condition
-	 * @param distanceInCounts
+	 * @param distanceInInches
 	 *            The distance to drive in encoder counts
 	 * @param angle
 	 *            The angle to drive at (1 degree tolerance)
@@ -57,14 +57,14 @@ public class PIDDriveAtAngle implements ICommand {
 	 * @param absoluteTolerance
 	 *            The absolute tolerance
 	 */
-	public PIDDriveAtAngle(IStopCondition stop, List<Encoder> encoders, double distanceInCounts, double minOutput,
+	public PIDDriveAtAngle(IStopCondition stop, List<Encoder> encoders, double distanceInInches, double minOutput,
 			double maxOutput, double absoluteTolerance, double angle, double Kp) {
 		navX = (AHRS) SensorController.getInstance().getSensor("NAVX");
 		stopCondition = stop;
 		this.angle = angle;
 		this.Kp = Kp;
 
-		this.distance = distanceInCounts;
+		this.distance = distanceInInches;
 
 		driveEncoders = new DriveEncoders(encoders);
 		PIDSource source = driveEncoders;
@@ -74,7 +74,7 @@ public class PIDDriveAtAngle implements ICommand {
 		controller.setAbsoluteTolerance(absoluteTolerance);
 
 		try {
-			loadPIDValues();
+			loadPIDValues(distanceInInches < 50);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -179,7 +179,7 @@ public class PIDDriveAtAngle implements ICommand {
 				+ "\t" + "Inches: " + encoder1.getDistance() + "\n" + "Final Angle: " + navX.getYaw());
 	}
 
-	private void loadPIDValues() throws IOException {
+	private void loadPIDValues(boolean shortDistance) throws IOException {
 		switch (Robot.name) {
 		case BABBAGE:
 			break;
@@ -193,13 +193,23 @@ public class PIDDriveAtAngle implements ICommand {
 			// TODO setPIDVALUES
 			break;
 		case MIYAMOTO:
-			BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoDistancePIDValues.txt"));
-			Double Kp = Double.parseDouble(in.readLine());
-			Double Ki = Double.parseDouble(in.readLine());
-			Double Kd = Double.parseDouble(in.readLine());
-			controller.setPID(Kp, Ki, Kd);
-			in.close();
-			// controller.setPID(.055, 0.0, .5);
+			if(shortDistance) {
+				BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoDistancePIDValues.txt"));
+				Double Kp = Double.parseDouble(in.readLine());
+				Double Ki = Double.parseDouble(in.readLine());
+				Double Kd = Double.parseDouble(in.readLine());
+				controller.setPID(Kp, Ki, Kd);
+				in.close();
+				// controller.setPID(.055, 0.0, .5);
+			}else {
+				BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoDistancePIDValues.txt"));
+				Double Kp = Double.parseDouble(in.readLine());
+				Double Ki = Double.parseDouble(in.readLine());
+				Double Kd = Double.parseDouble(in.readLine());
+				controller.setPID(Kp, Ki, Kd);
+				in.close();
+				// controller.setPID(.055, 0.0, .5);				
+			}
 			break;
 		case UNKNOWN:
 			// TODO setPIDVALUES

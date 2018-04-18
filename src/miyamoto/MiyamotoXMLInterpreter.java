@@ -168,7 +168,7 @@ public class MiyamotoXMLInterpreter {
 				power *= -1;
 			}
 			
-			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 2, angle, .012);
+			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 2, angle, 0.012);
 		}
 		case ("DecelCommand"): {
 			double maxAcceleration = Double.parseDouble(attributes.getNamedItem("MaxAcceleration").getNodeValue());

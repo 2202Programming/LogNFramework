@@ -8,7 +8,10 @@ import com.kauailabs.navx.frc.AHRS;
 import auto.CommandList;
 import auto.CommandListRunner;
 import auto.commands.DriveAtAngle;
+import auto.commands.PIDDriveAtAngle;
 import auto.stopConditions.DistanceStopCondition;
+import auto.stopConditions.SummativeDistanceStopCondition;
+import auto.stopConditions.TimerStopCondition;
 import comms.DebugMode;
 import comms.SmartWriter;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -232,7 +235,9 @@ public class AutoRunner extends IControl {
 		encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
 		encoders.add((Encoder) sensorController.getSensor("ENCODER1"));
 
-		defaultPathList.addCommand(new DriveAtAngle(new DistanceStopCondition(encoders, 70), 0.5, 0));
+		defaultPathList.addCommand(new DriveAtAngle(new DistanceStopCondition(encoders, 40), 0.55, 0));
+		defaultPathList.addCommand(new DriveAtAngle(new SummativeDistanceStopCondition(encoders, 80), 0.3, 0));
+		defaultPathList.addCommand(new PIDDriveAtAngle(new TimerStopCondition(1000), encoders, 140, -0.3, 0.3, 2, 0, 0.012));
 		System.out.println("**********Caught error and will run default path**********");
 
 		runner = new CommandListRunner(defaultPathList);
