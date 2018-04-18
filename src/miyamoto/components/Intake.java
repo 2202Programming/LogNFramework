@@ -16,7 +16,8 @@ public class Intake extends IControl {
 
 	/**
 	 * Self-evident intake class
-	 * @param intakeMotorLeft 
+	 * 
+	 * @param intakeMotorLeft
 	 * @param intakeMotorRight
 	 */
 	public Intake(IMotor intakeMotorLeft, IMotor intakeMotorRight) {
@@ -39,8 +40,8 @@ public class Intake extends IControl {
 	public void teleopInit() {
 		init();
 	}
-	
-	public void runIntake(double speed){
+
+	public void runIntake(double speed) {
 		intakeMotorLeft.set(speed);
 		intakeMotorRight.set(-speed);
 	}
@@ -54,8 +55,8 @@ public class Intake extends IControl {
 		intakeMotorLeft.set(-0.6);
 		intakeMotorRight.set(0.6);
 	}
-	
-	public void outtakeSlow(){
+
+	public void outtakeSlow() {
 		intakeMotorLeft.set(-0.3);
 		intakeMotorRight.set(0.3);
 	}
@@ -64,7 +65,7 @@ public class Intake extends IControl {
 		intakeMotorLeft.set(0.3);
 		intakeMotorRight.set(0.3);
 	}
-	
+
 	public void holdBlock() {
 		intakeMotorLeft.set(0.2);
 		intakeMotorRight.set(-0.2);
@@ -76,26 +77,25 @@ public class Intake extends IControl {
 	}
 
 	public void teleopPeriodic() {
-		if(sensor.get()) {
+		if (sensor.get()) {
 			holding = true;
 		}
-		
-		
-		if (controller.overrideIntake()) {
+
+		if (controller.rotateIntake()) {
+			rotate();
+		} else if (controller.overrideIntake()) {
 			intake();
 		} else if (controller.outtake()) {
 			holding = false;
 			outtake();
-		} else if (controller.outtakeSlow()){
+		} else if (controller.outtakeSlow()) {
 			holding = false;
 			outtakeSlow();
-		} else if (controller.rotateIntake()) {
-			rotate();
-		} else if(holding) {
+		} else if (holding) {
 			holdBlock();
 		} else {
 			stop();
 		}
-		
+
 	}
 }
