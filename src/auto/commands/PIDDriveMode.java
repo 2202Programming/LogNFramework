@@ -1,6 +1,6 @@
 package auto.commands;
 
-public enum PIDDrivePosition {
+public enum PIDDriveMode {
 	SHORT, LONG;
 
 }
