@@ -168,8 +168,8 @@ public class MiyamotoXMLInterpreter {
 			if (power < 0) {
 				power *= -1;
 			}
-			
-			PIDDriveMode mode = PIDDriveMode.valueOf(attributes.getNamedItem("Mode").getNodeValue());
+
+			PIDDriveMode mode = PIDDriveMode.valueOf(attributes.getNamedItem("Mode").getNodeValue().toUpperCase());
 
 			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 1, angle, 0.012,
 					mode);

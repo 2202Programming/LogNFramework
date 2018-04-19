@@ -99,11 +99,11 @@ public class Miyamoto extends RobotDefinitionBase {
 		encoder1.setDistancePerPulse(1.0 / CPI); // was 0.05321);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
-		encoderMonitor.add("ENCODER1", encoder1);
+		encoderMonitor.add("ENCODER1", encoder0);
 		iControlMap.put("ENCODERMONITOR", encoderMonitor);
 
 		sensorController.registerSensor("ENCODER0", encoder0);
-		sensorController.registerSensor("ENCODER1", encoder1);
+		sensorController.registerSensor("ENCODER1", encoder0);
 		sensorController.registerSensor("INTAKE", new DigitalInput(4));
 
 		IMotor FL = new SparkMotor(getInt("FLMOTORPIN"), false);
