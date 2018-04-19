@@ -21,6 +21,7 @@ import auto.commands.IntakeCommand;
 import auto.commands.LiftCommand;
 import auto.commands.OuttakeCommand;
 import auto.commands.PIDDriveAtAngle;
+import auto.commands.PIDDriveMode;
 import auto.commands.TurnCommand;
 import auto.commands.WaitCommand;
 import auto.stopConditions.AngleStopCondition;
@@ -158,7 +159,6 @@ public class MiyamotoXMLInterpreter {
 		case ("PIDDriveAtAngleCommand"): {
 			double power = Double.parseDouble(attributes.getNamedItem("Power").getNodeValue());
 			double angle = Double.parseDouble(attributes.getNamedItem("Angle").getNodeValue());
-			String mode = attributes.getNamedItem("Mode").getNodeValue();
 			ArrayList<Encoder> encoders = new ArrayList<Encoder>();
 			SensorController sensorController = SensorController.getInstance();
 			encoders.add((Encoder) sensorController.getSensor("ENCODER0"));
@@ -168,9 +168,11 @@ public class MiyamotoXMLInterpreter {
 			if (power < 0) {
 				power *= -1;
 			}
+			
+			PIDDriveMode mode = PIDDriveMode.valueOf(attributes.getNamedItem("Mode").getNodeValue());
 
 			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 1, angle, 0.012,
-					mode.equalsIgnoreCase("Short"));
+					mode);
 		}
 		case ("DecelCommand"): {
 			double maxAcceleration = Double.parseDouble(attributes.getNamedItem("MaxAcceleration").getNodeValue());
