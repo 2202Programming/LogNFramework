@@ -9,6 +9,7 @@ import auto.CommandList;
 import auto.CommandListRunner;
 import auto.commands.DriveAtAngle;
 import auto.commands.PIDDriveAtAngle;
+import auto.commands.PIDDriveMode;
 import auto.stopConditions.DistanceStopCondition;
 import auto.stopConditions.SummativeDistanceStopCondition;
 import auto.stopConditions.TimerStopCondition;
@@ -237,7 +238,8 @@ public class AutoRunner extends IControl {
 
 		defaultPathList.addCommand(new DriveAtAngle(new DistanceStopCondition(encoders, 40), 0.55, 0));
 		defaultPathList.addCommand(new DriveAtAngle(new SummativeDistanceStopCondition(encoders, 80), 0.3, 0));
-		defaultPathList.addCommand(new PIDDriveAtAngle(new TimerStopCondition(1000), encoders, 140, -0.3, 0.3, 2, 0, 0.012));
+		defaultPathList.addCommand(new PIDDriveAtAngle(new TimerStopCondition(1000), encoders, 140, -0.3, 0.3, 2, 0, 0.012, PIDDriveMode.LONG));
+		defaultPathList.addCommand(new PIDDriveAtAngle(new TimerStopCondition(1000), encoders, 140, -0.3, 0.3, 2, 0, 0.012, PIDDriveMode.SHORT));
 		System.out.println("**********Caught error and will run default path**********");
 
 		runner = new CommandListRunner(defaultPathList);
