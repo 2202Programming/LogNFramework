@@ -7,6 +7,7 @@ import auto.IStopCondition;
 import comms.SmartWriter;
 import drive.DriveControl;
 import drive.IDrive;
+import drive.MotionProfiler;
 import edu.wpi.first.wpilibj.Encoder;
 import input.SensorController;
 import robot.Global;
@@ -20,6 +21,8 @@ public class DriveAtAngle implements ICommand {
 	private double angle;
 	private AHRS navX;
 	private boolean usePID;
+	private double lastMotorPower;
+	private MotionProfiler powerRamp;
 
 	/**
 	 * Drives straight at a specified angle using PID (proportions)
@@ -85,6 +88,8 @@ public class DriveAtAngle implements ICommand {
 		stopCondition.init();
 		drive = (IDrive) Global.controlObjects.get(RobotDefinitionBase.DRIVENAME);
 		drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
+		lastMotorPower = 0;
+		powerRamp = (MotionProfiler) Global.controlObjects.get("PROFILER");
 	}
 
 	public boolean run() {
@@ -106,12 +111,14 @@ public class DriveAtAngle implements ICommand {
 		double change = getError() * Kp;
 		// System.out.println("PID error: " + getError());
 		// System.out.println("Base motor speed: " + slowSpeed);
+		double baseSpeed = powerRamp.capAcceleration(lastMotorPower, slowSpeed);
+		lastMotorPower = baseSpeed;
 		if (Math.abs(getError()) < 1) {
-			drive.setLeftMotors(slowSpeed);
-			drive.setRightMotors(slowSpeed);
+			drive.setLeftMotors(baseSpeed);
+			drive.setRightMotors(baseSpeed);
 		} else {
-			drive.setLeftMotors(slowSpeed + change);
-			drive.setRightMotors(slowSpeed - change);
+			drive.setLeftMotors(baseSpeed + change);
+			drive.setRightMotors(baseSpeed - change);
 			// System.out.println("PID offset: " + change);
 		}
 	}
@@ -162,8 +169,8 @@ public class DriveAtAngle implements ICommand {
 		SensorController sensorController = SensorController.getInstance();
 		Encoder encoder0 = (Encoder) sensorController.getSensor("ENCODER0");
 		Encoder encoder1 = (Encoder) sensorController.getSensor("ENCODER1");
-		System.out.println("DriveAtAngle Command Finished" + "\n" + 
-		"Encoder0 Distance| Counts: " + encoder0.get() + "\t" + "Inches: " + encoder0.getDistance() + "\n" + 
-		"Encoder1 Distance| Counts: " + encoder1.get() + "\t" + "Inches: " + encoder1.getDistance());
+		System.out.println("DriveAtAngle Command Finished" + "\n" + "Encoder0 Distance| Counts: " + encoder0.get()
+				+ "\t" + "Inches: " + encoder0.getDistance() + "\n" + "Encoder1 Distance| Counts: " + encoder1.get()
+				+ "\t" + "Inches: " + encoder1.getDistance());
 	}
 }
