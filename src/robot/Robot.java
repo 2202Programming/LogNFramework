@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot {
 
 		// Load all the properties in the currently selected definition
 		Global.controlObjects = robotDefinition.loadControlObjects();
+		Global.controlObjects.putAll(robotDefinition.loadDefaultControlObjects());
 		IControl.callRobotInit();
 	}
 

@@ -16,9 +16,13 @@ public class ReverseDrive extends IControl {
 	 * drivers' convenience
 	 * @param drive
 	 */
-	public ReverseDrive(IDrive drive) {
-		if (drive instanceof Reversible) {
-			this.drive = (Reversible) drive;
+	public ReverseDrive(){
+		
+	}
+	
+	public void robotInit(){
+		if (Global.controlObjects.get("DRIVE") instanceof Reversible) {
+			drive = (Reversible)Global.controlObjects.get("DRIVE");
 		}
 		if (Global.controllers instanceof ReversibleController) {
 			controller = (ReversibleController) Global.controllers;

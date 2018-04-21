@@ -1,6 +1,7 @@
 package comms;
 
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import robot.IControl;
 
 public class NetworkTables extends IControl{
@@ -8,34 +9,34 @@ public class NetworkTables extends IControl{
 	NetworkTable table;
 	
 	public NetworkTables(TableNamesEnum tableKey) {
-		table = NetworkTable.getTable(tableKey.toString());
+		table = NetworkTableInstance.getDefault().getTable(tableKey.toString());
 	}
 	
 	public double getDouble(String key){
-		return table.getNumber(key, 0);
+		return table.getEntry(key).getDouble(0);
 	}
 	
 	public void setDouble(String key, double value){
-		table.putNumber(key, value);
+		table.getEntry(key).setNumber(value);
 	}
 	
 	public String getString(String key){
-		return table.getString(key, "");
+		return table.getEntry(key).getString("");
 	}
 	
 	public void setString(String key, String value){
-		table.putString(key, value);
+		table.getEntry(key).setString(value);
 	}
 	
 	public boolean getBoolean(String key){
-		return table.getBoolean(key, false);
+		return table.getEntry(key).getBoolean(false);
 	}
 	
 	public boolean getBoolean(String key, boolean defaultValue){
-		return table.getBoolean(key, defaultValue);
+		return table.getEntry(key).getBoolean(defaultValue);
 	}
 	
 	public void setBoolean(String key, boolean value){
-		table.putBoolean(key, value);
+		table.getEntry(key).setBoolean(value);
 	}
 }
