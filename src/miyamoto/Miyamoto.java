@@ -93,19 +93,23 @@ public class Miyamoto extends RobotDefinitionBase {
 		// Encoder stuff
 		double CPI = 19.04; // use same calibration for left/right.Sensors are very very close. - DPL/TG
 							// 3/28
-		Encoder encoder0 = new Encoder(0, 1, true, EncodingType.k4X); // Right Changed from 0,1
+		Encoder encoder0 = new Encoder(0, 1, true, EncodingType.k4X);// Right Changed from 0,1
+		Encoder encoder0b = new Encoder(7, 8, true, EncodingType.k4X);
 		Encoder encoder1 = new Encoder(2, 3, true, EncodingType.k4X); // Left Changed from 2,3
-		Encoder encoder1b = new Encoder(5,6, true, EncodingType.k4X); // Alternate Left encoder
+		Encoder encoder1b = new Encoder(5, 6, true, EncodingType.k4X); // Alternate Left encoder
 		encoder0.setDistancePerPulse(1.0 / CPI); // was 0.05318);
+		encoder0b.setDistancePerPulse(3.0 / CPI);
 		encoder1.setDistancePerPulse(1.0 / CPI); // was 0.05321);
-		encoder1b.setDistancePerPulse(1.0 / CPI);
+		encoder1b.setDistancePerPulse(3.0 / CPI);
 		EncoderMonitor encoderMonitor = new EncoderMonitor();
 		encoderMonitor.add("ENCODER0", encoder0);
-		encoderMonitor.add("ENCODER1", encoder0);
+		encoderMonitor.add("ENCODER0B", encoder0b);
+		encoderMonitor.add("ENCODER1", encoder1);
 		encoderMonitor.add("ENCODER1B", encoder1b);
 		iControlMap.put("ENCODERMONITOR", encoderMonitor);
 
 		sensorController.registerSensor("ENCODER0", encoder0);
+		sensorController.registerSensor("ENCODER0B", encoder0b);
 		sensorController.registerSensor("ENCODER1", encoder0);
 		sensorController.registerSensor("ENCODER1B", encoder1b);
 		sensorController.registerSensor("INTAKE", new DigitalInput(4));
@@ -149,8 +153,8 @@ public class Miyamoto extends RobotDefinitionBase {
 
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
-		
-		//LogWriter.registerLoggable("AutonomousLog", new AutoLog());
+
+		// LogWriter.registerLoggable("AutonomousLog", new AutoLog());
 
 		return iControlMap;
 	}

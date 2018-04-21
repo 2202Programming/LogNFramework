@@ -113,11 +113,11 @@ public class PIDDriveAtAngle implements ICommand {
 			drive.setLeftMotors(baseSpeed + change);
 			drive.setRightMotors(baseSpeed - change);
 		}
-		frameCounter++;
-		if (frameCounter % 10 == 0) {
-			System.out.println("Distance PID error: " + controller.getError() + "\n" + "Base motor speed: " + baseSpeed
-					+ "\n" + "Angle PID error: " + getError() + "\n" + "PID offset: " + change);
-		}
+//		frameCounter++;
+//		if (frameCounter % 10 == 0) {
+//			System.out.println("Distance PID error: " + controller.getError() + "\n" + "Base motor speed: " + baseSpeed
+//					+ "\n" + "Angle PID error: " + getError() + "\n" + "PID offset: " + change);
+//		}
 		return PIDStop() || stopCondition.stopNow();
 	}
 
