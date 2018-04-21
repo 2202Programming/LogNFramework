@@ -47,7 +47,7 @@ public class AutoLog extends IControl implements ILoggable {
 
 	@Override
 	public String getLogFileName() {
-		return "/home/lvuser/RobotLog.txt";
+		return "/home/lvuser/AutoLog.txt";
 	}
 
 }
