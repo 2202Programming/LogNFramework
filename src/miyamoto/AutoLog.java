@@ -34,7 +34,7 @@ public class AutoLog extends IControl implements ILoggable {
 	public String getLogData() {
 		AHRS navX = (AHRS) sensors.getSensor("NAVX");
 		Lift lift = (Lift) Global.controlObjects.get("LIFT");
-		return "Command Finished" + getEncoderData() + "NAVX Final Angle: " + navX.getYaw() + "\n"
+		return "Command Finished\n" + getEncoderData() + "NAVX Final Angle: " + navX.getYaw() + "\n"
 				+ "Lift| SetPosition: " + lift.getLiftPosition() + "\t" + "Lift Counts: " + lift.getLiftCounts();
 	}
 
