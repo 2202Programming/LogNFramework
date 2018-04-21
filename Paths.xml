@@ -418,7 +418,7 @@
 
 		<PIDDriveAtAngleCommand Angle="0" Power="0.4"
 			Mode="SHORT" Dist_Inches="15">
-			<TimerStopCondition Timer="10000">
+			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
 
@@ -437,7 +437,7 @@
 
 		<PIDDriveAtAngleCommand Angle="45" Power="0.45"
 			Mode="LONG" Dist_Inches="58">
-			<TimerStopCondition Timer="10000">
+			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
 
@@ -459,56 +459,22 @@
 			</TimerStopCondition>
 		</OuttakeCommand>
 
-		<PIDDriveAtAngleCommand Angle="-45" Power="-0.5"
-			Mode="LONG" Dist_Inches="-70">
-			<TimerStopCondition Timer="3000">
-			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
-
-		<PIDDriveAtAngleCommand Angle="-45" Power="-0.4"
-			Mode="SHORT" Dist_Inches="-70">
-			<TimerStopCondition Timer="3000">
-			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
-
-		<DriveCommand Angle="-45" Power="-0.55">
-			<DistanceStopCondition Dist_Inches="30">
-			</DistanceStopCondition>
-		</DriveCommand>
-		
-		<LiftCommand Height="BOTTOM">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<TurnCommand Angle="-45" MaxPower="0.8">
-		</TurnCommand>
-
-		<DriveCommand Angle="-45" Power="0.55">
-			<DistanceStopCondition Dist_Inches="22">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<IntakeCommand Power="0.0" HoldPower="0.8">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</IntakeCommand>
-
-		<PIDDriveAtAngleCommand Angle="-45" Power="-0.5"
-			Mode="LONG" Dist_Inches="70">
-			<TimerStopCondition Timer="3000">
-			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
-
-		<PIDDriveAtAngleCommand Angle="-45" Power="-0.4"
-			Mode="SHORT" Dist_Inches="70">
-			<TimerStopCondition Timer="3000">
-			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
-
-		<IntakeCommand Power="0.8">
-			<IntakeStopCondition></IntakeStopCondition>
-		</IntakeCommand>
+		<!-- <PIDDriveAtAngleCommand Angle="-45" Power="-0.5" Mode="LONG" Dist_Inches="-70"> 
+			<TimerStopCondition Timer="3000"> </TimerStopCondition> </PIDDriveAtAngleCommand> 
+			<PIDDriveAtAngleCommand Angle="-45" Power="-0.4" Mode="SHORT" Dist_Inches="-70"> 
+			<TimerStopCondition Timer="3000"> </TimerStopCondition> </PIDDriveAtAngleCommand> 
+			<DriveCommand Angle="-45" Power="-0.55"> <DistanceStopCondition Dist_Inches="30"> 
+			</DistanceStopCondition> </DriveCommand> <LiftCommand Height="BOTTOM"> <TimerStopCondition 
+			Timer="10"> </TimerStopCondition> </LiftCommand> <TurnCommand Angle="-45" 
+			MaxPower="0.8"> </TurnCommand> <DriveCommand Angle="-45" Power="0.55"> <DistanceStopCondition 
+			Dist_Inches="22"> </DistanceStopCondition> </DriveCommand> <IntakeCommand 
+			Power="0.0" HoldPower="0.8"> <TimerStopCondition Timer="10"> </TimerStopCondition> 
+			</IntakeCommand> <PIDDriveAtAngleCommand Angle="-45" Power="-0.5" Mode="LONG" 
+			Dist_Inches="70"> <TimerStopCondition Timer="3000"> </TimerStopCondition> 
+			</PIDDriveAtAngleCommand> <PIDDriveAtAngleCommand Angle="-45" Power="-0.4" 
+			Mode="SHORT" Dist_Inches="70"> <TimerStopCondition Timer="3000"> </TimerStopCondition> 
+			</PIDDriveAtAngleCommand> <IntakeCommand Power="0.8"> <IntakeStopCondition></IntakeStopCondition> 
+			</IntakeCommand> -->
 	</Path>
 
 	<Path Id="M3-1">
@@ -519,7 +485,7 @@
 
 		<PIDDriveAtAngleCommand Angle="0" Power="0.4"
 			Mode="SHORT" Dist_Inches="15">
-			<TimerStopCondition Timer="10000">
+			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
 
@@ -538,7 +504,7 @@
 
 		<PIDDriveAtAngleCommand Angle="-45" Power="0.3"
 			Mode="LONG" Dist_Inches="90">
-			<TimerStopCondition Timer="10000">
+			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
 
@@ -560,55 +526,22 @@
 			</TimerStopCondition>
 		</OuttakeCommand>
 
-		<DriveCommand Angle="45" Power="-0.55">
-			<DistanceStopCondition Dist_Inches="0">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<PIDDriveAtAngleCommand Angle="45" Power="-0.5"
-			Mode="LONG" Dist_Inches="-70">
-			<TimerStopCondition Timer="3000">
-			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
-		
-		<PIDDriveAtAngleCommand Angle="45" Power="-0.4" Mode="SHORT" Dist_Inches="-70">
-			<TimerStopCondition Timer="3000">
-			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
-
-		<LiftCommand Height="BOTTOM">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</LiftCommand>
-
-		<TurnCommand Angle="45" MaxPower="0.8">
-		</TurnCommand>
-
-		<DriveCommand Angle="45" Power="0.55">
-			<DistanceStopCondition Dist_Inches="22">
-			</DistanceStopCondition>
-		</DriveCommand>
-
-		<IntakeCommand Power="0.0" HoldPower="0.8">
-			<TimerStopCondition Timer="10">
-			</TimerStopCondition>
-		</IntakeCommand>
-
-		<PIDDriveAtAngleCommand Angle="45" Power="-0.5"
-			Mode="LONG" Dist_Inches="70">
-			<TimerStopCondition Timer="3000">
-			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
-
-		<PIDDriveAtAngleCommand Angle="45" Power="-0.4"
-			Mode="SHORT" Dist_Inches="70">
-			<TimerStopCondition Timer="3000">
-			</TimerStopCondition>
-		</PIDDriveAtAngleCommand>
-
-		<IntakeCommand Power="0.8">
-			<IntakeStopCondition></IntakeStopCondition>
-		</IntakeCommand>
+		<!-- <DriveCommand Angle="45" Power="-0.55"> <DistanceStopCondition Dist_Inches="0"> 
+			</DistanceStopCondition> </DriveCommand> <PIDDriveAtAngleCommand Angle="45" 
+			Power="-0.5" Mode="LONG" Dist_Inches="-70"> <TimerStopCondition Timer="3000"> 
+			</TimerStopCondition> </PIDDriveAtAngleCommand> <PIDDriveAtAngleCommand Angle="45" 
+			Power="-0.4" Mode="SHORT" Dist_Inches="-70"> <TimerStopCondition Timer="3000"> 
+			</TimerStopCondition> </PIDDriveAtAngleCommand> <LiftCommand Height="BOTTOM"> 
+			<TimerStopCondition Timer="10"> </TimerStopCondition> </LiftCommand> <TurnCommand 
+			Angle="45" MaxPower="0.8"> </TurnCommand> <DriveCommand Angle="45" Power="0.55"> 
+			<DistanceStopCondition Dist_Inches="22"> </DistanceStopCondition> </DriveCommand> 
+			<IntakeCommand Power="0.0" HoldPower="0.8"> <TimerStopCondition Timer="10"> 
+			</TimerStopCondition> </IntakeCommand> <PIDDriveAtAngleCommand Angle="45" 
+			Power="-0.3" Mode="LONG" Dist_Inches="70"> <TimerStopCondition Timer="3000"> 
+			</TimerStopCondition> </PIDDriveAtAngleCommand> <PIDDriveAtAngleCommand Angle="45" 
+			Power="-0.3" Mode="SHORT" Dist_Inches="70"> <TimerStopCondition Timer="3000"> 
+			</TimerStopCondition> </PIDDriveAtAngleCommand> <IntakeCommand Power="0.8"> 
+			<IntakeStopCondition></IntakeStopCondition> </IntakeCommand> -->
 	</Path>
 
 	<Path Id="R2-1">

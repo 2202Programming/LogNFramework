@@ -1,0 +1,648 @@
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.0
+ENCODER0 Distance| Counts: 0	Inches: 0.0
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: -0.12
+Lift| SetPosition: 0	Lift Counts: 48
+Command run time: 20
+
+Command Finished
+ENCODER1 Distance| Counts: 300	Inches: 15.795693277310924
+ENCODER0 Distance| Counts: 290	Inches: 15.270483193277311
+ENCODER1B Distance| Counts: 102	Inches: 16.07142857142857
+ENCODER0B Distance| Counts: -98	Inches: -15.441176470588236
+NAVX Final Angle: 0.55
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 1299
+
+Command Finished
+ENCODER1 Distance| Counts: 656	Inches: 34.493172268907564
+ENCODER0 Distance| Counts: 297	Inches: 15.59873949579832
+ENCODER1B Distance| Counts: 219	Inches: 34.624474789915965
+ENCODER0B Distance| Counts: -100	Inches: -15.795693277310924
+NAVX Final Angle: 40.17
+Lift| SetPosition: 0	Lift Counts: 1
+Command run time: 1522
+
+Command Finished
+ENCODER1 Distance| Counts: 656	Inches: 34.493172268907564
+ENCODER0 Distance| Counts: 297	Inches: 15.59873949579832
+ENCODER1B Distance| Counts: 219	Inches: 34.624474789915965
+ENCODER0B Distance| Counts: -100	Inches: -15.795693277310924
+NAVX Final Angle: 40.21
+Lift| SetPosition: 10000	Lift Counts: 1
+Command run time: 20
+
+Command Finished
+ENCODER1 Distance| Counts: 1037	Inches: 54.464285714285715
+ENCODER0 Distance| Counts: 302	Inches: 15.900735294117647
+ENCODER1B Distance| Counts: 347	Inches: 54.7531512605042
+ENCODER0B Distance| Counts: -200	Inches: -31.59138655462185
+NAVX Final Angle: 42.96
+Lift| SetPosition: 28000	Lift Counts: 5612
+Command run time: 722
+
+Command Finished
+ENCODER1 Distance| Counts: 1837	Inches: 96.48109243697479
+ENCODER0 Distance| Counts: 1093	Inches: 57.41859243697479
+ENCODER1B Distance| Counts: 614	Inches: 96.74369747899159
+ENCODER0B Distance| Counts: -464	Inches: -73.14863445378151
+NAVX Final Angle: 43.98
+Lift| SetPosition: 10000	Lift Counts: 9871
+Command run time: 1399
+
+Command Finished
+ENCODER1 Distance| Counts: 1678	Inches: 88.16964285714286
+ENCODER0 Distance| Counts: 1281	Inches: 67.27941176470588
+ENCODER1B Distance| Counts: 562	Inches: 88.55042016806722
+ENCODER0B Distance| Counts: -526	Inches: -82.8781512605042
+NAVX Final Angle: -41.87
+Lift| SetPosition: 10000	Lift Counts: 9708
+Command run time: 1520
+
+Command Finished
+ENCODER1 Distance| Counts: 2098	Inches: 110.21533613445378
+ENCODER0 Distance| Counts: 1674	Inches: 87.9201680672269
+ENCODER1B Distance| Counts: 700	Inches: 110.33350840336134
+ENCODER0B Distance| Counts: -657	Inches: -103.51890756302521
+NAVX Final Angle: -44.35
+Lift| SetPosition: 10000	Lift Counts: 9708
+Command run time: 801
+
+Command Finished
+ENCODER1 Distance| Counts: 2360	Inches: 123.94957983193278
+ENCODER0 Distance| Counts: 1945	Inches: 102.1796218487395
+ENCODER1B Distance| Counts: 789	Inches: 124.39600840336134
+ENCODER0B Distance| Counts: -748	Inches: -117.85714285714285
+NAVX Final Angle: -44.79
+Lift| SetPosition: 10000	Lift Counts: 9708
+Command run time: 320
+
+Command Finished
+ENCODER1 Distance| Counts: 2522	Inches: 132.484243697479
+ENCODER0 Distance| Counts: 2111	Inches: 110.89810924369748
+ENCODER1B Distance| Counts: 841	Inches: 132.62867647058823
+ENCODER0B Distance| Counts: -803	Inches: -126.52310924369748
+NAVX Final Angle: -44.58
+Lift| SetPosition: 10000	Lift Counts: 9708
+Command run time: 519
+
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.0
+ENCODER0 Distance| Counts: 0	Inches: 0.0
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: -0.1
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 25
+
+Command Finished
+ENCODER1 Distance| Counts: 304	Inches: 16.00577731092437
+ENCODER0 Distance| Counts: 291	Inches: 15.323004201680673
+ENCODER1B Distance| Counts: 102	Inches: 16.150210084033613
+ENCODER0B Distance| Counts: -99	Inches: -15.67752100840336
+NAVX Final Angle: 0.72
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 1264
+
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.013130252100840336
+ENCODER0 Distance| Counts: 0	Inches: -0.013130252100840336
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: -0.01
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 13
+
+Command Finished
+ENCODER1 Distance| Counts: 297	Inches: 15.63813025210084
+ENCODER0 Distance| Counts: 288	Inches: 15.139180672268909
+ENCODER1B Distance| Counts: 100	Inches: 15.795693277310924
+ENCODER0B Distance| Counts: -98	Inches: -15.480567226890756
+NAVX Final Angle: 0.32
+Lift| SetPosition: 0	Lift Counts: 5
+Command run time: 1261
+
+Command Finished
+ENCODER1 Distance| Counts: 165	Inches: 8.679096638655462
+ENCODER0 Distance| Counts: 489	Inches: 25.682773109243698
+ENCODER1B Distance| Counts: 56	Inches: 8.902310924369747
+ENCODER0B Distance| Counts: -164	Inches: -25.879726890756302
+NAVX Final Angle: -41.38
+Lift| SetPosition: 0	Lift Counts: 8
+Command run time: 1502
+
+Command Finished
+ENCODER1 Distance| Counts: 165	Inches: 8.705357142857142
+ENCODER0 Distance| Counts: 488	Inches: 25.669642857142858
+ENCODER1B Distance| Counts: 56	Inches: 8.941701680672269
+ENCODER0B Distance| Counts: -164	Inches: -25.840336134453782
+NAVX Final Angle: -41.29
+Lift| SetPosition: 10000	Lift Counts: 8
+Command run time: 20
+
+Command Finished
+ENCODER1 Distance| Counts: 938	Inches: 49.304096638655466
+ENCODER0 Distance| Counts: 785	Inches: 41.22899159663866
+ENCODER1B Distance| Counts: 312	Inches: 49.19905462184874
+ENCODER0B Distance| Counts: -425	Inches: -67.08245798319328
+NAVX Final Angle: -45.0
+Lift| SetPosition: 28000	Lift Counts: 9336
+Command run time: 1139
+
+Command Finished
+ENCODER1 Distance| Counts: 1803	Inches: 94.72163865546219
+ENCODER0 Distance| Counts: 1665	Inches: 87.44747899159664
+ENCODER1B Distance| Counts: 606	Inches: 95.48319327731092
+ENCODER0B Distance| Counts: -720	Inches: -113.4453781512605
+NAVX Final Angle: -44.98
+Lift| SetPosition: 10000	Lift Counts: 9758
+Command run time: 1501
+
+Command Finished
+ENCODER1 Distance| Counts: 2045	Inches: 107.44485294117648
+ENCODER0 Distance| Counts: 1557	Inches: 81.77521008403362
+ENCODER1B Distance| Counts: 685	Inches: 107.93067226890756
+ENCODER0B Distance| Counts: -684	Inches: -107.85189075630252
+NAVX Final Angle: 39.64
+Lift| SetPosition: 10000	Lift Counts: 9700
+Command run time: 1519
+
+Command Finished
+ENCODER1 Distance| Counts: 2236	Inches: 117.4501050420168
+ENCODER0 Distance| Counts: 1703	Inches: 89.4826680672269
+ENCODER1B Distance| Counts: 749	Inches: 118.05409663865547
+ENCODER0B Distance| Counts: -731	Inches: -115.29674369747899
+NAVX Final Angle: 42.15
+Lift| SetPosition: 10000	Lift Counts: 9700
+Command run time: 501
+
+Command Finished
+ENCODER1 Distance| Counts: 2366	Inches: 124.27783613445378
+ENCODER0 Distance| Counts: 1824	Inches: 95.82457983193278
+ENCODER1B Distance| Counts: 794	Inches: 125.14443277310924
+ENCODER0B Distance| Counts: -772	Inches: -121.75682773109243
+NAVX Final Angle: 43.38
+Lift| SetPosition: 10000	Lift Counts: 9700
+Command run time: 201
+
+Command Finished
+ENCODER1 Distance| Counts: 2529	Inches: 132.8518907563025
+ENCODER0 Distance| Counts: 1988	Inches: 104.41176470588235
+ENCODER1B Distance| Counts: 850	Inches: 134.00735294117646
+ENCODER0B Distance| Counts: -827	Inches: -130.38340336134453
+NAVX Final Angle: 43.42
+Lift| SetPosition: 10000	Lift Counts: 9699
+Command run time: 518
+
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.0
+ENCODER0 Distance| Counts: 0	Inches: 0.0
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: 0.01
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 24
+
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.0
+ENCODER0 Distance| Counts: 0	Inches: 0.0
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: 0.01
+Lift| SetPosition: 10000	Lift Counts: 0
+Command run time: 20
+
+Command Finished
+ENCODER1 Distance| Counts: 1108	Inches: 58.19327731092437
+ENCODER0 Distance| Counts: 1089	Inches: 57.23476890756302
+ENCODER1B Distance| Counts: 369	Inches: 58.219537815126046
+ENCODER0B Distance| Counts: -362	Inches: -57.11659663865546
+NAVX Final Angle: 0.78
+Lift| SetPosition: 10000	Lift Counts: 10312
+Command run time: 1460
+
+Command Finished
+ENCODER1 Distance| Counts: 1694	Inches: 88.98371848739495
+ENCODER0 Distance| Counts: 1835	Inches: 96.4154411764706
+ENCODER1B Distance| Counts: 612	Inches: 96.54674369747899
+ENCODER0B Distance| Counts: -612	Inches: -96.50735294117646
+NAVX Final Angle: -0.15
+Lift| SetPosition: 10000	Lift Counts: 9774
+Command run time: 740
+
+Command Finished
+ENCODER1 Distance| Counts: 2380	Inches: 125.03939075630252
+ENCODER0 Distance| Counts: 2676	Inches: 140.5593487394958
+ENCODER1B Distance| Counts: 891	Inches: 140.4674369747899
+ENCODER0B Distance| Counts: -893	Inches: -140.70378151260505
+NAVX Final Angle: -0.84
+Lift| SetPosition: 10000	Lift Counts: 9732
+Command run time: 1520
+
+Command Finished
+ENCODER1 Distance| Counts: 2993	Inches: 157.20850840336135
+ENCODER0 Distance| Counts: 2633	Inches: 138.30094537815125
+ENCODER1B Distance| Counts: 1118	Inches: 176.23424369747897
+ENCODER0B Distance| Counts: -879	Inches: -138.49789915966386
+NAVX Final Angle: 83.79
+Lift| SetPosition: 10000	Lift Counts: 9638
+Command run time: 1523
+
+Command Finished
+ENCODER1 Distance| Counts: 3098	Inches: 162.71008403361344
+ENCODER0 Distance| Counts: 2684	Inches: 140.99264705882354
+ENCODER1B Distance| Counts: 1152	Inches: 181.63077731092437
+ENCODER0B Distance| Counts: -894	Inches: -140.94012605042016
+NAVX Final Angle: 84.93
+Lift| SetPosition: 10000	Lift Counts: 9638
+Command run time: 316
+
+Command Finished
+ENCODER1 Distance| Counts: 3126	Inches: 164.18067226890756
+ENCODER0 Distance| Counts: 2662	Inches: 139.83718487394958
+ENCODER1B Distance| Counts: 1161	Inches: 183.0488445378151
+ENCODER0B Distance| Counts: -888	Inches: -139.91596638655463
+NAVX Final Angle: 91.53
+Lift| SetPosition: 10000	Lift Counts: 9638
+Command run time: 520
+
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.0
+ENCODER0 Distance| Counts: 0	Inches: 0.0
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: 0.0
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 13
+
+Command Finished
+ENCODER1 Distance| Counts: 2384	Inches: 125.23634453781513
+ENCODER0 Distance| Counts: 2384	Inches: 125.22321428571429
+ENCODER1B Distance| Counts: 795	Inches: 125.2626050420168
+ENCODER0B Distance| Counts: -795	Inches: -125.2626050420168
+NAVX Final Angle: 1.08
+Lift| SetPosition: 0	Lift Counts: 21
+Command run time: 2345
+
+Command Finished
+ENCODER1 Distance| Counts: 3112	Inches: 163.45850840336135
+ENCODER0 Distance| Counts: 3124	Inches: 164.1018907563025
+ENCODER1B Distance| Counts: 1040	Inches: 163.8655462184874
+ENCODER0B Distance| Counts: -1042	Inches: -164.22006302521007
+NAVX Final Angle: 0.35
+Lift| SetPosition: 0	Lift Counts: 24
+Command run time: 620
+
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.0
+ENCODER0 Distance| Counts: 0	Inches: 0.0
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: 0.0
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 26
+
+Command Finished
+ENCODER1 Distance| Counts: 2389	Inches: 125.47268907563026
+ENCODER0 Distance| Counts: 2389	Inches: 125.47268907563026
+ENCODER1B Distance| Counts: 796	Inches: 125.42016806722688
+ENCODER0B Distance| Counts: -796	Inches: -125.42016806722688
+NAVX Final Angle: 1.32
+Lift| SetPosition: 0	Lift Counts: 7
+Command run time: 2382
+
+Command Finished
+ENCODER1 Distance| Counts: 3111	Inches: 163.43224789915968
+ENCODER0 Distance| Counts: 3124	Inches: 164.11502100840337
+ENCODER1B Distance| Counts: 1039	Inches: 163.7079831932773
+ENCODER0B Distance| Counts: -1041	Inches: -164.14128151260505
+NAVX Final Angle: 0.47
+Lift| SetPosition: 0	Lift Counts: 7
+Command run time: 618
+
+Command Finished
+ENCODER1 Distance| Counts: 3999	Inches: 210.07090336134453
+ENCODER0 Distance| Counts: 4022	Inches: 211.25262605042016
+ENCODER1B Distance| Counts: 1336	Inches: 210.50420168067225
+ENCODER0B Distance| Counts: -1340	Inches: -211.21323529411765
+NAVX Final Angle: -0.23
+Lift| SetPosition: 0	Lift Counts: 7
+Command run time: 1501
+
+Command Finished
+ENCODER1 Distance| Counts: 4521	Inches: 237.4606092436975
+ENCODER0 Distance| Counts: 3846	Inches: 202.02205882352942
+ENCODER1B Distance| Counts: 1507	Inches: 237.44747899159663
+ENCODER0B Distance| Counts: -1282	Inches: -202.07457983193277
+NAVX Final Angle: 84.96
+Lift| SetPosition: 0	Lift Counts: 7
+Command run time: 1518
+
+Command Finished
+ENCODER1 Distance| Counts: 4521	Inches: 237.47373949579833
+ENCODER0 Distance| Counts: 3846	Inches: 202.00892857142858
+ENCODER1B Distance| Counts: 1507	Inches: 237.44747899159663
+ENCODER0B Distance| Counts: -1282	Inches: -202.07457983193277
+NAVX Final Angle: 84.98
+Lift| SetPosition: 10000	Lift Counts: 7
+Command run time: 21
+
+Command Finished
+ENCODER1 Distance| Counts: 6993	Inches: 367.3056722689076
+ENCODER0 Distance| Counts: 2644	Inches: 138.8655462184874
+ENCODER1B Distance| Counts: 2415	Inches: 380.6328781512605
+ENCODER0B Distance| Counts: -2162	Inches: -340.76943277310926
+NAVX Final Angle: 90.87
+Lift| SetPosition: 10000	Lift Counts: 9720
+Command run time: 2580
+
+Command Finished
+ENCODER1 Distance| Counts: 7727	Inches: 405.8298319327731
+ENCODER0 Distance| Counts: 3399	Inches: 178.55829831932775
+ENCODER1B Distance| Counts: 2662	Inches: 419.51155462184875
+ENCODER0B Distance| Counts: -2415	Inches: -380.55409663865544
+NAVX Final Angle: 88.63
+Lift| SetPosition: 10000	Lift Counts: 9703
+Command run time: 621
+
+Command Finished
+ENCODER1 Distance| Counts: 8635	Inches: 453.5582983193277
+ENCODER0 Distance| Counts: 4311	Inches: 226.44432773109244
+ENCODER1B Distance| Counts: 2964	Inches: 467.01680672268907
+ENCODER0B Distance| Counts: -2719	Inches: -428.49264705882354
+NAVX Final Angle: 87.98
+Lift| SetPosition: 10000	Lift Counts: 9703
+Command run time: 1521
+
+Command Finished
+ENCODER1 Distance| Counts: 9603	Inches: 504.39863445378154
+ENCODER0 Distance| Counts: 4133	Inches: 217.08245798319328
+ENCODER1B Distance| Counts: 3285	Inches: 517.7127100840336
+ENCODER0B Distance| Counts: -2660	Inches: -419.11764705882354
+NAVX Final Angle: 124.79
+Lift| SetPosition: 10000	Lift Counts: 9591
+Command run time: 1520
+
+Command Finished
+ENCODER1 Distance| Counts: 10275	Inches: 539.6927521008404
+ENCODER0 Distance| Counts: 4569	Inches: 239.96848739495798
+ENCODER1B Distance| Counts: 3509	Inches: 553.0068277310925
+ENCODER0B Distance| Counts: -2804	Inches: -441.84611344537814
+NAVX Final Angle: 134.69
+Lift| SetPosition: 10000	Lift Counts: 9591
+Command run time: 819
+
+Command Finished
+ENCODER1 Distance| Counts: 10595	Inches: 556.499474789916
+ENCODER0 Distance| Counts: 4892	Inches: 256.94590336134456
+ENCODER1B Distance| Counts: 3617	Inches: 569.984243697479
+ENCODER0B Distance| Counts: -2913	Inches: -458.9810924369748
+NAVX Final Angle: 134.63
+Lift| SetPosition: 10000	Lift Counts: 9591
+Command run time: 521
+
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.0
+ENCODER0 Distance| Counts: 0	Inches: 0.0
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: -0.11
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 26
+
+Command Finished
+ENCODER1 Distance| Counts: 2396	Inches: 125.85346638655463
+ENCODER0 Distance| Counts: 2393	Inches: 125.70903361344538
+ENCODER1B Distance| Counts: 800	Inches: 126.12920168067227
+ENCODER0B Distance| Counts: -799	Inches: -125.93224789915966
+NAVX Final Angle: 1.42
+Lift| SetPosition: 0	Lift Counts: 20
+Command run time: 2302
+
+Command Finished
+ENCODER1 Distance| Counts: 3111	Inches: 163.39285714285714
+ENCODER0 Distance| Counts: 3130	Inches: 164.40388655462186
+ENCODER1B Distance| Counts: 1041	Inches: 164.0625
+ENCODER0B Distance| Counts: -1045	Inches: -164.69275210084032
+NAVX Final Angle: -0.4
+Lift| SetPosition: 0	Lift Counts: 23
+Command run time: 601
+
+Command Finished
+ENCODER1 Distance| Counts: 3986	Inches: 209.36186974789916
+ENCODER0 Distance| Counts: 4012	Inches: 210.71428571428572
+ENCODER1B Distance| Counts: 1332	Inches: 209.91334033613444
+ENCODER0B Distance| Counts: -1339	Inches: -211.05567226890756
+NAVX Final Angle: -0.97
+Lift| SetPosition: 0	Lift Counts: 24
+Command run time: 1520
+
+Command Finished
+ENCODER1 Distance| Counts: 4449	Inches: 233.67909663865547
+ENCODER0 Distance| Counts: 3769	Inches: 197.96481092436974
+ENCODER1B Distance| Counts: 1485	Inches: 233.9810924369748
+ENCODER0B Distance| Counts: -1258	Inches: -198.33245798319328
+NAVX Final Angle: 85.08
+Lift| SetPosition: 0	Lift Counts: 28
+Command run time: 1502
+
+Command Finished
+ENCODER1 Distance| Counts: 4449	Inches: 233.70535714285714
+ENCODER0 Distance| Counts: 3769	Inches: 197.9516806722689
+ENCODER1B Distance| Counts: 1485	Inches: 233.9810924369748
+ENCODER0B Distance| Counts: -1258	Inches: -198.33245798319328
+NAVX Final Angle: 85.41
+Lift| SetPosition: 10000	Lift Counts: 28
+Command run time: 21
+
+Command Finished
+ENCODER1 Distance| Counts: 7103	Inches: 373.0829831932773
+ENCODER0 Distance| Counts: 2646	Inches: 138.98371848739495
+ENCODER1B Distance| Counts: 2394	Inches: 377.32405462184875
+ENCODER0B Distance| Counts: -2140	Inches: -337.1848739495798
+NAVX Final Angle: 90.63
+Lift| SetPosition: 10000	Lift Counts: 9723
+Command run time: 2542
+
+Command Finished
+ENCODER1 Distance| Counts: 7827	Inches: 411.0950630252101
+ENCODER0 Distance| Counts: 3391	Inches: 178.125
+ENCODER1B Distance| Counts: 2638	Inches: 415.6512605042017
+ENCODER0B Distance| Counts: -2389	Inches: -376.41806722689074
+NAVX Final Angle: 88.59
+Lift| SetPosition: 10000	Lift Counts: 9707
+Command run time: 600
+
+Command Finished
+ENCODER1 Distance| Counts: 8734	Inches: 458.7578781512605
+ENCODER0 Distance| Counts: 4306	Inches: 226.18172268907563
+ENCODER1B Distance| Counts: 2941	Inches: 463.4716386554622
+ENCODER0B Distance| Counts: -2693	Inches: -424.43539915966386
+NAVX Final Angle: 87.95
+Lift| SetPosition: 10000	Lift Counts: 9688
+Command run time: 1519
+
+Command Finished
+ENCODER1 Distance| Counts: 9758	Inches: 512.5262605042017
+ENCODER0 Distance| Counts: 4090	Inches: 214.8109243697479
+ENCODER1B Distance| Counts: 3285	Inches: 517.594537815126
+ENCODER0B Distance| Counts: -2622	Inches: -413.20903361344534
+NAVX Final Angle: 126.8
+Lift| SetPosition: 10000	Lift Counts: 9601
+Command run time: 1521
+
+Command Finished
+ENCODER1 Distance| Counts: 10383	Inches: 545.3518907563025
+ENCODER0 Distance| Counts: 4515	Inches: 237.13235294117646
+ENCODER1B Distance| Counts: 3494	Inches: 550.5646008403361
+ENCODER0B Distance| Counts: -2762	Inches: -435.2678571428571
+NAVX Final Angle: 135.3
+Lift| SetPosition: 10000	Lift Counts: 9599
+Command run time: 819
+
+Command Finished
+ENCODER1 Distance| Counts: 10700	Inches: 562.0010504201681
+ENCODER0 Distance| Counts: 4835	Inches: 253.95220588235296
+ENCODER1B Distance| Counts: 3600	Inches: 567.2268907563025
+ENCODER0B Distance| Counts: -2870	Inches: -452.24527310924367
+NAVX Final Angle: 134.8
+Lift| SetPosition: 10000	Lift Counts: 9599
+Command run time: 519
+
+Command Finished
+ENCODER1 Distance| Counts: 0	Inches: 0.0
+ENCODER0 Distance| Counts: 0	Inches: 0.0
+ENCODER1B Distance| Counts: 0	Inches: 0.0
+ENCODER0B Distance| Counts: 0	Inches: 0.0
+NAVX Final Angle: -0.1
+Lift| SetPosition: 0	Lift Counts: 0
+Command run time: 13
+
+Command Finished
+ENCODER1 Distance| Counts: 2375	Inches: 124.7373949579832
+ENCODER0 Distance| Counts: 2375	Inches: 124.75052521008404
+ENCODER1B Distance| Counts: 793	Inches: 125.02626050420167
+ENCODER0B Distance| Counts: -792	Inches: -124.78991596638654
+NAVX Final Angle: 1.36
+Lift| SetPosition: 0	Lift Counts: 7
+Command run time: 2260
+
+Command Finished
+ENCODER1 Distance| Counts: 3117	Inches: 163.7079831932773
+ENCODER0 Distance| Counts: 3135	Inches: 164.6796218487395
+ENCODER1B Distance| Counts: 1043	Inches: 164.37762605042016
+ENCODER0B Distance| Counts: -1046	Inches: -164.81092436974788
+NAVX Final Angle: -0.01
+Lift| SetPosition: 0	Lift Counts: 7
+Command run time: 621
+
+Command Finished
+ENCODER1 Distance| Counts: 3981	Inches: 209.09926470588235
+ENCODER0 Distance| Counts: 4006	Inches: 210.4122899159664
+ENCODER1B Distance| Counts: 1330	Inches: 209.55882352941177
+ENCODER0B Distance| Counts: -1336	Inches: -210.50420168067225
+NAVX Final Angle: -0.77
+Lift| SetPosition: 0	Lift Counts: 8
+Command run time: 1519
+
+Command Finished
+ENCODER1 Distance| Counts: 4427	Inches: 232.54989495798318
+ENCODER0 Distance| Counts: 3744	Inches: 196.6780462184874
+ENCODER1B Distance| Counts: 1477	Inches: 232.79936974789916
+ENCODER0B Distance| Counts: -1249	Inches: -196.875
+NAVX Final Angle: 86.54
+Lift| SetPosition: 0	Lift Counts: 11
+Command run time: 1524
+
+Command Finished
+ENCODER1 Distance| Counts: 6681	Inches: 350.9322478991597
+ENCODER0 Distance| Counts: 2207	Inches: 115.92699579831933
+ENCODER1B Distance| Counts: 2230	Inches: 351.4837184873949
+ENCODER0B Distance| Counts: -1984	Inches: -312.7232142857143
+NAVX Final Angle: 91.25
+Lift| SetPosition: 0	Lift Counts: 12
+Command run time: 2159
+
+Command Finished
+ENCODER1 Distance| Counts: 7328	Inches: 384.87394957983196
+ENCODER0 Distance| Counts: 2956	Inches: 155.29149159663865
+ENCODER1B Distance| Counts: 2465	Inches: 388.5110294117647
+ENCODER0B Distance| Counts: -2235	Inches: -352.27153361344534
+NAVX Final Angle: 88.77
+Lift| SetPosition: 0	Lift Counts: 19
+Command run time: 621
+
+Command Finished
+ENCODER1 Distance| Counts: 7366	Inches: 386.8828781512605
+ENCODER0 Distance| Counts: 2996	Inches: 157.36607142857144
+ENCODER1B Distance| Counts: 2477	Inches: 390.4017857142857
+ENCODER0B Distance| Counts: -2248	Inches: -354.2016806722689
+NAVX Final Angle: 88.71
+Lift| SetPosition: 10000	Lift Counts: 19
+Command run time: 21
+
+Command Finished
+ENCODER1 Distance| Counts: 8196	Inches: 430.5015756302521
+ENCODER0 Distance| Counts: 3832	Inches: 201.26050420168067
+ENCODER1B Distance| Counts: 2753	Inches: 433.84978991596637
+ENCODER0B Distance| Counts: -2526	Inches: -398.0435924369748
+NAVX Final Angle: 88.28
+Lift| SetPosition: 10000	Lift Counts: 10183
+Command run time: 1519
+
+Command Finished
+ENCODER1 Distance| Counts: 7649	Inches: 401.73319327731093
+ENCODER0 Distance| Counts: 4217	Inches: 221.4810924369748
+ENCODER1B Distance| Counts: 2571	Inches: 405.2127100840336
+ENCODER0B Distance| Counts: -2653	Inches: -418.1328781512605
+NAVX Final Angle: -109.87
+Lift| SetPosition: 10000	Lift Counts: 9698
+Command run time: 1522
+
+Command Finished
+ENCODER1 Distance| Counts: 7647	Inches: 401.66754201680675
+ENCODER0 Distance| Counts: 4217	Inches: 221.50735294117646
+ENCODER1B Distance| Counts: 2571	Inches: 405.17331932773106
+ENCODER0B Distance| Counts: -2654	Inches: -418.172268907563
+NAVX Final Angle: -110.01
+Lift| SetPosition: 20000	Lift Counts: 9698
+Command run time: 20
+
+Command Finished
+ENCODER1 Distance| Counts: 7648	Inches: 401.6938025210084
+ENCODER0 Distance| Counts: 0	Inches: -0.03939075630252101
+ENCODER1B Distance| Counts: 2571	Inches: 405.17331932773106
+ENCODER0B Distance| Counts: -2653	Inches: -418.1328781512605
+NAVX Final Angle: -110.12
+Lift| SetPosition: 28000	Lift Counts: 9710
+Command run time: 19
+
+Command Finished
+ENCODER1 Distance| Counts: 8100	Inches: 425.44642857142856
+ENCODER0 Distance| Counts: 481	Inches: 25.27573529411765
+ENCODER1B Distance| Counts: 2721	Inches: 428.80777310924367
+ENCODER0B Distance| Counts: -2813	Inches: -443.2641806722689
+NAVX Final Angle: -113.38
+Lift| SetPosition: 20000	Lift Counts: 20185
+Command run time: 1504
+
+Command Finished
+ENCODER1 Distance| Counts: 8193	Inches: 430.3177521008403
+ENCODER0 Distance| Counts: 573	Inches: 30.107668067226893
+ENCODER1B Distance| Counts: 2753	Inches: 433.77100840336135
+ENCODER0B Distance| Counts: -2844	Inches: -448.22741596638656
+NAVX Final Angle: -113.28
+Lift| SetPosition: 20000	Lift Counts: 19808
+Command run time: 518
+
+Command Finished
+ENCODER1 Distance| Counts: 8197	Inches: 430.5409663865546
+ENCODER0 Distance| Counts: 583	Inches: 30.646008403361346
+ENCODER1B Distance| Counts: 2754	Inches: 434.046743697479
+ENCODER0B Distance| Counts: -2848	Inches: -448.7394957983193
+NAVX Final Angle: -113.61
+Lift| SetPosition: 0	Lift Counts: 175
+Command run time: 2020
+
