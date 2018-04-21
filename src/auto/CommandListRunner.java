@@ -1,10 +1,7 @@
 package auto;
 
 import auto.commands.EmptyCommand;
-import comms.FileLoader;
 import comms.LogWriter;
-import edu.wpi.first.wpilibj.Encoder;
-import input.SensorController;
 
 public class CommandListRunner {
 	public int commandNum;

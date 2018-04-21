@@ -1,8 +1,5 @@
 package miyamoto;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,16 +15,9 @@ import robot.IControl;
 
 public class AutoLog extends IControl implements ILoggable {
 	private SensorController sensors;
-	private String timeStamp;
 
 	public AutoLog() {
 		sensors = SensorController.getInstance();
-	}
-
-	public void setTimeStamp() {
-		// Time zone is Central Time (CST)
-		timeStamp = LocalDateTime.now(ZoneId.of("CST", ZoneId.SHORT_IDS))
-				.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
 	}
 
 	@Override
@@ -57,10 +47,7 @@ public class AutoLog extends IControl implements ILoggable {
 
 	@Override
 	public String getLogFileName() {
-		if (timeStamp == null) {
-			setTimeStamp();
-		}
-		return "/home/lvuser/RobotLog" + timeStamp + ".txt";
+		return "/home/lvuser/RobotLog.txt";
 	}
 
 }
