@@ -192,22 +192,22 @@ public class PIDDriveAtAngle implements ICommand {
 			break;
 		case MIYAMOTO:
 			if (position == PIDDriveMode.SHORT) {
-				BufferedReader in = new BufferedReader(
-						new FileReader("/home/lvuser/MiyamotoShortDistancePIDValues.txt"));
-				Double Kp = Double.parseDouble(in.readLine());
-				Double Ki = Double.parseDouble(in.readLine());
-				Double Kd = Double.parseDouble(in.readLine());
-				controller.setPID(Kp, Ki, Kd);
-				in.close();
-				// controller.setPID(.055, 0.0, .5);
+//				BufferedReader in = new BufferedReader(
+//						new FileReader("/home/lvuser/MiyamotoShortDistancePIDValues.txt"));
+//				Double Kp = Double.parseDouble(in.readLine());
+//				Double Ki = Double.parseDouble(in.readLine());
+//				Double Kd = Double.parseDouble(in.readLine());
+//				controller.setPID(Kp, Ki, Kd);
+//				in.close();
+				controller.setPID(.03, 0.0005, 0.6);
 			} else {
-				BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoDistancePIDValues.txt"));
-				Double Kp = Double.parseDouble(in.readLine());
-				Double Ki = Double.parseDouble(in.readLine());
-				Double Kd = Double.parseDouble(in.readLine());
-				controller.setPID(Kp, Ki, Kd);
-				in.close();
-				// controller.setPID(.055, 0.0, .5);
+//				BufferedReader in = new BufferedReader(new FileReader("/home/lvuser/MiyamotoDistancePIDValues.txt"));
+//				Double Kp = Double.parseDouble(in.readLine());
+//				Double Ki = Double.parseDouble(in.readLine());
+//				Double Kd = Double.parseDouble(in.readLine());
+//				controller.setPID(Kp, Ki, Kd);
+//				in.close();
+				controller.setPID(.023, 0.0, 0.3);
 			}
 			break;
 		case UNKNOWN:
