@@ -1,0 +1,41 @@
+DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 0	Inches: 0.0
+Encoder1 Distance| Counts: 0	Inches: 0.0
+Final Angle: 0.0
+Command run time: 24DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 292	Inches: 15.362394957983193
+Encoder1 Distance| Counts: 292	Inches: 15.362394957983193
+Final Angle: -0.88
+Command run time: 1221DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 477	Inches: 25.05252100840336
+Encoder1 Distance| Counts: 477	Inches: 25.05252100840336
+Final Angle: -41.11
+Command run time: 1520DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 477	Inches: 25.05252100840336
+Encoder1 Distance| Counts: 477	Inches: 25.05252100840336
+Final Angle: -41.1
+Command run time: 21DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 771	Inches: 40.533088235294116
+Encoder1 Distance| Counts: 772	Inches: 40.54621848739496
+Final Angle: -45.08
+Command run time: 1121DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 1712	Inches: 89.92909663865547
+Encoder1 Distance| Counts: 1712	Inches: 89.92909663865547
+Final Angle: -44.94
+Command run time: 1420DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 1640	Inches: 86.17384453781513
+Encoder1 Distance| Counts: 1640	Inches: 86.17384453781513
+Final Angle: 38.91
+Command run time: 1521DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 1797	Inches: 94.44590336134453
+Encoder1 Distance| Counts: 1799	Inches: 94.48529411764706
+Final Angle: 41.26
+Command run time: 520DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 1926	Inches: 101.18172268907563
+Encoder1 Distance| Counts: 1926	Inches: 101.18172268907563
+Final Angle: 42.68
+Command run time: 221DriveAtAngle Command Finished
+Encoder0 Distance| Counts: 2068	Inches: 108.63970588235294
+Encoder1 Distance| Counts: 2068	Inches: 108.63970588235294
+Final Angle: 46.16
+Command run time: 519
