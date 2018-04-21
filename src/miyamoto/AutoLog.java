@@ -1,9 +1,13 @@
 package miyamoto;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import comms.ILoggable;
 import edu.wpi.first.wpilibj.Encoder;
+import input.EncoderMonitor;
 import input.SensorController;
 import miyamoto.components.Lift;
 import robot.Global;
@@ -23,14 +27,27 @@ public class AutoLog extends IControl implements ILoggable {
 
 	@Override
 	public String getLogData() {
-		Encoder encoder0 = (Encoder) sensors.getSensor("ENCODER0");
-		Encoder encoder1 = (Encoder) sensors.getSensor("ENCODER1");
 		AHRS navX = (AHRS) sensors.getSensor("NAVX");
 		Lift lift = (Lift) Global.controlObjects.get("LIFT");
-		return "Command Finished" + "\n" + "Encoder0 Distance| Counts: " + encoder0.get() + "\t" + "Inches: "
-				+ encoder0.getDistance() + "\n" + "Encoder1 Distance| Counts: " + encoder1.get() + "\t" + "Inches: "
-				+ encoder1.getDistance() + "\n" + "NAVX Final Angle: " + navX.getYaw() + "\n" + "Lift| SetPosition: "
-				+ lift.getLiftPosition() + "\t" + "Lift Counts: " + lift.getLiftCounts();
+		return "Command Finished" + getEncoderData() + "NAVX Final Angle: " + navX.getYaw() + "\n"
+				+ "Lift| SetPosition: " + lift.getLiftPosition() + "\t" + "Lift Counts: " + lift.getLiftCounts();
+	}
+
+	public String getEncoderData() {
+		String data = "";
+
+		EncoderMonitor monitor = (EncoderMonitor) (Global.controlObjects.get("ENCODERMONITOR"));
+		HashMap<String, Encoder> encoders = monitor.getEncoders();
+
+		for (Map.Entry<String, Encoder> entry : encoders.entrySet()) {
+			String encoderName = entry.getKey();
+			Encoder encoder = entry.getValue();
+
+			data += encoderName + " Distance| Counts: " + encoder.get() + "\t" + "Inches: " + encoder.getDistance()
+					+ "\n";
+		}
+
+		return data;
 	}
 
 	@Override
