@@ -154,7 +154,7 @@ public class Miyamoto extends RobotDefinitionBase {
 		AutoRunner AR = new AutoRunner();
 		iControlMap.put("AutoRunner", AR);
 
-		// LogWriter.registerLoggable("AutonomousLog", new AutoLog());
+		LogWriter.registerLoggable("AutonomousLog", new AutoLog());
 
 		return iControlMap;
 	}
