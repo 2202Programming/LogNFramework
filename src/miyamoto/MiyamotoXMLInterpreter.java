@@ -171,7 +171,7 @@ public class MiyamotoXMLInterpreter {
 
 			PIDDriveMode mode = PIDDriveMode.valueOf(attributes.getNamedItem("Mode").getNodeValue().toUpperCase());
 
-			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 1, angle, 0.012,
+			return new PIDDriveAtAngle(getStopCondition(n), encoders, stopDistance, -power, power, 2, angle, 0.012,
 					mode);
 		}
 		case ("DecelCommand"): {
