@@ -172,7 +172,7 @@ public class PIDDriveAtAngle implements ICommand {
 		SensorController sensorController = SensorController.getInstance();
 		Encoder encoder0 = (Encoder) sensorController.getSensor("ENCODER0");
 		Encoder encoder1 = (Encoder) sensorController.getSensor("ENCODER1");
-		System.out.println("DriveAtAngle Command Finished" + "\n" + "Encoder0 Distance| Counts: " + encoder0.get()
+		System.out.println("PIDDriveAtAngle Command Finished" + "\n" + "Encoder0 Distance| Counts: " + encoder0.get()
 				+ "\t" + "Inches: " + encoder0.getDistance() + "\n" + "Encoder1 Distance| Counts: " + encoder1.get()
 				+ "\t" + "Inches: " + encoder1.getDistance() + "\n" + "Final Angle: " + navX.getYaw());
 	}
