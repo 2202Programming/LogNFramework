@@ -48,4 +48,8 @@ public class LiftCommand implements ICommand {
 	public void stop() {
 		lift.setLiftPosition(finalPosition);
 	}
+	
+	public String toString() {
+		return "LiftCommand";
+	}
 }

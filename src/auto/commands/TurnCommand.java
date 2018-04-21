@@ -194,4 +194,8 @@ public class TurnCommand implements ICommand {
 			break;
 		}
 	}
+	
+	public String toString() {
+		return "TurnCommand";
+	}
 }

@@ -220,4 +220,8 @@ public class PIDDriveAtAngle implements ICommand {
 			break;
 		}
 	}
+	
+	public String toString() {
+		return "PIDDriveAtAngle";
+	}
 }

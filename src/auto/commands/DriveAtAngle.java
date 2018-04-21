@@ -173,4 +173,8 @@ public class DriveAtAngle implements ICommand {
 				+ "\t" + "Inches: " + encoder0.getDistance() + "\n" + "Encoder1 Distance| Counts: " + encoder1.get()
 				+ "\t" + "Inches: " + encoder1.getDistance());
 	}
+	
+	public String toString() {
+		return "DriveAtAngle";
+	}
 }

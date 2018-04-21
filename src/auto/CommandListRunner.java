@@ -49,7 +49,7 @@ public class CommandListRunner {
 		if (curCommand.run()) {
 			curCommand.stop();
 			commandNum++;
-			LogWriter.runLog("AutonomousLog", "Command run time: " + (System.currentTimeMillis()-commandTime) + "\n\n");
+			LogWriter.runLog("AutonomousLog", "Command Name: " + curCommand.toString() + "\nCommand run time: " + (System.currentTimeMillis()-commandTime) + "\n\n");
 		}
 		return false;
 	}

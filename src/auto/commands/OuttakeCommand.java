@@ -38,4 +38,8 @@ public class OuttakeCommand implements ICommand {
 	public void stop() {
 		intake.stop();
 	}
+	
+	public String toString() {
+		return "OuttakeCommand";
+	}
 }

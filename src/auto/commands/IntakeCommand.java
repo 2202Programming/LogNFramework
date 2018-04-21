@@ -40,4 +40,8 @@ public class IntakeCommand implements ICommand {
 	public void stop() {
 		intake.runIntake(holdSpeed);
 	}
+	
+	public String toString() {
+		return "IntakeCommand";
+	}
 }
