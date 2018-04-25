@@ -526,7 +526,7 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="10" Power="-0.55">
-			<DistanceStopCondition Dist_Inches="32">
+			<DistanceStopCondition Dist_Inches="35">
 			</DistanceStopCondition>
 		</DriveCommand>
 
