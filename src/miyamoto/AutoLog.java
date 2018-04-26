@@ -1,5 +1,8 @@
 package miyamoto;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +50,8 @@ public class AutoLog extends IControl implements ILoggable {
 
 	@Override
 	public String getLogFileName() {
-		return "/home/lvuser/AutoLog.txt";
+		return "/home/lvuser/AutoLogs/AutoLog_" + LocalDateTime.now(ZoneId.of("CST", ZoneId.SHORT_IDS))
+				.format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss.SSS")) + ".txt";
 	}
 
 }

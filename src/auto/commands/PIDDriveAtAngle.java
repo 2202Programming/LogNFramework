@@ -207,7 +207,7 @@ public class PIDDriveAtAngle implements ICommand {
 //				Double Kd = Double.parseDouble(in.readLine());
 //				controller.setPID(Kp, Ki, Kd);
 //				in.close();
-				controller.setPID(.023, 0.0005, 0.33);
+				controller.setPID(.023, 0.0005, 0.5);
 			}
 			break;
 		case UNKNOWN:

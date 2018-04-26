@@ -22,6 +22,7 @@ public class LogWriter extends IControl{
 		FileWriter file = null;
 		try{
 			file = new FileWriter(logRule.getLogFileName());
+			System.out.println(logRule.getLogFileName());
 		}catch(IOException e){
 			SmartWriter.outputError(e, System.currentTimeMillis() + "");
 		}
