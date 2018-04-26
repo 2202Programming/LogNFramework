@@ -269,7 +269,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="120" Power="0.4">
-			<DistanceStopCondition Dist_Inches="37">
+			<DistanceStopCondition Dist_Inches="40">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -345,7 +345,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="120" Power="0.4">
-			<DistanceStopCondition Dist_Inches="37">
+			<DistanceStopCondition Dist_Inches="40">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -360,7 +360,7 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="125" Power="0.5">
-			<TimerStopCondition Timer="300">
+			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</DriveCommand>
 
@@ -730,7 +730,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="-120" Power="0.4">
-			<DistanceStopCondition Dist_Inches="37">
+			<DistanceStopCondition Dist_Inches="40">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -806,7 +806,7 @@
 		</IntakeCommand>
 
 		<DriveCommand Angle="-120" Power="0.4">
-			<DistanceStopCondition Dist_Inches="37">
+			<DistanceStopCondition Dist_Inches="40">
 			</DistanceStopCondition>
 		</DriveCommand>
 
@@ -821,7 +821,7 @@
 		</LiftCommand>
 
 		<DriveCommand Angle="-125" Power="0.5">
-			<TimerStopCondition Timer="300">
+			<TimerStopCondition Timer="500">
 			</TimerStopCondition>
 		</DriveCommand>
 
