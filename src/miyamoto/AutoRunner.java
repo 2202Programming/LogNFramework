@@ -207,7 +207,14 @@ public class AutoRunner extends IControl {
 			System.out.println(path);
 		}
 		else {
-			if (Global.ourSwitchPosition.toString().equals(switchboard.getStartPosition().toString())) {
+			if(switchboard.getObjective() && Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())){
+				if(Global.scalePosition == TargetSide.L){
+					path = "L8-1";
+				}else{
+					path = "R6-1";
+				}
+				
+			}else if (Global.ourSwitchPosition.toString().equals(switchboard.getStartPosition().toString())) {
 				if (Global.ourSwitchPosition == TargetSide.L) {
 					// If going for the left side of the switch
 					pathNum += 2;
