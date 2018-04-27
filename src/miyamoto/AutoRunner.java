@@ -209,9 +209,9 @@ public class AutoRunner extends IControl {
 		else {
 			if(switchboard.getObjective() && Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())){
 				if(Global.scalePosition == TargetSide.L){
-					path = "L8-1";
+					path = "L8-2";
 				}else{
-					path = "R6-1";
+					path = "R6-2";
 				}
 				
 			}else if (Global.ourSwitchPosition.toString().equals(switchboard.getStartPosition().toString())) {
