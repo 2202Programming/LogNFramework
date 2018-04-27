@@ -187,7 +187,7 @@
 		</DriveCommand>
 
 		<PIDDriveAtAngleCommand Angle="-115" Power="0.3"
-			Mode="LONG" Dist_Inches="33">
+			Mode="LONG" Dist_Inches="23">
 			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
@@ -1009,7 +1009,7 @@
 		</DriveCommand>
 
 		<PIDDriveAtAngleCommand Angle="115" Power="0.3"
-			Mode="LONG" Dist_Inches="33">
+			Mode="LONG" Dist_Inches="23">
 			<TimerStopCondition Timer="1500">
 			</TimerStopCondition>
 		</PIDDriveAtAngleCommand>
