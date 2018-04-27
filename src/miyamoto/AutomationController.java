@@ -124,22 +124,23 @@ public class AutomationController extends IControl{
 				hasReset = true;
 			}
 			if(controller.autoClimb()){
+				drive.setDriveControl(DriveControl.EXTERNAL_CONTROL);
 				hasReset = false;
 				CommandList list = new CommandList();
-				list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 2), 0.5));
+				list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 4), 0.5));
 				list.addCommand(new LiftCommand(LiftPosition.CLIMB, new TimerStopCondition(2000)));
 				list.addCommand(new DriveCommand(new TimerStopCondition(1000), -0.3));
 				list.addCommand(new LiftCommand(LiftPosition.BOTTOM, new TimerStopCondition(2000)));
-				if(Math.abs(controller.getLeftJoystickX(0)) > 0.2){
-					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 1), 0.5));
-					list.addCommand(new WaitCommand(new TimerStopCondition(200)));
-					if(controller.getLeftJoystickX(0) > 0){
-						list.addCommand(new TurnCommand(new OrStopCondition(new TimerStopCondition(1000), new AngleStopCondition(-90, 3, .5)),-90));
-					}else{
-						list.addCommand(new TurnCommand(new OrStopCondition(new TimerStopCondition(1000), new AngleStopCondition(90, 3, .5)),90));
-					}
-					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 15), 0.5));
-				}
+//				if(Math.abs(controller.getLeftJoystickX(0)) > 0.2){
+//					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 1), 0.5));
+//					list.addCommand(new WaitCommand(new TimerStopCondition(200)));
+//					if(controller.getLeftJoystickX(0) > 0){
+//						list.addCommand(new TurnCommand(new OrStopCondition(new TimerStopCondition(1000), new AngleStopCondition(-90, 3, .5)),-90));
+//					}else{
+//						list.addCommand(new TurnCommand(new OrStopCondition(new TimerStopCondition(1000), new AngleStopCondition(90, 3, .5)),90));
+//					}
+//					list.addCommand(new DriveCommand(new DistanceStopCondition(encoders, 15), 0.5));
+//				}
 				runner = new CommandListRunner(list);
 				runner.init();
 				doneRunning = false;
