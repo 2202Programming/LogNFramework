@@ -144,16 +144,17 @@ public class AutoRunner extends IControl {
 	// robot
 	// field position, and switch/scale position enums
 	public static String choosePath() {
-
+		
 		String path = "";
 		int pathNum = 1; // Defaults to front approach of the switch
-
+		
 		MiyamotoControl switchboard = (MiyamotoControl) Global.controllers;
 		path += switchboard.getStartPosition();
-
+		
 		if (!switchboard.getSafeAuto()) {
-			System.out.println("Start Position: " + switchboard.getStartPosition() + "\n" + "Approach: "
-					+ switchboard.getApproach() + "\n" + "Objective: " + switchboard.getObjective());
+			System.out.println("Start Position: " + switchboard.getStartPosition() + 
+					"\n" + "Approach: " + switchboard.getApproach() + 
+					"\n" + "Objective: " + switchboard.getObjective());
 			System.out.println(path);
 
 			if (path.equals("null") || path.equals("")) {
@@ -204,39 +205,34 @@ public class AutoRunner extends IControl {
 			path += pathType;
 
 			System.out.println(path);
-		} else {
-			if (switchboard.getObjective()
-					&& Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())) {
-				if (Global.scalePosition == TargetSide.L) {
-					path = "L8-";
-				} else {
-					path = "R6-";
+		}
+		else {
+			if(switchboard.getObjective() && Global.scalePosition.toString().equals(switchboard.getStartPosition().toString())){
+				if(Global.scalePosition == TargetSide.L){
+					path = "L8-2";
+				}else{
+					path = "R6-2";
 				}
-
-				if (Global.scalePosition == Global.ourSwitchPosition) {
-					path += "3";
-				} else {
-					path += "1";
-				}
-
-			} else if (Global.ourSwitchPosition.toString().equals(switchboard.getStartPosition().toString())) {
+				
+			}else if (Global.ourSwitchPosition.toString().equals(switchboard.getStartPosition().toString())) {
 				if (Global.ourSwitchPosition == TargetSide.L) {
 					// If going for the left side of the switch
 					pathNum += 2;
 				}
-
-				pathNum++; // always start on side
-
+				
+				pathNum++; //always start on side
+				
 				path += pathNum + "-1";
-			} else {
+			}
+			else {
 				path = "D";
 			}
-
+			
 			System.out.println(path);
 		}
-
+		
 		return path;
-
+		
 	}
 
 	public void useDefaultCommandList() {
@@ -249,10 +245,8 @@ public class AutoRunner extends IControl {
 
 		defaultPathList.addCommand(new DriveAtAngle(new DistanceStopCondition(encoders, 40), 0.55, 0));
 		defaultPathList.addCommand(new DriveAtAngle(new SummativeDistanceStopCondition(encoders, 80), 0.3, 0));
-		defaultPathList.addCommand(new PIDDriveAtAngle(new TimerStopCondition(1000), encoders, 140, -0.3, 0.3, 2, 0,
-				0.012, PIDDriveMode.LONG));
-		defaultPathList.addCommand(new PIDDriveAtAngle(new TimerStopCondition(1000), encoders, 140, -0.3, 0.3, 2, 0,
-				0.012, PIDDriveMode.SHORT));
+		defaultPathList.addCommand(new PIDDriveAtAngle(new TimerStopCondition(1000), encoders, 140, -0.3, 0.3, 2, 0, 0.012, PIDDriveMode.LONG));
+		defaultPathList.addCommand(new PIDDriveAtAngle(new TimerStopCondition(1000), encoders, 140, -0.3, 0.3, 2, 0, 0.012, PIDDriveMode.SHORT));
 		System.out.println("**********Caught error and will run default path**********");
 
 		runner = new CommandListRunner(defaultPathList);
