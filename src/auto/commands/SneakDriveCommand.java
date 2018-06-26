@@ -6,7 +6,7 @@ import drive.DriveControl;
 import drive.IDrive;
 import robot.Global;
 import robotDefinitions.RobotDefinitionBase;
-
+@Deprecated
 public class SneakDriveCommand implements ICommand {
 
 	private IStopCondition stopCondition;

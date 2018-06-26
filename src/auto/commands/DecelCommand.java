@@ -7,6 +7,7 @@ import drive.IDrive;
 import robot.Global;
 import robotDefinitions.RobotDefinitionBase;
 
+@Deprecated
 public class DecelCommand implements ICommand {
 
 	private IDrive drive;
